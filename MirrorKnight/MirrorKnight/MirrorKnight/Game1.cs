@@ -19,6 +19,8 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont spectral18;
+        Texture2D soulsPic, healthDisplayPic;
 
         public Game1()
         {
@@ -86,7 +88,9 @@ namespace MirrorKnight
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            spriteBatch.DrawString();
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
