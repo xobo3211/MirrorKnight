@@ -90,4 +90,15 @@ namespace MirrorKnight
             base.Draw(gameTime);
         }
     }
+
+
+    public class Player
+    {
+        private Sprite sprite;
+        public static int health, speed, damage;
+        Player()
+        {
+
+        }
+    }
 }
