@@ -768,6 +768,13 @@ namespace SureDroid
         internal static Game game;
         //internal static SpriteBatch spriteBatch;
 
+        internal static Camera2d cam;
+
+        public static void setCamera(Camera2d camera)
+        {
+            cam = camera;
+        }
+
         /// <summary>
         /// Gets the window width of the application. A shortcut for GraphicsDevice.Viewport.Width.
         /// </summary>
@@ -859,6 +866,7 @@ namespace SureDroid
         public static void set(Game g)
         {
             game = g;
+            game.Components.Add(new Automate(game));
             //spriteBatch = new SpriteBatch(game.GraphicsDevice);
         }
 
@@ -1068,6 +1076,35 @@ namespace SureDroid
                         cam.get_transformation());
                         */
 
+    }
+
+    public class Automate : DrawableGameComponent
+    {
+        SpriteBatch spriteBatch;
+
+        public Automate(Game game) : base(game) { }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            spriteBatch = new SpriteBatch(Useful.game.GraphicsDevice);
+        }
+        public override void Update(GameTime gameTime)
+        {
+            Sprite.updateAll();
+            base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            if(Useful.cam == null)
+                spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, null,null);
+            else
+                spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, null, null, Useful.cam.get_transformation());
+            Useful.drawAll(spriteBatch);
+            spriteBatch.End();
+            base.Draw(gameTime);
+        }
     }
 
     /* In Development (NonFunctional)

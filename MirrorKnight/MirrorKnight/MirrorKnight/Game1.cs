@@ -22,6 +22,8 @@ namespace MirrorKnight
         SpriteFont spectral18;
         Texture2D soulsPic, healthDisplayPic, placeHc;
 
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -98,6 +100,17 @@ namespace MirrorKnight
             spriteBatch.Draw(placeHc, new Rectangle(150, 75, 1300, 650), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+    }
+
+
+    public class Player
+    {
+        private Sprite sprite;
+        public static int health, speed, damage;
+        Player()
+        {
+
         }
     }
 }
