@@ -20,13 +20,17 @@ namespace MirrorKnight
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont spectral18;
-        Texture2D soulsPic, healthDisplayPic;
+        Texture2D soulsPic, healthDisplayPic, placeHc;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Useful.set(this);
+            this.Window.AllowUserResizing = true;
+            graphics.PreferredBackBufferWidth = 1600;
+            graphics.PreferredBackBufferHeight = 800;
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -52,6 +56,7 @@ namespace MirrorKnight
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            placeHc = Content.Load<Texture2D>("pc");
         }
 
         /// <summary>
@@ -89,7 +94,8 @@ namespace MirrorKnight
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            spriteBatch.DrawString();
+            //spriteBatch.DrawString(spectral18, "9999", new Vector2(10, 10), Color.White);
+            spriteBatch.Draw(placeHc, new Rectangle(150, 75, 1300, 650), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }
