@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SureDroid;
+using System.IO;
 
 namespace MirrorKnight
 {
@@ -83,6 +84,8 @@ namespace MirrorKnight
         {
             // TODO: Add your initialization logic here
             player = new Player();
+            lines = new List<string>();
+            tilesRead = new string[18, 10];
             base.Initialize();
         }
 
@@ -97,13 +100,32 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             //placeHc = Content.Load<Texture2D>("pc");
+            placeHc = Content.Load<Texture2D>("pc");
 
-            tileSprite = Useful.getTexture("tileset2");
-            loadTiles();
-            player.body.addTexture(tileSprite);
-            player.body.useRegion(true);
-            player.body.defRegion(tiles[0].Values.ToArray()[0]);
-            player.body.setScale(10);
+        private void ReadFileAsStrings(string path)
+        {
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+                        string[] parts = line.Split(' ');
+                        for (int i = 0; i < 240; i++)
+                        {
+                            string c = parts[i];
+                            tilesRead[i, j] = c;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
         }
 
         /// <summary>
@@ -146,17 +168,5 @@ namespace MirrorKnight
             spriteBatch.End();
             base.Draw(gameTime);
         }
-    }
-
-
-    public class Player
-    {
-        public Sprite body;
-        public static int health = 100, speed = 4, damage = 10;
-        public Player()
-        {
-            body = new Sprite();
-        }
-
     }
 }
