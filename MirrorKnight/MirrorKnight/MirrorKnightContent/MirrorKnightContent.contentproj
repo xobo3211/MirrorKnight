@@ -47,6 +47,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="rooms\" />
     <Folder Include="textures\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
