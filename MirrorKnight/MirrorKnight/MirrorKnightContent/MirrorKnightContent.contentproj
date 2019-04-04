@@ -46,7 +46,11 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="listv2.txt">
+      <Name>listv2</Name>
+    </Compile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="textures\big_demon_idle_anim_f0.png">
       <Name>big_demon_idle_anim_f0</Name>
