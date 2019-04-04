@@ -47,9 +47,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="listv2.txt">
+    <None Include="listv2.txt">
       <Name>listv2</Name>
-    </Compile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="textures\big_demon_idle_anim_f0.png">
@@ -1604,9 +1605,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="textures\tiles_list_v1.1">
-      <Name>tiles_list_v1</Name>
-    </Compile>
+    <Content Include="textures\tiles_list_v1.1.txt">
+      <Name>tiles_list_v1.1</Name>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 

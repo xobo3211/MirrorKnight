@@ -23,7 +23,8 @@ namespace MirrorKnight
         Texture2D soulsPic, healthDisplayPic, placeHc;
         Player player;
 
-        Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
+        List<Dictionary<String, Rectangle>> tiles;
+        Texture2D tileSprite;
 
 
         public Game1()
@@ -39,7 +40,37 @@ namespace MirrorKnight
 
         private void loadTiles()
         {
-            
+            String[] lines = Useful.readFileLines(@"Content\listv2.txt");
+            tiles = new List<Dictionary<string, Rectangle>>();
+
+            Dictionary<string, Rectangle> current = new Dictionary<string, Rectangle>();
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if(lines[i].Trim().Length == 0)
+                {
+                    tiles.Add(current);
+                    current = new Dictionary<string, Rectangle>();
+                }
+                else
+                {
+                    string[] split = Useful.readWords(lines[i]);
+                    int x = 0, y = 0, width = 0, height = 0;
+                    string name = split[0];
+                    try
+                    {
+                        x = Convert.ToInt32(split[1]);
+                        y = Convert.ToInt32(split[2]);
+                        width = Convert.ToInt32(split[3]);
+                        height = Convert.ToInt32(split[4]);
+                    }
+                    catch (FormatException fe)
+                    {
+                        Console.WriteLine("Unable to convert to string. \nCause: " + fe.Message + "\nSource: " + fe.Source);
+                    }
+                    current.Add(name, new Rectangle(x, y, width, height));
+                }
+            }
         }
 
         /// <summary>
@@ -66,9 +97,13 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             //placeHc = Content.Load<Texture2D>("pc");
-            placeHc = Content.Load<Texture2D>("pc");
 
-            player.body.addTexture("");
+            tileSprite = Useful.getTexture("tileset2");
+            loadTiles();
+            player.body.addTexture(tileSprite);
+            player.body.useRegion(true);
+            player.body.defRegion(tiles[0].Values.ToArray()[0]);
+            player.body.setScale(10);
         }
 
         /// <summary>
