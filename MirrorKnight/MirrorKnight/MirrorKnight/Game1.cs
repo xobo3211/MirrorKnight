@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SureDroid;
+using System.IO;
 
 namespace MirrorKnight
 {
@@ -22,7 +23,8 @@ namespace MirrorKnight
         SpriteFont spectral18;
         Texture2D soulsPic, healthDisplayPic, placeHc;
         Player player;
-
+        List<string> lines;
+        string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
 
         KeyboardState oldKB;
@@ -63,6 +65,8 @@ namespace MirrorKnight
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
 
+            lines = new List<string>();
+            tilesRead = new string[18, 10];
 
             base.Initialize();
         }
@@ -79,8 +83,34 @@ namespace MirrorKnight
             // TODO: use this.Content to load your game content here
             //placeHc = Content.Load<Texture2D>("pc");
             placeHc = Content.Load<Texture2D>("pc");
+            ReadFileAsStrings(@"Content/presetRooms/testroom.txt");
+            player.body.addTexture("");
+        }
 
-            //player.body.addTexture("");
+        private void ReadFileAsStrings(string path)
+        {
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+                        string[] parts = line.Split(' ');
+                        for (int i = 0; i < 240; i++)
+                        {
+                            string c = parts[i];
+                            tilesRead[i, j] = c;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
         }
 
         /// <summary>
