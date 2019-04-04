@@ -23,6 +23,9 @@ namespace MirrorKnight
         Texture2D soulsPic, healthDisplayPic, placeHc;
         Player player;
 
+        Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -34,6 +37,11 @@ namespace MirrorKnight
             graphics.ApplyChanges();
         }
 
+        private void loadTiles()
+        {
+            
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -43,8 +51,7 @@ namespace MirrorKnight
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            sprite = new Sprite(10, 10);
-
+            player = new Player();
             base.Initialize();
         }
 
@@ -60,7 +67,7 @@ namespace MirrorKnight
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
 
-            sprite.addTexture("");
+            player.body.addTexture("");
         }
 
         /// <summary>
@@ -110,7 +117,10 @@ namespace MirrorKnight
     {
         public Sprite body;
         public static int health = 100, speed = 4, damage = 10;
-        
+        public Player()
+        {
+            body = new Sprite();
+        }
 
     }
 }
