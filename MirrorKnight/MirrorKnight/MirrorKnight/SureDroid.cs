@@ -94,12 +94,12 @@ namespace SureDroid
             else return (int)((Double)getRegion().Height * scale);
         }
 
-        public void delete()
+        public void deleteThis()
         {
             sprites.Remove(this);
         }
 
-        public void add()
+        public void addThis()
         {
             sprites.Add(this);
         }

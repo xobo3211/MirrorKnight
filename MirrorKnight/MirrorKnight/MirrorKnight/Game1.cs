@@ -21,8 +21,7 @@ namespace MirrorKnight
         SpriteBatch spriteBatch;
         SpriteFont spectral18;
         Texture2D soulsPic, healthDisplayPic, placeHc;
-
-
+        Player player;
 
         public Game1()
         {
@@ -44,6 +43,7 @@ namespace MirrorKnight
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            sprite = new Sprite(10, 10);
 
             base.Initialize();
         }
@@ -59,6 +59,8 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
+
+            sprite.addTexture("");
         }
 
         /// <summary>
@@ -97,7 +99,7 @@ namespace MirrorKnight
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             //spriteBatch.DrawString(spectral18, "9999", new Vector2(10, 10), Color.White);
-            spriteBatch.Draw(placeHc, new Rectangle(150, 75, 1300, 650), Color.White);
+            
             spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -106,11 +108,9 @@ namespace MirrorKnight
 
     public class Player
     {
-        private Sprite sprite;
-        public static int health, speed, damage;
-        Player()
-        {
+        public Sprite body;
+        public static int health = 100, speed = 4, damage = 10;
+        
 
-        }
     }
 }
