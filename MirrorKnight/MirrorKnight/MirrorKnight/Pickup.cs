@@ -12,32 +12,14 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    class Player
+    public class Pickup
     {
-        public Sprite body;
+        Rectangle hitbox;
+        Texture2D texture;
 
-        int MAX_HP = 6, HP;
-        float SPEED = 1f, DMG = 2;
-
-        ActiveItem active;
-
-        List<PassiveItem> passives;
-
-        public Player()
+        public bool Collides(Rectangle rect)
         {
-            body = new Sprite(10, 10);
-
-            MAX_HP = 6;
-            HP = MAX_HP;
-
-            passives = new List<PassiveItem>();
-        }
-
-
-
-        public void Attack(Vector2 aimVec)  //
-        {
-
+            return hitbox.Intersects(rect);
         }
     }
 }
