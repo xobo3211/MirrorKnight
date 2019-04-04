@@ -46,8 +46,1563 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="textures\" />
+    <Compile Include="textures\big_demon_idle_anim_f0.png">
+      <Name>big_demon_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_demon_idle_anim_f1.png">
+      <Name>big_demon_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_demon_idle_anim_f2.png">
+      <Name>big_demon_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_demon_idle_anim_f3.png">
+      <Name>big_demon_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_demon_run_anim_f0.png">
+      <Name>big_demon_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_demon_run_anim_f1.png">
+      <Name>big_demon_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_demon_run_anim_f2.png">
+      <Name>big_demon_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_demon_run_anim_f3.png">
+      <Name>big_demon_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_zombie_idle_anim_f0.png">
+      <Name>big_zombie_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_zombie_idle_anim_f1.png">
+      <Name>big_zombie_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_zombie_idle_anim_f2.png">
+      <Name>big_zombie_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_zombie_idle_anim_f3.png">
+      <Name>big_zombie_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_zombie_run_anim_f0.png">
+      <Name>big_zombie_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_zombie_run_anim_f1.png">
+      <Name>big_zombie_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_zombie_run_anim_f2.png">
+      <Name>big_zombie_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\big_zombie_run_anim_f3.png">
+      <Name>big_zombie_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chest_empty_open_anim_f0.png">
+      <Name>chest_empty_open_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chest_empty_open_anim_f1.png">
+      <Name>chest_empty_open_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chest_empty_open_anim_f2.png">
+      <Name>chest_empty_open_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chest_full_open_anim_f0.png">
+      <Name>chest_full_open_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chest_full_open_anim_f1.png">
+      <Name>chest_full_open_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chest_full_open_anim_f2.png">
+      <Name>chest_full_open_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chest_mimic_open_anim_f0.png">
+      <Name>chest_mimic_open_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chest_mimic_open_anim_f1.png">
+      <Name>chest_mimic_open_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chest_mimic_open_anim_f2.png">
+      <Name>chest_mimic_open_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chort_idle_anim_f0.png">
+      <Name>chort_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chort_idle_anim_f1.png">
+      <Name>chort_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chort_idle_anim_f2.png">
+      <Name>chort_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chort_idle_anim_f3.png">
+      <Name>chort_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chort_run_anim_f0.png">
+      <Name>chort_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chort_run_anim_f1.png">
+      <Name>chort_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chort_run_anim_f2.png">
+      <Name>chort_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\chort_run_anim_f3.png">
+      <Name>chort_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\coin_anim_f0.png">
+      <Name>coin_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\coin_anim_f1.png">
+      <Name>coin_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\coin_anim_f2.png">
+      <Name>coin_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\coin_anim_f3.png">
+      <Name>coin_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\column_mid.png">
+      <Name>column_mid</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\column_top.png">
+      <Name>column_top</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\coulmn_base.png">
+      <Name>coulmn_base</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\crate.png">
+      <Name>crate</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\doors_all.png">
+      <Name>doors_all</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\doors_frame_left.png">
+      <Name>doors_frame_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\doors_frame_righ.png">
+      <Name>doors_frame_righ</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\doors_frame_top.png">
+      <Name>doors_frame_top</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\doors_leaf_closed.png">
+      <Name>doors_leaf_closed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\doors_leaf_open.png">
+      <Name>doors_leaf_open</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\edge.png">
+      <Name>edge</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_f_hit_anim_f0.png">
+      <Name>elf_f_hit_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_f_idle_anim_f0.png">
+      <Name>elf_f_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_f_idle_anim_f1.png">
+      <Name>elf_f_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_f_idle_anim_f2.png">
+      <Name>elf_f_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_f_idle_anim_f3.png">
+      <Name>elf_f_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_f_run_anim_f0.png">
+      <Name>elf_f_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_f_run_anim_f1.png">
+      <Name>elf_f_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_f_run_anim_f2.png">
+      <Name>elf_f_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_f_run_anim_f3.png">
+      <Name>elf_f_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_m_hit_anim_f0.png">
+      <Name>elf_m_hit_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_m_idle_anim_f0.png">
+      <Name>elf_m_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_m_idle_anim_f1.png">
+      <Name>elf_m_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_m_idle_anim_f2.png">
+      <Name>elf_m_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_m_idle_anim_f3.png">
+      <Name>elf_m_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_m_run_anim_f0.png">
+      <Name>elf_m_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_m_run_anim_f1.png">
+      <Name>elf_m_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_m_run_anim_f2.png">
+      <Name>elf_m_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\elf_m_run_anim_f3.png">
+      <Name>elf_m_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\flask_big_blue.png">
+      <Name>flask_big_blue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\flask_big_green.png">
+      <Name>flask_big_green</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\flask_big_red.png">
+      <Name>flask_big_red</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\flask_big_yellow.png">
+      <Name>flask_big_yellow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\flask_blue.png">
+      <Name>flask_blue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\flask_green.png">
+      <Name>flask_green</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\flask_red.png">
+      <Name>flask_red</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\flask_yellow.png">
+      <Name>flask_yellow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_1.png">
+      <Name>floor_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_2.png">
+      <Name>floor_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_3.png">
+      <Name>floor_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_4.png">
+      <Name>floor_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_5.png">
+      <Name>floor_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_6.png">
+      <Name>floor_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_7.png">
+      <Name>floor_7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_8.png">
+      <Name>floor_8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_ladder.png">
+      <Name>floor_ladder</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_spikes_anim_f0.png">
+      <Name>floor_spikes_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_spikes_anim_f1.png">
+      <Name>floor_spikes_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_spikes_anim_f2.png">
+      <Name>floor_spikes_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\floor_spikes_anim_f3.png">
+      <Name>floor_spikes_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\goblin_idle_anim_f0.png">
+      <Name>goblin_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\goblin_idle_anim_f1.png">
+      <Name>goblin_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\goblin_idle_anim_f2.png">
+      <Name>goblin_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\goblin_idle_anim_f3.png">
+      <Name>goblin_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\goblin_run_anim_f0.png">
+      <Name>goblin_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\goblin_run_anim_f1.png">
+      <Name>goblin_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\goblin_run_anim_f2.png">
+      <Name>goblin_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\goblin_run_anim_f3.png">
+      <Name>goblin_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\hole.png">
+      <Name>hole</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ice_zombie_idle_anim_f0.png">
+      <Name>ice_zombie_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ice_zombie_idle_anim_f1.png">
+      <Name>ice_zombie_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ice_zombie_idle_anim_f2.png">
+      <Name>ice_zombie_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ice_zombie_idle_anim_f3.png">
+      <Name>ice_zombie_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ice_zombie_run_anim_f0.png">
+      <Name>ice_zombie_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ice_zombie_run_anim_f1.png">
+      <Name>ice_zombie_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ice_zombie_run_anim_f2.png">
+      <Name>ice_zombie_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ice_zombie_run_anim_f3.png">
+      <Name>ice_zombie_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\imp_idle_anim_f0.png">
+      <Name>imp_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\imp_idle_anim_f1.png">
+      <Name>imp_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\imp_idle_anim_f2.png">
+      <Name>imp_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\imp_idle_anim_f3.png">
+      <Name>imp_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\imp_run_anim_f0.png">
+      <Name>imp_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\imp_run_anim_f1.png">
+      <Name>imp_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\imp_run_anim_f2.png">
+      <Name>imp_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\imp_run_anim_f3.png">
+      <Name>imp_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_f_hit_anim_f0.png">
+      <Name>knight_f_hit_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_f_idle_anim_f0.png">
+      <Name>knight_f_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_f_idle_anim_f1.png">
+      <Name>knight_f_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_f_idle_anim_f2.png">
+      <Name>knight_f_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_f_idle_anim_f3.png">
+      <Name>knight_f_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_f_run_anim_f0.png">
+      <Name>knight_f_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_f_run_anim_f1.png">
+      <Name>knight_f_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_f_run_anim_f2.png">
+      <Name>knight_f_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_f_run_anim_f3.png">
+      <Name>knight_f_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_m_hit_anim_f0.png">
+      <Name>knight_m_hit_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_m_idle_anim_f0.png">
+      <Name>knight_m_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_m_idle_anim_f1.png">
+      <Name>knight_m_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_m_idle_anim_f2.png">
+      <Name>knight_m_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_m_idle_anim_f3.png">
+      <Name>knight_m_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_m_run_anim_f0.png">
+      <Name>knight_m_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_m_run_anim_f1.png">
+      <Name>knight_m_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_m_run_anim_f2.png">
+      <Name>knight_m_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\knight_m_run_anim_f3.png">
+      <Name>knight_m_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\masked_orc_idle_anim_f0.png">
+      <Name>masked_orc_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\masked_orc_idle_anim_f1.png">
+      <Name>masked_orc_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\masked_orc_idle_anim_f2.png">
+      <Name>masked_orc_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\masked_orc_idle_anim_f3.png">
+      <Name>masked_orc_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\masked_orc_run_anim_f0.png">
+      <Name>masked_orc_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\masked_orc_run_anim_f1.png">
+      <Name>masked_orc_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\masked_orc_run_anim_f2.png">
+      <Name>masked_orc_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\masked_orc_run_anim_f3.png">
+      <Name>masked_orc_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\muddy_idle_anim_f0.png">
+      <Name>muddy_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\muddy_idle_anim_f1.png">
+      <Name>muddy_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\muddy_idle_anim_f2.png">
+      <Name>muddy_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\muddy_idle_anim_f3.png">
+      <Name>muddy_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\muddy_run_anim_f0.png">
+      <Name>muddy_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\muddy_run_anim_f1.png">
+      <Name>muddy_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\muddy_run_anim_f2.png">
+      <Name>muddy_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\muddy_run_anim_f3.png">
+      <Name>muddy_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\necromancer_idle_anim_f0.png">
+      <Name>necromancer_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\necromancer_idle_anim_f1.png">
+      <Name>necromancer_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\necromancer_idle_anim_f2.png">
+      <Name>necromancer_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\necromancer_idle_anim_f3.png">
+      <Name>necromancer_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\necromancer_run_anim_f0.png">
+      <Name>necromancer_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\necromancer_run_anim_f1.png">
+      <Name>necromancer_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\necromancer_run_anim_f2.png">
+      <Name>necromancer_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\necromancer_run_anim_f3.png">
+      <Name>necromancer_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ogre_idle_anim_f0.png">
+      <Name>ogre_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ogre_idle_anim_f1.png">
+      <Name>ogre_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ogre_idle_anim_f2.png">
+      <Name>ogre_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ogre_idle_anim_f3.png">
+      <Name>ogre_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ogre_run_anim_f0.png">
+      <Name>ogre_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ogre_run_anim_f1.png">
+      <Name>ogre_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ogre_run_anim_f2.png">
+      <Name>ogre_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ogre_run_anim_f3.png">
+      <Name>ogre_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_shaman_idle_anim_f0.png">
+      <Name>orc_shaman_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_shaman_idle_anim_f1.png">
+      <Name>orc_shaman_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_shaman_idle_anim_f2.png">
+      <Name>orc_shaman_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_shaman_idle_anim_f3.png">
+      <Name>orc_shaman_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_shaman_run_anim_f0.png">
+      <Name>orc_shaman_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_shaman_run_anim_f1.png">
+      <Name>orc_shaman_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_shaman_run_anim_f2.png">
+      <Name>orc_shaman_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_shaman_run_anim_f3.png">
+      <Name>orc_shaman_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_warrior_idle_anim_f0.png">
+      <Name>orc_warrior_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_warrior_idle_anim_f1.png">
+      <Name>orc_warrior_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_warrior_idle_anim_f2.png">
+      <Name>orc_warrior_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_warrior_idle_anim_f3.png">
+      <Name>orc_warrior_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_warrior_run_anim_f0.png">
+      <Name>orc_warrior_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_warrior_run_anim_f1.png">
+      <Name>orc_warrior_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_warrior_run_anim_f2.png">
+      <Name>orc_warrior_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\orc_warrior_run_anim_f3.png">
+      <Name>orc_warrior_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\skelet_idle_anim_f0.png">
+      <Name>skelet_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\skelet_idle_anim_f1.png">
+      <Name>skelet_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\skelet_idle_anim_f2.png">
+      <Name>skelet_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\skelet_idle_anim_f3.png">
+      <Name>skelet_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\skelet_run_anim_f0.png">
+      <Name>skelet_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\skelet_run_anim_f1.png">
+      <Name>skelet_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\skelet_run_anim_f2.png">
+      <Name>skelet_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\skelet_run_anim_f3.png">
+      <Name>skelet_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\skull.png">
+      <Name>skull</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\swampy_idle_anim_f0.png">
+      <Name>swampy_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\swampy_idle_anim_f1.png">
+      <Name>swampy_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\swampy_idle_anim_f2.png">
+      <Name>swampy_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\swampy_idle_anim_f3.png">
+      <Name>swampy_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\swampy_run_anim_f0.png">
+      <Name>swampy_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\swampy_run_anim_f1.png">
+      <Name>swampy_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\swampy_run_anim_f2.png">
+      <Name>swampy_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\swampy_run_anim_f3.png">
+      <Name>swampy_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\tiny_zombie_idle_anim_f0.png">
+      <Name>tiny_zombie_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\tiny_zombie_idle_anim_f1.png">
+      <Name>tiny_zombie_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\tiny_zombie_idle_anim_f2.png">
+      <Name>tiny_zombie_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\tiny_zombie_idle_anim_f3.png">
+      <Name>tiny_zombie_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\tiny_zombie_run_anim_f0.png">
+      <Name>tiny_zombie_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\tiny_zombie_run_anim_f1.png">
+      <Name>tiny_zombie_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\tiny_zombie_run_anim_f2.png">
+      <Name>tiny_zombie_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\tiny_zombie_run_anim_f3.png">
+      <Name>tiny_zombie_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ui_heart_empty.png">
+      <Name>ui_heart_empty</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ui_heart_full.png">
+      <Name>ui_heart_full</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\ui_heart_half.png">
+      <Name>ui_heart_half</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_banner_blue.png">
+      <Name>wall_banner_blue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_banner_green.png">
+      <Name>wall_banner_green</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_banner_red.png">
+      <Name>wall_banner_red</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_banner_yellow.png">
+      <Name>wall_banner_yellow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_column_mid.png">
+      <Name>wall_column_mid</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_column_top.png">
+      <Name>wall_column_top</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_corner_bottom_left.png">
+      <Name>wall_corner_bottom_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_corner_bottom_right.png">
+      <Name>wall_corner_bottom_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_corner_front_left.png">
+      <Name>wall_corner_front_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_corner_front_right.png">
+      <Name>wall_corner_front_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_corner_left.png">
+      <Name>wall_corner_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_corner_right.png">
+      <Name>wall_corner_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_corner_top_left.png">
+      <Name>wall_corner_top_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_corner_top_right.png">
+      <Name>wall_corner_top_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_coulmn_base.png">
+      <Name>wall_coulmn_base</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_basin_blue_anim_f0.png">
+      <Name>wall_fountain_basin_blue_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_basin_blue_anim_f1.png">
+      <Name>wall_fountain_basin_blue_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_basin_blue_anim_f2.png">
+      <Name>wall_fountain_basin_blue_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_basin_red_anim_f0.png">
+      <Name>wall_fountain_basin_red_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_basin_red_anim_f1.png">
+      <Name>wall_fountain_basin_red_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_basin_red_anim_f2.png">
+      <Name>wall_fountain_basin_red_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_mid_blue_anim_f0.png">
+      <Name>wall_fountain_mid_blue_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_mid_blue_anim_f1.png">
+      <Name>wall_fountain_mid_blue_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_mid_blue_anim_f2.png">
+      <Name>wall_fountain_mid_blue_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_mid_red_anim_f0.png">
+      <Name>wall_fountain_mid_red_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_mid_red_anim_f1.png">
+      <Name>wall_fountain_mid_red_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_mid_red_anim_f2.png">
+      <Name>wall_fountain_mid_red_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_fountain_top.png">
+      <Name>wall_fountain_top</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_goo.png">
+      <Name>wall_goo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_goo_base.png">
+      <Name>wall_goo_base</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_hole_1.png">
+      <Name>wall_hole_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_hole_2.png">
+      <Name>wall_hole_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_inner_corner_l_top_left.png">
+      <Name>wall_inner_corner_l_top_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_inner_corner_l_top_rigth.png">
+      <Name>wall_inner_corner_l_top_rigth</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_inner_corner_mid_left.png">
+      <Name>wall_inner_corner_mid_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_inner_corner_mid_rigth.png">
+      <Name>wall_inner_corner_mid_rigth</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_inner_corner_t_top_left.png">
+      <Name>wall_inner_corner_t_top_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_inner_corner_t_top_rigth.png">
+      <Name>wall_inner_corner_t_top_rigth</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_left.png">
+      <Name>wall_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_mid.png">
+      <Name>wall_mid</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_right.png">
+      <Name>wall_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_side_front_left.png">
+      <Name>wall_side_front_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_side_front_right.png">
+      <Name>wall_side_front_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_side_mid_left.png">
+      <Name>wall_side_mid_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_side_mid_right.png">
+      <Name>wall_side_mid_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_side_top_left.png">
+      <Name>wall_side_top_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_side_top_right.png">
+      <Name>wall_side_top_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_top_left.png">
+      <Name>wall_top_left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_top_mid.png">
+      <Name>wall_top_mid</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wall_top_right.png">
+      <Name>wall_top_right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_anime_sword.png">
+      <Name>weapon_anime_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_axe.png">
+      <Name>weapon_axe</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_baton_with_spikes.png">
+      <Name>weapon_baton_with_spikes</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_big_hammer.png">
+      <Name>weapon_big_hammer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_cleaver.png">
+      <Name>weapon_cleaver</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_duel_sword.png">
+      <Name>weapon_duel_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_golden_sword.png">
+      <Name>weapon_golden_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_green_magic_staff.png">
+      <Name>weapon_green_magic_staff</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_hammer.png">
+      <Name>weapon_hammer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_katana.png">
+      <Name>weapon_katana</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_knife.png">
+      <Name>weapon_knife</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_knight_sword.png">
+      <Name>weapon_knight_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_lavish_sword.png">
+      <Name>weapon_lavish_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_mace.png">
+      <Name>weapon_mace</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_machete.png">
+      <Name>weapon_machete</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_red_gem_sword.png">
+      <Name>weapon_red_gem_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_red_magic_staff.png">
+      <Name>weapon_red_magic_staff</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_regular_sword.png">
+      <Name>weapon_regular_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_rusty_sword.png">
+      <Name>weapon_rusty_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\weapon_saw_sword.png">
+      <Name>weapon_saw_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzard_f_idle_anim_f0.png">
+      <Name>wizzard_f_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzard_f_idle_anim_f1.png">
+      <Name>wizzard_f_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzard_f_idle_anim_f2.png">
+      <Name>wizzard_f_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzard_f_idle_anim_f3.png">
+      <Name>wizzard_f_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzard_m_idle_anim_f0.png">
+      <Name>wizzard_m_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzard_m_idle_anim_f1.png">
+      <Name>wizzard_m_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzard_m_idle_anim_f2.png">
+      <Name>wizzard_m_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzard_m_idle_anim_f3.png">
+      <Name>wizzard_m_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_f_hit_anim_f0.png">
+      <Name>wizzart_f_hit_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_f_run_anim_f0.png">
+      <Name>wizzart_f_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_f_run_anim_f1.png">
+      <Name>wizzart_f_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_f_run_anim_f2.png">
+      <Name>wizzart_f_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_f_run_anim_f3.png">
+      <Name>wizzart_f_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_m_hit_anim_f0.png">
+      <Name>wizzart_m_hit_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_m_run_anim_f0.png">
+      <Name>wizzart_m_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_m_run_anim_f1.png">
+      <Name>wizzart_m_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_m_run_anim_f2.png">
+      <Name>wizzart_m_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wizzart_m_run_anim_f3.png">
+      <Name>wizzart_m_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wogol_idle_anim_f0.png">
+      <Name>wogol_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wogol_idle_anim_f1.png">
+      <Name>wogol_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wogol_idle_anim_f2.png">
+      <Name>wogol_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wogol_idle_anim_f3.png">
+      <Name>wogol_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wogol_run_anim_f0.png">
+      <Name>wogol_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wogol_run_anim_f1.png">
+      <Name>wogol_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wogol_run_anim_f2.png">
+      <Name>wogol_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\wogol_run_anim_f3.png">
+      <Name>wogol_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\zombie_idle_anim_f0.png">
+      <Name>zombie_idle_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\zombie_idle_anim_f1.png">
+      <Name>zombie_idle_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\zombie_idle_anim_f2.png">
+      <Name>zombie_idle_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\zombie_idle_anim_f3.png">
+      <Name>zombie_idle_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\zombie_run_anim_f0.png">
+      <Name>zombie_run_anim_f0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\zombie_run_anim_f1.png">
+      <Name>zombie_run_anim_f1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\zombie_run_anim_f2.png">
+      <Name>zombie_run_anim_f2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="textures\zombie_run_anim_f3.png">
+      <Name>zombie_run_anim_f3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="textures\tiles_list_v1.1">
+      <Name>tiles_list_v1</Name>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
