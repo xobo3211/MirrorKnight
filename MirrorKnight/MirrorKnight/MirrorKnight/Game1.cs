@@ -24,6 +24,7 @@ namespace MirrorKnight
         Texture2D soulsPic, healthDisplayPic, placeHc;
         Player player;
         List<string> lines;
+        List<Room> psRoomsNormal, psRoomsRreasure, psRoomsShop, psRoomsBoss, psRoomsSecret, psRoomsPuzzle;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
 
@@ -41,7 +42,7 @@ namespace MirrorKnight
 
         private void loadTiles()
         {
-            
+            ReadFileAsStrings(@"Content/presetRooms/testroom.txt");
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace MirrorKnight
             // TODO: use this.Content to load your game content here
             //placeHc = Content.Load<Texture2D>("pc");
             placeHc = Content.Load<Texture2D>("pc");
-            ReadFileAsStrings(@"Content/presetRooms/testroom.txt");
+            
             player.body.addTexture("");
         }
 
