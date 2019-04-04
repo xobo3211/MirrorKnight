@@ -18,26 +18,29 @@ namespace MirrorKnight
         public Room(int rT)
         {
             rType = rT;
-            int c;
+            int c = 0; ;
             switch (rT)
             {
-                case (0):
+                case (0): //Normal
                     c = 10; 
                     break;
-                case (1):
+                case (1): //Boss
                     c = 10;
                     break;
-                case (2):
+                case (2): //Treasure
                     c = 10;
                     break;
-                case (3):
+                case (3): //Puzzle
                     c = 10;
                     break;
-                case (4):
+                case (4): //Shop
+                    c = 10;
+                    break;
+                case (5): //Secret
                     c = 10;
                     break;
             }
-            rNo = rand.Next(0, );
+            rNo = rand.Next(0, c);
         }
         public int getRoomType()
         {
