@@ -52,15 +52,9 @@ namespace MirrorKnight
             RIGHT,
             NONE
         }
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
+
         public Map()
         {
-            // TODO: Add your initialization logic here
 
             bool boss, treasure, shop, secret;
 
@@ -75,11 +69,13 @@ namespace MirrorKnight
             }
             while (CountDeadEnds() < 3 && !boss && !treasure && !shop && !secret);               //Require minimum of three dead ends in a map. Boss, Treasure, Shop
         }
+
+
         void Generate()
         {
             rooms = new Rooms[maxX, maxY];
 
-            rooms[maxX / 2, maxY / 2] = Rooms.EMPTY;
+            rooms[maxX / 2, maxY / 2] = Rooms.EMPTY;                                              //Places starting room in the middle
 
             currentRoomCount = maxRoomCount;
 

@@ -78,6 +78,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="SureDroid.cs" />
+    <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

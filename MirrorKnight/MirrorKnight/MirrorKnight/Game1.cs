@@ -32,7 +32,7 @@ namespace MirrorKnight
             Content.RootDirectory = "Content";
             Useful.set(this);
             this.Window.AllowUserResizing = true;
-            graphics.PreferredBackBufferWidth = 1600;
+            graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
             graphics.ApplyChanges();
         }
@@ -65,6 +65,7 @@ namespace MirrorKnight
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            //placeHc = Content.Load<Texture2D>("pc");
             placeHc = Content.Load<Texture2D>("pc");
 
             player.body.addTexture("");
@@ -106,7 +107,7 @@ namespace MirrorKnight
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             //spriteBatch.DrawString(spectral18, "9999", new Vector2(10, 10), Color.White);
-            
+            //spriteBatch.Draw(placeHc, new Rectangle(150, 75, 1300, 650), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }
