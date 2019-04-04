@@ -25,6 +25,12 @@ namespace MirrorKnight
 
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
 
+        KeyboardState oldKB;
+        MouseState oldM;
+        GamePadState oldGP;
+
+        bool usingController = false, usingKeyboard = true;
+
 
         public Game1()
         {
@@ -52,6 +58,12 @@ namespace MirrorKnight
         {
             // TODO: Add your initialization logic here
             player = new Player();
+
+            oldGP = GamePad.GetState(PlayerIndex.One);
+            oldKB = Keyboard.GetState();
+            oldM = Mouse.GetState();
+
+
             base.Initialize();
         }
 
@@ -68,7 +80,7 @@ namespace MirrorKnight
             //placeHc = Content.Load<Texture2D>("pc");
             placeHc = Content.Load<Texture2D>("pc");
 
-            player.body.addTexture("");
+            //player.body.addTexture("");
         }
 
         /// <summary>
@@ -88,10 +100,65 @@ namespace MirrorKnight
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
             // TODO: Add your update logic here
+
+            KeyboardState kb = Keyboard.GetState();
+            MouseState m = Mouse.GetState();
+            GamePadState gp = GamePad.GetState(PlayerIndex.One);
+
+            Vector2 playerMoveVec = Vector2.Zero;
+            Vector2 playerAimVec = Vector2.Zero;
+
+            if (usingKeyboard)
+            {
+                if(gp.ThumbSticks.Left != Vector2.Zero || gp.ThumbSticks.Right != Vector2.Zero)
+                {
+                    usingKeyboard = false;
+                    usingController = true;
+                }
+                if (kb.IsKeyDown(Keys.W))
+                {
+                    playerMoveVec.Y = -1;
+                }
+                else if (kb.IsKeyDown(Keys.S))
+                {
+                    playerMoveVec.Y = 1;
+                }
+                if (kb.IsKeyDown(Keys.A))
+                {
+                    playerMoveVec.X = -1;
+                }
+                else if (kb.IsKeyDown(Keys.D))
+                {
+                    playerMoveVec.X = 1;
+                }
+
+                playerAimVec = new Vector2(m.X - player.GetPosition().X, m.Y - player.GetPosition().Y);
+            }
+            if(usingController)
+            {
+                if(Keyboard.GetState().GetPressedKeys().Length > 0 || oldM.X != m.X)
+                {
+                    usingController = false;
+                    usingKeyboard = true;
+                }
+                if (gp.ThumbSticks.Left != Vector2.Zero)
+                {
+                    playerMoveVec = gp.ThumbSticks.Left;
+                }
+                if(gp.ThumbSticks.Right != Vector2.Zero)
+                {
+                    playerAimVec = gp.ThumbSticks.Right; 
+                }
+            }
+            playerMoveVec.Normalize();
+
+            
+
+            player.Move(playerMoveVec);
 
             base.Update(gameTime);
         }

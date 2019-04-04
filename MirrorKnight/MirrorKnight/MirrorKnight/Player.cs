@@ -14,6 +14,43 @@ namespace MirrorKnight
 {
     class Player
     {
-        Sprite body;   
+        Sprite body;
+
+        Vector2 position;
+
+        int MAX_HP = 6, HP;
+        float SPEED = 1f, DMG = 2;
+
+        ActiveItem active;
+
+        List<PassiveItem> passives;
+
+        public Player()
+        {
+            MAX_HP = 6;
+            HP = MAX_HP;
+
+            passives = new List<PassiveItem>();
+        }
+
+        public Vector2 GetPosition()
+        {
+            return position;
+        }
+
+        public void Move(Vector2 moveVec)   //Handles player movement. moveVec assumed to be normalized
+        {
+            position += moveVec * SPEED;
+        }
+
+        public void Attack(Vector2 aimVec)  //
+        {
+
+        }
+
+        public void Draw(SpriteBatch b)
+        {
+            body.draw(b);
+        }
     }
 }
