@@ -104,13 +104,4 @@ namespace MirrorKnight
             base.Draw(gameTime);
         }
     }
-
-
-    public class Player
-    {
-        public Sprite body;
-        public static int health = 100, speed = 4, damage = 10;
-        
-
-    }
 }
