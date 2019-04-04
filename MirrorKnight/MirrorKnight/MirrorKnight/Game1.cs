@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SureDroid;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace MirrorKnight
 {
@@ -24,8 +25,7 @@ namespace MirrorKnight
         Texture2D soulsPic, healthDisplayPic, placeHc;
         Player player;
 
-        List<Dictionary<String, Rectangle>> tiles;
-        Texture2D tileSprite;
+        Dictionary<string,Dictionary<String, Texture2D>> sprites;
 
 
         public Game1()
@@ -39,38 +39,17 @@ namespace MirrorKnight
             graphics.ApplyChanges();
         }
 
+        Regex nameReg = new Regex(@"^([a-z]+)");
         private void loadTiles()
         {
-            String[] lines = Useful.readFileLines(@"Content\listv2.txt");
-            tiles = new List<Dictionary<string, Rectangle>>();
+            DirectoryInfo d = new DirectoryInfo(@"Content/Tiles");
+            FileInfo[] Files = d.GetFiles(); //Getting Text files
 
-            Dictionary<string, Rectangle> current = new Dictionary<string, Rectangle>();
-
-            for (int i = 0; i < lines.Length; i++)
+            foreach (FileInfo file in Files)
             {
-                if(lines[i].Trim().Length == 0)
-                {
-                    tiles.Add(current);
-                    current = new Dictionary<string, Rectangle>();
-                }
-                else
-                {
-                    string[] split = Useful.readWords(lines[i]);
-                    int x = 0, y = 0, width = 0, height = 0;
-                    string name = split[0];
-                    try
-                    {
-                        x = Convert.ToInt32(split[1]);
-                        y = Convert.ToInt32(split[2]);
-                        width = Convert.ToInt32(split[3]);
-                        height = Convert.ToInt32(split[4]);
-                    }
-                    catch (FormatException fe)
-                    {
-                        Console.WriteLine("Unable to convert to string. \nCause: " + fe.Message + "\nSource: " + fe.Source);
-                    }
-                    current.Add(name, new Rectangle(x, y, width, height));
-                }
+                string op = nameReg.Match(file.Name).Groups[0].Value;
+                if(sprites.ContainsKey())
+                sprites.Add(file.Name, Useful.getTexture("));
             }
         }
 
@@ -84,8 +63,6 @@ namespace MirrorKnight
         {
             // TODO: Add your initialization logic here
             player = new Player();
-            lines = new List<string>();
-            tilesRead = new string[18, 10];
             base.Initialize();
         }
 
@@ -100,32 +77,10 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             //placeHc = Content.Load<Texture2D>("pc");
-            placeHc = Content.Load<Texture2D>("pc");
 
-        private void ReadFileAsStrings(string path)
-        {
-
-            try
-            {
-                using (StreamReader reader = new StreamReader(path))
-                {
-                    for (int j = 0; !reader.EndOfStream; j++)
-                    {
-                        string line = reader.ReadLine();
-                        string[] parts = line.Split(' ');
-                        for (int i = 0; i < 240; i++)
-                        {
-                            string c = parts[i];
-                            tilesRead[i, j] = c;
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }
+            loadTiles();
+            //player.body.addTexture(tileSprite);
+            player.body.setScale(10);
         }
 
         /// <summary>
@@ -169,4 +124,7 @@ namespace MirrorKnight
             base.Draw(gameTime);
         }
     }
+
+
+
 }

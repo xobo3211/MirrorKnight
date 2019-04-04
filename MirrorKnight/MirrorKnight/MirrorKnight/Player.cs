@@ -12,8 +12,14 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    class Player
+    public class Player
     {
-        Sprite body;   
+        public Sprite body;
+        public static int health = 100, speed = 4, damage = 10;
+        public Player()
+        {
+            body = new Sprite();
+        }
+
     }
 }
