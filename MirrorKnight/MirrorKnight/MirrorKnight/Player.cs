@@ -33,7 +33,12 @@ namespace MirrorKnight
             passives = new List<PassiveItem>();
         }
 
-
+        public void load()
+        {
+            body.setAnimation(true);
+            Game1.sprites["knight"].Keys.Where((str, index) => str.Contains("m_idle")).ToList().ForEach(str =>body.addTexture(Game1.sprites["knight"][str]));
+            Console.WriteLine(body.hasTextures());
+        }
 
         public void Attack(Vector2 aimVec)  //
         {

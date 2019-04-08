@@ -29,7 +29,7 @@ namespace MirrorKnight
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         bool pauseMenu;
-        Dictionary<string, Dictionary<String, Texture2D>> sprites;
+        public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
 
         KeyboardState oldKB;
         MouseState oldM;
@@ -90,6 +90,33 @@ namespace MirrorKnight
             base.Initialize();
         }
 
+
+        private void ReadFileAsStrings(string path)
+        {
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+                        string[] parts = line.Split(' ');
+                        for (int i = 0; i < 240; i++)
+                        {
+                            string c = parts[i];
+                            tilesRead[i, j] = c;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -104,6 +131,7 @@ namespace MirrorKnight
             placeHc = Content.Load<Texture2D>("pc");
 
             loadTiles();
+            player.load();
             //player.body.addTexture(tileSprite);
             player.body.setScale(10);
         }
