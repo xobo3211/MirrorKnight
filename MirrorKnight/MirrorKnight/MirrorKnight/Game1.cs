@@ -44,7 +44,8 @@ namespace MirrorKnight
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Useful.set(this);
-            this.Window.AllowUserResizing = true;
+
+            this.Window.AllowUserResizing = false;
             graphics.PreferredBackBufferWidth = 1080;
             graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
@@ -82,7 +83,6 @@ namespace MirrorKnight
         {
             // TODO: Add your initialization logic here
             player = new Player();
-            bool = false;
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
@@ -102,7 +102,6 @@ namespace MirrorKnight
             // TODO: use this.Content to load your game content here
             //placeHc = Content.Load<Texture2D>("pc");
             placeHc = Content.Load<Texture2D>("pc");
-        }
 
             loadTiles();
             //player.body.addTexture(tileSprite);
