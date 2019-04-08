@@ -22,7 +22,7 @@ namespace MirrorKnight
         SpriteBatch spriteBatch;
         SpriteFont spectral18;
         Texture2D soulsPic, healthDisplayPic, placeHc;
-        Player player;
+        public Texture2D placeholderTile;
         List<string> lines;
         List<Room> psRoomsNormal, psRoomsRreasure, psRoomsShop, psRoomsBoss, psRoomsSecret, psRoomsPuzzle;
         string[,] tilesRead;
@@ -33,6 +33,10 @@ namespace MirrorKnight
         GamePadState oldGP;
 
         bool usingController = false, usingKeyboard = true;
+
+        Player p;
+        Map m;
+
 
 
         public Game1()
@@ -60,14 +64,15 @@ namespace MirrorKnight
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            player = new Player();
-            bool = false;
+            p = new Player();
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
 
             lines = new List<string>();
             tilesRead = new string[18, 10];
+
+            m = new MirrorKnight.Map();
 
             base.Initialize();
         }
@@ -84,8 +89,10 @@ namespace MirrorKnight
             // TODO: use this.Content to load your game content here
             //placeHc = Content.Load<Texture2D>("pc");
             placeHc = Content.Load<Texture2D>("pc");
-            
-            player.body.addTexture("");
+
+            //player.body.addTexture("");
+
+            placeholderTile = Content.Load<Texture2D>("pc");
         }
 
         private void ReadFileAsStrings(string path)
@@ -144,7 +151,6 @@ namespace MirrorKnight
             Vector2 playerAimVec = Vector2.Zero;
 
 
-            if (Keyboard)
             if (usingKeyboard)
             {
                 if(gp.ThumbSticks.Left != Vector2.Zero || gp.ThumbSticks.Right != Vector2.Zero)
@@ -169,7 +175,7 @@ namespace MirrorKnight
                     playerMoveVec.X = 1;
                 }
 
-                playerAimVec = new Vector2(m.X - player.GetPosition().X, m.Y - player.GetPosition().Y);
+                playerAimVec = new Vector2(m.X - p.GetPosition().X, m.Y - p.GetPosition().Y);
             }
             if(usingController)
             {
@@ -191,7 +197,7 @@ namespace MirrorKnight
 
             
 
-            player.Move(playerMoveVec);
+            p.Move(playerMoveVec);
 
             base.Update(gameTime);
         }
