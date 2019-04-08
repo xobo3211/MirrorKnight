@@ -350,8 +350,12 @@ namespace SureDroid
         /// </summary>
         public void defRegion(int x, int y, int width, int height)
         {
-            getRegionList().Add(new Rectangle(x, y, width, height));
-            sizes.Add(new Size(width, height));
+            defRegion(new Rectangle(x, y, width, height));
+        }
+        public void defRegion(Rectangle box)
+        {
+            getRegionList().Add(box);
+            sizes.Add(new Size(box.Width, box.Height));
         }
 
         /// <summary>
@@ -561,7 +565,7 @@ namespace SureDroid
         /// </summary>
         public void draw(SpriteBatch batch)
         {
-            if (!visible) return;
+            if (!visible || sizes.Count == 0) return;
             updatePos();
             rectangle.Width = getWidth();
             rectangle.Height = getHeight();
