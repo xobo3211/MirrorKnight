@@ -45,17 +45,25 @@ namespace MirrorKnight
             graphics.ApplyChanges();
         }
 
+
+
+
+        /// <summary>
+        /// Classifies it by the first underscore name, and then into a dictionary with all names.
+        /// </summary>
         Regex nameReg = new Regex(@"^([a-z]+)");
         private void loadTiles()
         {
-            DirectoryInfo d = new DirectoryInfo(@"Content/Tiles");
+            DirectoryInfo d = new DirectoryInfo(@"Content/Textures");
             FileInfo[] Files = d.GetFiles(); //Getting Text files
-
+            sprites = new Dictionary<string, Dictionary<string, Texture2D>>();
             foreach (FileInfo file in Files)
             {
                 string op = nameReg.Match(file.Name).Groups[0].Value;
-                if(sprites.ContainsKey())
-                sprites.Add(file.Name, Useful.getTexture("));
+                string name = file.Name.Substring(0, file.Name.Length - 4);
+                if(!sprites.ContainsKey(op))
+                    sprites.Add(op, new Dictionary<string, Texture2D>());
+                sprites[op].Add(name, Useful.getTexture(@"textures\" + name));
             }
         }
 
@@ -73,9 +81,6 @@ namespace MirrorKnight
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
-
-            lines = new List<string>();
-            tilesRead = new string[18, 10];
 
             base.Initialize();
         }
@@ -150,7 +155,7 @@ namespace MirrorKnight
                     playerMoveVec.X = 1;
                 }
 
-                playerAimVec = new Vector2(m.X - player.GetPosition().X, m.Y - player.GetPosition().Y);
+                playerAimVec = new Vector2(m.X - player.body.getX(), m.Y - player.body.getY());
             }
             if(usingController)
             {
@@ -170,9 +175,7 @@ namespace MirrorKnight
             }
             playerMoveVec.Normalize();
 
-            
-
-            player.Move(playerMoveVec);
+            player.body.translate(playerMoveVec);
 
             base.Update(gameTime);
         }

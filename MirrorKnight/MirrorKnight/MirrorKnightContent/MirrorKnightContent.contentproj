@@ -1605,11 +1605,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="textures\tiles_list_v1.1.txt">
-      <Name>tiles_list_v1.1</Name>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="presetRooms\testroom.txt">
       <Name>testroom</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
