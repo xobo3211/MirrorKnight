@@ -32,6 +32,7 @@ namespace MirrorKnight
 
         public Room(Type t, String[,] tileArr, Texture2D texture)
         {
+            tiles = new Tile[tileArr.GetLength(0), tileArr.GetLength(1)];
             for(int y = 0; y < tiles.GetLength(1); y++)
             {
                 for(int x = 0; x < tiles.GetLength(0); x++)
@@ -65,6 +66,17 @@ namespace MirrorKnight
         public void setRoomType(Type r)
         {
             roomType = r;
+        }
+
+        public void Draw(SpriteBatch b, int left, int top, int tileSize)
+        {
+            for(int y = top; y < tiles.GetLength(1) + top / tileSize; y++)
+            {
+                for(int x = left; x < tiles.GetLength(0) + left / tileSize; x++)
+                {
+                    tiles[x, y].Draw(b, left + (tileSize * x), top + (tileSize * y), tileSize);
+                }
+            }
         }
         
     }

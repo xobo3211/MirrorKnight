@@ -23,7 +23,6 @@ namespace MirrorKnight
         SpriteBatch spriteBatch;
         SpriteFont spectral18;
         Texture2D soulsPic, healthDisplayPic, placeHc;
-        public Texture2D placeholderTile;
         List<string> lines;
         List<Room> psRoomsNormal, psRoomsRreasure, psRoomsShop, psRoomsBoss, psRoomsSecret, psRoomsPuzzle;
         string[,] tilesRead;
@@ -40,6 +39,8 @@ namespace MirrorKnight
 
         Player p;
         Map m;
+
+        int x, y;       //Contains the current room the player is in.
 
 
 
@@ -93,8 +94,12 @@ namespace MirrorKnight
             lines = new List<string>();
             tilesRead = new string[18, 10];
 
-            m = new MirrorKnight.Map();
+            m = new Map();
+            m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
 
+            x = m.GetDimensions().X / 2;
+            y = m.GetDimensions().Y / 2;
+            
             base.Initialize();
         }
 
@@ -108,13 +113,11 @@ namespace MirrorKnight
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            //placeHc = Content.Load<Texture2D>("pc");
             placeHc = Content.Load<Texture2D>("pc");
-        }
 
             loadTiles();
             //player.body.addTexture(tileSprite);
-            player.body.setScale(10);
+            p.body.setScale(10);
         }
 
         /// <summary>
@@ -171,7 +174,7 @@ namespace MirrorKnight
                     playerMoveVec.X = 1;
                 }
 
-                playerAimVec = new Vector2(m.X - player.body.getX(), m.Y - player.body.getY());
+                playerAimVec = new Vector2(m.X - p.body.getX(), m.Y - p.body.getY());
             }
             if(usingController)
             {
@@ -191,7 +194,7 @@ namespace MirrorKnight
             }
             playerMoveVec.Normalize();
 
-            player.body.translate(playerMoveVec);
+            p.body.translate(playerMoveVec);
 
             base.Update(gameTime);
         }
@@ -206,8 +209,9 @@ namespace MirrorKnight
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            //spriteBatch.DrawString(spectral18, "9999", new Vector2(10, 10), Color.White);
-            //spriteBatch.Draw(placeHc, new Rectangle(150, 75, 1300, 650), Color.White);
+
+            m.GetRoom(x, y).Draw(spriteBatch, 0, 100, 60);
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
