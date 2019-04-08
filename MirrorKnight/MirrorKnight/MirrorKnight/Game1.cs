@@ -27,7 +27,7 @@ namespace MirrorKnight
         List<Room> psRoomsNormal, psRoomsRreasure, psRoomsShop, psRoomsBoss, psRoomsSecret, psRoomsPuzzle;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
-
+        bool pauseMenu;
         KeyboardState oldKB;
         MouseState oldM;
         GamePadState oldGP;
@@ -41,8 +41,8 @@ namespace MirrorKnight
             Content.RootDirectory = "Content";
             Useful.set(this);
             this.Window.AllowUserResizing = true;
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1080;
+            graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
         }
 
@@ -61,7 +61,7 @@ namespace MirrorKnight
         {
             // TODO: Add your initialization logic here
             player = new Player();
-
+            bool = false;
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
@@ -143,6 +143,8 @@ namespace MirrorKnight
             Vector2 playerMoveVec = Vector2.Zero;
             Vector2 playerAimVec = Vector2.Zero;
 
+
+            if (Keyboard)
             if (usingKeyboard)
             {
                 if(gp.ThumbSticks.Left != Vector2.Zero || gp.ThumbSticks.Right != Vector2.Zero)
