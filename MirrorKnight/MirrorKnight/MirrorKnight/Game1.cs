@@ -24,6 +24,11 @@ namespace MirrorKnight
         SpriteFont spectral18;
         Texture2D soulsPic, healthDisplayPic, placeHc;
         Player player;
+        List<string> lines;
+        List<Room> psRoomsNormal, psRoomsRreasure, psRoomsShop, psRoomsBoss, psRoomsSecret, psRoomsPuzzle;
+        string[,] tilesRead;
+        Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
+        bool pauseMenu;
         Dictionary<string, Dictionary<String, Texture2D>> sprites;
 
         KeyboardState oldKB;
@@ -40,8 +45,8 @@ namespace MirrorKnight
             Content.RootDirectory = "Content";
             Useful.set(this);
             this.Window.AllowUserResizing = true;
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1080;
+            graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
         }
 
@@ -77,7 +82,7 @@ namespace MirrorKnight
         {
             // TODO: Add your initialization logic here
             player = new Player();
-
+            bool = false;
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
@@ -96,6 +101,8 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             //placeHc = Content.Load<Texture2D>("pc");
+            placeHc = Content.Load<Texture2D>("pc");
+        }
 
             loadTiles();
             //player.body.addTexture(tileSprite);
@@ -131,6 +138,8 @@ namespace MirrorKnight
             Vector2 playerMoveVec = Vector2.Zero;
             Vector2 playerAimVec = Vector2.Zero;
 
+
+            if (Keyboard)
             if (usingKeyboard)
             {
                 if(gp.ThumbSticks.Left != Vector2.Zero || gp.ThumbSticks.Right != Vector2.Zero)

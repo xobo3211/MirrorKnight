@@ -18,10 +18,10 @@ namespace MirrorKnight
         }
 
         Type roomType;
-
+        
         Tile[,] tiles;
 
-        public Room(Type t)
+        public Room(Type t, Tile[,] r)
         {
             
             switch (t)
@@ -39,6 +39,7 @@ namespace MirrorKnight
                 case Type.PUZZLE: //Puzzle
                     break;
             }
+
         }
         public Type getRoomType()
         {

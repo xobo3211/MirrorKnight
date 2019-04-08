@@ -22,17 +22,17 @@ namespace MirrorKnight
 
         public enum Type
         {
-            NORMAL,
-            OBSTACLE,
-            PIT,
-            HAZARD
+            NORMAL, //n
+            OBSTACLE, //o
+            PIT, //p
+            HAZARD //h
         }
 
         public Tile(Type t)
         {
             switch (t)
             {
-                case Type.NORMAL:
+                case Type.NORMAL: 
                     canMoveThrough = true;
                     canShootThrough = true;
                     damageHazard = false;

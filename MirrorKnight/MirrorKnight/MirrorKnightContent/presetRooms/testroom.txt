@@ -1,10 +1,10 @@
-o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0
-o0
-o0
-o0
-o0
-o0
-o0
-o0
-o0
-o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0 o0
+n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n n n n n n n
