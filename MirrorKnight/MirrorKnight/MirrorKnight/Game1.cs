@@ -28,7 +28,7 @@ namespace MirrorKnight
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         bool pauseMenu;
-        Dictionary<string, Dictionary<String, Texture2D>> sprites;
+        public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
 
         KeyboardState oldKB;
         MouseState oldM;
@@ -49,7 +49,8 @@ namespace MirrorKnight
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Useful.set(this);
-            this.Window.AllowUserResizing = true;
+
+            this.Window.AllowUserResizing = false;
             graphics.PreferredBackBufferWidth = 1080;
             graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
@@ -103,6 +104,33 @@ namespace MirrorKnight
             base.Initialize();
         }
 
+
+        private void ReadFileAsStrings(string path)
+        {
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+                        string[] parts = line.Split(' ');
+                        for (int i = 0; i < 240; i++)
+                        {
+                            string c = parts[i];
+                            tilesRead[i, j] = c;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -116,6 +144,7 @@ namespace MirrorKnight
             placeHc = Content.Load<Texture2D>("pc");
 
             loadTiles();
+            player.load();
             //player.body.addTexture(tileSprite);
             p.body.setScale(10);
         }
@@ -150,6 +179,20 @@ namespace MirrorKnight
             Vector2 playerAimVec = Vector2.Zero;
 
 
+            if (kb.IsKeyDown(Keys.Down) && !oldKB.IsKeyDown(Keys.Down) && pauseMenu == false)
+            {
+                pauseMenu = true;
+            }
+            else if (kb.IsKeyDown(Keys.Down) && !oldKB.IsKeyDown(Keys.Down) && pauseMenu == true)
+            {
+                pauseMenu = false;
+            }
+
+            if (pauseMenu == true)
+            {
+                
+            }
+            
             if (usingKeyboard)
             {
                 if(gp.ThumbSticks.Left != Vector2.Zero || gp.ThumbSticks.Right != Vector2.Zero)

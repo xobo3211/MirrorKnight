@@ -12,7 +12,7 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    class Tile
+    public class Tile
     {
         public bool canMoveThrough;
         public bool canShootThrough;
