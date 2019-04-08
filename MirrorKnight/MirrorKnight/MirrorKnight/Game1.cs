@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SureDroid;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace MirrorKnight
 {
@@ -28,9 +29,12 @@ namespace MirrorKnight
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         bool pauseMenu;
+        Dictionary<string, Dictionary<String, Texture2D>> sprites;
+
         KeyboardState oldKB;
         MouseState oldM;
         GamePadState oldGP;
+
 
         bool usingController = false, usingKeyboard = true;
 
@@ -50,9 +54,26 @@ namespace MirrorKnight
             graphics.ApplyChanges();
         }
 
+
+
+
+        /// <summary>
+        /// Classifies it by the first underscore name, and then into a dictionary with all names.
+        /// </summary>
+        Regex nameReg = new Regex(@"^([a-z]+)");
         private void loadTiles()
         {
-            ReadFileAsStrings(@"Content/presetRooms/testroom.txt");
+            DirectoryInfo d = new DirectoryInfo(@"Content/Textures");
+            FileInfo[] Files = d.GetFiles(); //Getting Text files
+            sprites = new Dictionary<string, Dictionary<string, Texture2D>>();
+            foreach (FileInfo file in Files)
+            {
+                string op = nameReg.Match(file.Name).Groups[0].Value;
+                string name = file.Name.Substring(0, file.Name.Length - 4);
+                if(!sprites.ContainsKey(op))
+                    sprites.Add(op, new Dictionary<string, Texture2D>());
+                sprites[op].Add(name, Useful.getTexture(@"textures\" + name));
+            }
         }
 
         /// <summary>
@@ -89,36 +110,11 @@ namespace MirrorKnight
             // TODO: use this.Content to load your game content here
             //placeHc = Content.Load<Texture2D>("pc");
             placeHc = Content.Load<Texture2D>("pc");
-
-            //player.body.addTexture("");
-
-            placeholderTile = Content.Load<Texture2D>("pc");
         }
 
-        private void ReadFileAsStrings(string path)
-        {
-
-            try
-            {
-                using (StreamReader reader = new StreamReader(path))
-                {
-                    for (int j = 0; !reader.EndOfStream; j++)
-                    {
-                        string line = reader.ReadLine();
-                        string[] parts = line.Split(' ');
-                        for (int i = 0; i < 240; i++)
-                        {
-                            string c = parts[i];
-                            tilesRead[i, j] = c;
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }
+            loadTiles();
+            //player.body.addTexture(tileSprite);
+            player.body.setScale(10);
         }
 
         /// <summary>
@@ -175,7 +171,7 @@ namespace MirrorKnight
                     playerMoveVec.X = 1;
                 }
 
-                playerAimVec = new Vector2(m.X - p.GetPosition().X, m.Y - p.GetPosition().Y);
+                playerAimVec = new Vector2(m.X - player.body.getX(), m.Y - player.body.getY());
             }
             if(usingController)
             {
@@ -195,9 +191,7 @@ namespace MirrorKnight
             }
             playerMoveVec.Normalize();
 
-            
-
-            p.Move(playerMoveVec);
+            player.body.translate(playerMoveVec);
 
             base.Update(gameTime);
         }
@@ -218,4 +212,7 @@ namespace MirrorKnight
             base.Draw(gameTime);
         }
     }
+
+
+
 }
