@@ -144,7 +144,20 @@ namespace MirrorKnight
             Vector2 playerAimVec = Vector2.Zero;
 
 
-            if (Keyboard)
+            if (kb.IsKeyDown(Keys.Down) && !oldKB.IsKeyDown(Keys.Down) && pauseMenu == false)
+            {
+                pauseMenu = true;
+            }
+            else if (kb.IsKeyDown(Keys.Down) && !oldKB.IsKeyDown(Keys.Down) && pauseMenu == true)
+            {
+                pauseMenu = false;
+            }
+
+            if (pauseMenu == true)
+            {
+                
+            }
+            
             if (usingKeyboard)
             {
                 if(gp.ThumbSticks.Left != Vector2.Zero || gp.ThumbSticks.Right != Vector2.Zero)
@@ -192,7 +205,7 @@ namespace MirrorKnight
             
 
             player.Move(playerMoveVec);
-
+            oldKB = Keyboard.GetState();
             base.Update(gameTime);
         }
 
