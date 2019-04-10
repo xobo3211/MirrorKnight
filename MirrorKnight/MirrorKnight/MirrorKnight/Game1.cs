@@ -28,9 +28,11 @@ namespace MirrorKnight
         List<Room> psRoomsNormal, psRoomsRreasure, psRoomsShop, psRoomsBoss, psRoomsSecret, psRoomsPuzzle;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
-        bool pauseMenu;
-        Dictionary<string, Dictionary<String, Texture2D>> sprites;
 
+        bool pauseMenu, pauseOptionsBool;
+        Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton;
+
+        Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
         MouseState oldM;
         GamePadState oldGP;
@@ -86,8 +88,12 @@ namespace MirrorKnight
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
-
-            base.Initialize();
+            pauseOptionsButton = new Rectangle();
+            pauseExitButton = new Rectangle();
+            pauseMusicButton = new Rectangle();
+            pauseSfxButton = new Rectangle();
+            
+            base.Initialize(); 
         }
 
         /// <summary>
@@ -138,11 +144,11 @@ namespace MirrorKnight
             Vector2 playerAimVec = Vector2.Zero;
 
 
-            if (kb.IsKeyDown(Keys.Down) && !oldKB.IsKeyDown(Keys.Down) && pauseMenu == false)
+            if (kb.IsKeyDown(Keys.Tab) && !oldKB.IsKeyDown(Keys.Tab) && pauseMenu == false)
             {
                 pauseMenu = true;
             }
-            else if (kb.IsKeyDown(Keys.Down) && !oldKB.IsKeyDown(Keys.Down) && pauseMenu == true)
+            else if (kb.IsKeyDown(Keys.Tab) && !oldKB.IsKeyDown(Keys.Tab) && pauseMenu == true)
             {
                 pauseMenu = false;
             }
@@ -150,6 +156,10 @@ namespace MirrorKnight
             if (pauseMenu == true)
             {
                 
+            }
+            else
+            {
+
             }
             
             if (usingKeyboard)
