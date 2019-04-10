@@ -12,13 +12,8 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    class Player
+    class Player : Entity
     {
-        public Sprite body;
-
-        int MAX_HP = 6, HP;
-        float SPEED = 1f, DMG = 2;
-
         ActiveItem active;
 
         List<PassiveItem> passives;
@@ -37,12 +32,21 @@ namespace MirrorKnight
         {
             body.setAnimation(true);
             Game1.sprites["knight"].Keys.Where((str, index) => str.Contains("m_idle")).ToList().ForEach(str =>body.addTexture(Game1.sprites["knight"][str]));
-            Console.WriteLine(body.hasTextures());
         }
 
-        public void Attack(Vector2 aimVec)  //
+        public void Attack(Vector2 aimVec)
         {
 
+        }
+
+        public void Pickup(PassiveItem p)
+        {
+            passives.Add(p);
+        }
+
+        public float GetSpeed()
+        {
+            return SPEED;
         }
     }
 }

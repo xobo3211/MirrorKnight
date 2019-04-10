@@ -44,6 +44,9 @@ namespace MirrorKnight
 
         int x, y;       //Contains the current room the player is in.
 
+        List<Projectile> projectiles;
+        List<Entity> enemies;
+
         int tileSize = 60;
 
 
@@ -97,12 +100,11 @@ namespace MirrorKnight
             oldM = Mouse.GetState();
 
             lines = new List<string>();
+            projectiles = new List<Projectile>();
+            enemies = new List<Entity>();
             tilesRead = new string[18, 10];
 
-            
-
-
-            ReadFileAsStrings("presetRooms/testroom.txt");
+            //ReadFileAsStrings("presetRooms/testroom.txt");
 
             m = new Map();
 
@@ -131,14 +133,24 @@ namespace MirrorKnight
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
 
-            
+            //string[] file = Useful.readFileLines(@"Content\presetRooms\testroom.txt");
+            //for (int i = 0; i < file.Length; i++)
+            //{
+            //    string[] parts = Useful.split(file[i]);
+            //    for (int j = 0; j < parts.Length; j++) {
+            //        string c = parts[i];
+            //        tilesRead[i, j] = c;
+            //    }
+            //}
 
+            ReadFileAsStrings("presetRooms/testroom.txt");
 
             loadTiles();
             p.load();
             //player.body.addTexture(tileSprite);
             p.body.setScale(3);
             p.body.setTimeFrame(1 / 16f);
+            p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
             m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
         }
 
@@ -167,6 +179,8 @@ namespace MirrorKnight
             KeyboardState kb = Keyboard.GetState();
             MouseState m = Mouse.GetState();
             GamePadState gp = GamePad.GetState(PlayerIndex.One);
+
+            ////////////////////////////////////////////////////////////////Player movement and aiming logic
 
             Vector2 playerMoveVec = Vector2.Zero;
             Vector2 playerAimVec = Vector2.Zero;
@@ -222,6 +236,14 @@ namespace MirrorKnight
                 }
 
                 playerAimVec = new Vector2(m.X - p.body.getX(), m.Y - p.body.getY());
+
+                if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
+                {
+                    Projectile proj = new Projectile(p.body.getPos(), playerAimVec);
+                    projectiles.Add(proj);
+                }
+
+                
             }
             if(usingController)
             {
@@ -239,9 +261,46 @@ namespace MirrorKnight
                     playerAimVec = gp.ThumbSticks.Right; 
                 }
             }
-            playerMoveVec.Normalize();
 
-            //p.body.translate(playerMoveVec);
+            if (playerMoveVec != Vector2.Zero)
+            {
+                playerMoveVec.Normalize();
+                p.body.translate(playerMoveVec * p.GetSpeed());
+            }
+
+            ///////////////////////////////////////////////////////////////////////////////Projectile logic
+
+            for(int i = 0; i < projectiles.Count; i++)
+            {
+                projectiles[i].Update();
+            }
+
+            for(int i = 0; i < projectiles.Count; i++)
+            {
+                Vector2 pos = projectiles[i].body.getPos();
+                if (pos.X < 0 || pos.X > graphics.PreferredBackBufferWidth || pos.Y < 0 || pos.Y > graphics.PreferredBackBufferHeight)
+                {
+                    projectiles[i].Dispose();
+                    projectiles.Remove(projectiles[i]);
+                }
+                else
+                {
+                    for (int a = 0; a < enemies.Count; a++)
+                    {
+                        if(enemies[a].body.intersects(projectiles[i].body))
+                        {
+                            projectiles[i].Dispose();
+                            projectiles.Remove(projectiles[i]);
+                            enemies.Remove(enemies[a]);
+                        }
+                    }
+                }
+            }
+
+            oldGP = gp;
+            oldKB = kb;
+            oldM = m;
+
 
 
             base.Update(gameTime);
@@ -267,7 +326,6 @@ namespace MirrorKnight
             spriteBatch.End();
             base.Draw(gameTime);
         }
-
         private void ReadFileAsStrings(string path)
         {
 
@@ -293,6 +351,7 @@ namespace MirrorKnight
                 Console.WriteLine(e.Message);
             }
         }
+
     }
 
 
