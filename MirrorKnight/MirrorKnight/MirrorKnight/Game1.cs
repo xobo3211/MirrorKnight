@@ -42,6 +42,8 @@ namespace MirrorKnight
 
         int x, y;       //Contains the current room the player is in.
 
+        int tileSize = 60;
+
 
 
         public Game1()
