@@ -21,15 +21,17 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SpriteFont spectral18;
-        Texture2D soulsPic, healthDisplayPic, placeHc;
+        Texture2D placeHc;
         List<string> lines;
-        List<Room> psRoomsNormal, psRoomsRreasure, psRoomsShop, psRoomsBoss, psRoomsSecret, psRoomsPuzzle;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         bool pauseMenu;
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
 
+        bool pauseMenu, pauseOptionsBool;
+        Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton;
+
+        Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
         MouseState oldM;
         GamePadState oldGP;
@@ -52,7 +54,7 @@ namespace MirrorKnight
 
             this.Window.AllowUserResizing = false;
             graphics.PreferredBackBufferWidth = 1080;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferHeight = 800;
             graphics.ApplyChanges();
         }
 
@@ -95,41 +97,21 @@ namespace MirrorKnight
             lines = new List<string>();
             tilesRead = new string[18, 10];
 
+            ReadFileAsStrings("presetRooms/testroom.txt");
+
             m = new Map();
-            m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
 
             x = m.GetDimensions().X / 2;
             y = m.GetDimensions().Y / 2;
             
             base.Initialize();
-        }
-
-
-        private void ReadFileAsStrings(string path)
-        {
-
-            try
-            {
-                using (StreamReader reader = new StreamReader(path))
-                {
-                    for (int j = 0; !reader.EndOfStream; j++)
-                    {
-                        string line = reader.ReadLine();
-                        string[] parts = line.Split(' ');
-                        for (int i = 0; i < 240; i++)
-                        {
-                            string c = parts[i];
-                            tilesRead[i, j] = c;
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }
-        }
+            pauseOptionsButton = new Rectangle();
+            pauseExitButton = new Rectangle();
+            pauseMusicButton = new Rectangle();
+            pauseSfxButton = new Rectangle();
+            
+            base.Initialize(); 
+        } 
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -148,6 +130,7 @@ namespace MirrorKnight
             //player.body.addTexture(tileSprite);
             p.body.setScale(3);
             p.body.setTimeFrame(1 / 16f);
+            m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
         }
 
         /// <summary>
@@ -180,11 +163,11 @@ namespace MirrorKnight
             Vector2 playerAimVec = Vector2.Zero;
 
 
-            if (kb.IsKeyDown(Keys.Down) && !oldKB.IsKeyDown(Keys.Down) && pauseMenu == false)
+            if (kb.IsKeyDown(Keys.Tab) && !oldKB.IsKeyDown(Keys.Tab) && pauseMenu == false)
             {
                 pauseMenu = true;
             }
-            else if (kb.IsKeyDown(Keys.Down) && !oldKB.IsKeyDown(Keys.Down) && pauseMenu == true)
+            else if (kb.IsKeyDown(Keys.Tab) && !oldKB.IsKeyDown(Keys.Tab) && pauseMenu == true)
             {
                 pauseMenu = false;
             }
@@ -192,6 +175,10 @@ namespace MirrorKnight
             if (pauseMenu == true)
             {
                 
+            }
+            else
+            {
+
             }
             
             if (usingKeyboard)
@@ -254,10 +241,36 @@ namespace MirrorKnight
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            m.GetRoom(x, y).Draw(spriteBatch, 0, 100, 60);
+            m.GetRoom(x, y).Draw(spriteBatch, 0, (GraphicsDevice.Viewport.Height - m.GetRoom(x, y).Height * tileSize) / 2, tileSize);   //Draws room with offset x, y and tile size of tileSize
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void ReadFileAsStrings(string path)
+        {
+
+            try
+            {
+                using (StreamReader reader = new StreamReader("../../../../MirrorKnightContent/" + path))
+                {
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+                        string[] parts = line.Split(' ');
+                        for (int i = 0; i < parts.Length; i++)
+                        {
+                            string c = parts[i];
+                            tilesRead[i, j] = c;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
         }
     }
 

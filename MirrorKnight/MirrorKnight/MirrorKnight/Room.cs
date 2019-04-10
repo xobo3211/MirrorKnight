@@ -26,6 +26,16 @@ namespace MirrorKnight
             PUZZLE
         }
 
+        public int Width
+        {
+            get { return tiles.GetLength(0); }
+        }
+
+        public int Height
+        {
+            get { return tiles.GetLength(1); }
+        }
+
         Type roomType;
         
         Tile[,] tiles;
@@ -70,9 +80,9 @@ namespace MirrorKnight
 
         public void Draw(SpriteBatch b, int left, int top, int tileSize)
         {
-            for(int y = top; y < tiles.GetLength(1) + top / tileSize; y++)
+            for(int y = 0; y < tiles.GetLength(1); y++)
             {
-                for(int x = left; x < tiles.GetLength(0) + left / tileSize; x++)
+                for(int x = 0; x < tiles.GetLength(0); x++)
                 {
                     tiles[x, y].Draw(b, left + (tileSize * x), top + (tileSize * y), tileSize);
                 }
