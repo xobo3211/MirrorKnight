@@ -97,14 +97,13 @@ namespace MirrorKnight
             lines = new List<string>();
             tilesRead = new string[18, 10];
 
-            ReadFileAsStrings("presetRooms/testroom.txt");
+            //ReadFileAsStrings("presetRooms/testroom.txt");
 
             m = new Map();
 
             x = m.GetDimensions().X / 2;
             y = m.GetDimensions().Y / 2;
             
-            base.Initialize();
             pauseOptionsButton = new Rectangle();
             pauseExitButton = new Rectangle();
             pauseMusicButton = new Rectangle();
@@ -124,6 +123,17 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
+
+            string[] file = Useful.readFileLines(@"Content\presetRooms\testroom.txt");
+            for (int i = 0; i < file.Length; i++)
+            {
+                string[] parts = Useful.split(file[i]);
+                for (int j = 0; j < parts.Length; j++) {
+                    string c = parts[i];
+                    tilesRead[i, j] = c;
+                }
+            }
+
 
             loadTiles();
             p.load();
@@ -247,31 +257,6 @@ namespace MirrorKnight
             base.Draw(gameTime);
         }
 
-        private void ReadFileAsStrings(string path)
-        {
-
-            try
-            {
-                using (StreamReader reader = new StreamReader("../../../../MirrorKnightContent/" + path))
-                {
-                    for (int j = 0; !reader.EndOfStream; j++)
-                    {
-                        string line = reader.ReadLine();
-                        string[] parts = line.Split(' ');
-                        for (int i = 0; i < parts.Length; i++)
-                        {
-                            string c = parts[i];
-                            tilesRead[i, j] = c;
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }
-        }
     }
 
 

@@ -925,6 +925,10 @@ namespace SureDroid
         {
             return Regex.Replace(value, @"\r\n?|\n|\s+|"+spChar, "-").Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
         }
+        public static string[] split(String value)
+        {
+            return split(value, ' ');
+        }
 
         public static void writeFile(string fileName, string text)
         {
