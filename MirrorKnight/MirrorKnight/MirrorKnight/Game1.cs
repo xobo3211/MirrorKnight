@@ -124,16 +124,17 @@ namespace MirrorKnight
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
 
-            string[] file = Useful.readFileLines(@"Content\presetRooms\testroom.txt");
-            for (int i = 0; i < file.Length; i++)
-            {
-                string[] parts = Useful.split(file[i]);
-                for (int j = 0; j < parts.Length; j++) {
-                    string c = parts[i];
-                    tilesRead[i, j] = c;
-                }
-            }
+            //string[] file = Useful.readFileLines(@"Content\presetRooms\testroom.txt");
+            //for (int i = 0; i < file.Length; i++)
+            //{
+            //    string[] parts = Useful.split(file[i]);
+            //    for (int j = 0; j < parts.Length; j++) {
+            //        string c = parts[i];
+            //        tilesRead[i, j] = c;
+            //    }
+            //}
 
+            ReadFileAsStrings("presetRooms/testroom.txt");
 
             loadTiles();
             p.load();
@@ -259,6 +260,31 @@ namespace MirrorKnight
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+        private void ReadFileAsStrings(string path)
+        {
+
+            try
+            {
+                using (StreamReader reader = new StreamReader("../../../../MirrorKnightContent/" + path))
+                {
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+                        string[] parts = line.Split(' ');
+                        for (int i = 0; i < parts.Length; i++)
+                        {
+                            string c = parts[i];
+                            tilesRead[i, j] = c;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
         }
 
     }
