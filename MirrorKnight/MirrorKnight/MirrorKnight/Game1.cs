@@ -130,6 +130,7 @@ namespace MirrorKnight
             //player.body.addTexture(tileSprite);
             p.body.setScale(3);
             p.body.setTimeFrame(1 / 16f);
+            p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
             m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
         }
 
@@ -223,9 +224,12 @@ namespace MirrorKnight
                     playerAimVec = gp.ThumbSticks.Right; 
                 }
             }
-            playerMoveVec.Normalize();
 
-            //p.body.translate(playerMoveVec);
+            if (playerMoveVec != Vector2.Zero)
+            {
+                playerMoveVec.Normalize();
+                p.body.translate(playerMoveVec * p.GetSpeed());
+            }
 
             base.Update(gameTime);
         }
