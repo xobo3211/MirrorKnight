@@ -66,7 +66,8 @@ namespace MirrorKnight
 
         public void Draw(SpriteBatch b, int x, int y, int size)
         {
-            b.Draw(texture, new Rectangle(x, y, size, size), Color.White);
+            if(texture != null)
+                b.Draw(texture, new Rectangle(x, y, size, size), Color.White);
         }
     }
 }
