@@ -144,9 +144,10 @@ namespace MirrorKnight
             placeHc = Content.Load<Texture2D>("pc");
 
             loadTiles();
-            player.load();
+            p.load();
             //player.body.addTexture(tileSprite);
-            p.body.setScale(10);
+            p.body.setScale(3);
+            p.body.setTimeFrame(1 / 16f);
         }
 
         /// <summary>
@@ -237,7 +238,7 @@ namespace MirrorKnight
             }
             playerMoveVec.Normalize();
 
-            p.body.translate(playerMoveVec);
+            //p.body.translate(playerMoveVec);
 
             base.Update(gameTime);
         }
