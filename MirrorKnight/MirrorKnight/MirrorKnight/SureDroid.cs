@@ -94,6 +94,11 @@ namespace SureDroid
             else return (int)((Double)getRegion().Height * scale);
         }
 
+        public bool hasTextures()
+        {
+            return (sizes.Count > 0);
+        }
+
         public void deleteThis()
         {
             sprites.Remove(this);

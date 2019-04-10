@@ -21,13 +21,12 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SpriteFont spectral18;
-        Texture2D soulsPic, healthDisplayPic, placeHc;
-        Player player;
+        Texture2D placeHc;
         List<string> lines;
-        List<Room> psRoomsNormal, psRoomsRreasure, psRoomsShop, psRoomsBoss, psRoomsSecret, psRoomsPuzzle;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
+        bool pauseMenu;
+        public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
 
         bool pauseMenu, pauseOptionsBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton;
@@ -40,6 +39,12 @@ namespace MirrorKnight
 
         bool usingController = false, usingKeyboard = true;
 
+        Player p;
+        Map m;
+
+        int x, y;       //Contains the current room the player is in.
+
+
 
         public Game1()
         {
@@ -49,7 +54,7 @@ namespace MirrorKnight
 
             this.Window.AllowUserResizing = false;
             graphics.PreferredBackBufferWidth = 1080;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferHeight = 800;
             graphics.ApplyChanges();
         }
 
@@ -84,17 +89,29 @@ namespace MirrorKnight
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            player = new Player();
+            p = new Player();
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
+
+            lines = new List<string>();
+            tilesRead = new string[18, 10];
+
+            ReadFileAsStrings("presetRooms/testroom.txt");
+
+            m = new Map();
+
+            x = m.GetDimensions().X / 2;
+            y = m.GetDimensions().Y / 2;
+            
+            base.Initialize();
             pauseOptionsButton = new Rectangle();
             pauseExitButton = new Rectangle();
             pauseMusicButton = new Rectangle();
             pauseSfxButton = new Rectangle();
             
             base.Initialize(); 
-        }
+        } 
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -106,12 +123,14 @@ namespace MirrorKnight
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            //placeHc = Content.Load<Texture2D>("pc");
             placeHc = Content.Load<Texture2D>("pc");
 
             loadTiles();
+            p.load();
             //player.body.addTexture(tileSprite);
-            player.body.setScale(10);
+            p.body.setScale(10);
+
+            m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
         }
 
         /// <summary>
@@ -186,7 +205,7 @@ namespace MirrorKnight
                     playerMoveVec.X = 1;
                 }
 
-                playerAimVec = new Vector2(m.X - player.body.getX(), m.Y - player.body.getY());
+                playerAimVec = new Vector2(m.X - p.body.getX(), m.Y - p.body.getY());
             }
             if(usingController)
             {
@@ -206,8 +225,8 @@ namespace MirrorKnight
             }
             playerMoveVec.Normalize();
 
-            player.body.translate(playerMoveVec);
-            oldKB = Keyboard.GetState();
+            p.body.translate(playerMoveVec);
+
             base.Update(gameTime);
         }
 
@@ -221,10 +240,37 @@ namespace MirrorKnight
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            //spriteBatch.DrawString(spectral18, "9999", new Vector2(10, 10), Color.White);
-            //spriteBatch.Draw(placeHc, new Rectangle(150, 75, 1300, 650), Color.White);
+
+            m.GetRoom(x, y).Draw(spriteBatch, 0, (GraphicsDevice.Viewport.Height - m.GetRoom(x, y).Height * tileSize) / 2, tileSize);   //Draws room with offset x, y and tile size of tileSize
+
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void ReadFileAsStrings(string path)
+        {
+
+            try
+            {
+                using (StreamReader reader = new StreamReader("../../../../MirrorKnightContent/" + path))
+                {
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+                        string[] parts = line.Split(' ');
+                        for (int i = 0; i < parts.Length; i++)
+                        {
+                            string c = parts[i];
+                            tilesRead[i, j] = c;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
         }
     }
 

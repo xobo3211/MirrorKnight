@@ -12,7 +12,7 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    class Tile
+    public class Tile
     {
         public bool canMoveThrough;
         public bool canShootThrough;
@@ -59,9 +59,15 @@ namespace MirrorKnight
 
         }
 
+        public void SetTexture(Texture2D t)
+        {
+            texture = t;
+        }
+
         public void Draw(SpriteBatch b, int x, int y, int size)
         {
-            b.Draw(texture, new Rectangle(x, y, size, size), Color.White);
+            if(texture != null)
+                b.Draw(texture, new Rectangle(x, y, size, size), Color.White);
         }
     }
 }

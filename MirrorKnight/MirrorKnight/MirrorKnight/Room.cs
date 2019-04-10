@@ -1,7 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using SureDroid;
+using System.IO;
 
 namespace MirrorKnight
 {
@@ -9,6 +17,7 @@ namespace MirrorKnight
     {
         public enum Type
         {
+            VOID,
             NORMAL,
             TREASURE,
             SHOP,
@@ -17,29 +26,48 @@ namespace MirrorKnight
             PUZZLE
         }
 
+        public int Width
+        {
+            get { return tiles.GetLength(0); }
+        }
+
+        public int Height
+        {
+            get { return tiles.GetLength(1); }
+        }
+
         Type roomType;
         
         Tile[,] tiles;
 
-        public Room(Type t, Tile[,] r)
+        public Room(Type t, String[,] tileArr, Texture2D texture)
         {
-            
-            switch (t)
+            tiles = new Tile[tileArr.GetLength(0), tileArr.GetLength(1)];
+            for(int y = 0; y < tiles.GetLength(1); y++)
             {
-                case Type.NORMAL: //Normal
-                    break;
-                case Type.TREASURE: //Treasure
-                    break;
-                case Type.SHOP: //Shop
-                    break;
-                case Type.BOSS: //Boss
-                    break;
-                case Type.SECRET: //Secret
-                    break;
-                case Type.PUZZLE: //Puzzle
-                    break;
-            }
+                for(int x = 0; x < tiles.GetLength(0); x++)
+                {
+                    switch(tileArr[x, y])
+                    {
+                        case "n":       //normal
+                            tiles[x, y] = new Tile(Tile.Type.NORMAL);
+                            tiles[x, y].SetTexture(texture);
+                            break;
 
+                        case "o":       //obstacle
+                            tiles[x, y] = new Tile(Tile.Type.OBSTACLE);
+                            break;
+
+                        case "p":       //pit
+                            tiles[x, y] = new Tile(Tile.Type.PIT);
+                            break;
+
+                        case "h":       //hazard
+                            tiles[x, y] = new Tile(Tile.Type.HAZARD);
+                            break;
+                    }
+                }
+            }
         }
         public Type getRoomType()
         {
@@ -48,6 +76,17 @@ namespace MirrorKnight
         public void setRoomType(Type r)
         {
             roomType = r;
+        }
+
+        public void Draw(SpriteBatch b, int left, int top, int tileSize)
+        {
+            for(int y = 0; y < tiles.GetLength(1); y++)
+            {
+                for(int x = 0; x < tiles.GetLength(0); x++)
+                {
+                    tiles[x, y].Draw(b, left + (tileSize * x), top + (tileSize * y), tileSize);
+                }
+            }
         }
         
     }

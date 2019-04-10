@@ -25,7 +25,9 @@ namespace MirrorKnight
 
         int maxX = 9, maxY = 9;
 
-        Rooms[,] rooms;
+        Rooms[,] roomsEnum;
+
+        Room[,] rooms;
 
         int maxRoomCount = 10;
         int currentRoomCount;
@@ -68,14 +70,23 @@ namespace MirrorKnight
                 secret = TryPlacingSecretRoom();
             }
             while (CountDeadEnds() < 3 && !boss && !treasure && !shop && !secret);               //Require minimum of three dead ends in a map. Boss, Treasure, Shop
+
+            for(int y = 0; y < maxY; y++)
+            {
+                for(int x = 0; x < maxX; x++)
+                {
+                    //rooms[x, y] = new Room(roomsEnum[x, y])
+                }
+            }
         }
 
 
         void Generate()
         {
-            rooms = new Rooms[maxX, maxY];
+            roomsEnum = new Rooms[maxX, maxY];
+            rooms = new Room[maxX, maxY];
 
-            rooms[maxX / 2, maxY / 2] = Rooms.EMPTY;                                              //Places starting room in the middle
+            roomsEnum[maxX / 2, maxY / 2] = Rooms.EMPTY;                                              //Places starting room in the middle
 
             currentRoomCount = maxRoomCount;
 
@@ -83,9 +94,9 @@ namespace MirrorKnight
             {
                 int x = rn.Next(maxX), y = rn.Next(maxY);
 
-                if (rooms[x, y] == Rooms.VOID && IsConnected(x, y))
+                if (roomsEnum[x, y] == Rooms.VOID && IsConnected(x, y))
                 {
-                    rooms[x, y] = Rooms.EMPTY;
+                    roomsEnum[x, y] = Rooms.EMPTY;
                     currentRoomCount--;
                 }
             }
@@ -112,11 +123,11 @@ namespace MirrorKnight
 
             if (isDeadEnd)
             {
-                rooms[x, y] = Rooms.DEAD_END;
+                roomsEnum[x, y] = Rooms.DEAD_END;
             }
             else
             {
-                rooms[x, y] = Rooms.EMPTY_AND_CHECKED;
+                roomsEnum[x, y] = Rooms.EMPTY_AND_CHECKED;
                 for (int i = 0; i < 4; i++)
                 {
                     if (i != (int)movementPath && connections[i])
@@ -144,17 +155,17 @@ namespace MirrorKnight
             }
         }
 
-        void RemoveExcessDeadEnds()     //Removes a dead end if it's connected to more than two rooms
+        void RemoveExcessDeadEnds()     //Removes a dead end if it's connected to more than two roomsEnum
         {
             for (int y = 0; y < maxY; y++)
             {
                 for (int x = 0; x < maxX; x++)
                 {
-                    if (rooms[x, y] == Rooms.DEAD_END)
+                    if (roomsEnum[x, y] == Rooms.DEAD_END)
                     {
-                        if (CountConnections(ConnectionArr(x, y, Rooms.EMPTY_AND_CHECKED)) + CountConnections(ConnectionArr(x, y, Rooms.DEAD_END)) > 2)      //Checks if dead end is connected to more than two rooms
+                        if (CountConnections(ConnectionArr(x, y, Rooms.EMPTY_AND_CHECKED)) + CountConnections(ConnectionArr(x, y, Rooms.DEAD_END)) > 2)      //Checks if dead end is connected to more than two roomsEnum
                         {
-                            rooms[x, y] = Rooms.EMPTY_AND_CHECKED;
+                            roomsEnum[x, y] = Rooms.EMPTY_AND_CHECKED;
                         }
                     }
                 }
@@ -164,7 +175,7 @@ namespace MirrorKnight
         int CountDeadEnds()     //Counts number of dead ends in the map
         {
             int n = 0;
-            foreach (Rooms r in rooms)
+            foreach (Rooms r in roomsEnum)
             {
                 if (r == Rooms.DEAD_END)
                     n++;
@@ -182,7 +193,7 @@ namespace MirrorKnight
             {
                 for (int x = 0; x < maxX; x++)
                 {
-                    if (rooms[x, y] == Rooms.DEAD_END && CheckDistance(x, y, maxX / 2, maxY / 2) > globalMax)
+                    if (roomsEnum[x, y] == Rooms.DEAD_END && CheckDistance(x, y, maxX / 2, maxY / 2) > globalMax)
                     {
                         globalMax = CheckDistance(x, y, maxX / 2, maxY / 2);
                         finalCoords = new int[] { x, y };
@@ -192,7 +203,7 @@ namespace MirrorKnight
 
             if (finalCoords[0] != -1 && finalCoords[1] != -1)
             {
-                rooms[finalCoords[0], finalCoords[1]] = Rooms.BOSS;
+                roomsEnum[finalCoords[0], finalCoords[1]] = Rooms.BOSS;
                 return true;
             }
             else Console.WriteLine("Error: Boss room could not be placed");
@@ -210,7 +221,7 @@ namespace MirrorKnight
             {
                 for (int x = 0; x < maxX; x++)
                 {
-                    if (rooms[x, y] == Rooms.DEAD_END && CheckDistance(x, y, maxX / 2, maxY / 2) < globalMin)
+                    if (roomsEnum[x, y] == Rooms.DEAD_END && CheckDistance(x, y, maxX / 2, maxY / 2) < globalMin)
                     {
                         globalMin = CheckDistance(x, y, maxX / 2, maxY / 2);
                         finalCoords = new int[] { x, y };
@@ -220,7 +231,7 @@ namespace MirrorKnight
 
             if (finalCoords[0] != -1 && finalCoords[1] != -1)
             {
-                rooms[finalCoords[0], finalCoords[1]] = Rooms.TREASURE;
+                roomsEnum[finalCoords[0], finalCoords[1]] = Rooms.TREASURE;
                 return true;
             }
             else Console.WriteLine("Error: Treasure room could not be placed");
@@ -237,7 +248,7 @@ namespace MirrorKnight
             {
                 for (int x = 0; x < maxX; x++)
                 {
-                    if (rooms[x, y] == Rooms.DEAD_END && CheckDistance(x, y, maxX / 2, maxY / 2) < globalMin)
+                    if (roomsEnum[x, y] == Rooms.DEAD_END && CheckDistance(x, y, maxX / 2, maxY / 2) < globalMin)
                     {
                         globalMin = CheckDistance(x, y, maxX / 2, maxY / 2);
                         finalCoords = new int[] { x, y };
@@ -247,23 +258,23 @@ namespace MirrorKnight
 
             if (finalCoords[0] != -1 && finalCoords[1] != -1)
             {
-                rooms[finalCoords[0], finalCoords[1]] = Rooms.SHOP;
+                roomsEnum[finalCoords[0], finalCoords[1]] = Rooms.SHOP;
                 return true;
             }
             else Console.WriteLine("Error: Shop room could not be placed");
             return false;
         }
 
-        bool TryPlacingSecretRoom()     //Finds a section where three or more rooms are connected to an empty void and places a secret room there
+        bool TryPlacingSecretRoom()     //Finds a section where three or more roomsEnum are connected to an empty void and places a secret room there
         {
             bool notPlaced = true;
             for (int y = 0; y < maxY && notPlaced; y++)
             {
                 for (int x = 0; x < maxX && notPlaced; x++)
                 {
-                    if (rooms[x, y] == Rooms.VOID && CountConnections(ConnectionArr(x, y)) > 2)
+                    if (roomsEnum[x, y] == Rooms.VOID && CountConnections(ConnectionArr(x, y)) > 2)
                     {
-                        rooms[x, y] = Rooms.SECRET;
+                        roomsEnum[x, y] = Rooms.SECRET;
                         notPlaced = false;
                     }
                 }
@@ -274,28 +285,28 @@ namespace MirrorKnight
 
 
 
-        void CreatePath(int x, int y, int finalX, int finalY)       //Creates a path of empty rooms from (x,y) to (finalX, finalY)
+        void CreatePath(int x, int y, int finalX, int finalY)       //Creates a path of empty roomsEnum from (x,y) to (finalX, finalY)
         {
             while (x < finalX)
             {
                 x++;
-                rooms[x, y] = Rooms.EMPTY;
+                roomsEnum[x, y] = Rooms.EMPTY;
             }
             while (x > finalX)
             {
                 x--;
-                rooms[x, y] = Rooms.EMPTY;
+                roomsEnum[x, y] = Rooms.EMPTY;
             }
 
             while (y < finalY)
             {
                 y++;
-                rooms[x, y] = Rooms.EMPTY;
+                roomsEnum[x, y] = Rooms.EMPTY;
             }
             while (y > finalY)
             {
                 y--;
-                rooms[x, y] = Rooms.EMPTY;
+                roomsEnum[x, y] = Rooms.EMPTY;
             }
         }
 
@@ -308,13 +319,13 @@ namespace MirrorKnight
         {
             bool a = false, b = false, c = false, d = false;
             if (y - 1 >= 0)
-                a = rooms[x, y - 1] != Rooms.VOID;
-            if (y + 1 < rooms.GetLength(1))
-                b = rooms[x, y + 1] != Rooms.VOID;
+                a = roomsEnum[x, y - 1] != Rooms.VOID;
+            if (y + 1 < roomsEnum.GetLength(1))
+                b = roomsEnum[x, y + 1] != Rooms.VOID;
             if (x - 1 >= 0)
-                c = rooms[x - 1, y] != Rooms.VOID;
-            if (x + 1 < rooms.GetLength(0))
-                d = rooms[x + 1, y] != Rooms.VOID;
+                c = roomsEnum[x - 1, y] != Rooms.VOID;
+            if (x + 1 < roomsEnum.GetLength(0))
+                d = roomsEnum[x + 1, y] != Rooms.VOID;
             return new bool[] { a, b, c, d };
         }
 
@@ -322,13 +333,13 @@ namespace MirrorKnight
         {
             bool a = false, b = false, c = false, d = false;
             if (y - 1 >= 0)
-                a = rooms[x, y - 1] == roomType;
-            if (y + 1 < rooms.GetLength(1))
-                b = rooms[x, y + 1] == roomType;
+                a = roomsEnum[x, y - 1] == roomType;
+            if (y + 1 < roomsEnum.GetLength(1))
+                b = roomsEnum[x, y + 1] == roomType;
             if (x - 1 >= 0)
-                c = rooms[x - 1, y] == roomType;
-            if (x + 1 < rooms.GetLength(0))
-                d = rooms[x + 1, y] == roomType;
+                c = roomsEnum[x - 1, y] == roomType;
+            if (x + 1 < roomsEnum.GetLength(0))
+                d = roomsEnum[x + 1, y] == roomType;
             return new bool[] { a, b, c, d };
         }
 
@@ -347,13 +358,13 @@ namespace MirrorKnight
         {
             bool a = false, b = false, c = false, d = false;
             if (x - 1 > 0)
-                a = rooms[x - 1, y] == Rooms.EMPTY;
-            if (x + 1 < rooms.GetLength(0))
-                b = rooms[x + 1, y] == Rooms.EMPTY;
+                a = roomsEnum[x - 1, y] == Rooms.EMPTY;
+            if (x + 1 < roomsEnum.GetLength(0))
+                b = roomsEnum[x + 1, y] == Rooms.EMPTY;
             if (y - 1 > 0)
-                c = rooms[x, y - 1] == Rooms.EMPTY;
-            if (y + 1 < rooms.GetLength(1))
-                d = rooms[x, y + 1] == Rooms.EMPTY;
+                c = roomsEnum[x, y - 1] == Rooms.EMPTY;
+            if (y + 1 < roomsEnum.GetLength(1))
+                d = roomsEnum[x, y + 1] == Rooms.EMPTY;
 
             return a || b || c || d;
         }
@@ -363,6 +374,21 @@ namespace MirrorKnight
         bool Random(int chance)             //Approx. 1/chance chance of returning true
         {
             return new Random().Next(2) % chance == 0;
+        }
+
+        public Room GetRoom(int x, int y)
+        {
+            return rooms[x, y];
+        }
+
+        public void SetRoom(Room r, int x, int y)
+        {
+            rooms[x, y] = r;
+        }
+
+        public Point GetDimensions()
+        {
+            return new Point(maxX, maxY);
         }
     }
 }
