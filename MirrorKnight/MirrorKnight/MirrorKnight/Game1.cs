@@ -102,14 +102,13 @@ namespace MirrorKnight
             enemies = new List<Entity>();
             tilesRead = new string[18, 10];
 
-            ReadFileAsStrings("presetRooms/testroom.txt");
+            //ReadFileAsStrings("presetRooms/testroom.txt");
 
             m = new Map();
 
             x = m.GetDimensions().X / 2;
             y = m.GetDimensions().Y / 2;
             
-            base.Initialize();
             pauseOptionsButton = new Rectangle();
             pauseExitButton = new Rectangle();
             pauseMusicButton = new Rectangle();
@@ -129,6 +128,18 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
+
+            //string[] file = Useful.readFileLines(@"Content\presetRooms\testroom.txt");
+            //for (int i = 0; i < file.Length; i++)
+            //{
+            //    string[] parts = Useful.split(file[i]);
+            //    for (int j = 0; j < parts.Length; j++) {
+            //        string c = parts[i];
+            //        tilesRead[i, j] = c;
+            //    }
+            //}
+
+            ReadFileAsStrings("presetRooms/testroom.txt");
 
             loadTiles();
             p.load();
@@ -299,7 +310,6 @@ namespace MirrorKnight
             spriteBatch.End();
             base.Draw(gameTime);
         }
-
         private void ReadFileAsStrings(string path)
         {
 
@@ -325,6 +335,7 @@ namespace MirrorKnight
                 Console.WriteLine(e.Message);
             }
         }
+
     }
 
 
