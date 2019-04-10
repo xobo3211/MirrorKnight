@@ -25,8 +25,6 @@ namespace MirrorKnight
         List<string> lines;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
-        bool pauseMenu;
-        public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
 
         bool pauseMenu, pauseOptionsBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton;
