@@ -29,7 +29,7 @@ namespace MirrorKnight
         bool pauseMenu, pauseOptionsBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton;
 
-        Dictionary<string, Dictionary<String, Texture2D>> sprites;
+        public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
         MouseState oldM;
         GamePadState oldGP;
