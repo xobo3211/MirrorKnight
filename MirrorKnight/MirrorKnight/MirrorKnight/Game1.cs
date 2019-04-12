@@ -27,7 +27,9 @@ namespace MirrorKnight
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
 
         bool pauseMenu, pauseOptionsBool;
-        Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton;
+        Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, menuRect;
+        
+        
 
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
@@ -114,11 +116,13 @@ namespace MirrorKnight
             x = m.GetDimensions().X / 2;
             y = m.GetDimensions().Y / 2;
             
-            pauseOptionsButton = new Rectangle();
-            pauseExitButton = new Rectangle();
-            pauseMusicButton = new Rectangle();
-            pauseSfxButton = new Rectangle();
-            
+            menuRect = new Rectangle(Useful.getWWidth()/2-Useful.getWWidth()/4, Useful.getWHeight() / 2 - Useful.getWHeight() / 4, Useful.getWWidth()/2, Useful.getWHeight()/2);
+            pauseOptionsButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 50), 400, 60);
+            pauseExitButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 + 50), 400, 60);
+
+            pauseMusicButton = new Rectangle(Useful.getWWidth()/2 - 200, (Useful.getWHeight() / 2 )-150, 60, 60);
+            pauseSfxButton = new Rectangle(Useful.getWWidth()/2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
+
             base.Initialize(); 
         } 
 
@@ -191,22 +195,29 @@ namespace MirrorKnight
             Vector2 playerAimVec = Vector2.Zero;
 
 
-            if (kb.IsKeyDown(Keys.Tab) && !oldKB.IsKeyDown(Keys.Tab) && pauseMenu == false)
+            if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
             {
-                pauseMenu = true;
-            }
-            else if (kb.IsKeyDown(Keys.Tab) && !oldKB.IsKeyDown(Keys.Tab) && pauseMenu == true)
-            {
-                pauseMenu = false;
+                pauseMenu = !pauseMenu;
+                Console.WriteLine(pauseMenu);
             }
 
             if (pauseMenu == true)
             {
-                
+                menuRect = new Rectangle(Useful.getWWidth() / 2 - Useful.getWWidth() / 4, Useful.getWHeight() / 2 - Useful.getWHeight() / 4, Useful.getWWidth() / 2, Useful.getWHeight() / 2);
+                pauseOptionsButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 50), 400, 60);
+                pauseExitButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 + 50), 400, 60);
+
+                pauseMusicButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2) - 150, 60, 60);
+                pauseSfxButton = new Rectangle(Useful.getWWidth() / 2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
             }
             else
             {
+                menuRect = new Rectangle();
+                pauseOptionsButton = new Rectangle();
+                pauseExitButton = new Rectangle();
 
+                pauseMusicButton = new Rectangle();
+                pauseSfxButton = new Rectangle();
             }
             
             if (usingKeyboard)
@@ -302,6 +313,7 @@ namespace MirrorKnight
             t.Update(p);
 
 
+
             base.Update(gameTime);
         }
 
@@ -315,9 +327,13 @@ namespace MirrorKnight
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
+            
             m.GetRoom(x, y).Draw(spriteBatch, 0, (GraphicsDevice.Viewport.Height - m.GetRoom(x, y).Height * tileSize) / 2, tileSize);   //Draws room with offset x, y and tile size of tileSize
-
+            spriteBatch.Draw(placeHc, menuRect, Color.White);
+            spriteBatch.Draw(placeHc, pauseMusicButton, Color.White);
+            spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
+            spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
+            spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -94,11 +94,17 @@ namespace SureDroid
             else return (int)((Double)getRegion().Height * scale);
         }
 
+        /// <summary>
+        /// Returns if the sprite has any textures loaded. (Useful for debugging.)
+        /// </summary>
         public bool hasTextures()
         {
             return (sizes.Count > 0);
         }
 
+        /// <summary>
+        /// Removes the sprite from being drawn.
+        /// </summary>
         public void deleteThis()
         {
             sprites.Remove(this);
@@ -107,6 +113,12 @@ namespace SureDroid
         public void addThis()
         {
             sprites.Add(this);
+        }
+
+        public void dispose()
+        {
+            deleteThis();
+            textures.ForEach(texture => texture.Dispose());
         }
 
         /// <summary>
@@ -154,6 +166,24 @@ namespace SureDroid
         {
             sprites.Remove(this);
             sprites.Insert(index, this);
+        }
+
+        /// <summary>
+        /// Sets the depth (layer in drawing) of the sprite.
+        /// </summary>
+        /// <param name="depth">A provided depth in float value.</param>
+        public void setDepth(float depth)
+        {
+            this.depth = depth;
+        }
+
+        /// <summary>
+        /// Returns the depth (layer in drawing) of the sprite.
+        /// </summary>
+        /// <returns>The depth in a float value.</returns>
+        public float getDepth()
+        {
+            return depth;
         }
 
         /// <summary>
@@ -236,7 +266,12 @@ namespace SureDroid
         {
             visible = value;
         }
+        
 
+        /// <summary>
+        /// Get the visibility of the sprite. (Does not include if the sprite has no textures.)
+        /// </summary>
+        /// <returns>The boolean value if the sprite visabe.</returns>
         public bool isVisable()
         {
             return visible;
@@ -531,6 +566,11 @@ namespace SureDroid
         public Vector2 getPos()
         {
             return pos;
+        }
+
+        public Vector2 getOriginPos()
+        {
+            return pos + origin;
         }
 
         public float getX()
