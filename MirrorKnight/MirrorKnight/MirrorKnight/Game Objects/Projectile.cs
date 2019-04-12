@@ -18,7 +18,8 @@ namespace MirrorKnight
         Vector2 velocity;
 
         float shotSpeed = 5f;
-
+ 
+        //pos = starting position, vel = velocity it will travel at
         public Projectile(Vector2 pos, Vector2 vel)
         {
             body = new Sprite(pos.X, pos.Y);
