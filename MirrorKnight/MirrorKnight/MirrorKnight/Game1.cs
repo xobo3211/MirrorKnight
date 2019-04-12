@@ -98,7 +98,7 @@ namespace MirrorKnight
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
 
-
+            
             p = new Player();
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
@@ -196,11 +196,24 @@ namespace MirrorKnight
             GamePadState gp = GamePad.GetState(PlayerIndex.One);
             if (pauseMenu == true)
             {
-                if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
+                if (mouseCursor.Intersects(pauseMusicButton))
+                {
+                    
+                }
+                if (mouseCursor.Intersects(pauseSfxButton))
                 {
 
                 }
-                    if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
+                if (mouseCursor.Intersects(pauseOptionsButton))
+                {
+                    pauseOptionsBool = true;
+                }
+                if (mouseCursor.Intersects(pauseExitButton))
+                {
+                    this.Exit();
+                }
+
+                if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
                 {
                     pauseMenu = false;
                     menuRect = new Rectangle();
@@ -211,7 +224,7 @@ namespace MirrorKnight
                     pauseSfxButton = new Rectangle();
                 }
             }
-            else
+            else if(pauseMenu == false)
             {
                 ////////////////////////////////////////////////////////////////Player movement and aiming logic
 
@@ -233,11 +246,7 @@ namespace MirrorKnight
 
                     pauseMusicButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2) - 150, 60, 60);
                     pauseSfxButton = new Rectangle(Useful.getWWidth() / 2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
-                    if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
-                    {
-                        pauseMenu = !pauseMenu;
-                        Console.WriteLine(pauseMenu);
-                    }
+                    
                 }
 
                 
@@ -331,8 +340,6 @@ namespace MirrorKnight
                 
 
             t.Update(p);
-
-
 
                 base.Update(gameTime);
             }
