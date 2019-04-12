@@ -18,12 +18,17 @@ namespace MirrorKnight
         Vector2 velocity;
 
         float shotSpeed = 5f;
+
+        public static float defaultShotSpeed = 5f;
+
+        bool canHurtEnemies;
  
         //pos = starting position, vel = velocity it will travel at
         public Projectile(Vector2 pos, Vector2 vel)
         {
             body = new Sprite(pos.X, pos.Y);
             body.setPos(pos);
+            body.setScale(2.0);
             velocity = vel;
             velocity.Normalize();
             velocity *= shotSpeed;
@@ -48,6 +53,22 @@ namespace MirrorKnight
         public void Dispose()
         {
             body.deleteThis();
+        }
+
+        public void Reflect(Vector2 aimVec, float speed)
+        {
+            aimVec.Normalize();
+            velocity = aimVec * speed;
+        }
+
+        public bool CanHurtEnemies()
+        {
+            return canHurtEnemies;
+        }
+
+        public void HurtsEnemies(bool value)
+        {
+            canHurtEnemies = value;
         }
     }
 }

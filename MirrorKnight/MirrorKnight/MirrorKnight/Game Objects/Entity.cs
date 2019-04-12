@@ -15,5 +15,15 @@ namespace MirrorKnight
     public abstract class Entity
     {
         public Sprite body;
+
+        public void Dispose()
+        {
+            body.dispose();
+        }
+
+        public virtual void Update()
+        {
+
+        }
     }
 }

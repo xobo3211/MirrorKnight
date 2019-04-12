@@ -43,11 +43,10 @@ namespace MirrorKnight
         Map m;
 
         int x, y;       //Contains the current room the player is in.
-
-        public List<Projectile> projectiles;
-        public List<LivingEntity> enemies;
-
-        Turret t;
+        
+        public static List<Projectile> projectiles;                     //Contains list of all active projectiles
+        public static List<LivingEntity> enemies;                       //Contains list of all living enemies in a room
+        public static List<Entity> entities;                            //Contains list of all non-living entities in a room
 
         int tileSize = 60;
 
@@ -110,6 +109,8 @@ namespace MirrorKnight
             lines = new List<string>();
             projectiles = new List<Projectile>();
             enemies = new List<LivingEntity>();
+            entities = new List<Entity>();
+
             tilesRead = new string[18, 10];
 
             //ReadFileAsStrings("presetRooms/testroom.txt");
@@ -167,7 +168,7 @@ namespace MirrorKnight
             m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
 
 
-            t = new Turret(50, 50, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"));
+            entities.Add(new Turret(50, 50, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(1, 1)));
 
         }
 
@@ -319,11 +320,10 @@ namespace MirrorKnight
 
                         playerAimVec = new Vector2(m.X - p.body.getX(), m.Y - p.body.getY());
 
-                        if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
-                        {
-                            Projectile proj = new Projectile(p.body.getPos(), playerAimVec);
-                            projectiles.Add(proj);
-                        }
+                if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
+                {
+                    p.Attack(playerAimVec);
+                }
 
 
                     }
@@ -350,38 +350,43 @@ namespace MirrorKnight
                         p.body.translate(playerMoveVec * p.GetSpeed());
                     }
 
-                    ///////////////////////////////////////////////////////////////////////////////Projectile logic
+            ///////////////////////////////////////////////////////////////////////////////Game Object update logic
+
+            for(int i = 0; i < entities.Count; i++)
+            {
+                entities[i].Update();
+            }
+
+            ///////////////////////////////////////////////////////////////////////////////Projectile logic
 
                     for (int i = 0; i < projectiles.Count; i++)
                     {
                         projectiles[i].Update();
                     }
 
-                    for (int i = 0; i < projectiles.Count; i++)
+            for(int i = 0; i < projectiles.Count; i++)
+            {
+                Vector2 pos = projectiles[i].body.getPos();
+                if (pos.X < 0 || pos.X > graphics.PreferredBackBufferWidth || pos.Y < 0 || pos.Y > graphics.PreferredBackBufferHeight)
+                {
+                    projectiles[i].Dispose();
+                    projectiles.Remove(projectiles[i]);
+                }
+                else
+                {
+                    for (int a = 0; a < enemies.Count; a++)
                     {
-                        Vector2 pos = projectiles[i].body.getPos();
-                        if (pos.X < 0 || pos.X > graphics.PreferredBackBufferWidth || pos.Y < 0 || pos.Y > graphics.PreferredBackBufferHeight)
+                        if(projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
                         {
                             projectiles[i].Dispose();
                             projectiles.Remove(projectiles[i]);
-                        }
-                        else
-                        {
-                            for (int a = 0; a < enemies.Count; a++)
-                            {
-                                if (enemies[a].body.intersects(projectiles[i].body))
-                                {
-                                    projectiles[i].Dispose();
-                                    projectiles.Remove(projectiles[i]);
-                                    enemies.Remove(enemies[a]);
-                                }
-                            }
+                            enemies.Remove(enemies[a]);
                         }
                     }
                 }
-                
+            }
 
-            t.Update(p);
+                
 
                 base.Update(gameTime);
             }
