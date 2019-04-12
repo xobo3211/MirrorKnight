@@ -43,11 +43,10 @@ namespace MirrorKnight
         Map m;
 
         int x, y;       //Contains the current room the player is in.
-
-        public List<Projectile> projectiles;
-        public List<LivingEntity> enemies;
-
-        Turret t;
+        
+        public static List<Projectile> projectiles;                     //Contains list of all active projectiles
+        public static List<LivingEntity> enemies;                       //Contains list of all living enemies in a room
+        public static List<Entity> entities;                            //Contains list of all non-living entities in a room
 
         int tileSize = 60;
 
@@ -107,6 +106,8 @@ namespace MirrorKnight
             lines = new List<string>();
             projectiles = new List<Projectile>();
             enemies = new List<LivingEntity>();
+            entities = new List<Entity>();
+
             tilesRead = new string[18, 10];
 
             //ReadFileAsStrings("presetRooms/testroom.txt");
@@ -159,7 +160,7 @@ namespace MirrorKnight
             m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
 
 
-            t = new Turret(50, 50, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"));
+            entities.Add(new Turret(50, 50, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(1, 1)));
 
         }
 
@@ -248,8 +249,7 @@ namespace MirrorKnight
 
                 if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
                 {
-                    Projectile proj = new Projectile(p.body.getPos(), playerAimVec);
-                    projectiles.Add(proj);
+                    p.Attack(playerAimVec);
                 }
 
                 
@@ -277,6 +277,13 @@ namespace MirrorKnight
                 p.body.translate(playerMoveVec * p.GetSpeed());
             }
 
+            ///////////////////////////////////////////////////////////////////////////////Game Object update logic
+
+            for(int i = 0; i < entities.Count; i++)
+            {
+                entities[i].Update();
+            }
+
             ///////////////////////////////////////////////////////////////////////////////Projectile logic
 
             for(int i = 0; i < projectiles.Count; i++)
@@ -296,7 +303,7 @@ namespace MirrorKnight
                 {
                     for (int a = 0; a < enemies.Count; a++)
                     {
-                        if(enemies[a].body.intersects(projectiles[i].body))
+                        if(projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
                         {
                             projectiles[i].Dispose();
                             projectiles.Remove(projectiles[i]);
@@ -309,8 +316,6 @@ namespace MirrorKnight
             oldGP = gp;
             oldKB = kb;
             oldM = m;
-
-            t.Update(p);
 
 
 
