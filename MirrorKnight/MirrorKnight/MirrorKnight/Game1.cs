@@ -27,7 +27,9 @@ namespace MirrorKnight
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
 
         bool pauseMenu, pauseOptionsBool;
-        Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton;
+        Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, menuRect;
+        
+        
 
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
@@ -41,6 +43,9 @@ namespace MirrorKnight
         Map m;
 
         int x, y;       //Contains the current room the player is in.
+
+        List<Projectile> projectiles;
+        List<Entity> enemies;
 
         int tileSize = 60;
 
@@ -95,6 +100,8 @@ namespace MirrorKnight
             oldM = Mouse.GetState();
 
             lines = new List<string>();
+            projectiles = new List<Projectile>();
+            enemies = new List<Entity>();
             tilesRead = new string[18, 10];
 
             //ReadFileAsStrings("presetRooms/testroom.txt");
@@ -104,11 +111,13 @@ namespace MirrorKnight
             x = m.GetDimensions().X / 2;
             y = m.GetDimensions().Y / 2;
             
-            pauseOptionsButton = new Rectangle();
-            pauseExitButton = new Rectangle();
-            pauseMusicButton = new Rectangle();
-            pauseSfxButton = new Rectangle();
-            
+            menuRect = new Rectangle(Useful.getWWidth()/2-Useful.getWWidth()/4, Useful.getWHeight() / 2 - Useful.getWHeight() / 4, Useful.getWWidth()/2, Useful.getWHeight()/2);
+            pauseOptionsButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 50), 400, 60);
+            pauseExitButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 + 50), 400, 60);
+
+            pauseMusicButton = new Rectangle(Useful.getWWidth()/2 - 200, (Useful.getWHeight() / 2 )-150, 60, 60);
+            pauseSfxButton = new Rectangle(Useful.getWWidth()/2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
+
             base.Initialize(); 
         } 
 
@@ -171,26 +180,35 @@ namespace MirrorKnight
             MouseState m = Mouse.GetState();
             GamePadState gp = GamePad.GetState(PlayerIndex.One);
 
+            ////////////////////////////////////////////////////////////////Player movement and aiming logic
+
             Vector2 playerMoveVec = Vector2.Zero;
             Vector2 playerAimVec = Vector2.Zero;
 
 
-            if (kb.IsKeyDown(Keys.Tab) && !oldKB.IsKeyDown(Keys.Tab) && pauseMenu == false)
+            if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
             {
-                pauseMenu = true;
-            }
-            else if (kb.IsKeyDown(Keys.Tab) && !oldKB.IsKeyDown(Keys.Tab) && pauseMenu == true)
-            {
-                pauseMenu = false;
+                pauseMenu = !pauseMenu;
+                Console.WriteLine(pauseMenu);
             }
 
             if (pauseMenu == true)
             {
-                
+                menuRect = new Rectangle(Useful.getWWidth() / 2 - Useful.getWWidth() / 4, Useful.getWHeight() / 2 - Useful.getWHeight() / 4, Useful.getWWidth() / 2, Useful.getWHeight() / 2);
+                pauseOptionsButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 50), 400, 60);
+                pauseExitButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 + 50), 400, 60);
+
+                pauseMusicButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2) - 150, 60, 60);
+                pauseSfxButton = new Rectangle(Useful.getWWidth() / 2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
             }
             else
             {
+                menuRect = new Rectangle();
+                pauseOptionsButton = new Rectangle();
+                pauseExitButton = new Rectangle();
 
+                pauseMusicButton = new Rectangle();
+                pauseSfxButton = new Rectangle();
             }
             
             if (usingKeyboard)
@@ -218,6 +236,14 @@ namespace MirrorKnight
                 }
 
                 playerAimVec = new Vector2(m.X - p.body.getX(), m.Y - p.body.getY());
+
+                if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
+                {
+                    Projectile proj = new Projectile(p.body.getPos(), playerAimVec);
+                    projectiles.Add(proj);
+                }
+
+                
             }
             if(usingController)
             {
@@ -242,6 +268,41 @@ namespace MirrorKnight
                 p.body.translate(playerMoveVec * p.GetSpeed());
             }
 
+            ///////////////////////////////////////////////////////////////////////////////Projectile logic
+
+            for(int i = 0; i < projectiles.Count; i++)
+            {
+                projectiles[i].Update();
+            }
+
+            for(int i = 0; i < projectiles.Count; i++)
+            {
+                Vector2 pos = projectiles[i].body.getPos();
+                if (pos.X < 0 || pos.X > graphics.PreferredBackBufferWidth || pos.Y < 0 || pos.Y > graphics.PreferredBackBufferHeight)
+                {
+                    projectiles[i].Dispose();
+                    projectiles.Remove(projectiles[i]);
+                }
+                else
+                {
+                    for (int a = 0; a < enemies.Count; a++)
+                    {
+                        if(enemies[a].body.intersects(projectiles[i].body))
+                        {
+                            projectiles[i].Dispose();
+                            projectiles.Remove(projectiles[i]);
+                            enemies.Remove(enemies[a]);
+                        }
+                    }
+                }
+            }
+
+            oldGP = gp;
+            oldKB = kb;
+            oldM = m;
+
+
+
             base.Update(gameTime);
         }
 
@@ -255,9 +316,13 @@ namespace MirrorKnight
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
+            
             m.GetRoom(x, y).Draw(spriteBatch, 0, (GraphicsDevice.Viewport.Height - m.GetRoom(x, y).Height * tileSize) / 2, tileSize);   //Draws room with offset x, y and tile size of tileSize
-
+            spriteBatch.Draw(placeHc, menuRect, Color.White);
+            spriteBatch.Draw(placeHc, pauseMusicButton, Color.White);
+            spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
+            spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
+            spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }

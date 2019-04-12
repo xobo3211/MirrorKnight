@@ -14,24 +14,39 @@ namespace MirrorKnight
 {
     public class Projectile
     {
-        Texture2D texture;
-        Vector2 position, velocity;
+        public Sprite body;
+        Vector2 velocity;
 
-        public Projectile(Texture2D t, Vector2 pos, Vector2 vel)
+        float shotSpeed = 5f;
+
+        public Projectile(Vector2 pos, Vector2 vel)
         {
-            texture = t;
-            position = pos;
+            body = new Sprite(pos.X, pos.Y);
+            body.setPos(pos);
             velocity = vel;
+            velocity.Normalize();
+            velocity *= shotSpeed;
+            Load();
         }
 
         public void Update()
         {
-            position += velocity;
+            body.translate(velocity);
         }
 
-        public void Draw(SpriteBatch b)
+        public void Load()
         {
-            b.Draw(texture, position, Color.White);
+            body.setAnimation(true);
+            Texture2D[] textures = Game1.sprites["coin"].Values.ToArray();
+            foreach(Texture2D t in textures)
+            {
+                body.addTexture(t);
+            }
+        }
+
+        public void Dispose()
+        {
+            body.deleteThis();
         }
     }
 }
