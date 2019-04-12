@@ -12,7 +12,7 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    class Player : Entity
+    class Player : LivingEntity
     {
         ActiveItem active;
 

@@ -12,16 +12,8 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    public class Entity
+    public abstract class Entity
     {
         public Sprite body;
-
-        protected int MAX_HP = 6, HP;
-        protected float SPEED = 1f, DMG = 2;
-
-        public Entity()
-        {
-
-        }
     }
 }
