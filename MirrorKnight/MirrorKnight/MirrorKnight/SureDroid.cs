@@ -386,12 +386,16 @@ namespace SureDroid
         // --------------------------------------------------------------------------
 
         /// <summary>
-        /// Define the rectangle for animation.
+        /// Define the rectangle (of a texture) for animation.
         /// </summary>
         public void defRegion(int x, int y, int width, int height)
         {
             defRegion(new Rectangle(x, y, width, height));
         }
+
+        /// <summary>
+        /// Define the rectangle (of a texture) for animation.
+        /// </summary>
         public void defRegion(Rectangle box)
         {
             getRegionList().Add(box);
@@ -534,11 +538,17 @@ namespace SureDroid
             pos.Y = y;
         }
 
+        /// <summary>
+        /// Sets the X position of the sprite.
+        /// </summary>
         public void setX(float x)
         {
             pos.X = x;
         }
-        
+
+        /// <summary>
+        /// Sets the Y position of the sprite.
+        /// </summary>
         public void setY(float y)
         {
             pos.Y = y;
@@ -568,16 +578,25 @@ namespace SureDroid
             return pos;
         }
 
+        /// <summary>
+        /// Returns the position of the sprite plus the origin in a Vector2 format.
+        /// </summary>
         public Vector2 getOriginPos()
         {
             return pos + origin;
         }
-
+        
+        /// <summary>
+        /// Gets the X position of the sprite.
+        /// </summary>
         public float getX()
         {
             return pos.X;
         }
 
+        /// <summary>
+        /// Gets the Y position of the sprite.
+        /// </summary>
         public float getY()
         {
             return pos.Y;
@@ -919,70 +938,113 @@ namespace SureDroid
             //spriteBatch = new SpriteBatch(game.GraphicsDevice);
         }
 
+        /// <summary>
+        /// Gets a Texture2D from a file.
+        /// </summary>
         public static Texture2D getTexture(String fileName)
         {
             return Useful.game.Content.Load<Texture2D>(fileName);
         }
 
+        /// <summary>
+        /// Gets a SpriteFont from a file.
+        /// </summary>
         public static SpriteFont getFont(String fileName)
         {
             return Useful.game.Content.Load<SpriteFont>(fileName);
         }
 
-        public static String readFile(String fileName)
+        /// <summary>
+        /// Returns the contents of a file in a string.
+        /// </summary>
+        /// <param name="filePath">The path of the file with the name and extension.</param>
+        /// <example>
+        /// <code>
+        /// String contents = Useful.readFile(@"Content\textFile.txt");
+        /// </code>
+        /// </example>
+        public static string readFile(String filePath)
         {
-            return File.ReadAllText(fileName);
+            return File.ReadAllText(filePath);
         }
 
-        public static String[] readFileLines(String fileName)
+        /// <summary>
+        /// Returns the contents of a file in a string array. Each line is its own string in the array.
+        /// </summary>
+        /// <param name="filePath">The path of the file with the name and extension.</param>
+        /// <example>
+        /// <code>
+        /// String[] contentLines = Useful.readFileLines(@"Content\textFile.txt");
+        /// </code>
+        /// </example>
+        public static string[] readFileLines(String filePath)
         {
-            return File.ReadAllLines(fileName);
+            return File.ReadAllLines(filePath);
         }
 
-        public static int[] readAllNumbers(String filename)
+        /// <summary>
+        /// Reads all numbers from a provided input. Ignores non-digits.
+        /// </summary>
+        public static int[] readAllNumbers(string input)
         {
             List<int> ints = new List<int>();
-            string[] values = readWords(filename);
+            string[] values = Regex.Split(input, @"\D+");
             foreach (string value in values)
             {
-                try {
-                    ints.Add(Convert.ToInt32(value));
-                } catch (FormatException fe)
+                if (!string.IsNullOrEmpty(value))
                 {
-                    Console.WriteLine("Unable to convert to string. \nCause: " + fe.Message + "\nSource: " + fe.Source);
+                    ints.Add(int.Parse(value));
+                } else
+                {
+                    Console.WriteLine("Value during number conversoin was null or empty. Value: \"" + value + "\"");
                 }
             }
             return ints.ToArray();
         }
 
         private static char[] splitChars = new char[] { '-' };
-        public static string[] readWords(String value)
+
+        /// <summary>
+        /// Splits the provided string into words, seperated by spaces.
+        /// </summary>
+        public static string[] split(String value)
         {
             return Regex.Replace(value, @"\r\n?|\n|\s+", "-").Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
         }
 
+        /// <summary>
+        /// Splits the provided string into words, seperated by a provided character.
+        /// </summary>
         public static string[] split(String value, char spChar)
         {
             return Regex.Replace(value, @"\r\n?|\n|\s+|"+spChar, "-").Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
         }
-        public static string[] split(String value)
+
+        /// <summary>
+        /// Writes a provided string to a provided file location.
+        /// </summary>
+        /// <param name="filePath">The path of the file with the name and extension.</param>
+        public static void writeFile(string filePath, string text)
         {
-            return split(value, ' ');
+            File.WriteAllText(filePath, text);
         }
 
-        public static void writeFile(string fileName, string text)
+        /// <summary>
+        /// Writes a provided string array to a provided file location, with each string in the string array being a seperate line.
+        /// </summary>
+        /// <param name="filePath">The path of the file with the name and extension.</param>
+        public static void writeFile(string filePath, string[] text)
         {
-            File.WriteAllText(fileName, text);
+            File.WriteAllLines(filePath, text);
         }
 
-        public static void writeFile(string fileName, string[] text)
+        /// <summary>
+        /// Writes a provided string to a provided file location, with the option of appending it to the file instead of overwriting to it.
+        /// </summary>
+        /// <param name="filePath">The path of the file with the name and extension.</param>
+        public static void writeFile(string filePath, string text, bool append)
         {
-            File.WriteAllLines(fileName, text);
-        }
-
-        public static void writeFile(string fileName, string text, bool append)
-        {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, append))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(filePath, append))
             {
                 file.WriteLine(text);
             }
@@ -1006,53 +1068,29 @@ namespace SureDroid
             return newArray;
         }
 
-        public static List<T> shuffle<T>(T Value, List<T> CList)
-        {
-            // Local Vars
-            int I, R;
-            bool Flag;
-            Random Rand = new Random();
-            // Local List of T type
-            var CardList = new List<T>();
-            // Build Local List as big as passed in list and fill it with default value
-            for (I = 0; I < CList.Count; I++)
-                CardList.Add(Value);
-            // Shuffle the list of cards
-            for (I = 0; I < CList.Count; I++)
-            {
-                Flag = false;
-                // Loop until an empty spot is found
-                do
-                {
-                    R = Rand.Next(0, CList.Count);
-                    if (CardList[R].Equals(Value))
-                    {
-                        Flag = true;
-                        CardList[R] = CList[I];
-                    }
-                } while (!Flag);
-            }
-
-            // Return the shuffled list
-            return CardList;
-        }
     }
 
     public static class RandomExtensions
     {
-        // Return a random value between 0 inclusive and max exclusive.
+        /// <summary>
+        /// Return a random value between 0 inclusive and max exclusive.
+        /// </summary>
         public static double NextDouble(this Random rand, double max)
         {
             return rand.NextDouble() * max;
         }
-
-        // Return a random value between min inclusive and max exclusive.
+        /// <summary>
+        /// Return a random value between min inclusive and max exclusive.
+        /// </summary>
         public static double NextDouble(this Random rand,
             double min, double max)
         {
             return min + (rand.NextDouble() * (max - min));
         }
 
+        /// <summary>
+        /// Clones a list.
+        /// </summary>
         public static List<T> Clone<T>(this List<T> listToClone) where T : ICloneable
         {
             return listToClone.Select(item => (T)item.Clone()).ToList();
@@ -1067,36 +1105,56 @@ namespace SureDroid
         protected float _rotation; // Camera Rotation
         public bool _centered = true;
 
+        /// <summary>
+        /// Returns if the camera is centered.
+        /// </summary>
         public bool Centered
         {
             get { return _centered; }
             set { _centered = value; }
         }
 
+        /// <summary>
+        /// The zoom value of the camera.
+        /// </summary>
+        /// <remarks>
+        /// A negetive zoom will flip the image.
+        /// </remarks>
         public float Zoom
         {
             get { return _zoom; }
             set { _zoom = value; if (_zoom < 0.1f) _zoom = 0.1f; } // Negative zoom will flip image
         }
 
+        /// <summary>
+        /// The rotation value of the camera.
+        /// </summary>
         public float Rotation
         {
             get { return _rotation; }
             set { _rotation = value; }
         }
 
-        // Auxiliary function to move the camera
+        /// <summary>
+        /// Auxiliary function to move the camera
+        /// </summary>
         public void Move(Vector2 amount)
         {
             _pos += amount;
         }
-        // Get set position
+
+        /// <summary>
+        /// The position value of the camera.
+        /// </summary>
         public Vector2 Pos
         {
             get { return _pos; }
             set { _pos = value; }
         }
 
+        /// <summary>
+        /// Gets the transformed value for the camera.
+        /// </summary>
         public Matrix get_transformation()
         {
             _transform = _centered ?
@@ -1112,6 +1170,9 @@ namespace SureDroid
             return _transform;
         }
 
+        /// <summary>
+        /// The constructor for the camera.
+        /// </summary>
         public Camera2d()
         {
             _zoom = 1.0f;
@@ -1131,7 +1192,7 @@ namespace SureDroid
 
     }
 
-    public class Automate : DrawableGameComponent
+    internal class Automate : DrawableGameComponent
     {
         SpriteBatch spriteBatch;
 
