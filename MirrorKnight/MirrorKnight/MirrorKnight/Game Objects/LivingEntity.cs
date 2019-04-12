@@ -12,14 +12,11 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    public class Pickup
+    public class LivingEntity : Entity
     {
-        Rectangle hitbox;
-        Texture2D texture;
+        protected int MAX_HP, HP;
+        protected float SPEED, DMG;
 
-        public bool Collides(Rectangle rect)
-        {
-            return hitbox.Intersects(rect);
-        }
+        protected bool immortal;        //Controls whether entity can be damaged
     }
 }

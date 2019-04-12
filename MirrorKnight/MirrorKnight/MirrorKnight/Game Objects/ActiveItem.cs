@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MirrorKnight
 {
-    class ActiveItem : Pickup
+    class ActiveItem
     {
     }
 }

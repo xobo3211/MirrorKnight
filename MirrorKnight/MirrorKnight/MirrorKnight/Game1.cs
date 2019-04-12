@@ -44,8 +44,10 @@ namespace MirrorKnight
 
         int x, y;       //Contains the current room the player is in.
 
-        List<Projectile> projectiles;
-        List<Entity> enemies;
+        public List<Projectile> projectiles;
+        public List<LivingEntity> enemies;
+
+        Turret t;
 
         int tileSize = 60;
 
@@ -94,6 +96,9 @@ namespace MirrorKnight
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            IsMouseVisible = true;
+
+
             p = new Player();
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
@@ -101,7 +106,7 @@ namespace MirrorKnight
             mouseCursor = new Rectangle(0, 0, 50, 50);
             lines = new List<string>();
             projectiles = new List<Projectile>();
-            enemies = new List<Entity>();
+            enemies = new List<LivingEntity>();
             tilesRead = new string[18, 10];
 
             //ReadFileAsStrings("presetRooms/testroom.txt");
@@ -157,6 +162,10 @@ namespace MirrorKnight
             p.body.setTimeFrame(1 / 16f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
             m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
+
+
+            t = new Turret(50, 50, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"));
+
         }
 
         /// <summary>
@@ -320,6 +329,8 @@ namespace MirrorKnight
                 }
 
                 
+
+            t.Update(p);
 
 
 
