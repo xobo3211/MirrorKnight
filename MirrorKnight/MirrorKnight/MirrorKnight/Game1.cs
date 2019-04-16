@@ -21,7 +21,7 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D placeHc;
+        Texture2D placeHc, loading;
         List<string> lines;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
@@ -50,6 +50,7 @@ namespace MirrorKnight
 
         int tileSize = 60;
 
+        Sprite[] hearts;
 
 
         public Game1()
@@ -101,6 +102,12 @@ namespace MirrorKnight
             mainMenuRect = new Rectangle(0, 0, Useful.getWWidth(), Useful.getWHeight());
             mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 -100), 400, 60);
 
+            //Sprite[] hearts = new Sprite[];
+            //for (int i = 0; 0 < 3; i++)
+            //{
+            //    hearts[i] = new Sprite(1000 - (50 * i), 100);
+            //    hearts[i].addTexture("textures/ui_heart_full");
+            //}
             p = new Player();
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
@@ -144,8 +151,8 @@ namespace MirrorKnight
             //pauseMenuRect.addTexture(placeHc);
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
-            
-            
+
+            loading = Content.Load<Texture2D>("loading");
 
             //string[] file = Useful.readFileLines(@"Content\presetRooms\testroom.txt");
             //for (int i = 0; i < file.Length; i++)
@@ -180,7 +187,10 @@ namespace MirrorKnight
         {
             // TODO: Unload any non ContentManager content here
         }
+        //private GameTime mainMenuTransition(GameTime gameTime)
+        //{
 
+        //}
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -216,6 +226,7 @@ namespace MirrorKnight
                     mainMenuRect = new Rectangle();
                     pauseMusicButton = new Rectangle();
                     pauseSfxButton = new Rectangle();
+                    //mainMenuTransition(gameTime);
                 }
                 if (mouseCursor.Intersects(pauseMusicButton))
                 {
@@ -397,7 +408,9 @@ namespace MirrorKnight
                 oldKB = kb;
                 oldM = m;
             }
-        
+
+       
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -416,7 +429,7 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
-                
+
             }
             else if (mainMenuBool == false)
             {
@@ -426,8 +439,15 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
-                
+
+
+                for (int i = 0; 0 < p.getHP(); i++)
+                {
+                    hearts[i] = new Sprite((1000- 100*i) + (50 * i), 100);
+                }
+
             }
+
             spriteBatch.Draw(placeHc, mouseCursor, Color.White);
             spriteBatch.End();
 
