@@ -28,8 +28,8 @@ namespace MirrorKnight
 
         bool pauseMenu, pauseOptionsBool, mainMenuBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mouseCursor, mainMenuRect, mainMenuStart;
-        
-        
+
+        Sprite test;
 
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
@@ -173,6 +173,11 @@ namespace MirrorKnight
             p.body.setTimeFrame(1 / 16f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
             m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
+
+            test = new Sprite(10, 10);
+            test.addTexture(placeHc);
+            test.setPos(p.body.getOriginPos());
+            test.setSize(10, 10);
 
 
             entities.Add(new Turret(50, 50, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(1, 1)));
@@ -329,16 +334,15 @@ namespace MirrorKnight
                             playerMoveVec.X = 1;
                         }
 
-                        playerAimVec = new Vector2(m.X - p.body.getX(), m.Y - p.body.getY());
+                        playerAimVec = new Vector2(m.X, m.Y) - p.body.getOriginPos();
 
                         if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
                         {
                             p.Attack(playerAimVec);
                         }
 
-
                     }
-                    if (usingController)
+                    else if (usingController)
                     {
                         if (Keyboard.GetState().GetPressedKeys().Length > 0 || oldM.X != m.X)
                         {
@@ -353,6 +357,10 @@ namespace MirrorKnight
                         {
                             playerAimVec = gp.ThumbSticks.Right;
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: No controller-type set");
                     }
 
                     if (playerMoveVec != Vector2.Zero)
@@ -396,20 +404,20 @@ namespace MirrorKnight
                             }
                         }
                     }
-
-
-
-                    base.Update(gameTime);
                 }
-                }
-                mouseCursor.X = m.X;
-                mouseCursor.Y = m.Y;
-                oldGP = gp;
-                oldKB = kb;
-                oldM = m;
+
+
+                test.setPos(p.body.getOriginPos());
+
+
+                base.Update(gameTime);
             }
-
-       
+            mouseCursor.X = m.X - mouseCursor.Width/2;
+            mouseCursor.Y = m.Y - mouseCursor.Height/2;
+            oldGP = gp;
+            oldKB = kb;
+            oldM = m;
+        }
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -449,6 +457,7 @@ namespace MirrorKnight
             }
 
             spriteBatch.Draw(placeHc, mouseCursor, Color.White);
+            
             spriteBatch.End();
 
             base.Draw(gameTime);
