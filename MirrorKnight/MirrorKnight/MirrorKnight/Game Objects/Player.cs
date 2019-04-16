@@ -41,6 +41,11 @@ namespace MirrorKnight
 
         }
 
+        public int getHP()
+        {
+            return HP;
+        }
+
         public void Attack(Vector2 aimVec)
         {
             List<Projectile> hitProjectiles = new List<Projectile>();
