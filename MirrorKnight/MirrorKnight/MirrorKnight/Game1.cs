@@ -28,8 +28,8 @@ namespace MirrorKnight
 
         bool pauseMenu, pauseOptionsBool, mainMenuBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mouseCursor, mainMenuRect, mainMenuStart;
-        
-        
+
+        Sprite test;
 
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
@@ -166,6 +166,11 @@ namespace MirrorKnight
             p.body.setTimeFrame(1 / 16f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
             m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
+
+            test = new Sprite(10, 10);
+            test.addTexture(placeHc);
+            test.setPos(p.body.getOriginPos());
+            test.setSize(10, 10);
 
 
             entities.Add(new Turret(50, 50, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(1, 1)));
@@ -318,34 +323,34 @@ namespace MirrorKnight
                             playerMoveVec.X = 1;
                         }
 
-                    playerAimVec = new Vector2(m.X, m.Y) - p.body.getOriginPos();
+                        playerAimVec = new Vector2(m.X, m.Y) - p.body.getOriginPos();
 
-                    if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
-                    {
-                        p.Attack(playerAimVec);
-                    }
+                        if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
+                        {
+                            p.Attack(playerAimVec);
+                        }
 
-                }
-                else if (usingController)
-                {
-                    if (Keyboard.GetState().GetPressedKeys().Length > 0 || oldM.X != m.X)
-                    {
-                        usingController = false;
-                        usingKeyboard = true;
                     }
-                    if (gp.ThumbSticks.Left != Vector2.Zero)
+                    else if (usingController)
                     {
-                        playerMoveVec = gp.ThumbSticks.Left;
+                        if (Keyboard.GetState().GetPressedKeys().Length > 0 || oldM.X != m.X)
+                        {
+                            usingController = false;
+                            usingKeyboard = true;
+                        }
+                        if (gp.ThumbSticks.Left != Vector2.Zero)
+                        {
+                            playerMoveVec = gp.ThumbSticks.Left;
+                        }
+                        if (gp.ThumbSticks.Right != Vector2.Zero)
+                        {
+                            playerAimVec = gp.ThumbSticks.Right;
+                        }
                     }
-                    if (gp.ThumbSticks.Right != Vector2.Zero)
+                    else
                     {
-                        playerAimVec = gp.ThumbSticks.Right;
+                        Console.WriteLine("Error: No controller-type set");
                     }
-                }
-                else
-                {
-                    Console.WriteLine("Error: No controller-type set");
-                }
 
                     if (playerMoveVec != Vector2.Zero)
                     {
@@ -388,9 +393,10 @@ namespace MirrorKnight
                             }
                         }
                     }
+                }
 
 
-
+                test.setPos(p.body.getOriginPos());
 
 
                 base.Update(gameTime);
@@ -433,6 +439,7 @@ namespace MirrorKnight
                 
             }
             spriteBatch.Draw(placeHc, mouseCursor, Color.White);
+            
             spriteBatch.End();
 
             base.Draw(gameTime);

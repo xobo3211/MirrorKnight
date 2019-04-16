@@ -18,7 +18,7 @@ namespace MirrorKnight
 
         List<PassiveItem> passives;
 
-        float RANGE = 50f;
+        float RANGE = 70f;
 
         public Player()
         {
@@ -36,7 +36,8 @@ namespace MirrorKnight
         {
             body.setAnimation(true);
             Game1.sprites["knight"].Keys.Where((str, index) => str.Contains("m_idle")).ToList().ForEach(str =>body.addTexture(Game1.sprites["knight"][str]));
-            body.centerOrigin();
+
+            body.setOrigin(5, 15);
 
         }
 
