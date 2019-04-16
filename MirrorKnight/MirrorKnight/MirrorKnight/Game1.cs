@@ -267,16 +267,15 @@ namespace MirrorKnight
                         playerMoveVec.X = 1;
                     }
 
-                    playerAimVec = new Vector2(m.X - p.body.getX(), m.Y - p.body.getY());
+                    playerAimVec = new Vector2(m.X, m.Y) - p.body.getOriginPos();
 
-                if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
-                {
-                    p.Attack(playerAimVec);
+                    if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
+                    {
+                        p.Attack(playerAimVec);
+                    }
+
                 }
-
-
-                }
-                if (usingController)
+                else if (usingController)
                 {
                     if (Keyboard.GetState().GetPressedKeys().Length > 0 || oldM.X != m.X)
                     {
@@ -291,6 +290,10 @@ namespace MirrorKnight
                     {
                         playerAimVec = gp.ThumbSticks.Right;
                     }
+                }
+                else
+                {
+                    Console.WriteLine("Error: No controller-type set");
                 }
 
                 if (playerMoveVec != Vector2.Zero)
@@ -341,8 +344,8 @@ namespace MirrorKnight
 
                 base.Update(gameTime);
             }
-            mouseCursor.X = m.X;
-            mouseCursor.Y = m.Y;
+            mouseCursor.X = m.X - mouseCursor.Width/2;
+            mouseCursor.Y = m.Y - mouseCursor.Height/2;
             oldGP = gp;
             oldKB = kb;
             oldM = m;
