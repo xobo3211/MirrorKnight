@@ -188,11 +188,11 @@ namespace MirrorKnight
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-           
+
             // TODO: Add your update logic here
 
             KeyboardState kb = Keyboard.GetState();
@@ -320,10 +320,10 @@ namespace MirrorKnight
 
                         playerAimVec = new Vector2(m.X - p.body.getX(), m.Y - p.body.getY());
 
-                if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
-                {
-                    p.Attack(playerAimVec);
-                }
+                        if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
+                        {
+                            p.Attack(playerAimVec);
+                        }
 
 
                     }
@@ -350,53 +350,54 @@ namespace MirrorKnight
                         p.body.translate(playerMoveVec * p.GetSpeed());
                     }
 
-            ///////////////////////////////////////////////////////////////////////////////Game Object update logic
+                    ///////////////////////////////////////////////////////////////////////////////Game Object update logic
 
-            for(int i = 0; i < entities.Count; i++)
-            {
-                entities[i].Update();
-            }
+                    for (int i = 0; i < entities.Count; i++)
+                    {
+                        entities[i].Update();
+                    }
 
-            ///////////////////////////////////////////////////////////////////////////////Projectile logic
+                    ///////////////////////////////////////////////////////////////////////////////Projectile logic
 
                     for (int i = 0; i < projectiles.Count; i++)
                     {
                         projectiles[i].Update();
                     }
 
-            for(int i = 0; i < projectiles.Count; i++)
-            {
-                Vector2 pos = projectiles[i].body.getPos();
-                if (pos.X < 0 || pos.X > graphics.PreferredBackBufferWidth || pos.Y < 0 || pos.Y > graphics.PreferredBackBufferHeight)
-                {
-                    projectiles[i].Dispose();
-                    projectiles.Remove(projectiles[i]);
-                }
-                else
-                {
-                    for (int a = 0; a < enemies.Count; a++)
+                    for (int i = 0; i < projectiles.Count; i++)
                     {
-                        if(projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
+                        Vector2 pos = projectiles[i].body.getPos();
+                        if (pos.X < 0 || pos.X > graphics.PreferredBackBufferWidth || pos.Y < 0 || pos.Y > graphics.PreferredBackBufferHeight)
                         {
                             projectiles[i].Dispose();
                             projectiles.Remove(projectiles[i]);
-                            enemies.Remove(enemies[a]);
+                        }
+                        else
+                        {
+                            for (int a = 0; a < enemies.Count; a++)
+                            {
+                                if (projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
+                                {
+                                    projectiles[i].Dispose();
+                                    projectiles.Remove(projectiles[i]);
+                                    enemies.Remove(enemies[a]);
+                                }
+                            }
                         }
                     }
+
+
+
+                    base.Update(gameTime);
                 }
+                }
+                mouseCursor.X = m.X;
+                mouseCursor.Y = m.Y;
+                oldGP = gp;
+                oldKB = kb;
+                oldM = m;
             }
-
-                
-
-                base.Update(gameTime);
-            }
-            mouseCursor.X = m.X;
-            mouseCursor.Y = m.Y;
-            oldGP = gp;
-            oldKB = kb;
-            oldM = m;
-        }
-
+        
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
