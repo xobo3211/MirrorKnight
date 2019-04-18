@@ -21,7 +21,7 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D placeHc, loading, crossHair;
+        Texture2D placeHc, loading;
         public static Texture2D enemyBullet, reflectedBullet;
         List<string> lines;
         string[,] tilesRead;
