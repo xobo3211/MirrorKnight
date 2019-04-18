@@ -1637,6 +1637,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="playerBullet.png">
+      <Name>playerBullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="roomEntities\testroom.txt">
       <Name>testroom</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1662,6 +1669,13 @@
   <ItemGroup>
     <Compile Include="presetRooms\normals\n3.txt">
       <Name>n3</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="enemyBullet.png">
+      <Name>enemyBullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
