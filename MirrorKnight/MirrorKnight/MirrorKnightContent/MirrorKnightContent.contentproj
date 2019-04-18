@@ -1658,7 +1658,6 @@
     <Folder Include="presetRooms\boss\" />
     <Folder Include="presetRooms\puzzle\" />
     <Folder Include="presetRooms\secret\" />
-    <Folder Include="presetRooms\shops\" />
     <Folder Include="presetRooms\treasures\" />
   </ItemGroup>
   <ItemGroup>
@@ -1676,6 +1675,11 @@
       <Name>enemyBullet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="presetRooms\shops\sh1.txt">
+      <Name>sh1</Name>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
