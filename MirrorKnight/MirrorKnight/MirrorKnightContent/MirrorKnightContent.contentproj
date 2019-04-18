@@ -1642,6 +1642,28 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="presetRooms\normals\n1.txt">
+      <Name>n1</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="presetRooms\boss\" />
+    <Folder Include="presetRooms\puzzle\" />
+    <Folder Include="presetRooms\secret\" />
+    <Folder Include="presetRooms\shops\" />
+    <Folder Include="presetRooms\treasures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="presetRooms\normals\n2.txt">
+      <Name>n2</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="presetRooms\normals\n3.txt">
+      <Name>n3</Name>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
