@@ -21,7 +21,7 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D placeHc;
+        Texture2D placeHc, loading, crossHair;
         List<string> lines;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
@@ -29,8 +29,6 @@ namespace MirrorKnight
 
         bool pauseMenu, pauseOptionsBool, mainMenuBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mouseCursor, mainMenuRect, mainMenuStart;
-        
-        
 
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
@@ -51,6 +49,7 @@ namespace MirrorKnight
 
         int tileSize = 60;
 
+        Sprite[] hearts;
 
 
         public Game1()
@@ -96,12 +95,18 @@ namespace MirrorKnight
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
 
             mainMenuBool = true;
             mainMenuRect = new Rectangle(0, 0, Useful.getWWidth(), Useful.getWHeight());
             mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 -100), 400, 60);
 
+            //Sprite[] hearts = new Sprite[];
+            //for (int i = 0; 0 < 3; i++)
+            //{
+            //    hearts[i] = new Sprite(1000 - (50 * i), 100);
+            //    hearts[i].addTexture("textures/ui_heart_full");
+            //}
             p = new Player();
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
@@ -118,7 +123,7 @@ namespace MirrorKnight
 
             //ReadFileAsStrings("presetRooms/testroom.txt");
 
-            m = new Map();
+            m = new Map(Map.Floor.GARDEN);
 
             x = m.GetDimensions().X / 2;
             y = m.GetDimensions().Y / 2;
@@ -144,6 +149,7 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
+            crossHair = Content.Load<Texture2D>("crosshair");
             //pauseMenuRect.addTexture(placeHc);
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
@@ -185,7 +191,10 @@ namespace MirrorKnight
         {
             // TODO: Unload any non ContentManager content here
         }
+        //private GameTime mainMenuTransition(GameTime gameTime)
+        //{
 
+        //}
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -221,6 +230,7 @@ namespace MirrorKnight
                     mainMenuRect = new Rectangle();
                     pauseMusicButton = new Rectangle();
                     pauseSfxButton = new Rectangle();
+                    //mainMenuTransition(gameTime);
                 }
                 if (mouseCursor.Intersects(pauseMusicButton))
                 {
@@ -323,16 +333,15 @@ namespace MirrorKnight
                             playerMoveVec.X = 1;
                         }
 
-                        playerAimVec = new Vector2(m.X - p.body.getX(), m.Y - p.body.getY());
+                        playerAimVec = new Vector2(m.X, m.Y) - p.body.getOriginPos();
 
                         if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
                         {
                             p.Attack(playerAimVec);
                         }
 
-
                     }
-                    if (usingController)
+                    else if (usingController)
                     {
                         if (Keyboard.GetState().GetPressedKeys().Length > 0 || oldM.X != m.X)
                         {
@@ -347,6 +356,10 @@ namespace MirrorKnight
                         {
                             playerAimVec = gp.ThumbSticks.Right;
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: No controller-type set");
                     }
 
                     if (playerMoveVec != Vector2.Zero)
@@ -390,19 +403,18 @@ namespace MirrorKnight
                             }
                         }
                     }
-
-
-
-                    base.Update(gameTime);
                 }
-                }
-                mouseCursor.X = m.X;
-                mouseCursor.Y = m.Y;
-                oldGP = gp;
-                oldKB = kb;
-                oldM = m;
+
+
+                base.Update(gameTime);
             }
-        
+            mouseCursor.X = m.X - mouseCursor.Width/2;
+            mouseCursor.Y = m.Y - mouseCursor.Height/2;
+            oldGP = gp;
+            oldKB = kb;
+            oldM = m;
+        }
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -421,7 +433,7 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
-                
+
             }
             else if (mainMenuBool == false)
             {
@@ -431,9 +443,17 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
-                
+
+
+                //for (int i = 0; 0 < p.getHP(); i++)
+                //{
+                //    hearts[i] = new Sprite((1000- 100*i) + (50 * i), 100);
+                //}
+
             }
-            spriteBatch.Draw(placeHc, mouseCursor, Color.White);
+
+            spriteBatch.Draw(crossHair, mouseCursor, Color.White);
+            
             spriteBatch.End();
 
             base.Draw(gameTime);
