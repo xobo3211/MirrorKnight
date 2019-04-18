@@ -42,13 +42,15 @@ namespace MirrorKnight
 
         String roomName;        //Contains file path for the room
 
-        public Room(Type t, String filePath, Type type)
+        bool hasBeenEntered = false;
+
+        public Room(Type t)
         {
             tiles = new Tile[18, 10];
 
             string initialPath = "../../../../MirrorKnightContent/presetRooms/";
 
-            switch(type)
+            switch(t)
             {
                 case Type.NORMAL:
                     initialPath += "normal/";
@@ -78,11 +80,11 @@ namespace MirrorKnight
                     break;
 
                 default:
-                    Console.WriteLine("Error loading file, type is " + type);
+                    Console.WriteLine("Error loading file, type is " + t);
                     break;
             }
             
-            roomName = initialPath + filePath;
+            roomName = initialPath;
         }
 
         public Room(Type t, String[,] tileArr, Texture2D texture)
@@ -122,9 +124,85 @@ namespace MirrorKnight
             roomType = r;
         }
 
-        public void LoadRoom()
+        public void LoadRoom()                                          //To be called when player enters the room. Supposed to load everything in the room
         {
+            Random rn = new Random();
 
+            int roomID = 0;
+
+            switch(roomType)
+            {
+                case Type.NORMAL:
+                    roomID = rn.Next(3) + 1;
+                    break;
+
+                case Type.TREASURE:
+
+                    break;
+
+                case Type.SHOP:
+
+                    break;
+
+                case Type.BOSS:
+
+                    break;
+
+                case Type.PUZZLE:
+
+                    break;
+
+                case Type.SECRET:
+
+                    break;
+            }
+
+            roomName += roomID;
+
+            ReadFile(roomName);
+        }
+
+        private void ReadFile(string path)
+        {
+            try
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+                        string[] parts = line.Split(' ');
+                        for (int i = 0; i < parts.Length; i++)
+                        {
+                            string c = parts[i];
+
+                            switch (c)
+                            {
+                                case "n":
+                                    tiles[i, j] = new Tile(Tile.Type.NORMAL);
+                                    break;
+
+                                case "o":
+                                    tiles[i, j] = new Tile(Tile.Type.OBSTACLE);
+                                    break;
+
+                                case "p":
+                                    tiles[i, j] = new Tile(Tile.Type.PIT);
+                                    break;
+
+                                case "h":
+                                    tiles[i, j] = new Tile(Tile.Type.HAZARD);
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void Draw(SpriteBatch b, int left, int top, int tileSize)
