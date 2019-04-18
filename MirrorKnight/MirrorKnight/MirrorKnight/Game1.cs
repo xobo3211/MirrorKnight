@@ -25,6 +25,7 @@ namespace MirrorKnight
         List<string> lines;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
+        Text text;
 
         bool pauseMenu, pauseOptionsBool, mainMenuBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mouseCursor, mainMenuRect, mainMenuStart;
@@ -113,6 +114,8 @@ namespace MirrorKnight
 
             tilesRead = new string[18, 10];
 
+            text = new Text("Testing Boxy");
+
             //ReadFileAsStrings("presetRooms/testroom.txt");
 
             m = new Map();
@@ -144,7 +147,9 @@ namespace MirrorKnight
             //pauseMenuRect.addTexture(placeHc);
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
-            
+            Text.setDefaultFont("font");
+
+            text.center();
             
 
             //string[] file = Useful.readFileLines(@"Content\presetRooms\testroom.txt");
