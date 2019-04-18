@@ -19,6 +19,7 @@ namespace MirrorKnight
         public bool damageHazard;
 
         Texture2D texture;
+        Texture2D[] 
 
         public enum Type
         {
