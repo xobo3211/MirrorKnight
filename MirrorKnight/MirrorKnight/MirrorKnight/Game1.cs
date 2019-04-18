@@ -150,6 +150,7 @@ namespace MirrorKnight
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
             crossHair = Content.Load<Texture2D>("crosshair");
+
             //pauseMenuRect.addTexture(placeHc);
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
