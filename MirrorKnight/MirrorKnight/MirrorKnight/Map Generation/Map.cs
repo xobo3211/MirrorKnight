@@ -16,10 +16,6 @@ namespace MirrorKnight
     /// </summary>
     public class Map
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
-        Texture2D t;
 
         Rectangle r = new Rectangle(0, 0, 50, 50);
 
@@ -29,7 +25,7 @@ namespace MirrorKnight
 
         Room[,] rooms;
 
-        int maxRoomCount = 10;
+        int maxRoomCount;
         int currentRoomCount;
 
         Random rn = new Random();
@@ -46,6 +42,14 @@ namespace MirrorKnight
             BOSS
         }
 
+        public enum Floor
+        {
+            GARDEN,
+            TEMPLE,
+            CRYPT,
+            ABYSS
+        }
+
         enum Directions
         {
             UP,
@@ -55,10 +59,34 @@ namespace MirrorKnight
             NONE
         }
 
-        public Map()
+        public Map(Floor f)
         {
 
             bool boss, treasure, shop, secret;
+
+            switch (f)
+            {
+                case Floor.GARDEN:
+                    maxRoomCount = 10;
+                    break;
+
+                case Floor.TEMPLE:
+                    maxRoomCount = 15;
+                    break;
+
+                case Floor.CRYPT:
+                    maxRoomCount = 20;
+                    maxX = 11;
+                    maxY = 11;
+                    break;
+
+                case Floor.ABYSS:
+                    maxRoomCount = 25;
+                    maxX = 13;
+                    maxY = 13;
+                    break;
+            }
+
 
             do
             {
@@ -163,7 +191,7 @@ namespace MirrorKnight
                 {
                     if (roomsEnum[x, y] == Rooms.DEAD_END)
                     {
-                        if (CountConnections(ConnectionArr(x, y, Rooms.EMPTY_AND_CHECKED)) + CountConnections(ConnectionArr(x, y, Rooms.DEAD_END)) > 2)      //Checks if dead end is connected to more than two roomsEnum
+                        if (CountConnections(ConnectionArr(x, y, Rooms.EMPTY_AND_CHECKED)) + CountConnections(ConnectionArr(x, y, Rooms.DEAD_END)) > 1)      //Checks if dead end is connected to more than two roomsEnum
                         {
                             roomsEnum[x, y] = Rooms.EMPTY_AND_CHECKED;
                         }
@@ -272,7 +300,7 @@ namespace MirrorKnight
             {
                 for (int x = 0; x < maxX && notPlaced; x++)
                 {
-                    if (roomsEnum[x, y] == Rooms.VOID && CountConnections(ConnectionArr(x, y)) > 2)
+                    if (roomsEnum[x, y] == Rooms.VOID && CountConnections(ConnectionArr(x, y)) > 2 && CountConnections(ConnectionArr(x, y, Rooms.BOSS)) < 1);
                     {
                         roomsEnum[x, y] = Rooms.SECRET;
                         notPlaced = false;

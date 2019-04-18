@@ -29,8 +29,6 @@ namespace MirrorKnight
         bool pauseMenu, pauseOptionsBool, mainMenuBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mouseCursor, mainMenuRect, mainMenuStart;
 
-        Sprite test;
-
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
         MouseState oldM;
@@ -122,7 +120,7 @@ namespace MirrorKnight
 
             //ReadFileAsStrings("presetRooms/testroom.txt");
 
-            m = new Map();
+            m = new Map(Map.Floor.GARDEN);
 
             x = m.GetDimensions().X / 2;
             y = m.GetDimensions().Y / 2;
@@ -174,11 +172,6 @@ namespace MirrorKnight
             p.body.setTimeFrame(1 / 16f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
             m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
-
-            test = new Sprite(10, 10);
-            test.addTexture(placeHc);
-            test.setPos(p.body.getOriginPos());
-            test.setSize(10, 10);
 
 
             entities.Add(new Turret(50, 50, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(1, 1)));
@@ -406,9 +399,6 @@ namespace MirrorKnight
                         }
                     }
                 }
-
-
-                test.setPos(p.body.getOriginPos());
 
 
                 base.Update(gameTime);
