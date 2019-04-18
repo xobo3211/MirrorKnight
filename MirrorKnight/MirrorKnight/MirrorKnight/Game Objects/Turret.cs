@@ -15,7 +15,7 @@ namespace MirrorKnight
     public class Turret : Entity
     {
 
-        int fireTimer = 0, timerCount = 40;
+        int fireTimer = 0, timerCount = 75;
 
         Entity targetEntity;
 

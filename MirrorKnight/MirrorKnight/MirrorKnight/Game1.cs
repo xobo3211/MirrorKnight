@@ -47,7 +47,7 @@ namespace MirrorKnight
         public static List<LivingEntity> enemies;                       //Contains list of all living enemies in a room
         public static List<Entity> entities;                            //Contains list of all non-living entities in a room
 
-        int tileSize = 60;
+        int tileSize = 60, verticalOffset = 200;
 
         Sprite[] hearts;
 
@@ -158,28 +158,15 @@ namespace MirrorKnight
             text.center();
             
 
-            //string[] file = Useful.readFileLines(@"Content\presetRooms\testroom.txt");
-            //for (int i = 0; i < file.Length; i++)
-            //{
-            //    string[] parts = Useful.split(file[i]);
-            //    for (int j = 0; j < parts.Length; j++) {
-            //        string c = parts[i];
-            //        tilesRead[i, j] = c;
-            //    }
-            //}
-
-            ReadFileAsStrings("presetRooms/testroom.txt");
+            ReadFileAsStrings("testroom.txt");
 
             loadTiles();
             p.load();
-            //player.body.addTexture(tileSprite);
             p.body.setScale(3);
             p.body.setTimeFrame(1 / 16f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
+
             m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
-
-
-            entities.Add(new Turret(50, 50, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(1, 1)));
 
         }
 
@@ -220,40 +207,20 @@ namespace MirrorKnight
 
                 //pauseMusicButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2) - 150, 60, 60);
                 //pauseSfxButton = new Rectangle(Useful.getWWidth() / 2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
-                if (mouseCursor.Intersects(mainMenuStart))
+                if (m.LeftButton == ButtonState.Pressed)
                 {
-                    mainMenuBool = false;
-                    pauseMenuRect = new Rectangle();
-                    pauseOptionsButton = new Rectangle();
-                    pauseExitButton = new Rectangle();
-                    mainMenuStart = new Rectangle();
-                    mainMenuRect = new Rectangle();
-                    pauseMusicButton = new Rectangle();
-                    pauseSfxButton = new Rectangle();
-                    //mainMenuTransition(gameTime);
-                }
-                if (mouseCursor.Intersects(pauseMusicButton))
-                {
-
-                }
-                if (mouseCursor.Intersects(pauseSfxButton))
-                {
-
-                }
-                if (mouseCursor.Intersects(pauseOptionsButton))
-                {
-                    pauseOptionsBool = true;
-                }
-                if (mouseCursor.Intersects(pauseExitButton))
-                {
-                    this.Exit();
-                }
-
-            }
-            if (mainMenuBool == false)
-            {
-                if (pauseMenu == true)
-                {
+                    if (mouseCursor.Intersects(mainMenuStart))
+                    {
+                        mainMenuBool = false;
+                        pauseMenuRect = new Rectangle();
+                        pauseOptionsButton = new Rectangle();
+                        pauseExitButton = new Rectangle();
+                        mainMenuStart = new Rectangle();
+                        mainMenuRect = new Rectangle();
+                        pauseMusicButton = new Rectangle();
+                        pauseSfxButton = new Rectangle();
+                        //mainMenuTransition(gameTime);
+                    }
                     if (mouseCursor.Intersects(pauseMusicButton))
                     {
 
@@ -269,6 +236,32 @@ namespace MirrorKnight
                     if (mouseCursor.Intersects(pauseExitButton))
                     {
                         this.Exit();
+                    }
+                }
+
+            }
+            if (mainMenuBool == false)
+            {
+                if (pauseMenu == true)
+                {
+                    if (m.LeftButton == ButtonState.Pressed)
+                    {
+                        if (mouseCursor.Intersects(pauseMusicButton))
+                        {
+
+                        }
+                        if (mouseCursor.Intersects(pauseSfxButton))
+                        {
+
+                        }
+                        if (mouseCursor.Intersects(pauseOptionsButton))
+                        {
+                            pauseOptionsBool = true;
+                        }
+                        if (mouseCursor.Intersects(pauseExitButton))
+                        {
+                            this.Exit();
+                        }
                     }
 
                     if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
@@ -444,11 +437,13 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
 
+                Console.WriteLine("Test");
 
-                //for (int i = 0; 0 < p.getHP(); i++)
-                //{
-                //    hearts[i] = new Sprite((1000- 100*i) + (50 * i), 100);
-                //}
+
+                for (int i = 0; i < p.getHP(); i++)
+                {
+                    //hearts[i] = new Sprite((1000- 100*i) + (50 * i), 100);
+                }
 
             }
 
@@ -463,7 +458,7 @@ namespace MirrorKnight
 
             try
             {
-                using (StreamReader reader = new StreamReader("../../../../MirrorKnightContent/" + path))
+                using (StreamReader reader = new StreamReader("../../../../MirrorKnightContent/presetRooms/" + path))
                 {
                     for (int j = 0; !reader.EndOfStream; j++)
                     {
@@ -482,10 +477,68 @@ namespace MirrorKnight
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
+
+            try
+            {
+                using (StreamReader reader = new StreamReader("../../../../MirrorKnightContent/roomEntities/" + path))
+                {
+                    bool beginReading = false;
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+
+                        if(beginReading)
+                        {
+                            string[] args = line.Split(' ');
+
+                            int x = Convert.ToInt32(args[1]);
+                            int y = Convert.ToInt32(args[2]);
+
+                            Vector2 pos = TileToPixelCoords(x, y);
+
+                            switch(args[0])
+                            {
+                                case "e":
+                                    
+                                    break;
+
+                                case "t":
+                                    if(args.Length < 4)
+                                        entities.Add(new Turret((int)pos.X, (int)pos.Y, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), p));
+
+                                    else
+                                    {
+                                        int targetX = Convert.ToInt32(args[3]);
+                                        int targetY = Convert.ToInt32(args[4]);
+                                        entities.Add(new Turret((int)pos.X, (int)pos.Y, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(targetX, targetY)));
+                                    }
+                                    break;
+                            }
+                        }
+
+
+                        if(line == "*")
+                        {
+                            beginReading = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public Vector2 TileToPixelCoords(int x, int y)
+        {
+            x = tileSize * x;
+            y = verticalOffset + (y * tileSize);
+
+            return new Vector2(x, y);
         }
 
     }
-
-
 
 }
