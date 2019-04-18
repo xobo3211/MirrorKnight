@@ -42,12 +42,8 @@ namespace MirrorKnight
 
         public void Load()
         {
-            body.setAnimation(true);
-            Texture2D[] textures = Game1.sprites["coin"].Values.ToArray();
-            foreach(Texture2D t in textures)
-            {
-                body.addTexture(t);
-            }
+            body.setAnimation(false);
+            body.addTexture(Game1.enemyBullet);
         }
 
         public void Dispose()
@@ -59,6 +55,8 @@ namespace MirrorKnight
         {
             aimVec.Normalize();
             velocity = aimVec * speed;
+            body.addTexture(Game1.reflectedBullet);
+            body.setTexture(1);
         }
 
         public bool CanHurtEnemies()
