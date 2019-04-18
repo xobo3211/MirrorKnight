@@ -19,7 +19,7 @@ namespace MirrorKnight
 
         float shotSpeed = 5f;
 
-        public static float defaultShotSpeed = 5f;
+        public static float defaultShotSpeed = 5f, defaultBulletSize = 10f;
 
         bool canHurtEnemies;
  
@@ -27,12 +27,12 @@ namespace MirrorKnight
         public Projectile(Vector2 pos, Vector2 vel)
         {
             body = new Sprite(pos.X, pos.Y);
+            Load();
             body.setPos(pos);
-            body.setScale(2.0);
+            body.setSize(defaultBulletSize, defaultBulletSize);
             velocity = vel;
             velocity.Normalize();
             velocity *= shotSpeed;
-            Load();
         }
 
         public void Update()
@@ -42,12 +42,8 @@ namespace MirrorKnight
 
         public void Load()
         {
-            body.setAnimation(true);
-            Texture2D[] textures = Game1.sprites["coin"].Values.ToArray();
-            foreach(Texture2D t in textures)
-            {
-                body.addTexture(t);
-            }
+            body.setAnimation(false);
+            body.addTexture(Game1.enemyBullet);
         }
 
         public void Dispose()
@@ -59,6 +55,9 @@ namespace MirrorKnight
         {
             aimVec.Normalize();
             velocity = aimVec * speed;
+            body.addTexture(Game1.reflectedBullet);
+            body.setTexture(1);
+            body.setSize(defaultBulletSize, defaultBulletSize);
         }
 
         public bool CanHurtEnemies()

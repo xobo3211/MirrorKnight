@@ -22,6 +22,7 @@ namespace MirrorKnight
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D placeHc, loading;
+        public static Texture2D enemyBullet, reflectedBullet;
         List<string> lines;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
@@ -154,6 +155,9 @@ namespace MirrorKnight
             crossheir.setSize(100, 100);
             crossheir.centerOrigin();
 
+            //crossHair = Content.Load<Texture2D>("crosshair");
+            enemyBullet = Content.Load<Texture2D>("enemyBullet");
+            reflectedBullet = Content.Load<Texture2D>("playerBullet");
             //pauseMenuRect.addTexture(placeHc);
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
