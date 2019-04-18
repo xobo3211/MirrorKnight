@@ -21,7 +21,7 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D placeHc, loading;
+        Texture2D placeHc, loading, crossHair;
         List<string> lines;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
@@ -94,7 +94,7 @@ namespace MirrorKnight
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
 
             mainMenuBool = true;
             mainMenuRect = new Rectangle(0, 0, Useful.getWWidth(), Useful.getWHeight());
@@ -146,6 +146,7 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
+            crossHair = Content.Load<Texture2D>("crosshair");
             //pauseMenuRect.addTexture(placeHc);
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
@@ -441,7 +442,7 @@ namespace MirrorKnight
 
             }
 
-            spriteBatch.Draw(placeHc, mouseCursor, Color.White);
+            spriteBatch.Draw(crossHair, mouseCursor, Color.White);
             
             spriteBatch.End();
 
