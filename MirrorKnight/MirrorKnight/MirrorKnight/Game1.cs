@@ -447,8 +447,6 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
 
-                Console.WriteLine("Test");
-
 
                 for (int i = 0; i < p.getHP(); i++)
                 {

@@ -96,7 +96,6 @@ namespace MirrorKnight
                     {
                         case "n":       //normal
                             tiles[x, y] = new Tile(Tile.Type.NORMAL);
-                            tiles[x, y].SetTexture(texture);
                             break;
 
                         case "o":       //obstacle
