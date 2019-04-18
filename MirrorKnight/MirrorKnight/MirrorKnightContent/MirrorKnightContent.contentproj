@@ -1650,8 +1650,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="presetRooms\normal\n1.txt">
-      <Name>n1</Name>
+    <None Include="presetRooms\normal\1.txt">
+      <Name>1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -1663,14 +1663,14 @@
     <Folder Include="presetRooms\treasure\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="presetRooms\normal\n2.txt">
-      <Name>n2</Name>
+    <None Include="presetRooms\normal\2.txt">
+      <Name>2</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="presetRooms\normal\n3.txt">
-      <Name>n3</Name>
+    <None Include="presetRooms\normal\3.txt">
+      <Name>3</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
