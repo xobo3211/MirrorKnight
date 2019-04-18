@@ -21,7 +21,7 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D placeHc, loading;
+        Texture2D placeHc, loading, crossHair;
         List<string> lines;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
@@ -96,7 +96,7 @@ namespace MirrorKnight
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
 
             mainMenuBool = true;
             mainMenuRect = new Rectangle(0, 0, Useful.getWWidth(), Useful.getWHeight());
@@ -148,11 +148,12 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
+            crossHair = Content.Load<Texture2D>("crosshair");
             //pauseMenuRect.addTexture(placeHc);
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
 
-            loading = Content.Load<Texture2D>("loading");
+            //loading = Content.Load<Texture2D>("loading");
 
             //string[] file = Useful.readFileLines(@"Content\presetRooms\testroom.txt");
             //for (int i = 0; i < file.Length; i++)
@@ -449,14 +450,14 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
 
 
-                for (int i = 0; 0 < p.getHP(); i++)
-                {
-                    hearts[i] = new Sprite((1000- 100*i) + (50 * i), 100);
-                }
+                //for (int i = 0; 0 < p.getHP(); i++)
+                //{
+                //    hearts[i] = new Sprite((1000- 100*i) + (50 * i), 100);
+                //}
 
             }
 
-            spriteBatch.Draw(placeHc, mouseCursor, Color.White);
+            spriteBatch.Draw(crossHair, mouseCursor, Color.White);
             
             spriteBatch.End();
 
