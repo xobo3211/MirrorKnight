@@ -688,6 +688,8 @@ namespace SureDroid
         }
     }
 
+
+
     /// <summary>
     /// Custom Texture Class - Created By Rithvik Senthilkumar | 
     /// Allows for easy handling of text. | 
@@ -796,6 +798,9 @@ namespace SureDroid
                 return normal.MeasureString(content);
         }
 
+        /// <summary>
+        /// Positions the text at the center of the screen.
+        /// </summary>
         public void center()
         {
             pos.X = Useful.getWWidth() / 2 - getSize().X / 2;
@@ -1203,6 +1208,8 @@ namespace SureDroid
             base.Initialize();
             spriteBatch = new SpriteBatch(Useful.game.GraphicsDevice);
         }
+        
+
         public override void Update(GameTime gameTime)
         {
             Sprite.updateAll();
