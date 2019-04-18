@@ -40,6 +40,51 @@ namespace MirrorKnight
         
         Tile[,] tiles;
 
+        String roomName;        //Contains file path for the room
+
+        public Room(Type t, String filePath, Type type)
+        {
+            tiles = new Tile[18, 10];
+
+            string initialPath = "../../../../MirrorKnightContent/presetRooms/";
+
+            switch(type)
+            {
+                case Type.NORMAL:
+                    initialPath += "normal/";
+                    break;
+
+                case Type.BOSS:
+                    initialPath += "boss/";
+                    break;
+
+                case Type.PUZZLE:
+                    initialPath += "puzzle/";
+                    break;
+
+                case Type.SECRET:
+                    initialPath += "secret/";
+                    break;
+
+                case Type.SHOP:
+                    initialPath += "shop/";
+                    break;
+
+                case Type.TREASURE:
+                    initialPath += "treasure/";
+                    break;
+
+                case Type.VOID:
+                    break;
+
+                default:
+                    Console.WriteLine("Error loading file, type is " + type);
+                    break;
+            }
+            
+            roomName = initialPath + filePath;
+        }
+
         public Room(Type t, String[,] tileArr, Texture2D texture)
         {
             tiles = new Tile[tileArr.GetLength(0), tileArr.GetLength(1)];
@@ -76,6 +121,11 @@ namespace MirrorKnight
         public void setRoomType(Type r)
         {
             roomType = r;
+        }
+
+        public void LoadRoom()
+        {
+
         }
 
         public void Draw(SpriteBatch b, int left, int top, int tileSize)

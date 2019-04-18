@@ -1650,25 +1650,29 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="presetRooms\normals\n1.txt">
+    <None Include="presetRooms\normal\n1.txt">
       <Name>n1</Name>
-    </Compile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="presetRooms\boss\" />
     <Folder Include="presetRooms\puzzle\" />
     <Folder Include="presetRooms\secret\" />
-    <Folder Include="presetRooms\treasures\" />
+    <Folder Include="presetRooms\shop\" />
+    <Folder Include="presetRooms\treasure\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="presetRooms\normals\n2.txt">
+    <None Include="presetRooms\normal\n2.txt">
       <Name>n2</Name>
-    </Compile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="presetRooms\normals\n3.txt">
+    <None Include="presetRooms\normal\n3.txt">
       <Name>n3</Name>
-    </Compile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="enemyBullet.png">
