@@ -125,11 +125,6 @@ namespace MirrorKnight
 
             //ReadFileAsStrings("presetRooms/testroom.txt");
 
-            m = new Map(Map.Floor.GARDEN);
-
-            x = m.GetDimensions().X / 2;
-            y = m.GetDimensions().Y / 2;
-            
             pauseMenuRect = new Rectangle(Useful.getWWidth()/2-Useful.getWWidth()/4, Useful.getWHeight() / 2 - Useful.getWHeight() / 4, Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             pauseOptionsButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 50), 400, 60);
             pauseExitButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 + 50), 400, 60);
@@ -172,6 +167,11 @@ namespace MirrorKnight
             p.body.setScale(3);
             p.body.setTimeFrame(1 / 16f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
+
+            m = new Map(Map.Floor.GARDEN);
+
+            x = m.GetDimensions().X / 2;
+            y = m.GetDimensions().Y / 2;
 
             m.GetRoom(x, y).EnterRoom(Content, p);
         }
@@ -457,86 +457,6 @@ namespace MirrorKnight
 
             base.Draw(gameTime);
         }
-
-        /*
-        private void ReadFileAsStrings(string path)
-        {
-
-            try
-            {
-                using (StreamReader reader = new StreamReader("../../../../MirrorKnightContent/presetRooms/" + path))
-                {
-                    for (int j = 0; !reader.EndOfStream; j++)
-                    {
-                        string line = reader.ReadLine();
-                        string[] parts = line.Split(' ');
-                        for (int i = 0; i < parts.Length; i++)
-                        {
-                            string c = parts[i];
-                            tilesRead[i, j] = c;
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }
-
-            try
-            {
-                using (StreamReader reader = new StreamReader("../../../../MirrorKnightContent/roomEntities/" + path))
-                {
-                    bool beginReading = false;
-                    for (int j = 0; !reader.EndOfStream; j++)
-                    {
-                        string line = reader.ReadLine();
-
-                        if(beginReading)
-                        {
-                            string[] args = line.Split(' ');
-
-                            int x = Convert.ToInt32(args[1]);
-                            int y = Convert.ToInt32(args[2]);
-
-                            Vector2 pos = TileToPixelCoords(x, y);
-
-                            switch(args[0])
-                            {
-                                case "e":
-                                    
-                                    break;
-
-                                case "t":
-                                    if(args.Length < 4)
-                                        entities.Add(new Turret((int)pos.X, (int)pos.Y, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), p));
-
-                                    else
-                                    {
-                                        int targetX = Convert.ToInt32(args[3]);
-                                        int targetY = Convert.ToInt32(args[4]);
-                                        entities.Add(new Turret((int)pos.X, (int)pos.Y, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(targetX, targetY)));
-                                    }
-                                    break;
-                            }
-                        }
-
-
-                        if(line == "*")
-                        {
-                            beginReading = true;
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }
-        }
-        */
 
         public static Vector2 TileToPixelCoords(int x, int y)
         {
