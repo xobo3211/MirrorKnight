@@ -19,6 +19,8 @@ namespace MirrorKnight
         public bool damageHazard;
 
         Texture2D texture;
+        static Dictionary<String, Texture2D> textures = Game1.sprites["floor"];
+        Random rand = new Random(DateTime.Now.Millisecond);
 
         public enum Type
         {
@@ -36,24 +38,28 @@ namespace MirrorKnight
                     canMoveThrough = true;
                     canShootThrough = true;
                     damageHazard = false;
+                    texture = textures["floor_" + rand.Next(1,9)];
                     break;
 
                 case Type.OBSTACLE:
                     canMoveThrough = false;
                     canShootThrough = false;
                     damageHazard = false;
+                    texture = Game1.sprites["crate"]["crate"];
                     break;
 
                 case Type.PIT:
                     canMoveThrough = false;
                     canShootThrough = true;
                     damageHazard = false;
+                    texture = Game1.sprites["hole"]["hole"];
                     break;
 
                 case Type.HAZARD:
                     canMoveThrough = true;
                     canShootThrough = true;
                     damageHazard = true;
+                    texture = textures["floor_spikes_anim_f3"];
                     break;
             }
 
