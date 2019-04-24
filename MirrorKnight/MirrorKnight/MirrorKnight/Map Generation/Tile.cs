@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SureDroid;
+using System.Threading;
 
 namespace MirrorKnight
 {
@@ -17,10 +18,9 @@ namespace MirrorKnight
         public bool canMoveThrough;
         public bool canShootThrough;
         public bool damageHazard;
-
         Texture2D texture;
         static Dictionary<String, Texture2D> textures = Game1.sprites["floor"];
-        Random rand = new Random(DateTime.Now.Millisecond);
+        Random rand = new Random((int)DateTime.Now.Ticks);
 
         public enum Type
         {
@@ -32,6 +32,7 @@ namespace MirrorKnight
 
         public Tile(Type t)
         {
+            Thread.Sleep(rand.Next(1,10));
             switch (t)
             {
                 case Type.NORMAL: 
