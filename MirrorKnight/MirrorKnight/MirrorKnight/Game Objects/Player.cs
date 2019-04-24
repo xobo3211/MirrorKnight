@@ -12,7 +12,7 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    class Player : LivingEntity
+    public class Player : LivingEntity
     {
         ActiveItem active;
 
@@ -79,11 +79,6 @@ namespace MirrorKnight
             float rotation = (float)(Math.Asin((vector - secondVector).Length() / 2));
 
             return rotation * 180;
-        }
-
-        public void Pickup(PassiveItem p)
-        {
-            passives.Add(p);
         }
 
         public float GetSpeed()

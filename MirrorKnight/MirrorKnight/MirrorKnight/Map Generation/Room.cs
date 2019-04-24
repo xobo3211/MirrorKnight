@@ -46,6 +46,8 @@ namespace MirrorKnight
 
         public Room(Type t)
         {
+            roomType = t;
+
             tiles = new Tile[18, 10];
 
             string initialPath = "../../../../MirrorKnightContent/presetRooms/";
@@ -85,6 +87,7 @@ namespace MirrorKnight
             }
             
             roomName = initialPath;
+            LoadRoom();
         }
 
         public Room(Type t, String[,] tileArr, Texture2D texture)
@@ -125,7 +128,7 @@ namespace MirrorKnight
             roomType = r;
         }
 
-        public void LoadRoom()                                          //To be called when player enters the room. Supposed to load everything in the room
+        public void LoadRoom()                                          //To be called when the map is generated
         {
             Random rn = new Random();
 
@@ -158,9 +161,114 @@ namespace MirrorKnight
                     break;
             }
 
-            roomName += roomID;
+            roomName += roomID + ".txt";
 
             ReadFile(roomName);
+        }
+
+        public void EnterRoom(ContentManager Content, Player p)
+        {
+            string path = "../../../../MirrorKnightContent/roomEntities/";
+
+            switch (roomType)
+            {
+                case Type.NORMAL:
+                    path += "normal/";
+                    break;
+
+                case Type.BOSS:
+                    path += "boss/";
+                    break;
+
+                case Type.PUZZLE:
+                    path += "puzzle/";
+                    break;
+
+                case Type.SECRET:
+                    path += "secret/";
+                    break;
+
+                case Type.SHOP:
+                    path += "shop/";
+                    break;
+
+                case Type.TREASURE:
+                    path += "treasure/";
+                    break;
+
+                case Type.VOID:
+                    break;
+
+                default:
+                    Console.WriteLine("Error loading file, type is " + roomType);
+                    break;
+            }
+
+            path += getRoomName();
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    bool beginReading = false;
+                    for (int j = 0; !reader.EndOfStream; j++)
+                    {
+                        string line = reader.ReadLine();
+
+                        if (beginReading)
+                        {
+                            string[] args = line.Split(' ');
+
+                            int x = Convert.ToInt32(args[1]);
+                            int y = Convert.ToInt32(args[2]);
+
+                            Vector2 pos = Game1.TileToPixelCoords(x, y);
+
+                            switch (args[0])
+                            {
+                                case "e":
+
+                                    break;
+
+                                case "t":
+                                    if (args.Length < 4)
+                                        Game1.entities.Add(new Turret((int)pos.X, (int)pos.Y, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), p));
+
+                                    else
+                                    {
+                                        int targetX = Convert.ToInt32(args[3]);
+                                        int targetY = Convert.ToInt32(args[4]);
+                                        Game1.entities.Add(new Turret((int)pos.X, (int)pos.Y, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(targetX, targetY)));
+                                    }
+                                    break;
+                            }
+                        }
+
+
+                        if (line == "*")
+                        {
+                            beginReading = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        private string getRoomName()
+        {
+            for(int i = roomName.Length - 1; i > 0; i--)
+            {
+                if(roomName[i] == '/')
+                {
+                    return roomName.Substring(i);
+                }
+            }
+            return "Error";
         }
 
         private void ReadFile(string path)
