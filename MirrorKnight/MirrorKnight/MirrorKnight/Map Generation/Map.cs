@@ -97,13 +97,35 @@ namespace MirrorKnight
                 shop = TryPlacingShop();
                 secret = TryPlacingSecretRoom();
             }
-            while (CountDeadEnds() < 3 && !boss && !treasure && !shop && !secret);               //Require minimum of three dead ends in a map. Boss, Treasure, Shop
+            while (CountDeadEnds() < 3 && (!boss || !treasure || !shop || !secret));               //Require minimum of three dead ends in a map. Boss, Treasure, Shop
 
             for(int y = 0; y < maxY; y++)
             {
                 for(int x = 0; x < maxX; x++)
                 {
-                    //rooms[x, y] = new Room(roomsEnum[x, y])
+                    switch(roomsEnum[x, y])
+                    {
+                        case Rooms.DEAD_END:
+                        case Rooms.EMPTY_AND_CHECKED:
+                            rooms[x, y] = new Room(Room.Type.NORMAL);
+                            break;
+
+                        case Rooms.TREASURE:
+                            rooms[x, y] = new Room(Room.Type.TREASURE);
+                            break;
+
+                        case Rooms.BOSS:
+                            rooms[x, y] = new Room(Room.Type.BOSS);
+                            break;
+
+                        case Rooms.SECRET:
+                            rooms[x, y] = new Room(Room.Type.SECRET);
+                            break;
+
+                        case Rooms.SHOP:
+                            rooms[x, y] = new Room(Room.Type.SHOP);
+                            break;
+                    }
                 }
             }
         }
@@ -300,7 +322,7 @@ namespace MirrorKnight
             {
                 for (int x = 0; x < maxX && notPlaced; x++)
                 {
-                    if (roomsEnum[x, y] == Rooms.VOID && CountConnections(ConnectionArr(x, y)) > 2 && CountConnections(ConnectionArr(x, y, Rooms.BOSS)) < 1);
+                    if (roomsEnum[x, y] == Rooms.VOID && CountConnections(ConnectionArr(x, y)) > 2 && CountConnections(ConnectionArr(x, y, Rooms.BOSS)) < 1)
                     {
                         roomsEnum[x, y] = Rooms.SECRET;
                         notPlaced = false;

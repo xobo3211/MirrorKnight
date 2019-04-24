@@ -48,7 +48,7 @@ namespace MirrorKnight
         public static List<LivingEntity> enemies;                       //Contains list of all living enemies in a room
         public static List<Entity> entities;                            //Contains list of all non-living entities in a room
 
-        int tileSize = 60, verticalOffset = 200;
+        static int tileSize = 60, verticalOffset = 200;
 
         Sprite[] hearts;
         Sprite crossheir;
@@ -164,9 +164,6 @@ namespace MirrorKnight
             Text.setDefaultFont("font");
 
             text.center();
-            
-
-            ReadFileAsStrings("testroom.txt");
 
             loadTiles();
             p.load();
@@ -174,8 +171,7 @@ namespace MirrorKnight
             p.body.setTimeFrame(1 / 16f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
 
-            m.SetRoom(new MirrorKnight.Room(Room.Type.NORMAL, tilesRead, placeHc), m.GetDimensions().X / 2, m.GetDimensions().Y / 2);
-
+            m.GetRoom(x, y).EnterRoom(Content, p);
         }
 
         /// <summary>
@@ -459,6 +455,8 @@ namespace MirrorKnight
 
             base.Draw(gameTime);
         }
+
+        /*
         private void ReadFileAsStrings(string path)
         {
 
@@ -536,8 +534,9 @@ namespace MirrorKnight
                 Console.WriteLine(e.Message);
             }
         }
+        */
 
-        public Vector2 TileToPixelCoords(int x, int y)
+        public static Vector2 TileToPixelCoords(int x, int y)
         {
             x = tileSize * x;
             y = verticalOffset + (y * tileSize);
