@@ -122,6 +122,7 @@ namespace MirrorKnight
             tilesRead = new string[18, 10];
 
             text = new Text("Testing Boxy");
+            text.visable = false;
 
             //ReadFileAsStrings("presetRooms/testroom.txt");
 

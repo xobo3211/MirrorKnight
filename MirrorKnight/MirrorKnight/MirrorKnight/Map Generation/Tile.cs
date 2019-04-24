@@ -39,7 +39,7 @@ namespace MirrorKnight
                     canMoveThrough = true;
                     canShootThrough = true;
                     damageHazard = false;
-                    texture = textures["floor_" + rand.Next(1,9)];
+                    texture = textures["floor_" + rand.Next(1,5)];
                     break;
 
                 case Type.OBSTACLE:

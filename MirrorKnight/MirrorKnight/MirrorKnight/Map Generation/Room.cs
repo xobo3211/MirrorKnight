@@ -301,12 +301,15 @@ namespace MirrorKnight
                                 case "h":
                                     tiles[i, j] = new Tile(Tile.Type.HAZARD);
                                     break;
+                                default:
+                                    Console.WriteLine("Thing not found");
+                                    break;
                             }
                         }
                     }
                 }
             }
-            catch (Exception e)
+            catch (FileNotFoundException e)
             {
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
