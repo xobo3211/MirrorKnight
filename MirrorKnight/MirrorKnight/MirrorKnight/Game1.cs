@@ -21,7 +21,7 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D placeHc, loading;
+        Texture2D placeHc, loading, pMB, pMBO, pMBF;
         public static Texture2D enemyBullet, reflectedBullet;
         List<string> lines;
         string[,] tilesRead;
@@ -154,7 +154,9 @@ namespace MirrorKnight
             crossheir.addTexture("crosshair");
             crossheir.setSize(100, 100);
             crossheir.centerOrigin();
-
+            pMBO = Content.Load<Texture2D>("mNoteOn");
+            pMBF = Content.Load<Texture2D>("mNoteOn (1)");
+            pMB = pMBF;
             //crossHair = Content.Load<Texture2D>("crosshair");
             enemyBullet = Content.Load<Texture2D>("enemyBullet");
             reflectedBullet = Content.Load<Texture2D>("playerBullet");
@@ -428,7 +430,7 @@ namespace MirrorKnight
             {
                 spriteBatch.Draw(placeHc, mainMenuRect, Color.White);
                 spriteBatch.Draw(placeHc, mainMenuStart, Color.White);
-                spriteBatch.Draw(placeHc, pauseMusicButton, Color.White);
+                spriteBatch.Draw(pMB, pauseMusicButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
@@ -438,7 +440,7 @@ namespace MirrorKnight
             {
                 m.GetRoom(x, y).Draw(spriteBatch, 0, (GraphicsDevice.Viewport.Height - m.GetRoom(x, y).Height * tileSize) / 2, tileSize);   //Draws room with offset x, y and tile size of tileSize
                 spriteBatch.Draw(placeHc, pauseMenuRect, Color.White);
-                spriteBatch.Draw(placeHc, pauseMusicButton, Color.White);
+                spriteBatch.Draw(pMB, pauseMusicButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
