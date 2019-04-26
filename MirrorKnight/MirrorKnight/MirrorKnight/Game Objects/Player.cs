@@ -19,11 +19,11 @@ namespace MirrorKnight
         List<PassiveItem> passives;
 
         float RANGE = 70f;
-
+        Sprite swordSwing;
         public Player()
         {
             body = new Sprite(10, 10);
-
+            swordSwing = new Sprite(0, 0);
             SPEED = 3f;
 
             MAX_HP = 6;
