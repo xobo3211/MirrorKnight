@@ -27,7 +27,7 @@ namespace MirrorKnight
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         Text text;
-
+        int movementAccel, movementTimer;
         bool pauseMenu, pauseOptionsBool, mainMenuBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mainMenuRect, mainMenuStart;
 
@@ -101,8 +101,9 @@ namespace MirrorKnight
             mainMenuBool = true;
             mainMenuRect = new Rectangle(0, 0, Useful.getWWidth(), Useful.getWHeight());
             mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 -100), 400, 60);
-
+            movementAccel = 0;
             crossheir = new Sprite();
+            movementTimer = 0;
 
             //Sprite[] hearts = new Sprite[];
             //for (int i = 0; 0 < 3; i++)
@@ -150,9 +151,9 @@ namespace MirrorKnight
             crossheir.addTexture("crosshair");
             crossheir.setSize(100, 100);
             crossheir.centerOrigin();
-            pMBO = Content.Load<Texture2D>("mNoteOn");
-            pMBF = Content.Load<Texture2D>("mNoteOn (1)");
-            pMB = pMBF;
+            pMBO = Content.Load<Texture2D>("mNoteOn"); //pause button music note on texture
+            pMBF = Content.Load<Texture2D>("mNoteOn (1)"); //pause button music note off texture
+            pMB = pMBF; 
             //crossHair = Content.Load<Texture2D>("crosshair");
             enemyBullet = Content.Load<Texture2D>("enemyBullet");
             reflectedBullet = Content.Load<Texture2D>("playerBullet");
@@ -316,6 +317,19 @@ namespace MirrorKnight
                             usingKeyboard = false;
                             usingController = true;
                         }
+                        //if (playerMoveVec != Vector2.Zero)
+                        //{
+                            //movementTimer++;
+                            //switch (movementTimer)
+                          //  {
+                              //  case 30: 
+                              //  movementAccel = 2;
+                               //     break;
+                             ////   case 60:
+                             //       movementAccel = 1000;
+                             //       break;
+                           // }
+                     //   }
                         if (kb.IsKeyDown(Keys.W))
                         {
                             playerMoveVec.Y = -1;
@@ -332,6 +346,11 @@ namespace MirrorKnight
                         {
                             playerMoveVec.X = 1;
                         }
+                        //if (playerMoveVec == Vector2.Zero)
+                        //{
+                        //    movementTimer = 0;
+                        //    movementAccel = 1000;
+                        //}
 
                         playerAimVec = new Vector2(m.X, m.Y) - p.body.getOriginPos();
 
