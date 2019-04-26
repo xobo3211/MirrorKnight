@@ -58,7 +58,6 @@ namespace MirrorKnight
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Useful.set(this);
-
             this.Window.AllowUserResizing = false;
             graphics.PreferredBackBufferWidth = 1080;
             graphics.PreferredBackBufferHeight = 800;
@@ -167,7 +166,7 @@ namespace MirrorKnight
             loadTiles();
             p.load();
             p.body.setScale(3);
-            p.body.setTimeFrame(1 / 16f);
+            p.body.setTimeFrame(1 / 8f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
 
             m = new Map(Map.Floor.GARDEN);
@@ -442,10 +441,10 @@ namespace MirrorKnight
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, null, null);
             if (mainMenuBool == true)
             {
                 spriteBatch.Draw(placeHc, mainMenuRect, Color.White);

@@ -35,8 +35,13 @@ namespace MirrorKnight
         public void load()
         {
             body.setAnimation(true);
-            Game1.sprites["knight"].Keys.Where((str, index) => str.Contains("m_idle")).ToList().ForEach(str =>body.addTexture(Game1.sprites["knight"][str]));
-
+            body.useRegion(true);
+            body.addTexture("packed/knight/idle");
+            
+            for (int i = 0; i < 4; i++)
+            {
+                body.defRegion(i*16, 0, 16, 28);
+            }
             body.setOrigin(5, 15);
 
         }

@@ -30,9 +30,10 @@ namespace MirrorKnight
             HAZARD //h
         }
 
+
         public Tile(Type t)
         {
-            Thread.Sleep(rand.Next(1,10));
+            Thread.Sleep(rand.Next(1,6));
             switch (t)
             {
                 case Type.NORMAL: 
