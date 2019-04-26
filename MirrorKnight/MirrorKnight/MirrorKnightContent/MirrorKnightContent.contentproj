@@ -1655,13 +1655,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="presetRooms\boss\" />
-    <Folder Include="presetRooms\puzzle\" />
-    <Folder Include="presetRooms\secret\" />
-    <Folder Include="presetRooms\shop\" />
-    <Folder Include="presetRooms\treasure\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="presetRooms\normal\2.txt">
       <Name>2</Name>
@@ -1707,6 +1701,36 @@
       <Name>swordSwing</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="presetRooms\puzzle\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="presetRooms\secret\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="presetRooms\shop\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="presetRooms\boss\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="presetRooms\treasure\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
