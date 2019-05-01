@@ -705,9 +705,11 @@ namespace SureDroid
 
         private static KeyboardState kd, okd;
 
-        private static void addKey(Keys key)
-        {
+        private static Dictionary<Keys, OnKeyPress> manager = new Dictionary<Keys, OnKeyPress>();
 
+        private static void addKey(Keys key, OnKeyPress press)
+        {
+            manager[key] = press;
         }
 
         internal static void setKeyboard(KeyboardState newKD)
