@@ -15,6 +15,7 @@ namespace MirrorKnight
 {
     public class Room
     {
+
         public enum Type
         {
             VOID,

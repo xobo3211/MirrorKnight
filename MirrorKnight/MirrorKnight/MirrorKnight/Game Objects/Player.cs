@@ -19,11 +19,11 @@ namespace MirrorKnight
         List<PassiveItem> passives;
 
         float RANGE = 70f;
-        Sprite swordSwing;
+
         public Player()
         {
             body = new Sprite(10, 10);
-            swordSwing = new Sprite(0, 0);
+
             SPEED = 3f;
 
             MAX_HP = 6;
@@ -77,7 +77,6 @@ namespace MirrorKnight
         public float CalculateRotationalDistance(Vector2 vector, Vector2 point)                 //Checks rotational distance between player's aim vector and a position
         {
             Vector2 secondVector = point - body.getOriginPos();
-
             vector.Normalize();
             secondVector.Normalize();
 
