@@ -15,6 +15,7 @@ namespace MirrorKnight
 {
     public class Room
     {
+
         public enum Type
         {
             VOID,
@@ -131,7 +132,7 @@ namespace MirrorKnight
         {
             Random rn = new Random();
 
-            int roomID = 0;
+            int roomID = 1;
 
             switch(roomType)
             {
@@ -168,6 +169,8 @@ namespace MirrorKnight
         public void EnterRoom(ContentManager Content, Player p)
         {
             string path = "../../../../MirrorKnightContent/roomEntities/";
+
+            Game1.entities.Clear();
 
             switch (roomType)
             {
@@ -227,6 +230,11 @@ namespace MirrorKnight
                             {
                                 case "e":
 
+                                    if(hasBeenEntered == false)
+                                    {
+
+                                    }
+
                                     break;
 
                                 case "t":
@@ -256,6 +264,8 @@ namespace MirrorKnight
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
+
+            hasBeenEntered = true;
         }
 
         private string getRoomName()
