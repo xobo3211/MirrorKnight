@@ -240,7 +240,7 @@ namespace MirrorKnight
 
                                     if(hasBeenEntered == false)
                                     {
-
+                                        Game1.enemies.Add(new BasicEnemy((int)pos.X, (int)pos.Y, Content.Load<Texture2D>("textures/goblin_idle_anim_f0"), p));
                                     }
 
                                     break;
@@ -352,6 +352,8 @@ namespace MirrorKnight
 
         public bool isTileWalkableThrough(int x, int y)
         {
+            if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
+                return false;
             return tiles[x, y].canMoveThrough;
         }
 

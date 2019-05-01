@@ -17,6 +17,24 @@ namespace MirrorKnight
         protected int MAX_HP, HP;
         protected float SPEED, DMG;
 
-        protected bool immortal;        //Controls whether entity can be damaged
+        public int GetHP()
+        {
+            return HP;
+        }
+
+        public int GetMaxHP()
+        {
+            return MAX_HP;
+        }
+
+        public float GetSpeed()
+        {
+            return SPEED;
+        }
+
+        public float GetDamage()
+        {
+            return DMG;
+        }
     }
 }

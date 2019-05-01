@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game Objects\ActiveItem.cs" />
+    <Compile Include="Game Objects\BasicEnemy.cs" />
     <Compile Include="Game Objects\Entity.cs" />
     <Compile Include="Game Objects\LivingEntity.cs" />
     <Compile Include="Map Generation\Map.cs" />

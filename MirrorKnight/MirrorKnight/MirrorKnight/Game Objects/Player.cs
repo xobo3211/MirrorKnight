@@ -46,11 +46,6 @@ namespace MirrorKnight
 
         }
 
-        public int getHP()
-        {
-            return HP;
-        }
-
         public void Attack(Vector2 aimVec)
         {
             List<Projectile> hitProjectiles = new List<Projectile>();
@@ -83,11 +78,6 @@ namespace MirrorKnight
             float rotation = (float)(Math.Asin((vector - secondVector).Length() / 2));
 
             return rotation * 180;
-        }
-
-        public float GetSpeed()
-        {
-            return SPEED;
         }
 
         public bool Intersects(Rectangle r)
