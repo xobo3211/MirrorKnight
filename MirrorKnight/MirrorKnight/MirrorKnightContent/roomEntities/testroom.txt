@@ -1,7 +1,0 @@
-e - Indicates enemy
-t - Indicates turret
-
-*
-t 0 0
-e 9 0
-e 9 9

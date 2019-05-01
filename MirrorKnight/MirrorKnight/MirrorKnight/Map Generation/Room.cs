@@ -132,7 +132,7 @@ namespace MirrorKnight
         {
             Random rn = new Random();
 
-            int roomID = 0;
+            int roomID = 1;
 
             switch(roomType)
             {
@@ -169,6 +169,16 @@ namespace MirrorKnight
         public void EnterRoom(ContentManager Content, Player p)
         {
             string path = "../../../../MirrorKnightContent/roomEntities/";
+
+            for(int i = 0; i < Game1.entities.Count; i++)
+            {
+                Game1.entities[i].body.deleteThis();
+            }
+            for (int i = 0; i < Game1.projectiles.Count; i++)
+                Game1.projectiles[i].Dispose();
+
+            Game1.entities.Clear();
+            Game1.projectiles.Clear();
 
             switch (roomType)
             {
@@ -228,6 +238,11 @@ namespace MirrorKnight
                             {
                                 case "e":
 
+                                    if(hasBeenEntered == false)
+                                    {
+
+                                    }
+
                                     break;
 
                                 case "t":
@@ -257,9 +272,11 @@ namespace MirrorKnight
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
+
+            hasBeenEntered = true;
         }
 
-        private string getRoomName()
+        public string getRoomName()
         {
             for(int i = roomName.Length - 1; i > 0; i--)
             {
@@ -327,6 +344,16 @@ namespace MirrorKnight
                 }
             }
         }
-        
+
+        public bool isTileShootableThrough(int x, int y)
+        {
+            return tiles[x, y].canShootThrough;
+        }
+
+        public bool isTileWalkableThrough(int x, int y)
+        {
+            return tiles[x, y].canMoveThrough;
+        }
+
     }
 }

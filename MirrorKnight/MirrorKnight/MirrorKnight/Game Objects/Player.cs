@@ -89,5 +89,10 @@ namespace MirrorKnight
         {
             return SPEED;
         }
+
+        public bool Intersects(Rectangle r)
+        {
+            return body.getRectangle().Intersects(r);
+        }
     }
 }
