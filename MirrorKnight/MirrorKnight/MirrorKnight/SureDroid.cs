@@ -40,6 +40,9 @@ namespace SureDroid
         private Color color = Color.White;
         public float depth = 1;
 
+        public delegate void CustomUpdate(Sprite sprite);
+        private CustomUpdate customUpdateMethod;
+
         // -------------------------------------------------------------------
         // ------------------------- Constructors ----------------------------
         // -------------------------------------------------------------------
@@ -78,8 +81,8 @@ namespace SureDroid
         public int getWidth()
         {
             if (sizes.Count == 0) throw new NullReferenceException("The size for this sprite has not been yet determined. Please use this method after loading a texture. The index of this sprite is " + sprites.IndexOf(this) + ".");
-            if (!regionUse) 
-            return (int)((Double)sizes[index].width * scale);
+            if (!regionUse)
+                return (int)((Double)sizes[index].width * scale);
             else return (int)((Double)getRegion().Width * scale);
         }
 
@@ -89,8 +92,8 @@ namespace SureDroid
         public int getHeight()
         {
             if (sizes.Count == 0) throw new NullReferenceException("The size for this sprite has not been yet determined. Please use this method after loading a texture. The index of this sprite is " + sprites.IndexOf(this) + ".");
-            if (!regionUse) 
-            return (int)((Double)sizes[index].height * scale);
+            if (!regionUse)
+                return (int)((Double)sizes[index].height * scale);
             else return (int)((Double)getRegion().Height * scale);
         }
 
@@ -148,7 +151,7 @@ namespace SureDroid
         {
             return getRectangle().Intersects(other.getRectangle());
         }
-        
+
         /// <summary>
         /// Gets the rectangle for the current sprite. No changes can be made.
         /// </summary>
@@ -239,8 +242,8 @@ namespace SureDroid
         {
             //if (x > getWidth() || x < 0 || y > getHeight() || y < 0) throw new ArgumentOutOfRangeException("The origin is out of bounds.");
             //if (true) {
-                origin.X = (int)(x / scale);
-                origin.Y = (int)(y / scale);
+            origin.X = (int)(x / scale);
+            origin.Y = (int)(y / scale);
             //}
             /*
             else
@@ -266,7 +269,7 @@ namespace SureDroid
         {
             visible = value;
         }
-        
+
 
         /// <summary>
         /// Get the visibility of the sprite. (Does not include if the sprite has no textures.)
@@ -299,11 +302,17 @@ namespace SureDroid
         public void setSize(float width, float height)
         {
             if (sizes.Count == 0) throw new NullReferenceException("The size for this sprite has not been yet determined. Please use this method after loading a texture. The index of this sprite is " + sprites.IndexOf(this) + ".");
-            sizes[index].set((int) width,(int) height);
+            sizes[index].set((int)width, (int)height);
         }
         public void setSize(Vector2 size)
         {
             setSize(size.X, size.Y);
+        }
+
+
+        public void setUpdate(CustomUpdate update)
+        {
+            this.customUpdateMethod = update;
         }
 
         // -----------------------------------------------------------------
@@ -585,7 +594,7 @@ namespace SureDroid
         {
             return pos + origin;
         }
-        
+
         /// <summary>
         /// Gets the X position of the sprite.
         /// </summary>
@@ -622,6 +631,7 @@ namespace SureDroid
         public void update()
         {
             if (animation) updateAnimation();
+            customUpdateMethod?.Invoke(this);
         }
 
         /// <summary>
@@ -633,7 +643,7 @@ namespace SureDroid
             updatePos();
             rectangle.Width = getWidth();
             rectangle.Height = getHeight();
-            if(!regionUse) batch.Draw(getTexture(), rectangle, null, color, rotation, origin, effect, depth);
+            if (!regionUse) batch.Draw(getTexture(), rectangle, null, color, rotation, origin, effect, depth);
             else batch.Draw(getTexture(), rectangle, getRegion(), color, rotation, origin, effect, depth);
         }
 
@@ -642,7 +652,7 @@ namespace SureDroid
         /// Draws all sprites created in order of creation using a provided spritebatch.
         /// </summary>
         public static void drawAll(SpriteBatch batch)
-        { 
+        {
             foreach (Sprite sprite in sprites)
             {
                 sprite.draw(batch);
@@ -663,7 +673,7 @@ namespace SureDroid
         /// </summary>
         public static void updateAll()
         {
-            foreach(Sprite sprite in sprites)
+            foreach (Sprite sprite in sprites)
             {
                 sprite.update();
             }
@@ -688,7 +698,15 @@ namespace SureDroid
         }
     }
 
+    public delegate void OnKeyPress(Keys key);
 
+    public static class AutoKey {
+        public static event OnKeyPress onKeyPressEvent;
+
+        private static KeyboardState kd, okd;
+        private static addKey(Keys key) {
+            ;
+    }
 
     /// <summary>
     /// Custom Texture Class - Created By Rithvik Senthilkumar | 
@@ -1200,6 +1218,8 @@ namespace SureDroid
     internal class Automate : DrawableGameComponent
     {
         SpriteBatch spriteBatch;
+
+        KeyboardState kb, okb;
 
         public Automate(Game game) : base(game) { }
 

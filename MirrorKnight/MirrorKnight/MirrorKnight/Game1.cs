@@ -116,6 +116,10 @@ namespace MirrorKnight
             //    hearts[i].addTexture("textures/ui_heart_full");
             //}
             p = new Player();
+            p.body.setUpdate((sprite)=>
+            {
+                Console.WriteLine(sprite.getPos());
+            });
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
@@ -330,11 +334,11 @@ namespace MirrorKnight
                             usingKeyboard = false;
                             usingController = true;
                         }
-                        if (kb.IsKeyDown(Keys.W))
+                        if (kb.IsKeyDown(Keys.W) && p.body.getY() > 100)
                         {
                             playerMoveVec.Y = -1;
                         }
-                        else if (kb.IsKeyDown(Keys.S))
+                        else if (kb.IsKeyDown(Keys.S) && p.body.getY() < Useful.getWHeight()-100-p.body.getHeight())
                         {
                             playerMoveVec.Y = 1;
                         }
