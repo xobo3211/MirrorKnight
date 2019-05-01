@@ -1704,34 +1704,40 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="presetRooms\puzzle\1.txt">
+    <None Include="presetRooms\puzzle\1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>1</Name>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="presetRooms\secret\1.txt">
+    <None Include="presetRooms\secret\1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>1</Name>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="presetRooms\shop\1.txt">
+    <None Include="presetRooms\shop\1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>1</Name>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="presetRooms\boss\1.txt">
+    <None Include="presetRooms\boss\1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>1</Name>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="presetRooms\treasure\1.txt">
+    <None Include="presetRooms\treasure\1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>1</Name>
-    </Compile>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="roomEntities\normal\3.txt">
+      <Name>3</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 

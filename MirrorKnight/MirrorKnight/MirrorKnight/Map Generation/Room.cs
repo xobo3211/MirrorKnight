@@ -170,7 +170,15 @@ namespace MirrorKnight
         {
             string path = "../../../../MirrorKnightContent/roomEntities/";
 
+            for(int i = 0; i < Game1.entities.Count; i++)
+            {
+                Game1.entities[i].body.deleteThis();
+            }
+            for (int i = 0; i < Game1.projectiles.Count; i++)
+                Game1.projectiles[i].Dispose();
+
             Game1.entities.Clear();
+            Game1.projectiles.Clear();
 
             switch (roomType)
             {
