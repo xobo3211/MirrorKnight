@@ -391,6 +391,10 @@ namespace MirrorKnight
                     {
                         entities[i].Update();
                     }
+                    for(int i = 0; i < enemies.Count; i++)
+                    {
+                        enemies[i].Update();
+                    }
 
                     ///////////////////////////////////////////////////////////////////////////////Projectile logic
 
@@ -519,7 +523,7 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
 
 
-                for (int i = 0; i < p.getHP(); i++)
+                for (int i = 0; i < p.GetHP(); i++)
                 {
                     //hearts[i] = new Sprite((1000- 100*i) + (50 * i), 100);
                 }
@@ -548,7 +552,7 @@ namespace MirrorKnight
             else if (tempPos.X > tileSize * 18 || tempPos.Y > tileSize * 10)
                 return false;
 
-            return m.GetRoom(x, y).isTileShootableThrough((int)tempPos.X / tileSize, (int)tempPos.Y / tileSize);
+            return map.GetRoom(x, y).isTileShootableThrough((int)tempPos.X / tileSize, (int)tempPos.Y / tileSize);
         }
 
         private bool isTileWalkableThrough(Vector2 pos)
@@ -560,7 +564,7 @@ namespace MirrorKnight
             else if (tempPos.X > tileSize * 18 || tempPos.Y > tileSize * 10)
                 return false;
 
-            return m.GetRoom(x, y).isTileWalkableThrough((int)tempPos.X / tileSize, (int)tempPos.Y / tileSize);
+            return map.GetRoom(x, y).isTileWalkableThrough((int)tempPos.X / tileSize, (int)tempPos.Y / tileSize);
         }
 
         /// <summary>

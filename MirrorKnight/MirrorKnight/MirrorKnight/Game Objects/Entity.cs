@@ -16,6 +16,26 @@ namespace MirrorKnight
     {
         public Sprite body;
 
+        public Vector2 GetPos()
+        {
+            return body.getPos();
+        }
+
+        public Vector2 GetOriginPos()
+        {
+            return body.getOriginPos();
+        }
+
+        public Rectangle GetRectangle()
+        {
+            return body.getRectangle();
+        }
+
+        public void Remove()
+        {
+            body.deleteThis();
+        }
+
         public void Dispose()
         {
             body.dispose();

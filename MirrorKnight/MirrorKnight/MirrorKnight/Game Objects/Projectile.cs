@@ -51,6 +51,17 @@ namespace MirrorKnight
             body.deleteThis();
         }
 
+        public void RotateVelocity(float rotation)
+        {
+            if (rotation == 0)
+                return;
+
+            float baseRotation = (float)Math.Atan(velocity.Y / velocity.X);
+            rotation += baseRotation;
+            velocity.X = (float)Math.Cos(rotation) * velocity.Length();
+            velocity.Y = (float)Math.Sin(rotation) * velocity.Length();
+        }
+
         public void Reflect(Vector2 aimVec, float speed)
         {
             aimVec.Normalize();
