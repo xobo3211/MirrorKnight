@@ -440,5 +440,14 @@ namespace MirrorKnight
         {
             return new Point(maxX, maxY);
         }
+
+        public bool CheckRoom(int x, int y)     //Checks if room at coords given is a valid room
+        {
+            if (x < 0 || x >= rooms.GetLength(0) || y < 0 || y >= rooms.GetLength(1))
+            {
+                return false;
+            }
+            else return roomsEnum[x, y] != Rooms.VOID;
+        }
     }
 }

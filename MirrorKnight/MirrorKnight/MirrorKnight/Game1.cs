@@ -21,7 +21,7 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D placeHc, loading;
+        Texture2D placeHc, loading, pMB, pMBO, pMBF;
         public static Texture2D enemyBullet, reflectedBullet;
         List<string> lines;
         string[,] tilesRead;
@@ -30,6 +30,12 @@ namespace MirrorKnight
 
         bool pauseMenu, pauseOptionsBool, mainMenuBool;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mainMenuRect, mainMenuStart;
+
+        Rectangle leftDoor, topDoor, rightDoor, bottomDoor;     //Contains hitboxes for the exits from rooms
+        int doorSize = 50;                                      //Contains width of the doors
+        bool enteringRoom = false;                              //Prevents player from interacting with door immediately after entering a room
+        int doorTimerMax = 60, doorTimer = 0;                   //Timer to control the enteringRoom boolean.
+
 
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
@@ -40,7 +46,7 @@ namespace MirrorKnight
         bool usingController = false, usingKeyboard = true;
 
         Player p;
-        Map m;
+        Map map;
 
         int x, y;       //Contains the current room the player is in.
         
@@ -58,7 +64,6 @@ namespace MirrorKnight
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Useful.set(this);
-
             this.Window.AllowUserResizing = false;
             graphics.PreferredBackBufferWidth = 1080;
             graphics.PreferredBackBufferHeight = 800;
@@ -122,6 +127,7 @@ namespace MirrorKnight
             tilesRead = new string[18, 10];
 
             text = new Text("Testing Boxy");
+            text.visable = false;
 
             //ReadFileAsStrings("presetRooms/testroom.txt");
 
@@ -131,6 +137,15 @@ namespace MirrorKnight
 
             pauseMusicButton = new Rectangle(Useful.getWWidth()/2 - 200, (Useful.getWHeight() / 2 )-150, 60, 60);
             pauseSfxButton = new Rectangle(Useful.getWWidth()/2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
+
+
+            //Creates the bounding boxes for the doors
+            leftDoor = new Rectangle(0, Useful.getWHeight()/2 - doorSize / 2, 10, doorSize);
+            rightDoor = new Rectangle(Useful.getWWidth() - 10, Useful.getWHeight() / 2 - doorSize / 2, 10, doorSize);
+
+            topDoor = new Rectangle(Useful.getWWidth()/2 - doorSize / 2, verticalOffset/2, doorSize, 10);
+            bottomDoor = new Rectangle(Useful.getWWidth() / 2 - doorSize / 2, Useful.getWHeight() - 10 - verticalOffset/2, doorSize, 10);
+
 
             base.Initialize(); 
         } 
@@ -149,7 +164,9 @@ namespace MirrorKnight
             crossheir.addTexture("crosshair");
             crossheir.setSize(100, 100);
             crossheir.centerOrigin();
-
+            pMBO = Content.Load<Texture2D>("mNoteOn"); //pause button music note on texture
+            pMBF = Content.Load<Texture2D>("mNoteOn (1)"); //pause button music note off texture
+            pMB = pMBF; 
             //crossHair = Content.Load<Texture2D>("crosshair");
             enemyBullet = Content.Load<Texture2D>("enemyBullet");
             reflectedBullet = Content.Load<Texture2D>("playerBullet");
@@ -163,15 +180,15 @@ namespace MirrorKnight
             loadTiles();
             p.load();
             p.body.setScale(3);
-            p.body.setTimeFrame(1 / 16f);
+            p.body.setTimeFrame(1 / 8f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
 
-            m = new Map(Map.Floor.GARDEN);
+            map = new Map(Map.Floor.GARDEN);
 
-            x = m.GetDimensions().X / 2;
-            y = m.GetDimensions().Y / 2;
+            x = map.GetDimensions().X / 2;
+            y = map.GetDimensions().Y / 2;
 
-            m.GetRoom(x, y).EnterRoom(Content, p);
+            map.GetRoom(x, y).EnterRoom(Content, p);
         }
 
         /// <summary>
@@ -385,6 +402,7 @@ namespace MirrorKnight
                     for (int i = 0; i < projectiles.Count; i++)
                     {
                         Vector2 pos = projectiles[i].body.getPos();
+                        //Detects if projectile is going offscreen and if so, removes it
                         if (pos.X < 0 || pos.X > graphics.PreferredBackBufferWidth || pos.Y < 0 || pos.Y > graphics.PreferredBackBufferHeight)
                         {
                             projectiles[i].Dispose();
@@ -395,7 +413,8 @@ namespace MirrorKnight
                             projectiles[i].Dispose();
                             projectiles.Remove(projectiles[i]);
                         }
-                        else
+
+                        else //Detects if projectile is currently hitting an enemy and if it is a reflected projectile.
                         {
                             for (int a = 0; a < enemies.Count; a++)
                             {
@@ -408,6 +427,54 @@ namespace MirrorKnight
                             }
                         }
                     }
+
+                    //Movement from room to room logic
+
+                    //If player enters the hitbox for a door
+                    if (enteringRoom == false && (p.Intersects(leftDoor) || p.Intersects(rightDoor) || p.Intersects(topDoor) || p.Intersects(bottomDoor)))
+                    {
+                        if (enemies.Count == 0)  //And if all enemies are dead
+                        {
+                            //Checks each door hitbox, whether or not the room in that direction exists, and if the player is moving towards that door
+                            //If so, moves the player to that room
+                            if (p.Intersects(leftDoor) && map.CheckRoom(x - 1, y) && playerMoveVec.X < 0)  
+                            {
+                                x--;
+                                p.body.setPos(rightDoor.X - rightDoor.Width * 2 - p.body.getWidth() / 2, rightDoor.Y + rightDoor.Height / 2 - p.body.getHeight() / 2);
+                            }
+                            else if (p.Intersects(rightDoor) && map.CheckRoom(x + 1, y) && playerMoveVec.X > 0)
+                            {
+                                x++;
+                                p.body.setPos(leftDoor.X + leftDoor.Width * 2 + p.body.getWidth() / 2, leftDoor.Y + leftDoor.Height / 2 - p.body.getHeight() / 2);
+                                
+                            }
+                            else if (p.Intersects(topDoor) && map.CheckRoom(x, y - 1) && playerMoveVec.Y < 0)
+                            {
+                                y--;
+                                p.body.setPos(bottomDoor.X + bottomDoor.Width / 2 - p.body.getWidth() / 2, bottomDoor.Y - bottomDoor.Height * 2 - p.body.getHeight() / 2);
+
+                            }
+                            else if (p.Intersects(bottomDoor) && map.CheckRoom(x, y + 1) && playerMoveVec.Y > 0)
+                            {
+                                y++;
+                                p.body.setPos(topDoor.X + topDoor.Width / 2 - p.body.getWidth() / 2, topDoor.Y + topDoor.Height * 2 + p.body.getHeight() / 2);
+                            }
+                            else Console.WriteLine("Room movement error");
+
+                            map.GetRoom(x, y).EnterRoom(Content, p);
+                            enteringRoom = true;
+                        }
+                    }
+                    else
+                    {
+                        if(doorTimer >= doorTimerMax)
+                        {
+                            enteringRoom = false;
+                            doorTimer = 0;
+                        }
+                        doorTimer++;
+                    }
+
                 }
 
             }
@@ -428,15 +495,15 @@ namespace MirrorKnight
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, null, null);
             if (mainMenuBool == true)
             {
                 spriteBatch.Draw(placeHc, mainMenuRect, Color.White);
                 spriteBatch.Draw(placeHc, mainMenuStart, Color.White);
-                spriteBatch.Draw(placeHc, pauseMusicButton, Color.White);
+                spriteBatch.Draw(pMB, pauseMusicButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
@@ -444,9 +511,9 @@ namespace MirrorKnight
             }
             else if (mainMenuBool == false)
             {
-                m.GetRoom(x, y).Draw(spriteBatch, 0, (GraphicsDevice.Viewport.Height - m.GetRoom(x, y).Height * tileSize) / 2, tileSize);   //Draws room with offset x, y and tile size of tileSize
+                map.GetRoom(x, y).Draw(spriteBatch, 0, (GraphicsDevice.Viewport.Height - map.GetRoom(x, y).Height * tileSize) / 2, tileSize);   //Draws room with offset x, y and tile size of tileSize
                 spriteBatch.Draw(placeHc, pauseMenuRect, Color.White);
-                spriteBatch.Draw(placeHc, pauseMusicButton, Color.White);
+                spriteBatch.Draw(pMB, pauseMusicButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
                 spriteBatch.Draw(placeHc, pauseExitButton, Color.White);

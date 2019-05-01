@@ -19,11 +19,11 @@ namespace MirrorKnight
         List<PassiveItem> passives;
 
         float RANGE = 70f;
-
+        Sprite swordSwing;
         public Player()
         {
             body = new Sprite(10, 10);
-
+            swordSwing = new Sprite(0, 0);
             SPEED = 3f;
 
             MAX_HP = 6;
@@ -35,8 +35,13 @@ namespace MirrorKnight
         public void load()
         {
             body.setAnimation(true);
-            Game1.sprites["knight"].Keys.Where((str, index) => str.Contains("m_idle")).ToList().ForEach(str =>body.addTexture(Game1.sprites["knight"][str]));
-
+            body.useRegion(true);
+            body.addTexture("packed/knight/idle");
+            
+            for (int i = 0; i < 4; i++)
+            {
+                body.defRegion(i*16, 0, 16, 28);
+            }
             body.setOrigin(5, 15);
 
         }
@@ -84,6 +89,11 @@ namespace MirrorKnight
         public float GetSpeed()
         {
             return SPEED;
+        }
+
+        public bool Intersects(Rectangle r)
+        {
+            return body.getRectangle().Intersects(r);
         }
     }
 }

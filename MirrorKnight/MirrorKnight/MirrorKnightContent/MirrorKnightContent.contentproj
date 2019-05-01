@@ -1649,6 +1649,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Folder Include="presetRooms\boss\" />
     <Folder Include="presetRooms\puzzle\" />
@@ -1688,18 +1689,60 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="roomEntities\normal\1.txt">
+    <Compile Include="mNoteOn.png">
+      <Name>mNoteOn</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="mNoteOn %281%29.png">
+      <Name>mNoteOn %281%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="swordSwing.png">
+      <Name>swordSwing</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="presetRooms\puzzle\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>1</Name>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="roomEntities\normal\2.txt">
-      <Name>2</Name>
+    <None Include="presetRooms\secret\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="presetRooms\shop\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="presetRooms\boss\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="presetRooms\treasure\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="roomEntities\normal\3.txt">
       <Name>3</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
