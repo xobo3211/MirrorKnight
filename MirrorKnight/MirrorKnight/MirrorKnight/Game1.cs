@@ -116,10 +116,7 @@ namespace MirrorKnight
             //    hearts[i].addTexture("textures/ui_heart_full");
             //}
             p = new Player();
-            p.body.setUpdate((sprite)=>
-            {
-                Console.WriteLine(sprite.getPos());
-            });
+            
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();

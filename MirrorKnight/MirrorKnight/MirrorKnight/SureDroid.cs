@@ -40,7 +40,7 @@ namespace SureDroid
         private Color color = Color.White;
         public float depth = 1;
 
-        public delegate void CustomUpdate(Sprite sprite);
+        public delegate void CustomUpdate();
         private CustomUpdate customUpdateMethod;
 
         // -------------------------------------------------------------------
@@ -631,7 +631,7 @@ namespace SureDroid
         public void update()
         {
             if (animation) updateAnimation();
-            customUpdateMethod?.Invoke(this);
+            customUpdateMethod?.Invoke();
         }
 
         /// <summary>
@@ -698,14 +698,32 @@ namespace SureDroid
         }
     }
 
-    public delegate void OnKeyPress(Keys key);
+    
 
-    public static class AutoKey {
-        public static event OnKeyPress onKeyPressEvent;
+    public static class KeyControl {
+        public delegate void OnKeyPress(Keys key);
 
         private static KeyboardState kd, okd;
-        private static addKey(Keys key) {
-            ;
+
+        private static void addKey(Keys key)
+        {
+
+        }
+
+        internal static void setKeyboard(KeyboardState newKD)
+        {
+            kd = newKD;
+        }
+
+        internal static void setOKeyboard(KeyboardState newOKD)
+        {
+            okd = newOKD;
+        }
+
+        internal static void update()
+        {
+
+        }
     }
 
     /// <summary>
