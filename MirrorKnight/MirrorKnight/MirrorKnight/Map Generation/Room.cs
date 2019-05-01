@@ -258,7 +258,7 @@ namespace MirrorKnight
             }
         }
 
-        private string getRoomName()
+        public string getRoomName()
         {
             for(int i = roomName.Length - 1; i > 0; i--)
             {
@@ -323,6 +323,16 @@ namespace MirrorKnight
                 }
             }
         }
-        
+
+        public bool isTileShootableThrough(int x, int y)
+        {
+            return tiles[x, y].canShootThrough;
+        }
+
+        public bool isTileWalkableThrough(int x, int y)
+        {
+            return tiles[x, y].canMoveThrough;
+        }
+
     }
 }

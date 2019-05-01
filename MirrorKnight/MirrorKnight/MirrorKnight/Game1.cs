@@ -362,7 +362,10 @@ namespace MirrorKnight
                     if (playerMoveVec != Vector2.Zero)
                     {
                         playerMoveVec.Normalize();
-                        p.body.translate(playerMoveVec * p.GetSpeed());
+                        playerMoveVec *= p.GetSpeed();
+
+                        if(checkNewPos(p, playerMoveVec))
+                            p.body.translate(playerMoveVec);
                     }
 
                     ///////////////////////////////////////////////////////////////////////////////Game Object update logic
@@ -383,6 +386,11 @@ namespace MirrorKnight
                     {
                         Vector2 pos = projectiles[i].body.getPos();
                         if (pos.X < 0 || pos.X > graphics.PreferredBackBufferWidth || pos.Y < 0 || pos.Y > graphics.PreferredBackBufferHeight)
+                        {
+                            projectiles[i].Dispose();
+                            projectiles.Remove(projectiles[i]);
+                        }
+                        else if (isTileShootableThrough(projectiles[i].body.getOriginPos()) == false)
                         {
                             projectiles[i].Dispose();
                             projectiles.Remove(projectiles[i]);
@@ -458,12 +466,47 @@ namespace MirrorKnight
 
         public static Vector2 TileToPixelCoords(int x, int y)
         {
-            x = tileSize * x;
-            y = verticalOffset + (y * tileSize);
+            x = tileSize * x + (tileSize / 2);
+            y = (verticalOffset / 2) + (y * tileSize) + (tileSize / 2);
 
             return new Vector2(x, y);
         }
 
+        private bool isTileShootableThrough(Vector2 pos)
+        {
+            Vector2 tempPos = new Vector2(pos.X, pos.Y - (verticalOffset / 2));
+
+            if (tempPos.X < 0 || tempPos.Y < 0)
+                return false;
+            else if (tempPos.X > tileSize * 18 || tempPos.Y > tileSize * 10)
+                return false;
+
+            return m.GetRoom(x, y).isTileShootableThrough((int)tempPos.X / tileSize, (int)tempPos.Y / tileSize);
+        }
+
+        private bool isTileWalkableThrough(Vector2 pos)
+        {
+            Vector2 tempPos = new Vector2(pos.X, pos.Y - (verticalOffset / 2));
+
+            if (tempPos.X < 0 || tempPos.Y < 0)
+                return false;
+            else if (tempPos.X > tileSize * 18 || tempPos.Y > tileSize * 10)
+                return false;
+
+            return m.GetRoom(x, y).isTileWalkableThrough((int)tempPos.X / tileSize, (int)tempPos.Y / tileSize);
+        }
+
+        /// <summary>
+        /// Work in progress. Finish this later
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="moveVector"></param>
+        /// <returns></returns>
+
+        public bool checkNewPos(Entity e, Vector2 moveVector)       //Checks whether player can move in moveVector direction
+        {
+            return isTileWalkableThrough(e.body.getOriginPos() + moveVector);
+        }
     }
 
 }
