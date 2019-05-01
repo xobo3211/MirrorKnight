@@ -57,7 +57,7 @@ namespace MirrorKnight
         static int tileSize = 60, verticalOffset = 200;
 
         Sprite[] hearts;
-        Sprite crossheir;
+        Sprite crosshair;
 
         public Game1()
         {
@@ -107,7 +107,7 @@ namespace MirrorKnight
             mainMenuRect = new Rectangle(0, 0, Useful.getWWidth(), Useful.getWHeight());
             mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 -100), 400, 60);
 
-            crossheir = new Sprite();
+            crosshair = new Sprite();
 
             //Sprite[] hearts = new Sprite[];
             //for (int i = 0; 0 < 3; i++)
@@ -116,6 +116,10 @@ namespace MirrorKnight
             //    hearts[i].addTexture("textures/ui_heart_full");
             //}
             p = new Player();
+            p.body.setUpdate((sprite)=>
+            {
+                Console.WriteLine(sprite.getPos());
+            });
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
@@ -161,9 +165,9 @@ namespace MirrorKnight
 
             // TODO: use this.Content to load your game content here
             placeHc = Content.Load<Texture2D>("pc");
-            crossheir.addTexture("crosshair");
-            crossheir.setSize(100, 100);
-            crossheir.centerOrigin();
+            crosshair.addTexture("crosshair");
+            crosshair.setSize(100, 100);
+            crosshair.centerOrigin();
             pMBO = Content.Load<Texture2D>("mNoteOn"); //pause button music note on texture
             pMBF = Content.Load<Texture2D>("mNoteOn (1)"); //pause button music note off texture
             pMB = pMBF; 
@@ -230,7 +234,7 @@ namespace MirrorKnight
                 //pauseSfxButton = new Rectangle(Useful.getWWidth() / 2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
                 if (m.LeftButton == ButtonState.Pressed)
                 {
-                    if (crossheir.getRectangle().Intersects(mainMenuStart))
+                    if (crosshair.getRectangle().Intersects(mainMenuStart))
                     {
                         mainMenuBool = false;
                         pauseMenuRect = new Rectangle();
@@ -242,19 +246,19 @@ namespace MirrorKnight
                         pauseSfxButton = new Rectangle();
                         //mainMenuTransition(gameTime);
                     }
-                    if (crossheir.getRectangle().Intersects(pauseMusicButton))
+                    if (crosshair.getRectangle().Intersects(pauseMusicButton))
                     {
                         
                     }
-                    if (crossheir.getRectangle().Intersects(pauseSfxButton))
+                    if (crosshair.getRectangle().Intersects(pauseSfxButton))
                     {
 
                     }
-                    if (crossheir.getRectangle().Intersects(pauseOptionsButton))
+                    if (crosshair.getRectangle().Intersects(pauseOptionsButton))
                     {
                         pauseOptionsBool = true;
                     }
-                    if (crossheir.getRectangle().Intersects(pauseExitButton))
+                    if (crosshair.getRectangle().Intersects(pauseExitButton))
                     {
                         this.Exit();
                     }
@@ -267,19 +271,19 @@ namespace MirrorKnight
                 {
                     if (m.LeftButton == ButtonState.Pressed)
                     {
-                        if (crossheir.getRectangle().Intersects(pauseMusicButton))
+                        if (crosshair.getRectangle().Intersects(pauseMusicButton))
                         {
 
                         }
-                        if (crossheir.getRectangle().Intersects(pauseSfxButton))
+                        if (crosshair.getRectangle().Intersects(pauseSfxButton))
                         {
 
                         }
-                        if (crossheir.getRectangle().Intersects(pauseOptionsButton))
+                        if (crosshair.getRectangle().Intersects(pauseOptionsButton))
                         {
                             pauseOptionsBool = true;
                         }
-                        if (crossheir.getRectangle().Intersects(pauseExitButton))
+                        if (crosshair.getRectangle().Intersects(pauseExitButton))
                         {
                             this.Exit();
                         }
@@ -330,11 +334,11 @@ namespace MirrorKnight
                             usingKeyboard = false;
                             usingController = true;
                         }
-                        if (kb.IsKeyDown(Keys.W))
+                        if (kb.IsKeyDown(Keys.W) && p.body.getY() > 100)
                         {
                             playerMoveVec.Y = -1;
                         }
-                        else if (kb.IsKeyDown(Keys.S))
+                        else if (kb.IsKeyDown(Keys.S) && p.body.getY() < Useful.getWHeight()-100-p.body.getHeight())
                         {
                             playerMoveVec.Y = 1;
                         }
@@ -484,7 +488,7 @@ namespace MirrorKnight
             }
 
 
-            crossheir.setPos(m.X, m.Y);
+            crosshair.setPos(m.X-24, m.Y-24);
 
             oldGP = gp;
             oldKB = kb;

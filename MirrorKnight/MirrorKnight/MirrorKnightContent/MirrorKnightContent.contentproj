@@ -1644,18 +1644,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="presetRooms\normal\1.txt">
-      <Name>1</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Folder Include="presetRooms\boss\" />
-    <Folder Include="presetRooms\puzzle\" />
-    <Folder Include="presetRooms\secret\" />
-    <Folder Include="presetRooms\shop\" />
-    <Folder Include="presetRooms\treasure\" />
     <Folder Include="roomEntities\boss\" />
     <Folder Include="roomEntities\puzzle\" />
     <Folder Include="roomEntities\secret\" />
@@ -1663,14 +1651,28 @@
     <Folder Include="roomEntities\treasure\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="presetRooms\normal\1.txt">
+      <Name>1</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="presetRooms\normal\2.txt">
       <Name>2</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="presetRooms\normal\3.txt">
       <Name>3</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="presetRooms\normal\4.txt">
+      <Name>4</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="presetRooms\normal\5.txt">
+      <Name>5</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="presetRooms\normal\6.txt">
+      <Name>6</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
