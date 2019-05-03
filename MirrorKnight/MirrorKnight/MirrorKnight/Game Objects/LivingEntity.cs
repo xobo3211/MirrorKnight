@@ -39,8 +39,37 @@ namespace MirrorKnight
 
         public void Move(Room currentRoom, Vector2 moveVec)
         {
-            
+            Vector2 tempFinalPos = body.getOriginPos() + moveVec;
+
+            tempFinalPos.Y += Game1.verticalOffset / 2;
+
+            Vector2 left = tempFinalPos - new Vector2(body.getRectangle().Width / 2, 0);
+            Vector2 right = tempFinalPos + new Vector2(body.getRectangle().Width / 2, 0);
+            Vector2 up = tempFinalPos - new Vector2(0, body.getRectangle().Height / 2);
+            Vector2 down = tempFinalPos + new Vector2(0, body.getRectangle().Height / 2);
+
+            Vector2 trueFinalMoveVec = Vector2.Zero;
+
+            if(up.Y > Game1.verticalOffset && (moveVec.Y < 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(up))) || (moveVec.Y > 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(down))))
+            {
+                trueFinalMoveVec.Y = moveVec.Y;
+            }
+
+            if(left.X > 0 && (moveVec.X < 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(left))) || (moveVec.X > 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(right))))
+            {
+                trueFinalMoveVec.X = moveVec.X;
+            }
+
+            Console.WriteLine(up);
+
+            body.translate(trueFinalMoveVec);
         }
+
+        private bool CheckPos(Room r, Vector2 pos)
+        {
+            return r.isTileWalkableThrough((int)pos.X, (int)pos.Y);
+        }
+
 
         private bool isTileWalkableThrough(Room r, Vector2 pos)
         {

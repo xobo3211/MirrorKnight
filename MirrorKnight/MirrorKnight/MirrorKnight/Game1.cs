@@ -383,8 +383,7 @@ namespace MirrorKnight
                         playerMoveVec.Normalize();
                         playerMoveVec *= p.GetSpeed();
 
-                        if(checkNewPos(p, playerMoveVec))
-                            p.body.translate(playerMoveVec);
+                        p.Move(map.GetRoom(x, y), playerMoveVec);
                     }
 
                     ///////////////////////////////////////////////////////////////////////////////Game Object update logic
@@ -434,7 +433,7 @@ namespace MirrorKnight
                         }
                     }
 
-                    //Movement from room to room logic
+                    ////////////////////////////////////////////////////////Movement from room to room logic
 
                     //If player enters the hitbox for a door
                     if (enteringRoom == false && (p.Intersects(leftDoor) || p.Intersects(rightDoor) || p.Intersects(topDoor) || p.Intersects(bottomDoor)))
@@ -543,6 +542,20 @@ namespace MirrorKnight
             y = (verticalOffset / 2) + (y * tileSize) + (tileSize / 2);
 
             return new Vector2(x, y);
+        }
+
+        public static Vector2 PixelToTileCoords(Vector2 v)
+        {
+            int newX = (int)(v.X / tileSize);
+            int newY = (int)((v.Y - verticalOffset) / tileSize);
+            return new Vector2(newX, newY);
+        }
+
+        public static Vector2 PixelToTileCoords(double x, double y)
+        {
+            int newX = (int)(x / tileSize);
+            int newY = (int)((y - verticalOffset) / tileSize);
+            return new Vector2(newX, newY);
         }
 
         private bool isTileShootableThrough(Vector2 pos)
