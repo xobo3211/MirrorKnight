@@ -698,7 +698,6 @@ namespace SureDroid
         }
     }
 
-    
 
     public static class KeyControl {
         public delegate void OnKeyPress(bool hold);
