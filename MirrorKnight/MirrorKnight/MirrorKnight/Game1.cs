@@ -54,7 +54,7 @@ namespace MirrorKnight
         public static List<LivingEntity> enemies;                       //Contains list of all living enemies in a room
         public static List<Entity> entities;                            //Contains list of all non-living entities in a room
 
-        static int tileSize = 60, verticalOffset = 200;
+        public static int tileSize = 60, verticalOffset = 200;
 
         Sprite[] hearts;
         Sprite crosshair;
@@ -331,11 +331,11 @@ namespace MirrorKnight
                             usingKeyboard = false;
                             usingController = true;
                         }
-                        if (kb.IsKeyDown(Keys.W) && p.body.getY() > 100)
+                        if (kb.IsKeyDown(Keys.W))
                         {
                             playerMoveVec.Y = -1;
                         }
-                        else if (kb.IsKeyDown(Keys.S) && p.body.getY() < Useful.getWHeight()-100-p.body.getHeight())
+                        else if (kb.IsKeyDown(Keys.S))
                         {
                             playerMoveVec.Y = 1;
                         }

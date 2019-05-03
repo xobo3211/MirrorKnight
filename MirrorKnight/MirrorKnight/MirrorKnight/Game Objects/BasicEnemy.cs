@@ -32,13 +32,13 @@ namespace MirrorKnight
 
         Behavior b = Behavior.Idle;                 //Default behavior is idle
 
-        FiringType fireType = FiringType.Basic;     //Default firing type is basic
+        FiringType fireType = FiringType.Shotgun;     //Default firing type is basic
 
         Player p;
 
         int fireTimer = 0, fireTimerMax = 120;
 
-        int bulletCount = 1;                        //Bullet count that will be shot each time enemy shoots. Default is 1
+        int bulletCount = 5;                        //Bullet count that will be shot each time enemy shoots. Default is 1
 
         Vector2 velocity = new Vector2(0, 0);
 
@@ -95,26 +95,26 @@ namespace MirrorKnight
 
                 case FiringType.Shotgun:
 
-                    double spread = Math.PI / 4;
-                    //double iteration = spread * 2.0 / (bulletCount - 1);
-                    double iteration = Math.PI / 8;
-                    float rotation = 0;
+                    double spread = Math.PI / 6;
+                    int bulletsPerSide = bulletCount / 2;
+                    double rotation, iteration;
+                    rotation = iteration = spread / bulletsPerSide;
 
-                    int flip = -1;
-                    for (int i = 0; i < bulletCount; i++)
+                    Game1.projectiles.Add(proj);
+
+                    for(int i = 1; i < bulletCount; i += 2)
                     {
-                        
-                        Projectile temp = new Projectile(pos, velocity);
-                        temp.RotateVelocity(rotation);
-                        Game1.projectiles.Add(temp);
+                        Projectile left, right;
+                        left = new Projectile(pos, velocity);
+                        right = new Projectile(pos, velocity);
 
-                        if (i % 2 == 0)
-                        {
-                            rotation = Math.Abs(rotation) + (float)iteration;
-                        }
-                        rotation *= flip;
-                        flip *= -1;
+                        left.RotateVelocity(-(float)rotation);
+                        right.RotateVelocity((float)rotation);
 
+                        Game1.projectiles.Add(left);
+                        Game1.projectiles.Add(right);
+
+                        rotation += iteration;
                     }
                     break;
 
