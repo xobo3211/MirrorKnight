@@ -22,7 +22,7 @@ namespace MirrorKnight
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D placeHc, loading, pMB, pMBO, pMBF;
-        public static Texture2D enemyBullet, reflectedBullet;
+        public static Texture2D enemyBullet, reflectedBullet, room;
         List<string> lines;
         string[,] tilesRead;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
@@ -171,6 +171,8 @@ namespace MirrorKnight
             //crossHair = Content.Load<Texture2D>("crosshair");
             enemyBullet = Content.Load<Texture2D>("enemyBullet");
             reflectedBullet = Content.Load<Texture2D>("playerBullet");
+
+            room = Content.Load<Texture2D>("Star");
             //pauseMenuRect.addTexture(placeHc);
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
@@ -266,6 +268,7 @@ namespace MirrorKnight
             {
                 if (pauseMenu == true)
                 {
+                    map.DrawMap();
                     if (m.LeftButton == ButtonState.Pressed)
                     {
                         if (crosshair.getRectangle().Intersects(pauseMusicButton))
@@ -292,7 +295,7 @@ namespace MirrorKnight
                         pauseMenuRect = new Rectangle();
                         pauseOptionsButton = new Rectangle();
                         pauseExitButton = new Rectangle();
-
+                        
                         pauseMusicButton = new Rectangle();
                         pauseSfxButton = new Rectangle();
                     }
@@ -301,10 +304,12 @@ namespace MirrorKnight
                 {
                     ////////////////////////////////////////////////////////////////Player movement and aiming logic
 
+                    map.HideMap();
+
                     Vector2 playerMoveVec = Vector2.Zero;
                     Vector2 playerAimVec = Vector2.Zero;
 
-
+                    p.body.setVisible(true);
                     if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
                     {
                         pauseMenu = true;
