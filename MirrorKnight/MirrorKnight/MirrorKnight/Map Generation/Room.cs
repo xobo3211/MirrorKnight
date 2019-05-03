@@ -354,6 +354,7 @@ namespace MirrorKnight
         {
             if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
                 return false;
+
             return tiles[x, y].canMoveThrough;
         }
 
