@@ -15,7 +15,7 @@ namespace MirrorKnight
     public class Projectile
     {
         public Sprite body;
-        Vector2 velocity;
+        public Vector2 velocity;
 
         float shotSpeed = 5f;
 
@@ -58,8 +58,18 @@ namespace MirrorKnight
 
             float baseRotation = (float)Math.Atan(velocity.Y / velocity.X);
             rotation += baseRotation;
-            velocity.X = (float)Math.Cos(rotation) * velocity.Length();
-            velocity.Y = (float)Math.Sin(rotation) * velocity.Length();
+
+            if (velocity.X > 0)
+            {
+                velocity.X = (float)Math.Cos(rotation) * velocity.Length();
+                velocity.Y = (float)Math.Sin(rotation) * velocity.Length();
+            }
+            else
+            {
+                velocity.X = -(float)Math.Cos(rotation) * velocity.Length();
+                velocity.Y = -(float)Math.Sin(rotation) * velocity.Length();
+            }
+            
         }
 
         public void Reflect(Vector2 aimVec, float speed)

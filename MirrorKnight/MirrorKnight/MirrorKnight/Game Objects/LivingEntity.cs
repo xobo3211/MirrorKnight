@@ -36,5 +36,22 @@ namespace MirrorKnight
         {
             return DMG;
         }
+
+        public void Move(Room currentRoom, Vector2 moveVec)
+        {
+            
+        }
+
+        private bool isTileWalkableThrough(Room r, Vector2 pos)
+        {
+            Vector2 tempPos = new Vector2(pos.X, pos.Y - (Game1.verticalOffset / 2));
+
+            if (tempPos.X < 0 || tempPos.Y < 0)
+                return false;
+            else if (tempPos.X > Game1.tileSize * 18 || tempPos.Y > Game1.tileSize * 10)
+                return false;
+
+            return r.isTileWalkableThrough((int)tempPos.X / Game1.tileSize, (int)tempPos.Y / Game1.tileSize);
+        }
     }
 }
