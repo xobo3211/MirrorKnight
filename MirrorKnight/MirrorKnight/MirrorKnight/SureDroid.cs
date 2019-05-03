@@ -724,7 +724,7 @@ namespace SureDroid
 
         internal static void update()
         {
-
+            
         }
     }
 

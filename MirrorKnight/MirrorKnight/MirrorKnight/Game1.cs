@@ -366,6 +366,7 @@ namespace MirrorKnight
                         if (gp.ThumbSticks.Left != Vector2.Zero)
                         {
                             playerMoveVec = gp.ThumbSticks.Left;
+                            playerMoveVec.Y *= -1;
                         }
                         if (gp.ThumbSticks.Right != Vector2.Zero)
                         {
