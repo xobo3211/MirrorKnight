@@ -30,7 +30,7 @@ namespace MirrorKnight
             Burst           //Fires multiple shots in random directions
         }
 
-        Behavior b = Behavior.Idle;                 //Default behavior is idle
+        Behavior b = Behavior.ChasePlayer;                 //Default behavior is idle
 
         FiringType fireType = FiringType.Shotgun;     //Default firing type is basic
 
@@ -72,7 +72,7 @@ namespace MirrorKnight
                     velocity = GetOriginPos() - p.GetOriginPos();
                     velocity.Normalize();
                     velocity *= SPEED;
-                    body.translate(velocity);
+                    Move(Game1.GetCurrentRoom(), velocity);
                     break;
             }
         }

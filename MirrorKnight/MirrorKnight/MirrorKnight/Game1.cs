@@ -46,9 +46,9 @@ namespace MirrorKnight
         bool usingController = false, usingKeyboard = true;
 
         Player p;
-        Map map;
+        static Map map;
 
-        int x, y;       //Contains the current room the player is in.
+        static int x, y;       //Contains the current room the player is in.
         
         public static List<Projectile> projectiles;                     //Contains list of all active projectiles
         public static List<LivingEntity> enemies;                       //Contains list of all living enemies in a room
@@ -570,29 +570,11 @@ namespace MirrorKnight
             return map.GetRoom(x, y).isTileShootableThrough((int)tempPos.X / tileSize, (int)tempPos.Y / tileSize);
         }
 
-        private bool isTileWalkableThrough(Vector2 pos)
+        public static Room GetCurrentRoom()
         {
-            Vector2 tempPos = new Vector2(pos.X, pos.Y - (verticalOffset / 2));
-
-            if (tempPos.X < 0 || tempPos.Y < 0)
-                return false;
-            else if (tempPos.X > tileSize * 18 || tempPos.Y > tileSize * 10)
-                return false;
-
-            return map.GetRoom(x, y).isTileWalkableThrough((int)tempPos.X / tileSize, (int)tempPos.Y / tileSize);
+            return map.GetRoom(x, y);
         }
 
-        /// <summary>
-        /// Work in progress. Finish this later
-        /// </summary>
-        /// <param name="e"></param>
-        /// <param name="moveVector"></param>
-        /// <returns></returns>
-
-        public bool checkNewPos(Entity e, Vector2 moveVector)       //Checks whether player can move in moveVector direction
-        {
-            return isTileWalkableThrough(e.body.getOriginPos() + moveVector);
-        }
     }
 
 }
