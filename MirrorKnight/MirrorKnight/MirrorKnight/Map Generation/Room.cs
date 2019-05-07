@@ -137,8 +137,7 @@ namespace MirrorKnight
             switch(roomType)
             {
                 case Type.NORMAL:
-                    //roomID = rn.Next(6) + 1;
-                    roomID = 3;
+                    roomID = rn.Next(6) + 1;
                     break;
 
                 case Type.TREASURE:
@@ -176,7 +175,7 @@ namespace MirrorKnight
                 Game1.entities[i].body.deleteThis();
             }
             for (int i = 0; i < Game1.projectiles.Count; i++)
-                Game1.projectiles[i].Dispose();
+                Game1.projectiles[i].Remove();
 
             Game1.entities.Clear();
             Game1.projectiles.Clear();
@@ -350,6 +349,8 @@ namespace MirrorKnight
 
         public bool isTileShootableThrough(int x, int y)
         {
+            if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
+                return false;
             return tiles[x, y].canShootThrough;
         }
 
@@ -359,6 +360,14 @@ namespace MirrorKnight
                 return false;
 
             return tiles[x, y].canMoveThrough;
+        }
+
+        public bool isTileHazardous(int x, int y)
+        {
+            if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
+                return false;
+
+            return tiles[x, y].damageHazard;
         }
 
     }

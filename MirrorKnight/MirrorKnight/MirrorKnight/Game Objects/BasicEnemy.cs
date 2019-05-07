@@ -42,11 +42,9 @@ namespace MirrorKnight
 
         Vector2 velocity = new Vector2(0, 0);
 
-        public BasicEnemy(int x, int y, Texture2D texture, Player p)
+        public BasicEnemy(int x, int y, Texture2D texture, Player p) : base(x, y, texture)
         {
-            body = new Sprite(x, y);
-            body.addTexture(texture);
-            body.setScale(4);
+            body.setScale(2.5);
             body.translate(-body.getWidth() / 2, -body.getHeight() / 2);
             body.centerOrigin();
 

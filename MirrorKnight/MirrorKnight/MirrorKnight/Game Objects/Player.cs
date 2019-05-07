@@ -20,6 +20,10 @@ namespace MirrorKnight
 
         float RANGE = 70f;
 
+        bool invincible = false;
+
+        int invincibilityTimer = 0, invincibilityMax = 60;
+
         public Player()
         {
             body = new Sprite(10, 10);
@@ -105,6 +109,60 @@ namespace MirrorKnight
             for(int i = 0; i < hitProjectiles.Count; i++)
             {
                 hitProjectiles[i].Reflect(aimVec - (hitProjectiles[i].body.getOriginPos() - body.getOriginPos()), Projectile.defaultShotSpeed);
+            }
+        }
+
+        public override void Update()
+        {
+            //////////////////////Invincibility frames logic
+            if(invincible)
+            {
+                invincibilityTimer++;
+            }
+            if(invincibilityTimer >= invincibilityMax)
+            {
+                invincible = false;
+                invincibilityTimer = 0;
+            }
+
+            ////////////////Player getting damaged logic
+
+            for(int i = 0; i < Game1.projectiles.Count; i++)
+            {
+                if(Game1.projectiles[i].body.intersects(body))
+                {
+                    Game1.projectiles[i].Remove();
+                    Game1.projectiles.Remove(Game1.projectiles[i]);
+
+                    if (!invincible)
+                    {
+                        HP--;
+                        invincible = true;
+                    }
+                }
+            }
+
+            Vector2 start = Game1.PixelToTileCoords(GetPos());
+            Vector2 end = Game1.PixelToTileCoords(GetPos() + new Vector2(body.getWidth(), body.getHeight()));
+
+            Console.WriteLine(start + " : " + end);
+
+            if (hasFlight)
+            {
+                for (int y = (int)start.Y; y <= end.Y; y++)
+                {
+                    for (int x = (int)start.X; x <= end.X; x++)
+                    {
+                        if (Game1.GetCurrentRoom().isTileHazardous(x, y))
+                        {
+                            if (!invincible)
+                            {
+                                HP--;
+                                invincible = true;
+                            }
+                        }
+                    }
+                }
             }
         }
 

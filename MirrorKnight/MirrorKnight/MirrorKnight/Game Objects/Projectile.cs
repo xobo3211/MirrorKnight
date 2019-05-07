@@ -47,7 +47,7 @@ namespace MirrorKnight
             body.addTexture(Game1.enemyBullet);
         }
 
-        public void Dispose()
+        public void Remove()
         {
             body.deleteThis();
         }
@@ -75,6 +75,7 @@ namespace MirrorKnight
 
         public void Reflect(Vector2 aimVec, float speed)
         {
+            canHurtEnemies = true;
             aimVec.Normalize();
             velocity = aimVec * speed;
             body.addTexture(Game1.reflectedBullet);

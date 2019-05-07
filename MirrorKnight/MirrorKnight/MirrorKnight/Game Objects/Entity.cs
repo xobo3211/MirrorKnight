@@ -16,6 +16,18 @@ namespace MirrorKnight
     {
         public Sprite body;
 
+        public Entity(int x, int y, Texture2D t)
+        {
+            body = new Sprite(x, y);
+            body.addTexture(t);
+            body.setDepth(Game1.ENTITY);
+        }
+
+        public Entity()
+        {
+
+        }
+
         public Vector2 GetPos()
         {
             return body.getPos();
@@ -34,11 +46,6 @@ namespace MirrorKnight
         public void Remove()
         {
             body.deleteThis();
-        }
-
-        public void Dispose()
-        {
-            body.dispose();
         }
 
         public virtual void Update()
