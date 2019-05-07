@@ -46,7 +46,7 @@ namespace MirrorKnight
         {
             body = new Sprite(x, y);
             body.addTexture(texture);
-            body.setSize(16, 16);
+            body.setScale(4);
             body.translate(-body.getWidth() / 2, -body.getHeight() / 2);
             body.centerOrigin();
 
