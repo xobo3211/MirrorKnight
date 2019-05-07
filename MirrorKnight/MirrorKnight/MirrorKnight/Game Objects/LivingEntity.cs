@@ -17,6 +17,8 @@ namespace MirrorKnight
         protected int MAX_HP = 20, HP = 20;
         protected float SPEED = 1f, DMG = 1f;
 
+        protected bool hasFlight;             //Flight allows entities to ignore hazards, pits, and obstacles when moving
+
         public LivingEntity(int x, int y, Texture2D t) : base(x, y, t)
         {
 
@@ -59,14 +61,31 @@ namespace MirrorKnight
 
             Vector2 trueFinalMoveVec = Vector2.Zero;
 
-            if(up.Y > Game1.verticalOffset && (moveVec.Y < 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(up))) || (moveVec.Y > 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(down))))
+            if (hasFlight == false)
             {
-                trueFinalMoveVec.Y = moveVec.Y;
-            }
 
-            if(left.X > 0 && (moveVec.X < 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(left))) || (moveVec.X > 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(right))))
+                if (up.Y > Game1.verticalOffset && (moveVec.Y < 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(up))) || (moveVec.Y > 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(down))))
+                {
+                    trueFinalMoveVec.Y = moveVec.Y;
+                }
+
+                if (left.X > 0 && (moveVec.X < 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(left))) || (moveVec.X > 0 && CheckPos(currentRoom, Game1.PixelToTileCoords(right))))
+                {
+                    trueFinalMoveVec.X = moveVec.X;
+                }
+
+            }
+            else
             {
-                trueFinalMoveVec.X = moveVec.X;
+                if(up.Y > Game1.verticalOffset && down.Y < Useful.getWHeight() - Game1.verticalOffset)
+                {
+                    trueFinalMoveVec.Y = moveVec.Y;
+                }
+
+                if(left.X > 0 && right.X < Useful.getWWidth())
+                {
+                    trueFinalMoveVec.X = moveVec.X;
+                }
             }
 
             body.translate(trueFinalMoveVec);

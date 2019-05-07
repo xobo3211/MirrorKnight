@@ -410,6 +410,8 @@ namespace MirrorKnight
                         enemies[i].Update();
                     }
 
+                    p.Update();
+
                     ///////////////////////////////////////////////////////////////////////////////Projectile logic
 
                     for (int i = 0; i < projectiles.Count; i++)
@@ -423,12 +425,12 @@ namespace MirrorKnight
                         //Detects if projectile is going offscreen and if so, removes it
                         if (pos.X < 0 || pos.X > graphics.PreferredBackBufferWidth || pos.Y < 0 || pos.Y > graphics.PreferredBackBufferHeight)
                         {
-                            projectiles[i].Dispose();
+                            projectiles[i].Remove();
                             projectiles.Remove(projectiles[i]);
                         }
                         else if (isTileShootableThrough(projectiles[i].body.getOriginPos()) == false)
                         {
-                            projectiles[i].Dispose();
+                            projectiles[i].Remove();
                             projectiles.Remove(projectiles[i]);
                         }
 
@@ -438,7 +440,7 @@ namespace MirrorKnight
                             {
                                 if (projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
                                 {
-                                    projectiles[i].Dispose();
+                                    projectiles[i].Remove();
                                     enemies[a].Remove();
                                     projectiles.Remove(projectiles[i]);
                                     enemies.Remove(enemies[a]);

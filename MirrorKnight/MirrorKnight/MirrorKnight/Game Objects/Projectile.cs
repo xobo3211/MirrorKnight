@@ -47,7 +47,7 @@ namespace MirrorKnight
             body.addTexture(Game1.enemyBullet);
         }
 
-        public void Dispose()
+        public void Remove()
         {
             body.deleteThis();
         }
