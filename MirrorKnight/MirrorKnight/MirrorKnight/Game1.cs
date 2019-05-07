@@ -32,7 +32,7 @@ namespace MirrorKnight
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mainMenuRect, mainMenuStart;
 
         Rectangle leftDoor, topDoor, rightDoor, bottomDoor;     //Contains hitboxes for the exits from rooms
-        int doorSize = 50;                                      //Contains width of the doors
+        int doorWidth = 50, doorSize = 20;                      //Contains width and protrusion of the doors
         bool enteringRoom = false;                              //Prevents player from interacting with door immediately after entering a room
         int doorTimerMax = 60, doorTimer = 0;                   //Timer to control the enteringRoom boolean.
 
@@ -55,6 +55,10 @@ namespace MirrorKnight
         public static List<Entity> entities;                            //Contains list of all non-living entities in a room
 
         public static int tileSize = 60, verticalOffset = 200;
+
+        //Layer depths for everything. Depths range from 0 ~ 1, with lower numbers being further forward
+        public static float INVISIBLE = 1.0f, TILE = 0.99f, PROJECTILE = 0.6f, ENTITY = 0.5f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
+
 
         Sprite[] hearts;
         Sprite crosshair;
@@ -141,11 +145,11 @@ namespace MirrorKnight
 
 
             //Creates the bounding boxes for the doors
-            leftDoor = new Rectangle(0, Useful.getWHeight()/2 - doorSize / 2, 10, doorSize);
-            rightDoor = new Rectangle(Useful.getWWidth() - 10, Useful.getWHeight() / 2 - doorSize / 2, 10, doorSize);
+            leftDoor = new Rectangle(24, Useful.getWHeight()/2 - doorWidth / 2, doorSize, doorWidth);
+            rightDoor = new Rectangle(Useful.getWWidth() - doorSize, Useful.getWHeight() / 2 - doorWidth / 2, doorSize, doorWidth);
 
-            topDoor = new Rectangle(Useful.getWWidth()/2 - doorSize / 2, verticalOffset/2, doorSize, 10);
-            bottomDoor = new Rectangle(Useful.getWWidth() / 2 - doorSize / 2, Useful.getWHeight() - 10 - verticalOffset/2, doorSize, 10);
+            topDoor = new Rectangle(Useful.getWWidth()/2 - doorWidth / 2, verticalOffset/2 + 24, doorWidth, doorSize);
+            bottomDoor = new Rectangle(Useful.getWWidth() / 2 - doorWidth / 2, Useful.getWHeight() - doorSize - verticalOffset/2, doorWidth, doorSize);
 
 
             base.Initialize(); 
@@ -451,28 +455,33 @@ namespace MirrorKnight
                             {
                                 x--;
                                 p.body.setPos(rightDoor.X - rightDoor.Width * 2 - p.body.getWidth() / 2, rightDoor.Y + rightDoor.Height / 2 - p.body.getHeight() / 2);
+                                enteringRoom = true;
                             }
                             else if (p.Intersects(rightDoor) && map.CheckRoom(x + 1, y) && playerMoveVec.X > 0)
                             {
                                 x++;
                                 p.body.setPos(leftDoor.X + leftDoor.Width * 2 + p.body.getWidth() / 2, leftDoor.Y + leftDoor.Height / 2 - p.body.getHeight() / 2);
-                                
+                                enteringRoom = true;
+
                             }
                             else if (p.Intersects(topDoor) && map.CheckRoom(x, y - 1) && playerMoveVec.Y < 0)
                             {
                                 y--;
                                 p.body.setPos(bottomDoor.X + bottomDoor.Width / 2 - p.body.getWidth() / 2, bottomDoor.Y - bottomDoor.Height * 2 - p.body.getHeight() / 2);
+                                enteringRoom = true;
 
                             }
                             else if (p.Intersects(bottomDoor) && map.CheckRoom(x, y + 1) && playerMoveVec.Y > 0)
                             {
                                 y++;
                                 p.body.setPos(topDoor.X + topDoor.Width / 2 - p.body.getWidth() / 2, topDoor.Y + topDoor.Height * 2 + p.body.getHeight() / 2);
+                                enteringRoom = true;
                             }
                             else Console.WriteLine("Room movement error");
 
-                            map.GetRoom(x, y).EnterRoom(Content, p);
-                            enteringRoom = true;
+                            if(enteringRoom)
+                                map.EnterRoom(x, y, Content, p);
+                            
                         }
                     }
                     else
@@ -511,28 +520,22 @@ namespace MirrorKnight
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, null, null);
             if (mainMenuBool == true)
             {
-                spriteBatch.Draw(placeHc, mainMenuRect, Color.White);
-                spriteBatch.Draw(placeHc, mainMenuStart, Color.White);
-                spriteBatch.Draw(pMB, pauseMusicButton, Color.White);
-                spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
-                spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
-                spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
-
+                spriteBatch.Draw(placeHc, mainMenuRect, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU);
+                spriteBatch.Draw(placeHc, mainMenuStart, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                spriteBatch.Draw(pMB, pauseMusicButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                spriteBatch.Draw(placeHc, pauseSfxButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                spriteBatch.Draw(placeHc, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                
             }
             else if (mainMenuBool == false)
             {
                 map.GetRoom(x, y).Draw(spriteBatch, 0, (GraphicsDevice.Viewport.Height - map.GetRoom(x, y).Height * tileSize) / 2, tileSize);   //Draws room with offset x, y and tile size of tileSize
-                spriteBatch.Draw(placeHc, pauseMenuRect, Color.White);
-                spriteBatch.Draw(pMB, pauseMusicButton, Color.White);
-                spriteBatch.Draw(placeHc, pauseSfxButton, Color.White);
-                spriteBatch.Draw(placeHc, pauseOptionsButton, Color.White);
-                spriteBatch.Draw(placeHc, pauseExitButton, Color.White);
-
-
-                for (int i = 0; i < p.GetHP(); i++)
-                {
-                    //hearts[i] = new Sprite((1000- 100*i) + (50 * i), 100);
-                }
+                spriteBatch.Draw(placeHc, pauseMenuRect, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU);
+                spriteBatch.Draw(pMB, pauseMusicButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                spriteBatch.Draw(placeHc, pauseSfxButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                spriteBatch.Draw(placeHc, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
 
             }
             

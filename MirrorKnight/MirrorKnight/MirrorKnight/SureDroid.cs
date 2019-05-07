@@ -379,6 +379,11 @@ namespace SureDroid
             return textures[index];
         }
 
+        public Color getColor()
+        {
+            return color;
+        }
+
         /// <summary>
         /// Adds a texture to the sprite using a provided filename. You can only use this if you set the Content Manager in a previous method.
         /// </summary>

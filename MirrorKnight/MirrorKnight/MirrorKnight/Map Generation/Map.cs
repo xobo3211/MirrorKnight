@@ -129,6 +129,9 @@ namespace MirrorKnight
                     }
                 }
             }
+
+            CreateMap();
+            HideMap();
         }
 
 
@@ -155,8 +158,6 @@ namespace MirrorKnight
 
             SetDeadEnds(maxX / 2, maxY / 2, Directions.NONE);
             RemoveExcessDeadEnds();
-            CreateMap();
-            HideMap();
         }
 
         void SetDeadEnds(int x, int y, Directions movementPath)
@@ -440,6 +441,74 @@ namespace MirrorKnight
             rooms[x, y] = r;
         }
 
+        public void EnterRoom(int x, int y, ContentManager c, Player p)
+        {
+            Discover(x, y);
+            rooms[x, y].EnterRoom(c, p);
+        }
+
+        private void Discover(int x, int y)
+        {
+            try
+            {
+                /*  Fog of war stuff
+                minimap[x - 1, y].setDepth(Game1.MINIMAP);
+                minimap[x + 1, y].setDepth(Game1.MINIMAP);
+                minimap[x, y - 1].setDepth(Game1.MINIMAP);
+                minimap[x, y + 1].setDepth(Game1.MINIMAP);
+                */
+
+                SetColor(x - 1, y);
+                SetColor(x + 1, y);
+                SetColor(x, y - 1);
+                SetColor(x, y + 1);
+
+                minimap[x, y].setColor(Color.White);
+            }
+            catch(Exception e)
+            {
+
+            }
+        }
+
+        private void SetColor(int x, int y)
+        {
+            Color c;
+
+            switch(rooms[x, y].getRoomType())
+            {
+                case Room.Type.NORMAL:
+                    c = Color.Gray;
+                    break;
+
+                case Room.Type.TREASURE:
+                    c = Color.Yellow;
+                    break;
+
+                case Room.Type.SHOP:
+                    c = Color.Green;
+                    break;
+
+                case Room.Type.SECRET:
+                    c = Color.Purple;
+                    break;
+
+                case Room.Type.BOSS:
+                    c = Color.Red;
+                    break;
+
+                case Room.Type.PUZZLE:
+                    c = Color.Blue;
+                    break;
+
+                default:
+                    c = Color.Black;
+                    break;
+            }
+
+            minimap[x, y].setColor(c);
+        }
+
         public Point GetDimensions()
         {
             return new Point(maxX, maxY);
@@ -453,40 +522,25 @@ namespace MirrorKnight
                     minimap[j, i] = new Sprite(j * 20, i*20);
                     minimap[j, i].addTexture(Game1.room);
                     minimap[j, i].setSize(20, 20);
-                    minimap[j, i].setDepth(2);
+                    minimap[j, i].setDepth(Game1.INVISIBLE);
                     minimap[j, i].setVisible(true);
-                    
+
 
                     if (rooms[j, i] != null)
                     {
-                        if (rooms[j, i].getRoomType() == Room.Type.NORMAL)
-                        {
-                            minimap[j, i].setColor(Color.White);
-                        }
-                        if (rooms[j, i].getRoomType() == Room.Type.TREASURE)
-                        {
-                            minimap[j, i].setColor(Color.Yellow);
-                        }
-                        if (rooms[j, i].getRoomType() == Room.Type.SHOP)
-                        {
-                            minimap[j, i].setColor(Color.CornflowerBlue);
-                        }
-                        if (rooms[j, i].getRoomType() == Room.Type.BOSS)
-                        {
-                            minimap[j, i].setColor(Color.Purple);
-                        }
-                        if (rooms[j, i].getRoomType() == Room.Type.SECRET)
-                        {
-                            minimap[j, i].setColor(Color.DarkRed);
-                        }
-                        if (rooms[j, i].getRoomType() == Room.Type.PUZZLE)
-                        {
-                            minimap[j, i].setColor(Color.Green);
-                        }
+
+                        SetColor(j, i);
                     }
-                    else minimap[j, i].setColor(Color.Black);
+                    else
+                    {
+                        minimap[j, i].setColor(Color.Black);
+                    }
                 }
             }
+
+            minimap[maxX / 2, maxY / 2].setDepth(Game1.MINIMAP);
+            minimap[maxX / 2, maxY / 2].setColor(Color.White);
+            Discover(maxX / 2, maxY / 2);
         }
 
         public void DrawMap()

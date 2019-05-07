@@ -60,8 +60,6 @@ namespace MirrorKnight
                 trueFinalMoveVec.X = moveVec.X;
             }
 
-            Console.WriteLine(up);
-
             body.translate(trueFinalMoveVec);
         }
 

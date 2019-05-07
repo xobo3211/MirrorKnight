@@ -1684,7 +1684,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="roomEntities\packed\knight\idle.png">
+    <Compile Include="packed\knight\idle.png">
       <Name>idle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
