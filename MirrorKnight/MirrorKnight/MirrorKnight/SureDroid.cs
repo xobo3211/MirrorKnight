@@ -38,7 +38,7 @@ namespace SureDroid
         private float timeframe = 1 / 3f;
         private SpriteEffects effect = SpriteEffects.None;
         private Color color = Color.White;
-        public float depth = 1;
+        private float depth = 1;
 
         public delegate void CustomUpdate();
         private CustomUpdate customUpdateMethod;
@@ -304,6 +304,10 @@ namespace SureDroid
             if (sizes.Count == 0) throw new NullReferenceException("The size for this sprite has not been yet determined. Please use this method after loading a texture. The index of this sprite is " + sprites.IndexOf(this) + ".");
             sizes[index].set((int)width, (int)height);
         }
+
+        /// <summary>
+        /// Sets the size of the sprite based off of the provided width and height (in a Vector2).
+        /// </summary>
         public void setSize(Vector2 size)
         {
             setSize(size.X, size.Y);
@@ -379,6 +383,9 @@ namespace SureDroid
             return textures[index];
         }
 
+        /// <summary>
+        /// Gets the current color of the sprite.
+        /// </summary>
         public Color getColor()
         {
             return color;
