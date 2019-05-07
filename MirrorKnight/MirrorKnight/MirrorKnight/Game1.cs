@@ -57,7 +57,7 @@ namespace MirrorKnight
         public static int tileSize = 60, verticalOffset = 200;
 
         //Layer depths for everything. Depths range from 0 ~ 1, with lower numbers being further forward
-        public static float INVISIBLE = 1.0f, TILE = 0.99f, PROJECTILE = 0.6f, ENTITY = 0.5f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
+        public static float INVISIBLE = 1.0f, TILE = 0.95f, PROJECTILE = 0.6f, ENTITY = 0.5f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
 
 
         Sprite[] hearts;
@@ -227,6 +227,7 @@ namespace MirrorKnight
             KeyboardState kb = Keyboard.GetState();
             MouseState m = Mouse.GetState();
             GamePadState gp = GamePad.GetState(PlayerIndex.One);
+
             if (mainMenuBool == true)
             {
                 mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 200), 400, 100);
@@ -270,9 +271,11 @@ namespace MirrorKnight
             }
             if (mainMenuBool == false)
             {
+
                 if (pauseMenu == true)
                 {
-                    map.DrawMap();
+                        
+
                     if (m.LeftButton == ButtonState.Pressed)
                     {
                         if (crosshair.getRectangle().Intersects(pauseMusicButton))
@@ -302,13 +305,13 @@ namespace MirrorKnight
                         
                         pauseMusicButton = new Rectangle();
                         pauseSfxButton = new Rectangle();
+
+                        map.HideMap();
                     }
                 }
                 else if (pauseMenu == false)
                 {
                     ////////////////////////////////////////////////////////////////Player movement and aiming logic
-
-                    map.HideMap();
 
                     Vector2 playerMoveVec = Vector2.Zero;
                     Vector2 playerAimVec = Vector2.Zero;
@@ -317,6 +320,7 @@ namespace MirrorKnight
                     if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
                     {
                         pauseMenu = true;
+                        map.DrawMap();
 
                     }
                     if (pauseMenu == true)
@@ -437,6 +441,8 @@ namespace MirrorKnight
                                     projectiles[i].Dispose();
                                     projectiles.Remove(projectiles[i]);
                                     enemies.Remove(enemies[a]);
+
+                                    Console.WriteLine("Projectile collision test");
                                 }
                             }
                         }

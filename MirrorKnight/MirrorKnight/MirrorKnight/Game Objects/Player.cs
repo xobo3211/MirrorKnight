@@ -24,7 +24,7 @@ namespace MirrorKnight
         {
             body = new Sprite(10, 10);
             body.setVisible(false);
-            SPEED = 5f;
+            SPEED = 3f;
 
             MAX_HP = 6;
             HP = MAX_HP;
