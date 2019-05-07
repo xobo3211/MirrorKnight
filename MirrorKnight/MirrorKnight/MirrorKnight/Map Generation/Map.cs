@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using SureDroid;
 
 namespace MirrorKnight
 {
@@ -22,7 +23,7 @@ namespace MirrorKnight
         int maxX = 9, maxY = 9;
 
         Rooms[,] roomsEnum;
-
+        Sprite[,] minimap;
         Room[,] rooms;
 
         int maxRoomCount;
@@ -128,6 +129,9 @@ namespace MirrorKnight
                     }
                 }
             }
+
+            CreateMap();
+            HideMap();
         }
 
 
@@ -135,6 +139,7 @@ namespace MirrorKnight
         {
             roomsEnum = new Rooms[maxX, maxY];
             rooms = new Room[maxX, maxY];
+            minimap = new Sprite[maxX, maxY];
 
             roomsEnum[maxX / 2, maxY / 2] = Rooms.EMPTY;                                              //Places starting room in the middle
 
@@ -436,9 +441,128 @@ namespace MirrorKnight
             rooms[x, y] = r;
         }
 
+        public void EnterRoom(int x, int y, ContentManager c, Player p)
+        {
+            Discover(x, y);
+            rooms[x, y].EnterRoom(c, p);
+        }
+
+        private void Discover(int x, int y)
+        {
+            try
+            {
+                /*  Fog of war stuff
+                minimap[x - 1, y].setDepth(Game1.MINIMAP);
+                minimap[x + 1, y].setDepth(Game1.MINIMAP);
+                minimap[x, y - 1].setDepth(Game1.MINIMAP);
+                minimap[x, y + 1].setDepth(Game1.MINIMAP);
+                */
+
+                SetColor(x - 1, y);
+                SetColor(x + 1, y);
+                SetColor(x, y - 1);
+                SetColor(x, y + 1);
+
+                minimap[x, y].setColor(Color.White);
+            }
+            catch(Exception e)
+            {
+
+            }
+        }
+
+        private void SetColor(int x, int y)
+        {
+            Color c;
+
+            switch(rooms[x, y].getRoomType())
+            {
+                case Room.Type.NORMAL:
+                    c = Color.Gray;
+                    break;
+
+                case Room.Type.TREASURE:
+                    c = Color.Yellow;
+                    break;
+
+                case Room.Type.SHOP:
+                    c = Color.Green;
+                    break;
+
+                case Room.Type.SECRET:
+                    c = Color.Purple;
+                    break;
+
+                case Room.Type.BOSS:
+                    c = Color.Red;
+                    break;
+
+                case Room.Type.PUZZLE:
+                    c = Color.Blue;
+                    break;
+
+                default:
+                    c = Color.Black;
+                    break;
+            }
+
+            minimap[x, y].setColor(c);
+        }
+
         public Point GetDimensions()
         {
             return new Point(maxX, maxY);
+        }
+        public void CreateMap()
+        {
+            for (int i = 0; i < maxY; i++)
+            {
+                for (int j = 0; j < maxX; j++)
+                {
+                    minimap[j, i] = new Sprite(j * 20, i*20);
+                    minimap[j, i].addTexture(Game1.room);
+                    minimap[j, i].setSize(20, 20);
+                    minimap[j, i].setDepth(Game1.INVISIBLE);
+                    minimap[j, i].setVisible(true);
+
+
+                    if (rooms[j, i] != null)
+                    {
+
+                        SetColor(j, i);
+                    }
+                    else
+                    {
+                        minimap[j, i].setColor(Color.Black);
+                    }
+                }
+            }
+
+            minimap[maxX / 2, maxY / 2].setDepth(Game1.MINIMAP);
+            minimap[maxX / 2, maxY / 2].setColor(Color.White);
+            Discover(maxX / 2, maxY / 2);
+        }
+
+        public void DrawMap()
+        {
+            for (int y = 0; y < maxY; y++)
+            {
+                for (int x = 0; x < maxX; x++)
+                {
+                    minimap[x, y].setVisible(true);
+                }
+            }
+        }
+
+        public void HideMap()
+        {
+            for (int y = 0; y < maxY; y++)
+            {
+                for (int x = 0; x < maxX; x++)
+                {
+                    minimap[x, y].setVisible(false);
+                }
+            }
         }
 
         public bool CheckRoom(int x, int y)     //Checks if room at coords given is a valid room

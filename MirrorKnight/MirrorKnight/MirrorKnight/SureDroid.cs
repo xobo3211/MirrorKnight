@@ -379,6 +379,11 @@ namespace SureDroid
             return textures[index];
         }
 
+        public Color getColor()
+        {
+            return color;
+        }
+
         /// <summary>
         /// Adds a texture to the sprite using a provided filename. You can only use this if you set the Content Manager in a previous method.
         /// </summary>
@@ -698,34 +703,78 @@ namespace SureDroid
         }
     }
 
-    
 
     public static class KeyControl {
-        public delegate void OnKeyPress(Keys key);
+        public delegate void OnKeyPress(bool hold);
 
         private static KeyboardState kd, okd;
 
         private static Dictionary<Keys, OnKeyPress> manager = new Dictionary<Keys, OnKeyPress>();
 
-        private static void addKey(Keys key, OnKeyPress press)
+        internal static void init()
         {
-            manager[key] = press;
+            okd = Keyboard.GetState();
         }
 
-        internal static void setKeyboard(KeyboardState newKD)
+        private static bool addKey(Keys key, OnKeyPress press)
         {
-            kd = newKD;
+            if (press != null)
+            {
+                manager[key] = press;
+                return true;
+            }
+            return false;
         }
 
-        internal static void setOKeyboard(KeyboardState newOKD)
+        private static bool removeKey(Keys key)
         {
-            okd = newOKD;
+            return manager.Remove(key);
         }
 
         internal static void update()
         {
-            
+            kd = Keyboard.GetState();
+            foreach (KeyValuePair<Keys, OnKeyPress> entry in manager)
+            {
+                if (kd.IsKeyDown(entry.Key))
+                {
+                    entry.Value.Invoke(!okd.IsKeyUp(entry.Key));
+                }
+            }
+            okd = kd;
         }
+    }
+
+    public static class ControllerControl
+    {
+        public delegate void OnControllerUpdate(GamePadState state);
+        private static Dictionary<PlayerIndex, OnControllerUpdate> manager = new Dictionary<PlayerIndex, OnControllerUpdate>();
+
+        public static bool add(OnControllerUpdate newControllerUpdate)
+        {
+            return add(PlayerIndex.One, newControllerUpdate);
+        }
+        public static bool add(PlayerIndex index, OnControllerUpdate newControllerUpdate)
+        {
+            if (newControllerUpdate != null)
+            {
+                manager.Add(index, newControllerUpdate);
+                return true;
+            }
+            return false;
+        }
+        public static bool remove(PlayerIndex index)
+        {
+            return manager.Remove(index);
+        }
+        internal static void update()
+        {
+            foreach(KeyValuePair<PlayerIndex, OnControllerUpdate> entry in manager)
+            {
+                entry.Value.Invoke(GamePad.GetState(entry.Key));
+            }
+        }
+
     }
 
     /// <summary>
@@ -1247,11 +1296,14 @@ namespace SureDroid
         {
             base.Initialize();
             spriteBatch = new SpriteBatch(Useful.game.GraphicsDevice);
+            KeyControl.init();
         }
         
 
         public override void Update(GameTime gameTime)
         {
+            KeyControl.update();
+            ControllerControl.update();
             Sprite.updateAll();
             base.Update(gameTime);
         }

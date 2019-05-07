@@ -1,5 +1,5 @@
-n n n n n n n n n n p n n n o n n n
-n p p p p p p p p p p n n n o n n n
+n n n n p n n n n n p n n n o n n n
+n p p p p p p n n p p n n n o n n n
 n p n n n h n n n n h n n n n n n n
 n p n n n h n n n n h n n n n o o o
 n p n n n h n h n n h n n n n n p p
@@ -7,4 +7,4 @@ n n n n n n n h n n h n n h h h p n
 n n n n n h n n n n n n n n n n p n
 n p n n n h n h n n n n n n n n p n
 n p p p p p p p p p p p p p n p p n
-n n n n n n n n n n n n n n n n n n
+n n n n n n n n n n n n p n n n n n

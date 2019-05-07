@@ -30,6 +30,7 @@ namespace MirrorKnight
             Load();
             body.setPos(pos);
             body.setSize(defaultBulletSize, defaultBulletSize);
+            body.setDepth(Game1.PROJECTILE);
             velocity = vel;
             velocity.Normalize();
             velocity *= shotSpeed;
