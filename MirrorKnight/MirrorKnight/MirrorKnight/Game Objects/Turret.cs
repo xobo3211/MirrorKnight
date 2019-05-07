@@ -25,10 +25,8 @@ namespace MirrorKnight
 
         float bulletSpeed = 2f;
 
-        public Turret(int x, int y, Texture2D texture, Entity target)
+        public Turret(int x, int y, Texture2D texture, Entity target) : base(x, y, texture)
         {
-            body = new Sprite(x, y);
-            body.addTexture(texture);
             body.setSize(25, 25);
             body.centerOrigin();
 
@@ -36,10 +34,8 @@ namespace MirrorKnight
             targetsEntity = true;
         }
 
-        public Turret(int x, int y, Texture2D texture, Vector2 target)
+        public Turret(int x, int y, Texture2D texture, Vector2 target) : base(x, y, texture)
         {
-            body = new Sprite(x, y);
-            body.addTexture(texture);
             body.setSize(25, 25);
             body.centerOrigin();
 

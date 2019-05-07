@@ -17,6 +17,15 @@ namespace MirrorKnight
         protected int MAX_HP = 20, HP = 20;
         protected float SPEED = 1f, DMG = 1f;
 
+        public LivingEntity(int x, int y, Texture2D t) : base(x, y, t)
+        {
+
+        }
+        public LivingEntity()
+        {
+
+        }
+
         public int GetHP()
         {
             return HP;

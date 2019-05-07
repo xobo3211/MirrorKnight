@@ -75,6 +75,7 @@ namespace MirrorKnight
 
         public void Reflect(Vector2 aimVec, float speed)
         {
+            canHurtEnemies = true;
             aimVec.Normalize();
             velocity = aimVec * speed;
             body.addTexture(Game1.reflectedBullet);

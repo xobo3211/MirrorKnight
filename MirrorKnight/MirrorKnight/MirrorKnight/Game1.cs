@@ -439,6 +439,7 @@ namespace MirrorKnight
                                 if (projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
                                 {
                                     projectiles[i].Dispose();
+                                    enemies[a].Remove();
                                     projectiles.Remove(projectiles[i]);
                                     enemies.Remove(enemies[a]);
 

@@ -137,8 +137,7 @@ namespace MirrorKnight
             switch(roomType)
             {
                 case Type.NORMAL:
-                    //roomID = rn.Next(6) + 1;
-                    roomID = 3;
+                    roomID = rn.Next(6) + 1;
                     break;
 
                 case Type.TREASURE:
