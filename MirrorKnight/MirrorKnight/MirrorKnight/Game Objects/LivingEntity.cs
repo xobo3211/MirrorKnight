@@ -14,8 +14,8 @@ namespace MirrorKnight
 {
     public class LivingEntity : Entity
     {
-        protected int MAX_HP, HP;
-        protected float SPEED, DMG;
+        protected int MAX_HP = 20, HP = 20;
+        protected float SPEED = 1f, DMG = 1f;
 
         public int GetHP()
         {

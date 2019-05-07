@@ -46,7 +46,8 @@ namespace MirrorKnight
         {
             body = new Sprite(x, y);
             body.addTexture(texture);
-            body.setSize(25, 40);
+            body.setSize(16, 16);
+            body.translate(-body.getWidth() / 2, -body.getHeight() / 2);
             body.centerOrigin();
 
             this.p = p;
@@ -69,10 +70,11 @@ namespace MirrorKnight
                     break;
 
                 case Behavior.ChasePlayer:
-                    velocity = GetOriginPos() - p.GetOriginPos();
+                    velocity = p.GetOriginPos() - GetOriginPos();
                     velocity.Normalize();
                     velocity *= SPEED;
                     Move(Game1.GetCurrentRoom(), velocity);
+
                     break;
             }
         }

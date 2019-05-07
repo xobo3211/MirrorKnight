@@ -444,36 +444,45 @@ namespace MirrorKnight
         public void EnterRoom(int x, int y, ContentManager c, Player p)
         {
             Discover(x, y);
+
             rooms[x, y].EnterRoom(c, p);
         }
 
         private void Discover(int x, int y)
         {
-            try
+            if (x > -1 && rooms[x - 1, y] != null)
             {
-                /*  Fog of war stuff
-                minimap[x - 1, y].setDepth(Game1.MINIMAP);
-                minimap[x + 1, y].setDepth(Game1.MINIMAP);
-                minimap[x, y - 1].setDepth(Game1.MINIMAP);
-                minimap[x, y + 1].setDepth(Game1.MINIMAP);
-                */
-
                 SetColor(x - 1, y);
+                minimap[x - 1, y].setDepth(Game1.MINIMAP);
+            }
+            if (x < maxX && rooms[x + 1, y] != null)
+            { 
                 SetColor(x + 1, y);
-                SetColor(x, y - 1);
-                SetColor(x, y + 1);
-
-                minimap[x, y].setColor(Color.White);
+                minimap[x + 1, y].setDepth(Game1.MINIMAP);
             }
-            catch(Exception e)
+            if (y > -1 && rooms[x, y - 1] != null)
             {
-
+                SetColor(x, y - 1);
+                minimap[x, y - 1].setDepth(Game1.MINIMAP);
             }
+            if (y < maxY && rooms[x, y + 1] != null)
+            {
+                SetColor(x, y + 1);
+                minimap[x, y + 1].setDepth(Game1.MINIMAP);
+            }
+
+            minimap[x, y].setColor(Color.White);
+
         }
 
         private void SetColor(int x, int y)
         {
             Color c;
+
+            if(x < 0 || x >= maxX || y < 0 || y >= maxY)
+            {
+                return;
+            }
 
             switch(rooms[x, y].getRoomType())
             {
@@ -524,7 +533,6 @@ namespace MirrorKnight
                     minimap[j, i].setSize(20, 20);
                     minimap[j, i].setDepth(Game1.INVISIBLE);
                     minimap[j, i].setVisible(true);
-
 
                     if (rooms[j, i] != null)
                     {

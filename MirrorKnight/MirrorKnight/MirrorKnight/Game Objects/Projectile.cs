@@ -19,7 +19,7 @@ namespace MirrorKnight
 
         float shotSpeed = 5f;
 
-        public static float defaultShotSpeed = 5f, defaultBulletSize = 10f;
+        public static float defaultShotSpeed = 5f, defaultBulletSize = 15f;
 
         bool canHurtEnemies;
  

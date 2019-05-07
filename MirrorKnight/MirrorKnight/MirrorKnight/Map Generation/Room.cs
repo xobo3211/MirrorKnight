@@ -137,7 +137,8 @@ namespace MirrorKnight
             switch(roomType)
             {
                 case Type.NORMAL:
-                    roomID = rn.Next(6) + 1;
+                    //roomID = rn.Next(6) + 1;
+                    roomID = 3;
                     break;
 
                 case Type.TREASURE:
@@ -255,6 +256,8 @@ namespace MirrorKnight
                                         int targetY = Convert.ToInt32(args[4]);
                                         Game1.entities.Add(new Turret((int)pos.X, (int)pos.Y, Content.Load<Texture2D>("textures/big_demon_idle_anim_f0"), new Vector2(targetX, targetY)));
                                     }
+
+                                    Console.WriteLine("Test");
                                     break;
                             }
                         }
