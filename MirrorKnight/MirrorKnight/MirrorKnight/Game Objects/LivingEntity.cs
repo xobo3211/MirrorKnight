@@ -19,6 +19,8 @@ namespace MirrorKnight
 
         protected bool hasFlight;             //Flight allows entities to ignore hazards, pits, and obstacles when moving
 
+        protected Rectangle hitbox;
+
         public LivingEntity(int x, int y, Texture2D t) : base(x, y, t)
         {
 
@@ -51,13 +53,11 @@ namespace MirrorKnight
         public void Move(Room currentRoom, Vector2 moveVec)
         {
             Vector2 tempFinalPos = body.getOriginPos() + moveVec;
-
-            tempFinalPos.Y += Game1.verticalOffset / 2;
-
-            Vector2 left = tempFinalPos - new Vector2(body.getRectangle().Width / 2, 0);
-            Vector2 right = tempFinalPos + new Vector2(body.getRectangle().Width / 2, 0);
-            Vector2 up = tempFinalPos - new Vector2(0, body.getRectangle().Height / 2);
-            Vector2 down = tempFinalPos + new Vector2(0, body.getRectangle().Height / 2);
+            
+            Vector2 left = tempFinalPos - new Vector2(hitbox.Width / 2, 0);
+            Vector2 right = tempFinalPos + new Vector2(hitbox.Width / 2, 0);
+            Vector2 up = tempFinalPos - new Vector2(0, hitbox.Height / 2);
+            Vector2 down = tempFinalPos + new Vector2(0, hitbox.Height / 2);
 
             Vector2 trueFinalMoveVec = Vector2.Zero;
 
@@ -77,7 +77,7 @@ namespace MirrorKnight
             }
             else
             {
-                if(up.Y > Game1.verticalOffset && down.Y < Useful.getWHeight() - Game1.verticalOffset)
+                if(up.Y > Game1.verticalOffset && down.Y < Useful.getWHeight())
                 {
                     trueFinalMoveVec.Y = moveVec.Y;
                 }
@@ -107,6 +107,22 @@ namespace MirrorKnight
                 return false;
 
             return r.isTileWalkableThrough((int)tempPos.X / Game1.tileSize, (int)tempPos.Y / Game1.tileSize);
+        }
+
+
+        public bool Intersects(Rectangle r)
+        {
+            return hitbox.Intersects(r);
+        }
+
+        public bool Intersects(Sprite s)
+        {
+            return s.getRectangle().Intersects(hitbox);
+        }
+
+        public Rectangle getHitbox()
+        {
+            return hitbox;
         }
     }
 }
