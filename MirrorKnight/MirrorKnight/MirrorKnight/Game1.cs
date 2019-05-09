@@ -32,7 +32,7 @@ namespace MirrorKnight
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mainMenuRect, mainMenuStart;
 
         Rectangle leftDoor, topDoor, rightDoor, bottomDoor;     //Contains hitboxes for the exits from rooms
-        int doorWidth = 50, doorSize = 20;                      //Contains width and protrusion of the doors
+        int doorWidth = 50, doorSize = 10;                      //Contains width and protrusion of the doors
         bool enteringRoom = false;                              //Prevents player from interacting with door immediately after entering a room
         int doorTimerMax = 60, doorTimer = 0;                   //Timer to control the enteringRoom boolean.
 
@@ -54,10 +54,10 @@ namespace MirrorKnight
         public static List<LivingEntity> enemies;                       //Contains list of all living enemies in a room
         public static List<Entity> entities;                            //Contains list of all non-living entities in a room
 
-        public static int tileSize = 60, verticalOffset = 200;
+        public static int tileSize = 60, verticalOffset;
 
         //Layer depths for everything. Depths range from 0 ~ 1, with lower numbers being further forward
-        public static float INVISIBLE = 1.0f, TILE = 0.95f, PROJECTILE = 0.6f, ENTITY = 0.5f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
+        public static float INVISIBLE = 1.0f, TILE = 0.8f, PROJECTILE = 0.6f, ENTITY = 0.5f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
 
 
         Sprite[] hearts;
@@ -112,15 +112,7 @@ namespace MirrorKnight
             mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 -100), 400, 60);
 
             crosshair = new Sprite();
-
-            //Sprite[] hearts = new Sprite[];
-            //for (int i = 0; 0 < 3; i++)
-            //{
-            //    hearts[i] = new Sprite(1000 - (50 * i), 100);
-            //    hearts[i].addTexture("textures/ui_heart_full");
-            //}
-            p = new Player();
-            
+                        
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
             oldM = Mouse.GetState();
@@ -134,8 +126,6 @@ namespace MirrorKnight
             text = new Text("Testing Boxy");
             text.visable = false;
 
-            //ReadFileAsStrings("presetRooms/testroom.txt");
-
             pauseMenuRect = new Rectangle(Useful.getWWidth()/2-Useful.getWWidth()/4, Useful.getWHeight() / 2 - Useful.getWHeight() / 4, Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             pauseOptionsButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 50), 400, 60);
             pauseExitButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 + 50), 400, 60);
@@ -148,8 +138,8 @@ namespace MirrorKnight
             leftDoor = new Rectangle(24, Useful.getWHeight()/2 - doorWidth / 2, doorSize, doorWidth);
             rightDoor = new Rectangle(Useful.getWWidth() - doorSize, Useful.getWHeight() / 2 - doorWidth / 2, doorSize, doorWidth);
 
-            topDoor = new Rectangle(Useful.getWWidth()/2 - doorWidth / 2, verticalOffset/2 + 24, doorWidth, doorSize);
-            bottomDoor = new Rectangle(Useful.getWWidth() / 2 - doorWidth / 2, Useful.getWHeight() - doorSize - verticalOffset/2, doorWidth, doorSize);
+            topDoor = new Rectangle(Useful.getWWidth()/2 - doorWidth / 2, verticalOffset, doorWidth, doorSize);
+            bottomDoor = new Rectangle(Useful.getWWidth() / 2 - doorWidth / 2, Useful.getWHeight() - doorSize - verticalOffset, doorWidth, doorSize);
 
 
             base.Initialize(); 
@@ -168,6 +158,7 @@ namespace MirrorKnight
             placeHc = Content.Load<Texture2D>("pc");
             crosshair.addTexture("crosshair");
             crosshair.setSize(100, 100);
+            crosshair.setDepth(MENU_BUTTONS);
             crosshair.centerOrigin();
             pMBO = Content.Load<Texture2D>("mNoteOn"); //pause button music note on texture
             pMBF = Content.Load<Texture2D>("mNoteOn (1)"); //pause button music note off texture
@@ -185,8 +176,9 @@ namespace MirrorKnight
             text.center();
 
             loadTiles();
-            p.load();
-            p.body.setScale(3);
+
+            p = new Player();
+
             p.body.setTimeFrame(1 / 8f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
 
@@ -196,6 +188,8 @@ namespace MirrorKnight
             y = map.GetDimensions().Y / 2;
 
             map.GetRoom(x, y).EnterRoom(Content, p);
+
+            verticalOffset = (GraphicsDevice.Viewport.Height - map.GetRoom(x, y).Height * tileSize) / 2;
         }
 
         /// <summary>
@@ -545,9 +539,10 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseSfxButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(placeHc, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
-
             }
-            
+
+            spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -556,7 +551,7 @@ namespace MirrorKnight
         public static Vector2 TileToPixelCoords(int x, int y)
         {
             x = tileSize * x + (tileSize / 2);
-            y = (verticalOffset / 2) + (y * tileSize) + (tileSize / 2);
+            y = (verticalOffset) + (y * tileSize) + (tileSize / 2);
 
             return new Vector2(x, y);
         }
@@ -571,13 +566,13 @@ namespace MirrorKnight
         public static Vector2 PixelToTileCoords(double x, double y)
         {
             int newX = (int)(x / tileSize);
-            int newY = (int)((y - verticalOffset) / tileSize);
+            int newY = (int)(y - verticalOffset) / tileSize;
             return new Vector2(newX, newY);
         }
 
         private bool isTileShootableThrough(Vector2 pos)
         {
-            Vector2 tempPos = new Vector2(pos.X, pos.Y - (verticalOffset / 2));
+            Vector2 tempPos = new Vector2(pos.X, pos.Y - (verticalOffset));
 
             if (tempPos.X < 0 || tempPos.Y < 0)
                 return false;

@@ -22,7 +22,9 @@ namespace MirrorKnight
 
         bool invincible = false;
 
-        int invincibilityTimer = 0, invincibilityMax = 60;
+        int invincibilityTimer = 0, invincibilityMax = 60, invisibleFrames = 5;
+
+        
 
         public Player()
         {
@@ -34,9 +36,10 @@ namespace MirrorKnight
             HP = MAX_HP;
 
             passives = new List<PassiveItem>();
+            load();
         }
 
-        public void load()
+        private void load()
         {
             body.setAnimation(true);
             body.useRegion(true);
@@ -48,6 +51,9 @@ namespace MirrorKnight
             }
             body.setOrigin(5, 15);
             body.setDepth(Game1.ENTITY);
+            body.setScale(3);
+
+            hitbox = new Rectangle(0, 0, body.getWidth(), body.getHeight());
 
         }
 
@@ -76,15 +82,28 @@ namespace MirrorKnight
 
         public override void Update()
         {
+
+            hitbox.X = (int)body.getOriginPos().X - body.getWidth() / 2;
+            hitbox.Y = (int)body.getOriginPos().Y - body.getHeight() / 2 + 10;
+
             //////////////////////Invincibility frames logic
             if(invincible)
             {
+                //////////////////////Invinciblity animation logic
+
+                if ((invincibilityTimer / invisibleFrames) % 2 == 0)
+                {
+                    body.setVisible(false);
+                }
+                else body.setVisible(true);
+
                 invincibilityTimer++;
             }
             if(invincibilityTimer >= invincibilityMax)
             {
                 invincible = false;
                 invincibilityTimer = 0;
+                body.setVisible(true);
             }
 
             ////////////////Player getting damaged logic
@@ -104,24 +123,21 @@ namespace MirrorKnight
                 }
             }
 
-            Vector2 start = Game1.PixelToTileCoords(GetPos());
-            Vector2 end = Game1.PixelToTileCoords(GetPos() + new Vector2(body.getWidth(), body.getHeight()));
+            
 
-            Console.WriteLine(start + " : " + end);
+            Vector2 start = Game1.PixelToTileCoords(GetOriginPos() - new Vector2(body.getWidth()/2, body.getHeight()/2));
+            Vector2 end = Game1.PixelToTileCoords(GetOriginPos() + new Vector2(body.getWidth()/2, body.getHeight()/2));
 
-            if (hasFlight)
+            if (hasFlight == false)
             {
                 for (int y = (int)start.Y; y <= end.Y; y++)
                 {
                     for (int x = (int)start.X; x <= end.X; x++)
                     {
-                        if (Game1.GetCurrentRoom().isTileHazardous(x, y))
+                        if (invincible == false && Game1.GetCurrentRoom().isTileHazardous(x, y))
                         {
-                            if (!invincible)
-                            {
-                                HP--;
-                                invincible = true;
-                            }
+                            HP--;
+                            invincible = true;
                         }
                     }
                 }
@@ -139,9 +155,5 @@ namespace MirrorKnight
             return rotation * 180;
         }
 
-        public bool Intersects(Rectangle r)
-        {
-            return body.getRectangle().Intersects(r);
-        }
     }
 }
