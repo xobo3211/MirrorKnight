@@ -46,9 +46,9 @@ namespace MirrorKnight
         bool usingController = false, usingKeyboard = true;
 
         Player p;
-        static Map map;
+        public static Map map;
 
-        static int x, y;       //Contains the current room the player is in.
+        public static int x, y;       //Contains the current room the player is in.
         
         public static List<Projectile> projectiles;                     //Contains list of all active projectiles
         public static List<LivingEntity> enemies;                       //Contains list of all living enemies in a room
@@ -160,6 +160,8 @@ namespace MirrorKnight
             crosshair.setSize(100, 100);
             crosshair.setDepth(MENU_BUTTONS);
             crosshair.centerOrigin();
+
+
             pMBO = Content.Load<Texture2D>("mNoteOn"); //pause button music note on texture
             pMBF = Content.Load<Texture2D>("mNoteOn (1)"); //pause button music note off texture
             pMB = pMBF; 
@@ -329,70 +331,6 @@ namespace MirrorKnight
 
                     }
 
-
-
-                    if (usingKeyboard)
-                    {
-                        if (gp.ThumbSticks.Left != Vector2.Zero || gp.ThumbSticks.Right != Vector2.Zero)
-                        {
-                            usingKeyboard = false;
-                            usingController = true;
-                        }
-                        if (kb.IsKeyDown(Keys.W))
-                        {
-                            playerMoveVec.Y = -1;
-                        }
-                        else if (kb.IsKeyDown(Keys.S))
-                        {
-                            playerMoveVec.Y = 1;
-                        }
-                        if (kb.IsKeyDown(Keys.A))
-                        {
-                            playerMoveVec.X = -1;
-                        }
-                        else if (kb.IsKeyDown(Keys.D))
-                        {
-                            playerMoveVec.X = 1;
-                        }
-
-                        playerAimVec = new Vector2(m.X, m.Y) - p.body.getOriginPos();
-
-                        if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
-                        {
-                            p.Attack(playerAimVec);
-                        }
-
-                    }
-                    else if (usingController)
-                    {
-                        if (Keyboard.GetState().GetPressedKeys().Length > 0 || oldM.X != m.X)
-                        {
-                            usingController = false;
-                            usingKeyboard = true;
-                        }
-                        if (gp.ThumbSticks.Left != Vector2.Zero)
-                        {
-                            playerMoveVec = gp.ThumbSticks.Left;
-                            playerMoveVec.Y *= -1;
-                        }
-                        if (gp.ThumbSticks.Right != Vector2.Zero)
-                        {
-                            playerAimVec = gp.ThumbSticks.Right;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error: No controller-type set");
-                    }
-
-                    if (playerMoveVec != Vector2.Zero)
-                    {
-                        playerMoveVec.Normalize();
-                        playerMoveVec *= p.GetSpeed();
-
-                        p.Move(map.GetRoom(x, y), playerMoveVec);
-                    }
-
                     ///////////////////////////////////////////////////////////////////////////////Game Object update logic
 
                     for (int i = 0; i < entities.Count; i++)
@@ -500,9 +438,6 @@ namespace MirrorKnight
                 }
 
             }
-
-
-            crosshair.setPos(m.X-24, m.Y-24);
 
             oldGP = gp;
             oldKB = kb;

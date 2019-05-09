@@ -712,40 +712,71 @@ namespace SureDroid
 
 
     public static class KeyControl {
-        public delegate void OnKeyPress(bool hold);
+        public delegate void OnKeyEvent();
 
         private static KeyboardState kd, okd;
 
-        private static Dictionary<Keys, OnKeyPress> manager = new Dictionary<Keys, OnKeyPress>();
+        private static Dictionary<Keys, OnKeyEvent> managerPress = new Dictionary<Keys, OnKeyEvent>(), 
+            managerHold = new Dictionary<Keys, OnKeyEvent>();
 
         internal static void init()
         {
             okd = Keyboard.GetState();
         }
 
-        private static bool addKey(Keys key, OnKeyPress press)
+        public static bool addKeyPress(Keys key, OnKeyEvent press)
         {
             if (press != null)
             {
-                manager[key] = press;
+                managerPress[key] = press;
                 return true;
             }
             return false;
         }
 
-        private static bool removeKey(Keys key)
+        public static bool addKeyHold(Keys key, OnKeyEvent press)
         {
-            return manager.Remove(key);
+            if (press != null)
+            {
+                managerHold[key] = press;
+                return true;
+            }
+            return false;
+        }
+
+        public static bool removeKey(Keys key)
+        {
+            bool returnVal = false;
+            if(removeKeyPress(key)) returnVal = true;
+            if (removeKeyHold(key)) returnVal = true;
+            return returnVal;
+        }
+
+        public static bool removeKeyPress(Keys key)
+        {
+            return managerPress.Remove(key);
+        }
+
+        public static bool removeKeyHold(Keys key)
+        {
+            return managerHold.Remove(key);
         }
 
         internal static void update()
         {
             kd = Keyboard.GetState();
-            foreach (KeyValuePair<Keys, OnKeyPress> entry in manager)
+            foreach (KeyValuePair<Keys, OnKeyEvent> entry in managerPress)
             {
                 if (kd.IsKeyDown(entry.Key))
                 {
-                    entry.Value.Invoke(!okd.IsKeyUp(entry.Key));
+                    entry.Value.Invoke();
+                }
+            }
+            foreach (KeyValuePair<Keys, OnKeyEvent> entry in managerPress)
+            {
+                if (kd.IsKeyDown(entry.Key) && okd.IsKeyUp(entry.Key))
+                {
+                    entry.Value.Invoke();
                 }
             }
             okd = kd;

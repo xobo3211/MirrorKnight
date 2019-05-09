@@ -36,7 +36,44 @@ namespace MirrorKnight
             HP = MAX_HP;
 
             passives = new List<PassiveItem>();
-            load();
+
+            Vector2 movement = Vector2.Zero;
+            KeyControl.addKeyPress(Keys.W, () => movement.Y = -1);
+            KeyControl.addKeyPress(Keys.S, () => movement.Y = 1);
+            KeyControl.addKeyPress(Keys.A, () => movement.X = -1);
+            KeyControl.addKeyPress(Keys.D, () => movement.X = 1);
+            ControllerControl.add(gp =>
+            {
+                if (gp.ThumbSticks.Left != Vector2.Zero)
+                {
+                    movement = gp.ThumbSticks.Left;
+                    movement.Y *= -1;
+                }
+                if (gp.ThumbSticks.Right != Vector2.Zero)
+                {
+                    movement = gp.ThumbSticks.Right;
+                }
+            });
+            MouseState oldM = Mouse.GetState();
+            body.setUpdate(() =>
+            {
+                if (movement != Vector2.Zero)
+                {
+                    movement.Normalize();
+                    movement *= GetSpeed();
+                    Move(Game1.map.GetRoom(Game1.x, Game1.y), movement);
+                    movement = Vector2.Zero;
+                }
+
+                MouseState m = Mouse.GetState();
+                if (m.LeftButton == ButtonState.Pressed && oldM.LeftButton == ButtonState.Released)
+                {
+                    Vector2 playerAimVec = new Vector2(m.X, m.Y) - body.getOriginPos();
+                    Attack(playerAimVec);
+                }
+                oldM = m;
+            });
+            
         }
 
         private void load()

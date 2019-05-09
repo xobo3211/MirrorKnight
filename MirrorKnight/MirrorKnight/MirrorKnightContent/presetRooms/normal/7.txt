@@ -1,0 +1,10 @@
+n n n n n n n n n n n p n n n n n n
+n p p p p p p p p p p p n n n n n n
+n n n n n n n n n n n n n n n n n n
+p p p p p p p p p p p p p p p p n n
+n n p n n n n n n n n n n n p n n n
+n n p n p n n n n n n n n n p n n n
+n n p n p n n n n n n n n n p n n n
+n n n n p n n n n n n n n n n n n n
+p p p p p n n n n n n n n p p p p p
+n n n n n n n n n n n n n n n n n n
