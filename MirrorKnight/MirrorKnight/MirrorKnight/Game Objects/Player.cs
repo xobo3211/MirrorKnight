@@ -73,6 +73,8 @@ namespace MirrorKnight
                 }
                 oldM = m;
             });
+
+            load();
             
         }
 

@@ -113,6 +113,7 @@ namespace MirrorKnight
             mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 -100), 400, 60);
 
             crosshair = new Sprite();
+            crosshair.setUpdate(()=>crosshair.setPos(Mouse.GetState().X, Mouse.GetState().Y));
                         
             oldGP = GamePad.GetState(PlayerIndex.One);
             oldKB = Keyboard.GetState();
@@ -479,7 +480,6 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
             }
 
-            }
             spriteBatch.Draw(box, p.body.getBounds(), Color.White);
             spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
 
