@@ -28,7 +28,7 @@ namespace MirrorKnight
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         Text text;
 
-        bool pauseMenu, pauseOptionsBool, mainMenuBool;
+        bool pauseMenu, pauseOptionsBool, mainMenuBool, soundFxTog, musicTog;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mainMenuRect, mainMenuStart;
 
         Rectangle leftDoor, topDoor, rightDoor, bottomDoor;     //Contains hitboxes for the exits from rooms
@@ -111,7 +111,8 @@ namespace MirrorKnight
             mainMenuBool = true;
             mainMenuRect = new Rectangle(0, 0, Useful.getWWidth(), Useful.getWHeight());
             mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 -100), 400, 60);
-
+            soundFxTog = true;
+            musicTog = true;
             crosshair = new Sprite();
             crosshair.setUpdate(()=>crosshair.setPos(Mouse.GetState().X, Mouse.GetState().Y));
                         
