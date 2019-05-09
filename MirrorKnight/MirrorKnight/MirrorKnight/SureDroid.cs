@@ -165,8 +165,7 @@ namespace SureDroid
 
         public Rectangle getBounds()
         {
-            Rectangle originRectangle = new Rectangle((int)getOriginPos().X - getWidth()/2, (int)getOriginPos().Y - getHeight()/2, getWidth(), getHeight());
-            return originRectangle;
+            return new Rectangle((int)getOriginPos().X - getWidth()/2, (int)getOriginPos().Y - getHeight()/2, getWidth(), getHeight());
         }
 
         /// <summary>
