@@ -33,7 +33,7 @@ namespace MirrorKnight
 
         public Tile(Type t)
         {
-            Thread.Sleep(rand.Next(1,6));
+            Thread.Sleep(rand.Next(1,3));
             switch (t)
             {
                 case Type.NORMAL: 

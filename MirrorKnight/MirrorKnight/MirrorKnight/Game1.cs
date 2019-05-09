@@ -480,7 +480,7 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
             }
 
-            spriteBatch.Draw(box, p.body.getBounds(), Color.White);
+            //spriteBatch.Draw(box, p.body.getBounds(), Color.White);
             spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
 
             spriteBatch.End();
