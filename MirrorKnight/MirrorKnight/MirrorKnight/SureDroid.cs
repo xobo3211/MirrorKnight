@@ -24,7 +24,8 @@ namespace SureDroid
         // -----------------------------------------------------------------
         // -------------------------- Variables ----------------------------
         // -----------------------------------------------------------------
-        public static List<Sprite> sprites = new List<Sprite>();
+        private static List<Sprite> sprites = new List<Sprite>();
+        private static Dictionary<String,List<Sprite>> groups = new Dictionary<String,List<Sprite>>(); 
 
         private Rectangle rectangle;
         private Vector2 pos, origin;
@@ -160,6 +161,12 @@ namespace SureDroid
         {
             updatePos();
             return rectangle;
+        }
+
+        public Rectangle getBounds()
+        {
+            Rectangle originRectangle = new Rectangle((int)getOriginPos().X - getWidth()/2, (int)getOriginPos().Y - getHeight()/2, getWidth(), getHeight());
+            return originRectangle;
         }
 
         /// <summary>
@@ -636,6 +643,29 @@ namespace SureDroid
         // ----------------------- USESPRITE CODE --------------------------
         // -----------------------------------------------------------------
 
+        public void setGroup(String name)
+        {
+            if (!groups.ContainsKey(name))
+                groups.Add(name,new List<Sprite>());
+            groups[name].Add(this);
+        }
+
+        public static List<Sprite> getGroup(String name)
+        {
+            List<Sprite> ival;
+            groups.TryGetValue(name, out ival);
+            return ival;
+        }
+
+        public static void groupAction(String name, Action<Sprite> action)
+        {
+            getGroup(name).ForEach(action);
+        }
+
+        // -----------------------------------------------------------------
+        // ----------------------- USESPRITE CODE --------------------------
+        // -----------------------------------------------------------------
+
         /// <summary>
         /// Updates all the logic in the sprite classes.
         /// Required if you want to do animation.
@@ -931,6 +961,7 @@ namespace SureDroid
             pos.X = Useful.getWWidth() / 2 - getSize().X / 2;
             pos.Y = Useful.getWHeight() / 2 - getSize().Y / 2;
         }
+
 
         //Static Methods
 
