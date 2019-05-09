@@ -59,6 +59,7 @@ namespace MirrorKnight
         //Layer depths for everything. Depths range from 0 ~ 1, with lower numbers being further forward
         public static float INVISIBLE = 1.0f, TILE = 0.95f, PROJECTILE = 0.6f, ENTITY = 0.5f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
 
+        Texture2D box;
 
         Sprite[] hearts;
         Sprite crosshair;
@@ -186,6 +187,8 @@ namespace MirrorKnight
             Text.setDefaultFont("font");
 
             text.center();
+
+            box = Useful.CreateRectangle(1,1,Color.White);
 
             loadTiles();
             p.load();
@@ -483,7 +486,7 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
 
             }
-            
+            spriteBatch.Draw(box, p.body.getBounds(), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
