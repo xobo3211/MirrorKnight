@@ -92,7 +92,7 @@ namespace MirrorKnight
             body.setDepth(Game1.ENTITY);
             body.setScale(3);
 
-            hitbox = new Rectangle(0, 0, body.getWidth(), body.getHeight());
+            hitbox = new Rectangle(0, 0, body.getWidth(), body.getHeight() - 10);
 
         }
 
@@ -123,7 +123,7 @@ namespace MirrorKnight
         {
 
             hitbox.X = (int)body.getOriginPos().X - body.getWidth() / 2;
-            hitbox.Y = (int)body.getOriginPos().Y - body.getHeight() / 2 + 10;
+            hitbox.Y = (int)body.getOriginPos().Y - body.getHeight() / 2;
 
             //////////////////////Invincibility frames logic
             if(invincible)
@@ -149,7 +149,7 @@ namespace MirrorKnight
 
             for(int i = 0; i < Game1.projectiles.Count; i++)
             {
-                if(Game1.projectiles[i].body.intersects(body))
+                if(Intersects(Game1.projectiles[i].body))
                 {
                     Game1.projectiles[i].Remove();
                     Game1.projectiles.Remove(Game1.projectiles[i]);
