@@ -24,7 +24,7 @@ namespace MirrorKnight
 
         int invincibilityTimer = 0, invincibilityMax = 60, invisibleFrames = 5;
 
-        
+
 
         public Player()
         {
@@ -75,7 +75,7 @@ namespace MirrorKnight
             });
 
             load();
-            
+        }
         }
 
         private void load()
