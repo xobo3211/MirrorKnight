@@ -76,7 +76,7 @@ namespace MirrorKnight
 
             load();
         }
-        }
+        
 
         private void load()
         {
