@@ -23,9 +23,7 @@ namespace MirrorKnight
         bool invincible = false;
 
         int invincibilityTimer = 0, invincibilityMax = 60, invisibleFrames = 5;
-
-
-
+        
         public Player()
         {
             body = new Sprite(10, 10);
@@ -117,6 +115,18 @@ namespace MirrorKnight
             {
                 hitProjectiles[i].Reflect(aimVec - (hitProjectiles[i].body.getOriginPos() - body.getOriginPos()), Projectile.defaultShotSpeed);
             }
+        }
+
+        public void decreaseHP(int z)
+        {
+            int b = HP;
+            HP -= z;
+
+            //decrease percent
+            int a = HP / b;
+
+            Game1.playerHitbar.decrease(a);
+
         }
 
         public override void Update()
