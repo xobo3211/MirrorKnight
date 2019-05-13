@@ -93,7 +93,7 @@ namespace MirrorKnight
             body.setScale(3);
 
             //hitbox = new Rectangle(0, 0, body.getWidth() - 20, body.getHeight() - 40);
-            hitbox = new Rectangle(0, 0, 30, 40);
+            hitbox = new Rectangle(0, 0, 25, 40);
         }
 
         public void Attack(Vector2 aimVec)
@@ -124,7 +124,7 @@ namespace MirrorKnight
 
             //hitbox.X = (int)body.getOriginPos().X - body.getWidth() / 2;
             //hitbox.Y = (int)body.getOriginPos().Y - body.getHeight() / 2;
-            hitbox.X = (int)body.getOriginPos().X - 15;
+            hitbox.X = (int)body.getOriginPos().X - 10;
             hitbox.Y = (int)body.getOriginPos().Y - 20;
 
             //////////////////////Invincibility frames logic
