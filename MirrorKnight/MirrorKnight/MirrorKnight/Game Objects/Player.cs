@@ -90,8 +90,8 @@ namespace MirrorKnight
             body.setDepth(Game1.ENTITY);
             body.setScale(3);
 
-            hitbox = new Rectangle(0, 0, body.getWidth(), body.getHeight() - 10);
-
+            //hitbox = new Rectangle(0, 0, body.getWidth() - 20, body.getHeight() - 40);
+            hitbox = new Rectangle(0, 0, 25, 40);
         }
 
         public void Attack(Vector2 aimVec)
@@ -132,11 +132,13 @@ namespace MirrorKnight
         public override void Update()
         {
 
-            hitbox.X = (int)body.getOriginPos().X - body.getWidth() / 2;
-            hitbox.Y = (int)body.getOriginPos().Y - body.getHeight() / 2;
+            //hitbox.X = (int)body.getOriginPos().X - body.getWidth() / 2;
+            //hitbox.Y = (int)body.getOriginPos().Y - body.getHeight() / 2;
+            hitbox.X = (int)body.getOriginPos().X - 10;
+            hitbox.Y = (int)body.getOriginPos().Y - 20;
 
             //////////////////////Invincibility frames logic
-            if(invincible)
+            if (invincible)
             {
                 //////////////////////Invinciblity animation logic
 

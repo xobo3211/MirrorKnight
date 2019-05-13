@@ -77,6 +77,7 @@ namespace MirrorKnight
             graphics.PreferredBackBufferWidth = 1080;
             graphics.PreferredBackBufferHeight = 800;
             graphics.ApplyChanges();
+            
         }
 
 
