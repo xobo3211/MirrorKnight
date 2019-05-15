@@ -24,7 +24,7 @@ namespace MirrorKnight
 
         int invincibilityTimer = 0, invincibilityMax = 60, invisibleFrames = 5;
 
-
+        public Vector2 lastMove = Vector2.Zero;
 
         public Player()
         {
@@ -38,6 +38,7 @@ namespace MirrorKnight
             passives = new List<PassiveItem>();
 
             Vector2 movement = Vector2.Zero;
+
             KeyControl.addKeyPress(Keys.W, () => movement.Y = -1);
             KeyControl.addKeyPress(Keys.S, () => movement.Y = 1);
             KeyControl.addKeyPress(Keys.A, () => movement.X = -1);
@@ -62,7 +63,11 @@ namespace MirrorKnight
                     movement.Normalize();
                     movement *= GetSpeed();
                     Move(Game1.map.GetRoom(Game1.x, Game1.y), movement);
+                    lastMove = movement;
                     movement = Vector2.Zero;
+                } else
+                {
+                    lastMove = Vector2.Zero;
                 }
 
                 MouseState m = Mouse.GetState();
@@ -71,6 +76,7 @@ namespace MirrorKnight
                     Vector2 playerAimVec = new Vector2(m.X, m.Y) - body.getOriginPos();
                     Attack(playerAimVec);
                 }
+
                 oldM = m;
             });
 
