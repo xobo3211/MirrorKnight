@@ -26,7 +26,8 @@ namespace MirrorKnight
         public static Texture2D enemyBullet, reflectedBullet, room;
         List<string> lines;
         string[,] tilesRead;
-        SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg;
+        SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
+
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         Text text;
 
@@ -164,12 +165,14 @@ namespace MirrorKnight
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            mbeep = Content.Load<SoundEffect>("MenuBeep");
-            monsterRoar = Content.Load<SoundEffect>("monsterRoar");
-            swordSwing = Content.Load<SoundEffect>("swordSwingSFX");
-            doorFX = Content.Load<SoundEffect>("door_lock");
-            bulletReg = Content.Load<SoundEffect>("proReg");
-            bulletShotgun = Content.Load<SoundEffect>("proShotgun");
+            mbeep = Content.Load<SoundEffect>("MenuBeep"); //menu sfw
+            monsterRoar = Content.Load<SoundEffect>("monsterRoar"); //sfw for bosses
+            swordSwing = Content.Load<SoundEffect>("swordSwingSFX"); //sfw when player swings sword, regardless of it hitting anything
+            doorFX = Content.Load<SoundEffect>("door_lock"); //door sfx
+            bulletReg = Content.Load<SoundEffect>("proReg"); //sfx for regular bullet firing from enemies
+            bulletShotgun = Content.Load<SoundEffect>("proShotgun"); //sfw for shotgun enemies
+            bossDoorLock = Content.Load<SoundEffect>("jail_cell_door"); //sound played when boss door is opened, in addition to normal door sound
+
 
             placeHc = Content.Load<Texture2D>("pc");
             crosshair.addTexture("crosshair");
