@@ -26,6 +26,7 @@ namespace MirrorKnight
         public static Texture2D enemyBullet, reflectedBullet, room;
         List<string> lines;
         string[,] tilesRead;
+        SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         Text text;
 
@@ -163,6 +164,13 @@ namespace MirrorKnight
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            mbeep = Content.Load<SoundEffect>("MenuBeep");
+            monsterRoar = Content.Load<SoundEffect>("monsterRoar");
+            swordSwing = Content.Load<SoundEffect>("swordSwingSFX");
+            doorFX = Content.Load<SoundEffect>("door_lock");
+            bulletReg = Content.Load<SoundEffect>("proReg");
+            bulletShotgun = Content.Load<SoundEffect>("proShotgun");
+
             placeHc = Content.Load<Texture2D>("pc");
             crosshair.addTexture("crosshair");
             crosshair.setSize(100, 100);
@@ -203,7 +211,7 @@ namespace MirrorKnight
 
             verticalOffset = (GraphicsDevice.Viewport.Height - map.GetRoom(x, y).Height * tileSize) / 2;
 
-            redBlockThing = Content.Load<Texture2D>("redBlock");
+            //redBlockThing = Content.Load<Texture2D>("redBlock");
         }
 
         /// <summary>
@@ -256,6 +264,11 @@ namespace MirrorKnight
                         mainMenuRect = new Rectangle();
                         pauseMusicButton = new Rectangle();
                         pauseSfxButton = new Rectangle();
+                        if (soundFxTog == true)
+                        {
+                            mbeep.Play();
+                        }
+
                         //mainMenuTransition(gameTime);
                     }
                     if (crosshair.getRectangle().Intersects(pauseMusicButton))
@@ -301,6 +314,10 @@ namespace MirrorKnight
                         if (crosshair.getRectangle().Intersects(pauseExitButton))
                         {
                             this.Exit();
+                            if (soundFxTog == true)
+                            {
+                                mbeep.Play();
+                            }
                         }
                     }
 
@@ -313,7 +330,10 @@ namespace MirrorKnight
                         
                         pauseMusicButton = new Rectangle();
                         pauseSfxButton = new Rectangle();
-
+                        if (soundFxTog == true)
+                        {
+                            mbeep.Play();
+                        }
                         map.HideMap();
                     }
                 }
@@ -328,6 +348,10 @@ namespace MirrorKnight
                     if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
                     {
                         pauseMenu = true;
+                        if (soundFxTog == true)
+                        {
+                            mbeep.Play();
+                        }
                         map.DrawMap();
 
                     }
@@ -432,8 +456,14 @@ namespace MirrorKnight
                             }
                             else Console.WriteLine("Room movement error");
 
-                            if(enteringRoom)
+                            if (enteringRoom)
+                            {
                                 map.EnterRoom(x, y, Content, p);
+                                if (soundFxTog == true)
+                                {
+                                    doorFX.Play();
+                                }
+                            }
                             
                         }
                     }
