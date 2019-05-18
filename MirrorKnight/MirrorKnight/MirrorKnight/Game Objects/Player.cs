@@ -125,7 +125,7 @@ namespace MirrorKnight
             //decrease percent
             int a = HP / b;
 
-            Game1.playerHitbar.decrease(a);
+            //Game1.playerHitbar.decrease(a);
 
         }
 
@@ -176,8 +176,8 @@ namespace MirrorKnight
 
             
 
-            Vector2 start = Game1.PixelToTileCoords(GetOriginPos() - new Vector2(body.getWidth()/2, body.getHeight()/2));
-            Vector2 end = Game1.PixelToTileCoords(GetOriginPos() + new Vector2(body.getWidth()/2, body.getHeight()/2));
+            Vector2 start = Game1.PixelToTileCoords(hitbox.X, hitbox.Y);
+            Vector2 end = Game1.PixelToTileCoords(hitbox.X + hitbox.Width, hitbox.Y + hitbox.Height);
 
             if (hasFlight == false)
             {

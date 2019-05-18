@@ -5,7 +5,14 @@ using System.Text;
 
 namespace MirrorKnight
 {
-    class PassiveItem
+    public class PassiveItem
     {
+
+        int HP_MOD, DMG_MOD, SPD_MOD;
+
+        public PassiveItem(int id)
+        {
+            string filePath = "";
+        }
     }
 }

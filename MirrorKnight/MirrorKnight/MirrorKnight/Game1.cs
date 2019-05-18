@@ -203,7 +203,7 @@ namespace MirrorKnight
 
             verticalOffset = (GraphicsDevice.Viewport.Height - map.GetRoom(x, y).Height * tileSize) / 2;
 
-            redBlockThing = Content.Load<Texture2D>("redBlock");
+            //redBlockThing = Content.Load<Texture2D>("redBlock");
         }
 
         /// <summary>
