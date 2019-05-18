@@ -107,6 +107,7 @@ namespace MirrorKnight
                     if(CalculateRotationalDistance(aimVec, p.body.getOriginPos()) <= 160)       //Checks whether or not the projectile is in front of the player
                     {
                         hitProjectiles.Add(p);
+
                     }
                 }
             }
