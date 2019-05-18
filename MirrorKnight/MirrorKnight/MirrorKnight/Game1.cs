@@ -31,7 +31,7 @@ namespace MirrorKnight
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         Text text;
 
-        bool pauseMenu, pauseOptionsBool, mainMenuBool, soundFxTog, musicTog;
+        public static bool pauseMenu, pauseOptionsBool, mainMenuBool, soundFxTog, musicTog;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mainMenuRect, mainMenuStart;
 
         Rectangle leftDoor, topDoor, rightDoor, bottomDoor;     //Contains hitboxes for the exits from rooms
@@ -520,8 +520,6 @@ namespace MirrorKnight
                 spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(placeHc, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
             }
-
-            //spriteBatch.Draw(box, p.body.getBounds(), Color.White);
             spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
 
             spriteBatch.End();

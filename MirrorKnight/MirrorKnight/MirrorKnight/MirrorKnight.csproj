@@ -77,8 +77,8 @@
     <Compile Include="Game Objects\BasicEnemy.cs" />
     <Compile Include="Game Objects\Entity.cs" />
     <Compile Include="Game Objects\Hitbar.cs" />
+    <Compile Include="Game Objects\Inventory.cs" />
     <Compile Include="Game Objects\LivingEntity.cs" />
-    <Compile Include="Game Objects\Texture2d.cs" />
     <Compile Include="Map Generation\Map.cs" />
     <Compile Include="Game Objects\PassiveItem.cs" />
     <Compile Include="Game Objects\Player.cs" />
