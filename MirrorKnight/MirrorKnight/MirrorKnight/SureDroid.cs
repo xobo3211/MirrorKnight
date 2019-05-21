@@ -656,9 +656,14 @@ namespace SureDroid
             return ival;
         }
 
-        public static void groupAction(String name, Action<Sprite> action)
+        public static bool groupAction(String name, Action<Sprite> action)
         {
-            getGroup(name).ForEach(action);
+            if (groups.ContainsKey(name))
+            {
+                getGroup(name).ForEach(action);
+                return true;
+            }
+            return false;
         }
 
         // -----------------------------------------------------------------
@@ -1418,16 +1423,17 @@ namespace SureDroid
         private int currentVal, max;
         Rectangle baseRect;
         Sprite fill, outline, cover;
-        private static List<Bar> list;
-        static int count = 0;
-        readonly int current;
+        private static int count = 0;
+        private readonly int position;
 
-        public Bar(int x, int y, int width, int height, int max) : this(x,y,width,height,max,max) { }
+        public Bar(int x, int y, int width, int height, int max) : this(x,y,width,height, max, max) { }
 
-        public Bar(int x, int y, int width, int height, int current, int max)
+        public Bar(int x, int y, int width, int height, int current, int max) : this(x, y, width, height, current, max, Color.Red, Color.Green, Color.White) { }
+
+        public Bar(int x, int y, int width, int height, int current, int max, Color baseColor, Color coverColor, Color outlineColor)
         {
             baseRect = new Rectangle(x, y, width, height);
-            current = count;
+            position = count;
             count++;
 
             this.max = max;
@@ -1440,17 +1446,40 @@ namespace SureDroid
             cover.setDepth(0.2f);
             outline.setDepth(0.1f);
 
-            fill.setGroup("bar" + count);
-            outline.setGroup("bar" + count);
-            cover.setGroup("bar" + count);
+            fill.setGroup("bar" + position);
+            outline.setGroup("bar" + position);
+            cover.setGroup("bar" + position);
 
 
-            Sprite.groupAction("bar" + count, sprite => sprite.setPos(x, y));
-            fill.addTexture(Useful.CreateRectangle(width, height, Color.Red));
+            Sprite.groupAction("bar" + position, sprite => sprite.setPos(x, y));
+
+            Texture2D box = Useful.CreateRectangle(width, height, Color.White);
+
+            fill.addTexture(box);
             outline.addTexture(Useful.CreateBox(width, height, 3, Color.White));
-            cover.addTexture(Useful.CreateRectangle(width, height, Color.Green));
+            cover.addTexture(box);
 
-            setVal(currentVal);
+            setVal(current);
+
+            setBaseColor(baseColor);
+            setOutlineColor(outlineColor);
+            setCoverColor(coverColor);
+            
+        }
+
+        public void setBaseColor(Color color)
+        {
+            fill.setColor(color);
+        }
+
+        public void setOutlineColor(Color color)
+        {
+            outline.setColor(color);
+        }
+
+        public void setCoverColor(Color color)
+        {
+            cover.setColor(color);
         }
 
         public void setVal(int num)
@@ -1467,6 +1496,11 @@ namespace SureDroid
         public void increment(int num)
         {
             setVal(currentVal + num);
+        }
+
+        public void decrement(int num)
+        {
+            setVal(currentVal - num);
         }
 
         private void updateBar()

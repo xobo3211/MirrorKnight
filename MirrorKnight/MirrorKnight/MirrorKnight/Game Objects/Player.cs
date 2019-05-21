@@ -36,7 +36,7 @@ namespace MirrorKnight
         public Player()
         {
 
-            bar = new Bar(10, 10, 100, 30, 100);
+            bar = new Bar(10, 10, 100, 30, 100, 100);
 
             i = new Inventory();
 
