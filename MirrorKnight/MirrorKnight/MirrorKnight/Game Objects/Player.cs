@@ -265,5 +265,15 @@ namespace MirrorKnight
             return trueMaxHP;
         }
 
+        public void Pickup(PassiveItem i)
+        {
+
+        }
+
+        public void Pickup(ActiveItem i)
+        {
+
+        }
+
     }
 }

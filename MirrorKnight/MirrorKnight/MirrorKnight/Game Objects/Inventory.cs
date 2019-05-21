@@ -26,6 +26,13 @@ namespace MirrorKnight.Game_Objects
             items = new List<PassiveItem>();
         }
 
+
+
+        public void Update()
+        {
+            active.Update();
+        }
+
         public int getHPMod()
         {
             int boost = 0;
@@ -54,6 +61,16 @@ namespace MirrorKnight.Game_Objects
                 boost *= i.GetSPDMod();
             }
             return boost;
+        }
+
+        public void Add(PassiveItem i)
+        {
+            items.Add(i);
+        }
+
+        public void Add(ActiveItem i)
+        {
+            active = i;
         }
     }
 }
