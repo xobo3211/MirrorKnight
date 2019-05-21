@@ -448,6 +448,13 @@ namespace MirrorKnight
                     for(int i = 0; i < enemies.Count; i++)
                     {
                         enemies[i].Update();
+                        
+                        if(enemies[i].IsAlive() == false)
+                        {
+                            enemies[i].Kill();
+                            enemies.Remove(enemies[i]);
+                            monsterRoar.Play();
+                        }
                     }
 
                     p.Update();
@@ -481,11 +488,9 @@ namespace MirrorKnight
                                 if (projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
                                 {
                                     projectiles[i].Remove();
-                                    enemies[a].Remove();
                                     projectiles.Remove(projectiles[i]);
-                                    enemies.Remove(enemies[a]);
 
-                                    Console.WriteLine("Projectile collision test");
+                                    enemies[a].Hurt((int)p.GetDamage());
                                 }
                             }
                         }

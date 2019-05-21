@@ -48,6 +48,9 @@ namespace MirrorKnight
 
         public BasicEnemy(int x, int y, Texture2D texture, Player p) : base(x, y, texture)
         {
+            Base_HP = 25;
+            HP = Base_HP;
+
             body.setScale(2.5);
             body.translate(-body.getWidth() / 2, -body.getHeight() / 2);
             body.centerOrigin();

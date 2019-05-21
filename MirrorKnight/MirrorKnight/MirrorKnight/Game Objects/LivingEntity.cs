@@ -125,5 +125,20 @@ namespace MirrorKnight
         {
             return hitbox;
         }
+
+        public void Hurt(int damage)
+        {
+            HP -= damage;
+        }
+
+        public bool IsAlive()
+        {
+            return HP >= 0;
+        }
+
+        public void Kill()
+        {
+            body.deleteThis();
+        }
     }
 }
