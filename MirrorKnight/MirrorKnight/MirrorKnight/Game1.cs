@@ -46,7 +46,7 @@ namespace MirrorKnight
         MouseState oldM;
         GamePadState oldGP;
 
-        
+        Rectangle[,] mainMenuKnights;
 
         bool usingController = false, usingKeyboard = true;
 
@@ -537,6 +537,7 @@ namespace MirrorKnight
                             if (enteringRoom)
                             {
                                 map.EnterRoom(x, y, Content, p);
+                                //if (map.GetRoom(x, y).Equals(Room.Type BOSS);
                                 if (soundFxTog == true)
                                 {
                                     doorFX.Play();
