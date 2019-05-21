@@ -1388,44 +1388,65 @@ namespace SureDroid
         }
     }
 
-    /* In Development (NonFunctional)
-     * 
-    public class KeyboardManager : GameComponent
+    public abstract class Drawable
     {
-        KeyboardState kb, okb;
-        List<Keys> touched, pressed;
-
-        KeyboardManager() : base(Useful.game)
-        {
-            Useful.game.Components.Add(this);
-        }
-
-        public void addtouch(Keys key) { touched.Add(key); }
-        public void addpressed(Keys key) { pressed.Add(key); }
-
-        public override void Initialize()
-        {
-            okb = Keyboard.GetState();
-
-            base.Initialize();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            foreach (Keys key in touched)
-            base.Update(gameTime);
-        }
+        public abstract void update(GameTime time);
     }
 
+    public interface IDrawable
+    {
+        void draw(GameTime time);
+    }
 
+    public abstract class Updatable
+    {
+        public abstract void update(SpriteBatch batch);
+    }
+
+    public interface IUpdatable
+    {
+        void update(GameTime time);
+    }
+
+    public interface Component : IDrawable , IUpdatable
+    {
+
+    }
     
     public class Bar
     {
         Texture2D texture;
-        public Bar(int max, int length)
+        private int currentVal, max;
+        Rectangle baseRect;
+
+        private static List<Bar> list;
+
+        public Bar(int x, int y, int width, int height, int current, int max)
+        {
+            baseRect = new Rectangle(x, y, width, height);
+            
+        }
+
+        public void setVal(int num)
+        {
+            if (num < 0)
+                num = 0;
+            else if (num > max)
+                num = max;
+            else
+                currentVal = num;
+        }
+
+        public void increment(int num)
+        {
+            setVal(currentVal + num);
+        }
+
+        private void updateBar()
         {
 
         }
+
+       
     }
-    */
 }

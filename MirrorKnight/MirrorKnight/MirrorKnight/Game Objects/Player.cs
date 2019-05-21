@@ -29,6 +29,9 @@ namespace MirrorKnight
 
         double effectiveDamage, effectiveMovespeed;
         
+
+        public Vector2 lastMove = Vector2.Zero;
+
         public Player()
         {
             i = new Inventory();
@@ -43,6 +46,7 @@ namespace MirrorKnight
             trueMaxHP = Base_HP;
 
             Vector2 movement = Vector2.Zero;
+
             KeyControl.addKeyPress(Keys.W, () => movement.Y = -1);
             KeyControl.addKeyPress(Keys.S, () => movement.Y = 1);
             KeyControl.addKeyPress(Keys.A, () => movement.X = -1);
@@ -69,6 +73,7 @@ namespace MirrorKnight
                         movement.Normalize();
                         movement *= GetSpeed();
                         Move(Game1.map.GetRoom(Game1.x, Game1.y), movement);
+                        lastMove = movement;
                         movement = Vector2.Zero;
                     }
 
@@ -108,7 +113,7 @@ namespace MirrorKnight
         public void Attack(Vector2 aimVec)
         {
             List<Projectile> hitProjectiles = new List<Projectile>();
-
+            Game1.swordSwing.Play();
             for(int i = 0; i < Game1.projectiles.Count; i++)
             {
                 Projectile p = Game1.projectiles[i];

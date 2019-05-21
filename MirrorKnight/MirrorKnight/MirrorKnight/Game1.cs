@@ -26,8 +26,7 @@ namespace MirrorKnight
         public static Texture2D enemyBullet, reflectedBullet, room;
         List<string> lines;
         string[,] tilesRead;
-        Rectangle[,] mainMenuKnights;
-        SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
+        public static SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
 
         int mMTimer;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
@@ -40,7 +39,7 @@ namespace MirrorKnight
         int doorWidth = 50, doorSize = 10;                      //Contains width and protrusion of the doors
         bool enteringRoom = false;                              //Prevents player from interacting with door immediately after entering a room
         int doorTimerMax = 60, doorTimer = 0;                   //Timer to control the enteringRoom boolean.
-
+        Rectangle bounds = new Rectangle(0, 0, 0, 0);
 
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
@@ -161,10 +160,7 @@ namespace MirrorKnight
             leftDoor = new Rectangle(24, Useful.getWHeight()/2 - doorWidth / 2, doorSize, doorWidth);
             rightDoor = new Rectangle(Useful.getWWidth() - doorSize, Useful.getWHeight() / 2 - doorWidth / 2, doorSize, doorWidth);
 
-            topDoor = new Rectangle(Useful.getWWidth()/2 - doorWidth / 2, verticalOffset, doorWidth, doorSize);
-            bottomDoor = new Rectangle(Useful.getWWidth() / 2 - doorWidth / 2, Useful.getWHeight() - doorSize - verticalOffset, doorWidth, doorSize);
 
-            //healthbar = new Hitbar(700, 30, 20, 500);
             base.Initialize(); 
         } 
 
@@ -233,9 +229,12 @@ namespace MirrorKnight
 
             map.GetRoom(x, y).EnterRoom(Content, p);
 
-            verticalOffset = (GraphicsDevice.Viewport.Height - map.GetRoom(x, y).Height * tileSize) / 2;
+            verticalOffset = (Useful.getWHeight() - map.GetRoom(x, y).Height * tileSize) / 2;
 
-            //redBlockThing = Content.Load<Texture2D>("redBlock");
+            topDoor = new Rectangle(Useful.getWWidth() / 2 - doorWidth / 2, verticalOffset, doorWidth, doorSize);
+            bottomDoor = new Rectangle(Useful.getWWidth() / 2 - doorWidth / 2, Useful.getWHeight() - doorSize - verticalOffset, doorWidth, doorSize);
+
+            // redBlockThing = Content.Load<Texture2D>("redBlock");
         }
 
         /// <summary>
@@ -415,9 +414,7 @@ namespace MirrorKnight
                 else if (pauseMenu == false)
                 {
                     ////////////////////////////////////////////////////////////////Player movement and aiming logic
-
-                    Vector2 playerMoveVec = Vector2.Zero;
-                    Vector2 playerAimVec = Vector2.Zero;
+                    
 
                     p.body.setVisible(true);
                     if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
@@ -499,33 +496,39 @@ namespace MirrorKnight
                     ////////////////////////////////////////////////////////Movement from room to room logic
 
                     //If player enters the hitbox for a door
-                    if (enteringRoom == false && (p.Intersects(leftDoor) || p.Intersects(rightDoor) || p.Intersects(topDoor) || p.Intersects(bottomDoor)))
+
+                    bounds = p.getHitbox();
+
+                    if (enteringRoom == false && (bounds.Intersects(leftDoor) || bounds.Intersects(rightDoor) || bounds.Intersects(topDoor) || bounds.Intersects(bottomDoor)))
                     {
                         if (enemies.Count == 0)  //And if all enemies are dead
                         {
                             //Checks each door hitbox, whether or not the room in that direction exists, and if the player is moving towards that door
                             //If so, moves the player to that room
-                            if (p.Intersects(leftDoor) && map.CheckRoom(x - 1, y) && playerMoveVec.X < 0)  
+                            Console.WriteLine(map.CheckRoom(x - 1, y));
+                            Console.WriteLine(p.lastMove);
+                            Console.WriteLine(bounds.Intersects(leftDoor));
+                            if (bounds.Intersects(leftDoor) && map.CheckRoom(x - 1, y) && p.lastMove.X < 0)
                             {
                                 x--;
                                 p.body.setPos(rightDoor.X - rightDoor.Width * 2 - p.body.getWidth() / 2, rightDoor.Y + rightDoor.Height / 2 - p.body.getHeight() / 2);
                                 enteringRoom = true;
                             }
-                            else if (p.Intersects(rightDoor) && map.CheckRoom(x + 1, y) && playerMoveVec.X > 0)
+                            else if (bounds.Intersects(rightDoor) && map.CheckRoom(x + 1, y) && p.lastMove.X > 0)
                             {
                                 x++;
                                 p.body.setPos(leftDoor.X + leftDoor.Width * 2 + p.body.getWidth() / 2, leftDoor.Y + leftDoor.Height / 2 - p.body.getHeight() / 2);
                                 enteringRoom = true;
 
                             }
-                            else if (p.Intersects(topDoor) && map.CheckRoom(x, y - 1) && playerMoveVec.Y < 0)
+                            else if (bounds.Intersects(topDoor) && map.CheckRoom(x, y - 1) && p.lastMove.Y < 0)
                             {
                                 y--;
                                 p.body.setPos(bottomDoor.X + bottomDoor.Width / 2 - p.body.getWidth() / 2, bottomDoor.Y - bottomDoor.Height * 2 - p.body.getHeight() / 2);
                                 enteringRoom = true;
 
                             }
-                            else if (p.Intersects(bottomDoor) && map.CheckRoom(x, y + 1) && playerMoveVec.Y > 0)
+                            else if (bounds.Intersects(bottomDoor) && map.CheckRoom(x, y + 1) && p.lastMove.Y > 0)
                             {
                                 y++;
                                 p.body.setPos(topDoor.X + topDoor.Width / 2 - p.body.getWidth() / 2, topDoor.Y + topDoor.Height * 2 + p.body.getHeight() / 2);
@@ -551,7 +554,7 @@ namespace MirrorKnight
                     }
                     else
                     {
-                        if(doorTimer >= doorTimerMax)
+                        if (doorTimer >= doorTimerMax)
                         {
                             enteringRoom = false;
                             doorTimer = 0;
@@ -606,7 +609,6 @@ namespace MirrorKnight
                 spriteBatch.Draw(exitB, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
             }
             spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-
             spriteBatch.End();
 
             base.Draw(gameTime);
