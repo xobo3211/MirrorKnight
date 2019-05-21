@@ -26,7 +26,7 @@ namespace MirrorKnight
         public static Texture2D enemyBullet, reflectedBullet, room;
         List<string> lines;
         string[,] tilesRead;
-        SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
+        public static SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
 
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         Text text;
