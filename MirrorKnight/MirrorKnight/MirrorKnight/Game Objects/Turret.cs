@@ -29,6 +29,7 @@ namespace MirrorKnight
         {
             body.setSize(25, 25);
             body.centerOrigin();
+            body.setScale(3);
 
             targetEntity = target;
             targetsEntity = true;
@@ -38,6 +39,7 @@ namespace MirrorKnight
         {
             body.setSize(25, 25);
             body.centerOrigin();
+            body.setScale(3);
 
             this.target = target;
             targetsEntity = false;

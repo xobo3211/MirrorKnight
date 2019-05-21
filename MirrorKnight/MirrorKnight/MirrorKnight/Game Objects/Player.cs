@@ -31,9 +31,13 @@ namespace MirrorKnight
         
 
         public Vector2 lastMove = Vector2.Zero;
+        private Bar bar;
 
         public Player()
         {
+
+            bar = new Bar(10, 10, 100, 30, 100);
+
             i = new Inventory();
 
             body = new Sprite(10, 10);
