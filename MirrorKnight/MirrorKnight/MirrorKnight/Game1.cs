@@ -452,6 +452,8 @@ namespace MirrorKnight
 
                     p.Update();
 
+                    Console.WriteLine(enemies.Count);
+
                     ///////////////////////////////////////////////////////////////////////////////Projectile logic
 
                     for (int i = 0; i < projectiles.Count; i++)
@@ -537,7 +539,11 @@ namespace MirrorKnight
                             if (enteringRoom)
                             {
                                 map.EnterRoom(x, y, Content, p);
-                                //if (map.GetRoom(x, y).Equals(Room.Type BOSS);
+
+                                if(map.GetRoom(x, y).getRoomType() == Room.Type.BOSS)
+                                {
+                                    bossDoorLock.Play();
+                                }
                                 if (soundFxTog == true)
                                 {
                                     doorFX.Play();
