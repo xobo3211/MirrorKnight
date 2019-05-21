@@ -88,6 +88,7 @@ namespace MirrorKnight
             });
 
             load();
+            body.setDepth(Game1.ENTITY);
         }
         
 
@@ -112,7 +113,7 @@ namespace MirrorKnight
         public void Attack(Vector2 aimVec)
         {
             List<Projectile> hitProjectiles = new List<Projectile>();
-
+            Game1.swordSwing.Play();
             for(int i = 0; i < Game1.projectiles.Count; i++)
             {
                 Projectile p = Game1.projectiles[i];

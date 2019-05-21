@@ -17,9 +17,131 @@ namespace MirrorKnight.Game_Objects
 {
     public class BossEnemy : BasicEnemy
     {
+
+        public const int Burst = 2;
+
+
         public BossEnemy(int x, int y, Texture2D texture, Player p) : base(x, y, texture, p)
         {
 
+        }
+
+        public override void Update()
+        {
+            if (actionList[0] == Burst)
+            {
+                b = Behavior.Idle;
+            }
+            else b = Behavior.ChasePlayer;
+
+            while (actionList.Count < bufferSize)
+            {
+                Random rn = new Random();
+
+                Thread.Sleep(rn.Next(3));
+
+                double chance = rn.NextDouble();
+
+                int type = Basic;
+
+                for (int i = 1; i < probability.Length; i++)
+                {
+                    if (chance <= probability[i])
+                    {
+                        type = i;
+                    }
+                }
+
+                actionList.Add(type);
+                timeList.Add(firingTime[(int)type]);
+            }
+
+            timeList[0]--;
+
+            if (timeList[0] <= 0)                    //Handles shooting
+            {
+                timeList.Remove(timeList[0]);
+                Fire(actionList[0]);
+
+                actionList.Remove(actionList[0]);
+            }
+
+
+            switch (b)              //Handle movement
+            {
+                case Behavior.Idle:
+                    break;
+
+                case Behavior.ChasePlayer:
+                    velocity = p.GetOriginPos() - GetOriginPos();
+                    velocity.Normalize();
+                    velocity *= SPEED;
+                    Move(Game1.GetCurrentRoom(), velocity);
+
+                    break;
+            }
+        }
+
+        public override void Fire(int t)
+        {
+            Vector2 pos = GetOriginPos();
+
+            Vector2 velocity = p.GetOriginPos() - pos;
+            velocity.Normalize();
+            velocity *= Projectile.defaultShotSpeed;
+
+            Projectile proj = new Projectile(pos, velocity);
+
+            switch (t)
+            {
+                case Basic:
+                    Game1.projectiles.Add(proj);
+                    break;
+
+                case Shotgun:
+
+                    double spread = Math.PI / 6;
+                    int bulletsPerSide = bulletCount / 2;
+                    double rotation, iteration;
+                    rotation = iteration = spread / bulletsPerSide;
+
+                    Game1.projectiles.Add(proj);
+
+                    for (int i = 1; i < bulletCount; i += 2)
+                    {
+                        Projectile left, right;
+                        left = new Projectile(pos, velocity);
+                        right = new Projectile(pos, velocity);
+
+                        left.RotateVelocity(-(float)rotation);
+                        right.RotateVelocity((float)rotation);
+
+                        Game1.projectiles.Add(left);
+                        Game1.projectiles.Add(right);
+
+                        rotation += iteration;
+                    }
+                    break;
+
+                case Burst:
+
+                    Game1.projectiles.Add(proj);
+
+                    Random rn = new Random();
+
+                    for (int i = 1; i < bulletCount * 3; i++)
+                    {
+                        Projectile p = new Projectile(pos, velocity);
+
+                        double tempRotate = rn.NextDouble() * Math.PI * 2;
+
+                        p.RotateVelocity((float)tempRotate);
+
+                        Game1.projectiles.Add(p);
+                    }
+
+                    break;
+            }
         }
     }
 }

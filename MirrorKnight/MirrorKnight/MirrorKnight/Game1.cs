@@ -26,8 +26,7 @@ namespace MirrorKnight
         public static Texture2D enemyBullet, reflectedBullet, room;
         List<string> lines;
         string[,] tilesRead;
-        Rectangle[,] mainMenuKnights;
-        SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
+        public static SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
 
         int mMTimer;
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
@@ -47,7 +46,7 @@ namespace MirrorKnight
         MouseState oldM;
         GamePadState oldGP;
 
-        
+        Rectangle[,] mainMenuKnights;
 
         bool usingController = false, usingKeyboard = true;
 
@@ -453,6 +452,8 @@ namespace MirrorKnight
 
                     p.Update();
 
+                    Console.WriteLine(enemies.Count);
+
                     ///////////////////////////////////////////////////////////////////////////////Projectile logic
 
                     for (int i = 0; i < projectiles.Count; i++)
@@ -538,6 +539,12 @@ namespace MirrorKnight
                             if (enteringRoom)
                             {
                                 map.EnterRoom(x, y, Content, p);
+
+                                if(map.GetRoom(x, y).getRoomType() == Room.Type.BOSS)
+                                {
+                                    bossDoorLock.Play();
+                                    monsterRoar.Play();
+                                }
                                 if (soundFxTog == true)
                                 {
                                     doorFX.Play();
