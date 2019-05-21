@@ -71,6 +71,8 @@ namespace MirrorKnight
         Sprite[] hearts;
         Sprite crosshair;
 
+        Sprite menuBackground;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -113,6 +115,8 @@ namespace MirrorKnight
         /// </summary>
         protected override void Initialize()
         {
+
+            menuBackground = new Sprite(0,0);
             // TODO: Add your initialization logic here
             //IsMouseVisible = true;
             mainMenuKnights = new Rectangle[Useful.getWWidth()/40, Useful.getWHeight()/40];
@@ -172,6 +176,11 @@ namespace MirrorKnight
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            menuBackground.addTexture(Useful.CreateRectangle(1, 1, Color.Black));
+            menuBackground.setSize(Useful.getWWidth(), Useful.getWHeight());
+            //menuBackground.setDepth(MENU_BUTTONS+.1f);
+            menuBackground.setVisible(false);
 
             // TODO: use this.Content to load your game content here
             mbeep = Content.Load<SoundEffect>("MenuBeep"); //menu sfw

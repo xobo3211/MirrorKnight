@@ -6,10 +6,12 @@ using SureDroid;
 
 namespace MirrorKnight
 {
-    class Bar
+    class UI
     {
-        public Bar(int x, int y)
+        
+        public UI()
         {
+
         }
     }
 }

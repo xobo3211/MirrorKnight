@@ -54,6 +54,7 @@ namespace MirrorKnight
             body.setScale(2.5);
             body.translate(-body.getWidth() / 2, -body.getHeight() / 2);
             body.centerOrigin();
+            body.setGroup("enemy");
 
             this.p = p;
         }

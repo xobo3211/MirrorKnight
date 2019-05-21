@@ -1421,20 +1421,29 @@ namespace SureDroid
         private static List<Bar> list;
         static int count = 0;
         readonly int current;
-        public Bar(int x, int y, int width, int height, int current, int max)
+
+        public Bar(int x, int y, int width, int height, int max)
         {
             baseRect = new Rectangle(x, y, width, height);
             current = count;
             count++;
-            
+
+            fill = new Sprite();
+            cover = new Sprite();
+            outline = new Sprite();
+
+            fill.setDepth(0.3f);
+            cover.setDepth(0.2f);
+            outline.setDepth(0.1f);
 
             fill.setGroup("bar" + count);
             outline.setGroup("bar" + count);
             cover.setGroup("bar" + count);
+
             Sprite.groupAction("bar" + count, sprite => sprite.setPos(x, y));
             fill.addTexture(Useful.CreateRectangle(width, height, Color.Red));
             outline.addTexture(Useful.CreateBox(width, height, 3, Color.White));
-            //fill.addTexture();
+            cover.addTexture(Useful.CreateRectangle(width, height, Color.Green));
         }
 
         public void setVal(int num)
