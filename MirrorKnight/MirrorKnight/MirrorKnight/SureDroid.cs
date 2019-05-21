@@ -1421,9 +1421,10 @@ namespace SureDroid
     public class Bar
     { 
         private int currentVal, max;
-        Sprite fill, outline, cover;
+        private Sprite fill, outline, cover;
         private static int count = 0;
         private readonly int position;
+        private Wrapper<int> reference;
 
         public Bar(int x, int y, int width, int height, int max) : this(x,y,width,height, max, max) { }
 
@@ -1466,6 +1467,18 @@ namespace SureDroid
             
         }
 
+        public void setReference(Wrapper<int> val)
+        {
+            reference = val;
+            fill.setUpdate(() =>
+            {
+                if (reference.Value != currentVal)
+                {
+                    setVal(reference.Value);
+                }
+            });
+        }
+
         public void setBaseColor(Color color)
         {
             fill.setColor(color);
@@ -1483,13 +1496,16 @@ namespace SureDroid
 
         public void setVal(int num)
         {
-            if (num < 0)
-                num = 0;
-            else if (num > max)
-                num = max;
-            else
-                currentVal = num;
-            updateBar();
+            if (currentVal != num)
+            {
+                if (num < 0)
+                    num = 0;
+                else if (num > max)
+                    num = max;
+                else
+                    currentVal = num;
+                updateBar();
+            }
         }
 
         public void increment(int num)
@@ -1512,5 +1528,39 @@ namespace SureDroid
             Sprite.groupAction("bar" + position, action);
             updateBar();
         }
+    }
+
+
+    public class Wrapper<T> where T : struct
+    {
+        public static implicit operator T(Wrapper<T> w)
+        {
+            return w.Value;
+        }
+
+        public Wrapper(T t)
+        {
+            _t = t;
+        }
+
+        public T Value
+        {
+            get
+            {
+                return _t;
+            }
+
+            set
+            {
+                _t = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return _t.ToString();
+        }
+
+        private T _t;
     }
 }
