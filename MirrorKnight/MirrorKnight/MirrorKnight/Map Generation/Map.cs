@@ -453,22 +453,22 @@ namespace MirrorKnight
             if (x > -1 && rooms[x - 1, y] != null)
             {
                 SetColor(x - 1, y);
-                minimap[x - 1, y].setDepth(Game1.MINIMAP);
+                
             }
             if (x < maxX && rooms[x + 1, y] != null)
             { 
                 SetColor(x + 1, y);
-                minimap[x + 1, y].setDepth(Game1.MINIMAP);
+
             }
             if (y > -1 && rooms[x, y - 1] != null)
             {
                 SetColor(x, y - 1);
-                minimap[x, y - 1].setDepth(Game1.MINIMAP);
+
             }
             if (y < maxY && rooms[x, y + 1] != null)
             {
                 SetColor(x, y + 1);
-                minimap[x, y + 1].setDepth(Game1.MINIMAP);
+
             }
 
             minimap[x, y].setColor(Color.White);
@@ -531,18 +531,10 @@ namespace MirrorKnight
                     minimap[j, i] = new Sprite(j * 20, i*20);
                     minimap[j, i].addTexture(Game1.room);
                     minimap[j, i].setSize(20, 20);
-                    minimap[j, i].setDepth(Game1.INVISIBLE);
+                    minimap[j, i].setDepth(Game1.MINIMAP);
                     minimap[j, i].setVisible(true);
 
-                    if (rooms[j, i] != null)
-                    {
-
-                        SetColor(j, i);
-                    }
-                    else
-                    {
-                        minimap[j, i].setColor(Color.Black);
-                    }
+                    minimap[j, i].setColor(Color.Black);
                 }
             }
 
