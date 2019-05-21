@@ -1645,7 +1645,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="roomEntities\puzzle\" />
-    <Folder Include="roomEntities\secret\" />
     <Folder Include="roomEntities\shop\" />
     <Folder Include="roomEntities\treasure\" />
   </ItemGroup>
@@ -1893,6 +1892,12 @@
     <None Include="roomEntities\boss\1.txt">
       <Name>1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="roomEntities\secret\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>1</Name>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
