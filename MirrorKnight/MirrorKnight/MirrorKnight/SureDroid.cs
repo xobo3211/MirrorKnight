@@ -1422,11 +1422,15 @@ namespace SureDroid
         static int count = 0;
         readonly int current;
 
-        public Bar(int x, int y, int width, int height, int max)
+        public Bar(int x, int y, int width, int height, int max) : this(x,y,width,height,max,max) { }
+
+        public Bar(int x, int y, int width, int height, int current, int max)
         {
             baseRect = new Rectangle(x, y, width, height);
             current = count;
             count++;
+
+            this.max = max;
 
             fill = new Sprite();
             cover = new Sprite();
@@ -1440,10 +1444,13 @@ namespace SureDroid
             outline.setGroup("bar" + count);
             cover.setGroup("bar" + count);
 
+
             Sprite.groupAction("bar" + count, sprite => sprite.setPos(x, y));
             fill.addTexture(Useful.CreateRectangle(width, height, Color.Red));
             outline.addTexture(Useful.CreateBox(width, height, 3, Color.White));
             cover.addTexture(Useful.CreateRectangle(width, height, Color.Green));
+
+            setVal(currentVal);
         }
 
         public void setVal(int num)
@@ -1454,6 +1461,7 @@ namespace SureDroid
                 num = max;
             else
                 currentVal = num;
+            updateBar();
         }
 
         public void increment(int num)
@@ -1463,7 +1471,7 @@ namespace SureDroid
 
         private void updateBar()
         {
-
+            cover.setSize((currentVal / max) * baseRect.Width, baseRect.Height);
         }
 
        
