@@ -26,8 +26,8 @@ namespace MirrorKnight
 
         public const int Basic = 0, Shotgun = 1;
 
-        protected int[] firingTime = new int[] { 60, 90, 120 };                   //Delay after firing before next action taken by the enemy
-        protected double[] probability = new double[] { 1, 0.3, 0.2 };          //Percent probability for the different firing types at different moments, first one must be 1 as it's the default value if all others fail
+        protected int[] firingTime = new int[] { 60, 90 };                   //Delay after firing before next action taken by the enemy
+        protected double[] probability = new double[] { 1, 0.3};          //Percent probability for the different firing types at different moments, first one must be 1 as it's the default value if all others fail
 
 
 
@@ -118,10 +118,15 @@ namespace MirrorKnight
             switch (t)
             {
                 case Basic:
+
+                    Game1.bulletShotgun.Play();
+
                     Game1.projectiles.Add(proj);
                     break;
 
                 case Shotgun:
+
+                    Game1.bulletShotgun.Play();
 
                     double spread = Math.PI / 6;
                     int bulletsPerSide = bulletCount / 2;
@@ -144,6 +149,9 @@ namespace MirrorKnight
 
                         rotation += iteration;
                     }
+
+                    Console.WriteLine(Game1.projectiles.Count);
+
                     break;
             }
         }

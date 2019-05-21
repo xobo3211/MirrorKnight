@@ -20,6 +20,9 @@ namespace MirrorKnight.Game_Objects
 
         public const int Burst = 2;
 
+        protected new int[] firingTime = new int[] { 60, 90, 120 };                   //Delay after firing before next action taken by the enemy
+        protected new double[] probability = new double[] { 1, 0.3, 0.2 };
+
 
         public BossEnemy(int x, int y, Texture2D texture, Player p) : base(x, y, texture, p)
         {

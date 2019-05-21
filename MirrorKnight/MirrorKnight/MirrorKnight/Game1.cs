@@ -452,8 +452,6 @@ namespace MirrorKnight
 
                     p.Update();
 
-                    Console.WriteLine(enemies.Count);
-
                     ///////////////////////////////////////////////////////////////////////////////Projectile logic
 
                     for (int i = 0; i < projectiles.Count; i++)
