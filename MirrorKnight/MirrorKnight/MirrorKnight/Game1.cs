@@ -64,7 +64,7 @@ namespace MirrorKnight
         public static int tileSize = 60, verticalOffset;
 
         //Layer depths for everything. Depths range from 0 ~ 1, with lower numbers being further forward
-        public static float INVISIBLE = 1.0f, TILE = 0.8f, PROJECTILE = 0.6f, ENTITY = 0.5f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
+        public static float INVISIBLE = 1.0f, TILE = 0.8f, PROJECTILE = 0.6f, ENTITY = 0.45f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
 
         Texture2D box;
 
@@ -278,7 +278,7 @@ namespace MirrorKnight
                     for (int j = 0; j < (Useful.getWHeight() / 40) - 1; j++)
                     {
                         mainMenuKnights[i, j].X += mMTimer;
-                        if (mainMenuKnights[i, j].X == Useful.getWWidth())
+                        if (mainMenuKnights[i, j].X >= Useful.getWWidth())
                         {
                             mainMenuKnights[i, j].X -= Useful.getWWidth();
                         }
