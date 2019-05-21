@@ -543,6 +543,7 @@ namespace MirrorKnight
                                 if(map.GetRoom(x, y).getRoomType() == Room.Type.BOSS)
                                 {
                                     bossDoorLock.Play();
+                                    monsterRoar.Play();
                                 }
                                 if (soundFxTog == true)
                                 {
