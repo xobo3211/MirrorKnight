@@ -28,10 +28,10 @@ namespace MirrorKnight
         string[,] tilesRead;
         public static SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
 
-        int mMTimer;
+        int mMTimer; //main menu scrolling
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         Text text;
-
+        Random rn;
         public static bool pauseMenu, pauseOptionsBool, mainMenuBool, soundFxTog, musicTog;
         Rectangle pauseOptionsButton, pauseMusicButton, pauseSfxButton, pauseExitButton, pauseMenuRect, mainMenuRect, mainMenuStart;
 
@@ -124,7 +124,7 @@ namespace MirrorKnight
                     mainMenuKnights[i, j] = new Rectangle(40 * j, 40 * i, 16, 28);
                 }
             }
-
+            rn = new Random();
             mMTimer = 0;
 
             mainMenuBool = true;
@@ -269,18 +269,19 @@ namespace MirrorKnight
 
             if (mainMenuBool == true)
             {
-                mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 200), 400, 100);
-                pauseOptionsButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 50), 400, 60);
+                //mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 200), 400, 100);
+                mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 50), 400, 60);
                 pauseExitButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 + 50), 400, 60);
                 mMTimer++;
-                for (int i = 0; i < (Useful.getWWidth() / 40) - 1; i++)
+                for (int i = 0; i < (Useful.getWWidth() / 40); i++)
                 {
-                    for (int j = 0; j < (Useful.getWHeight() / 40) - 1; j++)
+                    for (int j = 0; j < (Useful.getWHeight() / 40) ; j++)
                     {
-                        mainMenuKnights[i, j].X += mMTimer;
-                        if (mainMenuKnights[i, j].X == Useful.getWWidth())
+                        //mainMenuKnights[i, j].X += 1;
+                        mainMenuKnights[i, j].X += (rn.Next(10));
+                        if (mainMenuKnights[i, j].X >= Useful.getWWidth())
                         {
-                            mainMenuKnights[i, j].X -= Useful.getWWidth();
+                            mainMenuKnights[i, j].X -=  Useful.getWWidth();
                         }
                         
                     }
@@ -586,19 +587,20 @@ namespace MirrorKnight
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, null, null);
             if (mainMenuBool == true)
             {
-                for (int i = 0; i < Useful.getWWidth() / 40; i++)
+                for (int i = 0; i < Useful.getWWidth() / 40 ; i++)
                 {
                     for (int j = 0; j < Useful.getWHeight() / 40; j++)
                     {
-                        spriteBatch.Draw(kk, mainMenuKnights[i, j], Color.White);
+                        spriteBatch.Draw(kk, mainMenuKnights[i, j], null, Color.White);//, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                     }
                 }
                 spriteBatch.Draw(placeHc, mainMenuStart, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(pMB, pauseMusicButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(pSB, pauseSfxButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
-                spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                //spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(exitB, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(mainScreen, mainMenuRect, null, Color.White);
+                
             }
             else if (mainMenuBool == false)
             {
@@ -606,7 +608,7 @@ namespace MirrorKnight
                 spriteBatch.Draw(menuImage, pauseMenuRect, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU);
                 spriteBatch.Draw(pMB, pauseMusicButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(pSB, pauseSfxButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
-                spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                //spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(exitB, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
             }
             spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
