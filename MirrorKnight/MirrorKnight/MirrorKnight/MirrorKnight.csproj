@@ -76,7 +76,6 @@
     <Compile Include="Game Objects\BasicEnemy.cs" />
     <Compile Include="Game Objects\BossEnemy.cs" />
     <Compile Include="Game Objects\Entity.cs" />
-    <Compile Include="Game Objects\Hitbar.cs" />
     <Compile Include="Game Objects\Inventory.cs" />
     <Compile Include="Game Objects\LivingEntity.cs" />
     <Compile Include="Game Objects\UI.cs" />

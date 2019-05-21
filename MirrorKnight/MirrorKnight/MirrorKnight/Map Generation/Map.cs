@@ -29,6 +29,8 @@ namespace MirrorKnight
         int maxRoomCount;
         int currentRoomCount;
 
+        Floor f;
+
         Random rn = new Random();
 
         enum Rooms
@@ -64,6 +66,8 @@ namespace MirrorKnight
         {
 
             bool boss, treasure, shop, secret;
+
+            this.f = f;
 
             switch (f)
             {
@@ -572,6 +576,11 @@ namespace MirrorKnight
                 return false;
             }
             else return roomsEnum[x, y] != Rooms.VOID;
+        }
+
+        public Floor GetNextFloor()
+        {
+            return (Floor)((int)(f + 1));
         }
     }
 }

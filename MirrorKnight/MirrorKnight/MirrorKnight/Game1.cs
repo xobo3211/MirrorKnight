@@ -41,6 +41,11 @@ namespace MirrorKnight
         int doorTimerMax = 60, doorTimer = 0;                   //Timer to control the enteringRoom boolean.
         Rectangle bounds = new Rectangle(0, 0, 0, 0);
 
+
+        static int exitWidth = 50;
+        Rectangle floorExit;
+        bool playerCanExit = false;                            //Detects if player is allowed to go to next floor
+
         public static Dictionary<string, Dictionary<String, Texture2D>> sprites;
         KeyboardState oldKB;
         MouseState oldM;
@@ -51,7 +56,7 @@ namespace MirrorKnight
         bool usingController = false, usingKeyboard = true;
 
         Player p;
-        //public static Hitbar playerHitbar;
+
         Texture redBlockThing;
         public static Map map;
 
@@ -64,7 +69,7 @@ namespace MirrorKnight
         public static int tileSize = 60, verticalOffset;
 
         //Layer depths for everything. Depths range from 0 ~ 1, with lower numbers being further forward
-        public static float INVISIBLE = 1.0f, TILE = 0.8f, PROJECTILE = 0.6f, ENTITY = 0.45f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
+        public static float INVISIBLE = 1.0f, TILE = 0.8f, PROJECTILE = 0.6f, ENTITY = 0.45f, SUB_UI_ELEMENT = 0.35f , UI_ELEMENT = 0.3f, MENU = 0.2f, MENU_BUTTONS = 0.1f, MINIMAP = 0.0f;
 
         Texture2D box;
 
@@ -163,6 +168,8 @@ namespace MirrorKnight
             //Creates the bounding boxes for the doors
             leftDoor = new Rectangle(24, Useful.getWHeight()/2 - doorWidth / 2, doorSize, doorWidth);
             rightDoor = new Rectangle(Useful.getWWidth() - doorSize, Useful.getWHeight() / 2 - doorWidth / 2, doorSize, doorWidth);
+
+            floorExit = new Rectangle(Useful.getWWidth() / 2 - exitWidth / 2, Useful.getWHeight() / 2 - exitWidth / 2, exitWidth, exitWidth);
 
 
             base.Initialize(); 
@@ -276,6 +283,11 @@ namespace MirrorKnight
             MouseState m = Mouse.GetState();
             GamePadState gp = GamePad.GetState(PlayerIndex.One);
 
+
+
+
+
+            /////////////////////////////////////////////Main menu logic
             if (mainMenuBool == true)
             {
                 //mainMenuStart = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 200), 400, 100);
@@ -356,9 +368,10 @@ namespace MirrorKnight
                 }
 
             }
+            ////////////////////////////////////////////End main menu logic
             if (mainMenuBool == false)
             {
-
+                ///////////////////////////////////Pause menu logic
                 if (pauseMenu == true)
                 {
                         
@@ -420,9 +433,13 @@ namespace MirrorKnight
                         }
                         map.HideMap();
                     }
+                    /////////////////////////////////////////////////////////End pause menu logic
                 }
                 else if (pauseMenu == false)
                 {
+                ////////////////////////////////////////////////////////////////Begin normal game logic
+
+
                     ////////////////////////////////////////////////////////////////Player movement and aiming logic
                     
 
@@ -464,6 +481,8 @@ namespace MirrorKnight
                             enemies[i].Kill();
                             enemies.Remove(enemies[i]);
                             monsterRoar.Play();
+
+                            i--;
                         }
                     }
 
@@ -484,11 +503,15 @@ namespace MirrorKnight
                         {
                             projectiles[i].Remove();
                             projectiles.Remove(projectiles[i]);
+
+                            i--;
                         }
                         else if (isTileShootableThrough(projectiles[i].body.getOriginPos()) == false)
                         {
                             projectiles[i].Remove();
                             projectiles.Remove(projectiles[i]);
+
+                            i--;
                         }
 
                         else //Detects if projectile is currently hitting an enemy and if it is a reflected projectile.
@@ -499,6 +522,8 @@ namespace MirrorKnight
                                 {
                                     projectiles[i].Remove();
                                     projectiles.Remove(projectiles[i]);
+
+                                    i--;
 
                                     enemies[a].Hurt((int)p.GetDamage());
                                 }
@@ -576,7 +601,31 @@ namespace MirrorKnight
                         doorTimer++;
                     }
 
+                    ////////////////////////////////////////////////////////Floor exit logic
+                    if(map.GetRoom(x, y).getRoomType() == Room.Type.BOSS)
+                    {
+                        if(enemies.Count == 0)
+                        {
+                            if(p.Intersects(floorExit) && playerCanExit)
+                            {
+                                map = new Map(map.GetNextFloor());
+
+                                x = map.GetDimensions().X / 2;
+                                y = map.GetDimensions().Y / 2;
+
+                                map.GetRoom(x, y).EnterRoom(Content, p);
+                            }
+                            else if(!p.Intersects(floorExit))
+                            {
+                                playerCanExit = true;
+                            }
+                        }
+                    }
+
+                    
+
                 }
+                ///////////////////////////////////////////End normal game logic
 
             }
 
@@ -622,6 +671,11 @@ namespace MirrorKnight
                 spriteBatch.Draw(pSB, pauseSfxButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 //spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(exitB, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+
+                if(map.GetRoom(x, y).getRoomType() == Room.Type.BOSS && enemies.Count == 0)
+                {
+                    spriteBatch.Draw(placeHc, floorExit, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, PROJECTILE);
+                }
             }
             // spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
             spriteBatch.End();
