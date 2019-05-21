@@ -17,7 +17,7 @@ namespace MirrorKnight.Game_Objects
         public int percent;
 
         public Rectangle rect;
-        public Texture2d texture;
+        public Texture2D texture;
         private int v1;
         private int v2;
         private int v3;
