@@ -1421,7 +1421,6 @@ namespace SureDroid
     public class Bar
     { 
         private int currentVal, max;
-        Rectangle baseRect;
         Sprite fill, outline, cover;
         private static int count = 0;
         private readonly int position;
@@ -1432,7 +1431,7 @@ namespace SureDroid
 
         public Bar(int x, int y, int width, int height, int current, int max, Color baseColor, Color coverColor, Color outlineColor)
         {
-            baseRect = new Rectangle(x, y, width, height);
+            Rectangle baseRect = new Rectangle(x, y, width, height);
             position = count;
             count++;
 
@@ -1505,9 +1504,13 @@ namespace SureDroid
 
         private void updateBar()
         {
-            cover.setSize((currentVal / max) * baseRect.Width, baseRect.Height);
+            cover.setSize((currentVal / max) * fill.getWidth(), fill.getHeight());
         }
 
-       
+        public void change(Action<Sprite> action)
+        {
+            Sprite.groupAction("bar" + position, action);
+            updateBar();
+        }
     }
 }
