@@ -125,7 +125,7 @@ namespace MirrorKnight
             //decrease percent
             int a = HP / b;
 
-            Game1.playerHitbar.decrease(a);
+            //Game1.playerHitbar.decrease(a);
 
         }
 
