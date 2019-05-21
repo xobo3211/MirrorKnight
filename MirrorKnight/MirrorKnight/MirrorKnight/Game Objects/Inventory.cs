@@ -48,7 +48,7 @@ namespace MirrorKnight.Game_Objects
             {
                 boost *= i.GetDMGMod();
             }
-            if(active.IsActive())
+            if(active != null && active.IsActive())
             {
                 boost *= active.GetDMGMod();
             }
@@ -62,7 +62,7 @@ namespace MirrorKnight.Game_Objects
             {
                 boost *= i.GetSPDMod();
             }
-            if (active.IsActive())
+            if (active != null && active.IsActive())
             {
                 boost *= active.GetSPDMod();
             }
