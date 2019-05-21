@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using SureDroid;
 using System.IO;
 using System.Text.RegularExpressions;
+using MirrorKnight.Game_Objects;
 
 namespace MirrorKnight
 {
@@ -42,10 +43,13 @@ namespace MirrorKnight
         MouseState oldM;
         GamePadState oldGP;
 
+        
 
         bool usingController = false, usingKeyboard = true;
 
         Player p;
+        //public static Hitbar playerHitbar;
+        Texture redBlockThing;
         public static Map map;
 
         public static int x, y;       //Contains the current room the player is in.
@@ -198,6 +202,8 @@ namespace MirrorKnight
 
             topDoor = new Rectangle(Useful.getWWidth() / 2 - doorWidth / 2, verticalOffset, doorWidth, doorSize);
             bottomDoor = new Rectangle(Useful.getWWidth() / 2 - doorWidth / 2, Useful.getWHeight() - doorSize - verticalOffset, doorWidth, doorSize);
+
+            redBlockThing = Content.Load<Texture2D>("redBlock");
         }
 
         /// <summary>
