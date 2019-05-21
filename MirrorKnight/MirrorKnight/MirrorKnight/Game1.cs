@@ -118,9 +118,9 @@ namespace MirrorKnight
             //IsMouseVisible = true;
             mainMenuKnights = new Rectangle[Useful.getWWidth()/40, Useful.getWHeight()/40];
 
-            for (int i = 0; i < (Useful.getWHeight() / 40); i++)
+            for (int i = 0; i < (Useful.getWWidth() / 40); i++)
             {
-                for (int j = 0; j < (Useful.getWWidth() / 40); j++)
+                for (int j = 0; j < (Useful.getWHeight() / 40); j++)
                 {
                     mainMenuKnights[i, j] = new Rectangle(40 * j, 40 * i, 16, 28);
                 }
@@ -274,9 +274,9 @@ namespace MirrorKnight
                 pauseOptionsButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 - 50), 400, 60);
                 pauseExitButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2 + 50), 400, 60);
                 mMTimer++;
-                for (int i = 0; i < (Useful.getWHeight() / 40) - 1; i++)
+                for (int i = 0; i < (Useful.getWWidth() / 40) - 1; i++)
                 {
-                    for (int j = 0; j < (Useful.getWWidth() / 40) - 1; j++)
+                    for (int j = 0; j < (Useful.getWHeight() / 40) - 1; j++)
                     {
                         mainMenuKnights[i, j].X += mMTimer;
                         if (mainMenuKnights[i, j].X == Useful.getWWidth())
@@ -575,9 +575,9 @@ namespace MirrorKnight
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, null, null);
             if (mainMenuBool == true)
             {
-                for (int i = 0; i < Useful.getWHeight() / 40; i++)
+                for (int i = 0; i < Useful.getWWidth() / 40; i++)
                 {
-                    for (int j = 0; j < Useful.getWWidth() / 40; i++)
+                    for (int j = 0; j < Useful.getWHeight() / 40; j++)
                     {
                         spriteBatch.Draw(kk, mainMenuKnights[i, j], Color.White);
                     }
