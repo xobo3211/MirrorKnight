@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using SureDroid;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace MirrorKnight
 {
@@ -23,24 +24,27 @@ namespace MirrorKnight
             ChasePlayer,    //Run at player
         }
 
-        public enum FiringType     //Handles the different types of firing from enemies
-        {
-            Basic,          //Fires single shots
-            Shotgun,        //Fires multiple shots at a target
-            Burst           //Fires multiple shots in random directions
-        }
+        public const int Basic = 0, Shotgun = 1, Burst = 2;
+
+        int[] firingTime = new int[] { 60, 90, 120 };                   //Delay after firing before next action taken by the enemy
+        double[] probability = new double[] { 1, 0.3, 0.2 };          //Percent probability for the different firing types at different moments, first one must be 1 as it's the default value if all others fail
+
+
 
         Behavior b = Behavior.ChasePlayer;                 //Default behavior is idle
 
-        FiringType fireType = FiringType.Shotgun;     //Default firing type is basic
+        int fireType = Shotgun;     //Default firing type is basic
 
         Player p;
-
-        int fireTimer = 0, fireTimerMax = 120;
 
         int bulletCount = 5;                        //Bullet count that will be shot each time enemy shoots. Default is 1
 
         Vector2 velocity = new Vector2(0, 0);
+
+        List<int> actionList = new List<int>();   //Contains list of future actions
+        List<int> timeList = new List<int>();                   //Contains time left until future actions
+
+        int bufferSize = 8;                                     //Number of how many actions are chosen in advance
 
         public BasicEnemy(int x, int y, Texture2D texture, Player p) : base(x, y, texture)
         {
@@ -53,12 +57,36 @@ namespace MirrorKnight
 
         public override void Update()
         {
-            fireTimer++;
-
-            if (fireTimer >= fireTimerMax)          //Handle shooting
+            while(actionList.Count < bufferSize)
             {
-                fireTimer = 0;
-                Fire(fireType);
+                Random rn = new Random();
+
+                Thread.Sleep(rn.Next(3));
+
+                double chance = rn.NextDouble();
+
+                int type = Basic;
+
+                for(int i = 1; i < probability.Length; i++)
+                {
+                    if(chance <= probability[i])
+                    {
+                        type = i;
+                    }
+                }
+
+                actionList.Add(type);
+                timeList.Add(firingTime[(int)type]);
+            }
+
+            timeList[0]--;
+
+            if(timeList[0] <= 0)                    //Handles shooting
+            {
+                timeList.Remove(timeList[0]);
+                Fire(actionList[0]);
+
+                actionList.Remove(actionList[0]);
             }
 
 
@@ -77,7 +105,7 @@ namespace MirrorKnight
             }
         }
 
-        public void Fire(FiringType t)
+        public void Fire(int t)
         {
             Vector2 pos = GetOriginPos();
 
@@ -89,11 +117,11 @@ namespace MirrorKnight
 
             switch (t)
             {
-                case FiringType.Basic:
+                case Basic:
                     Game1.projectiles.Add(proj);
                     break;
 
-                case FiringType.Shotgun:
+                case Shotgun:
 
                     double spread = Math.PI / 6;
                     int bulletsPerSide = bulletCount / 2;
@@ -118,12 +146,28 @@ namespace MirrorKnight
                     }
                     break;
 
-                case FiringType.Burst:
+                case Burst:
+
+                    Game1.projectiles.Add(proj);
+
+                    Random rn = new Random();
+
+                    for(int i = 1; i < bulletCount * 3; i++)
+                    {
+                        Projectile p = new Projectile(pos, velocity);
+
+                        double tempRotate = rn.NextDouble() * Math.PI * 2;
+
+                        p.RotateVelocity((float)tempRotate);
+
+                        Game1.projectiles.Add(p);
+                    }
+
                     break;
             }
         }
 
-        public void SetFiringType(FiringType t)
+        public void SetFiringType(int t)
         {
             fireType = t;
         }

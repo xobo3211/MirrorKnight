@@ -10,11 +10,12 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SureDroid;
 
+
 namespace MirrorKnight
 {
     public class LivingEntity : Entity
     {
-        protected int MAX_HP = 20, HP = 20;
+        protected int Base_HP = 20, HP = 20;
         protected float SPEED = 1f, DMG = 1f;
 
         protected bool hasFlight;             //Flight allows entities to ignore hazards, pits, and obstacles when moving
@@ -35,17 +36,17 @@ namespace MirrorKnight
             return HP;
         }
 
-        public int GetMaxHP()
+        public virtual int GetMaxHP()
         {
-            return MAX_HP;
+            return Base_HP;
         }
 
-        public float GetSpeed()
+        public virtual float GetSpeed()
         {
             return SPEED;
         }
 
-        public float GetDamage()
+        public virtual double GetDamage()
         {
             return DMG;
         }
