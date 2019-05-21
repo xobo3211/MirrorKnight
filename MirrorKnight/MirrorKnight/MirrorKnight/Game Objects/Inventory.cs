@@ -26,8 +26,6 @@ namespace MirrorKnight.Game_Objects
             items = new List<PassiveItem>();
         }
 
-
-
         public void Update()
         {
             active.Update();
@@ -50,6 +48,10 @@ namespace MirrorKnight.Game_Objects
             {
                 boost *= i.GetDMGMod();
             }
+            if(active != null && active.IsActive())
+            {
+                boost *= active.GetDMGMod();
+            }
             return boost;
         }
 
@@ -60,6 +62,10 @@ namespace MirrorKnight.Game_Objects
             {
                 boost *= i.GetSPDMod();
             }
+            if (active != null && active.IsActive())
+            {
+                boost *= active.GetSPDMod();
+            }
             return boost;
         }
 
@@ -68,8 +74,12 @@ namespace MirrorKnight.Game_Objects
             items.Add(i);
         }
 
-        public void Add(ActiveItem i)
+        public void Add(ActiveItem i, Player p)
         {
+            if(active != null)
+            {
+                Game1.entities.Add(new WorldItem((int)p.body.getX(), (int)p.body.getY(), Game1.placeHc));
+            }
             active = i;
         }
     }

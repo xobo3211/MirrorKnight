@@ -79,6 +79,7 @@
     <Compile Include="Game Objects\Inventory.cs" />
     <Compile Include="Game Objects\LivingEntity.cs" />
     <Compile Include="Game Objects\UI.cs" />
+    <Compile Include="Game Objects\WorldItem.cs" />
     <Compile Include="Map Generation\Map.cs" />
     <Compile Include="Game Objects\PassiveItem.cs" />
     <Compile Include="Game Objects\Player.cs" />
