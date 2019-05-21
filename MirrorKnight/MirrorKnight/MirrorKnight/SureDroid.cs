@@ -1414,17 +1414,27 @@ namespace SureDroid
     }
     
     public class Bar
-    {
-        Texture2D texture;
+    { 
         private int currentVal, max;
         Rectangle baseRect;
-
+        Sprite fill, outline, cover;
         private static List<Bar> list;
-
+        static int count = 0;
+        readonly int current;
         public Bar(int x, int y, int width, int height, int current, int max)
         {
             baseRect = new Rectangle(x, y, width, height);
+            current = count;
+            count++;
             
+
+            fill.setGroup("bar" + count);
+            outline.setGroup("bar" + count);
+            cover.setGroup("bar" + count);
+            Sprite.groupAction("bar" + count, sprite => sprite.setPos(x, y));
+            fill.addTexture(Useful.CreateRectangle(width, height, Color.Red));
+            outline.addTexture(Useful.CreateBox(width, height, 3, Color.White));
+            //fill.addTexture();
         }
 
         public void setVal(int num)
