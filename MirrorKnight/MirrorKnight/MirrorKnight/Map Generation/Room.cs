@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SureDroid;
 using System.IO;
+using MirrorKnight.Game_Objects;
 
 namespace MirrorKnight
 {
@@ -258,6 +259,13 @@ namespace MirrorKnight
                                     }
 
                                     Console.WriteLine("Test");
+                                    break;
+
+                                case "b":
+                                    if(hasBeenEntered == false)
+                                    {
+                                        Game1.enemies.Add(new BossEnemy((int)pos.X, (int)pos.Y, Content.Load<Texture2D>("textures/ogre_idle_anim_f0"), p));
+                                    }
                                     break;
                             }
                         }

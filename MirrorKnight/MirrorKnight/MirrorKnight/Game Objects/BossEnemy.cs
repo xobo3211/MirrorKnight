@@ -20,20 +20,18 @@ namespace MirrorKnight.Game_Objects
 
         public const int Burst = 2;
 
+        protected new int[] firingTime = new int[] { 60, 90, 120 };                   //Delay after firing before next action taken by the enemy
+        protected new double[] probability = new double[] { 1, 0.3, 0.2 };
+
 
         public BossEnemy(int x, int y, Texture2D texture, Player p) : base(x, y, texture, p)
         {
-
+            Base_HP = 120;
+            HP = Base_HP;
         }
 
         public override void Update()
         {
-            if (actionList[0] == Burst)
-            {
-                b = Behavior.Idle;
-            }
-            else b = Behavior.ChasePlayer;
-
             while (actionList.Count < bufferSize)
             {
                 Random rn = new Random();
@@ -55,6 +53,12 @@ namespace MirrorKnight.Game_Objects
                 actionList.Add(type);
                 timeList.Add(firingTime[(int)type]);
             }
+
+            if (actionList[0] == Burst)
+            {
+                b = Behavior.Idle;
+            }
+            else b = Behavior.ChasePlayer;
 
             timeList[0]--;
 
@@ -139,7 +143,7 @@ namespace MirrorKnight.Game_Objects
 
                         Game1.projectiles.Add(p);
                     }
-
+                    
                     break;
             }
         }

@@ -449,11 +449,16 @@ namespace MirrorKnight
                     for(int i = 0; i < enemies.Count; i++)
                     {
                         enemies[i].Update();
+                        
+                        if(enemies[i].IsAlive() == false)
+                        {
+                            enemies[i].Kill();
+                            enemies.Remove(enemies[i]);
+                            monsterRoar.Play();
+                        }
                     }
 
                     p.Update();
-
-                    Console.WriteLine(enemies.Count);
 
                     ///////////////////////////////////////////////////////////////////////////////Projectile logic
 
@@ -484,11 +489,9 @@ namespace MirrorKnight
                                 if (projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
                                 {
                                     projectiles[i].Remove();
-                                    enemies[a].Remove();
                                     projectiles.Remove(projectiles[i]);
-                                    enemies.Remove(enemies[a]);
 
-                                    Console.WriteLine("Projectile collision test");
+                                    enemies[a].Hurt((int)p.GetDamage());
                                 }
                             }
                         }
@@ -611,7 +614,7 @@ namespace MirrorKnight
                 //spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(exitB, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
             }
-            spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+            // spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
             spriteBatch.End();
 
             base.Draw(gameTime);
