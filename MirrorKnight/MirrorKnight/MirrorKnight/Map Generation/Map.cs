@@ -100,7 +100,7 @@ namespace MirrorKnight
             }
             while (CountDeadEnds() < 3 && (!boss || !treasure || !shop || !secret));               //Require minimum of three dead ends in a map. Boss, Treasure, Shop
 
-            for(int y = 0; y < maxY; y++)
+            for (int y = 0; y < maxY; y++)
             {
                 for(int x = 0; x < maxX; x++)
                 {
@@ -345,23 +345,23 @@ namespace MirrorKnight
             while (x < finalX)
             {
                 x++;
-                roomsEnum[x, y] = Rooms.EMPTY;
+                rooms[x, y] = new Room(Room.Type.NORMAL);
             }
             while (x > finalX)
             {
                 x--;
-                roomsEnum[x, y] = Rooms.EMPTY;
+                rooms[x, y] = new Room(Room.Type.NORMAL);
             }
 
             while (y < finalY)
             {
                 y++;
-                roomsEnum[x, y] = Rooms.EMPTY;
+                rooms[x, y] = new Room(Room.Type.NORMAL);
             }
             while (y > finalY)
             {
                 y--;
-                roomsEnum[x, y] = Rooms.EMPTY;
+                rooms[x, y] = new Room(Room.Type.NORMAL);
             }
         }
 
@@ -450,22 +450,22 @@ namespace MirrorKnight
 
         private void Discover(int x, int y)
         {
-            if (x > -1 && rooms[x - 1, y] != null)
+            if (x - 1 > -1 && rooms[x - 1, y] != null)
             {
                 SetColor(x - 1, y);
                 
             }
-            if (x < maxX && rooms[x + 1, y] != null)
+            if (x + 1 < maxX && rooms[x + 1, y] != null)
             { 
                 SetColor(x + 1, y);
 
             }
-            if (y > -1 && rooms[x, y - 1] != null)
+            if (y - 1 > -1 && rooms[x, y - 1] != null)
             {
                 SetColor(x, y - 1);
 
             }
-            if (y < maxY && rooms[x, y + 1] != null)
+            if (y + 1 < maxY && rooms[x, y + 1] != null)
             {
                 SetColor(x, y + 1);
 

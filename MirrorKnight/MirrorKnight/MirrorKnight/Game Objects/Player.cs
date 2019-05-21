@@ -93,6 +93,8 @@ namespace MirrorKnight
 
             load();
             body.setDepth(Game1.ENTITY);
+
+            DMG = 5;
         }
         
 
