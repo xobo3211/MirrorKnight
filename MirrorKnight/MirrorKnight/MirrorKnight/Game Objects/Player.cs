@@ -73,6 +73,7 @@ namespace MirrorKnight
                         movement.Normalize();
                         movement *= GetSpeed();
                         Move(Game1.map.GetRoom(Game1.x, Game1.y), movement);
+                        lastMove = movement;
                         movement = Vector2.Zero;
                     }
 

@@ -603,7 +603,6 @@ namespace MirrorKnight
                 spriteBatch.Draw(exitB, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
             }
             spriteBatch.Draw(placeHc, p.getHitbox(), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-
             spriteBatch.End();
 
             base.Draw(gameTime);
