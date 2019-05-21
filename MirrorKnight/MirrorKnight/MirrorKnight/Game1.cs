@@ -22,7 +22,7 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D placeHc, loading, pMB, pMBO, pMBF, pSB, pSO, pSF, mainScreen, menuImage, exitB, kk;
+        public static Texture2D placeHc, loading, pMB, pMBO, pMBF, pSB, pSO, pSF, mainScreen, menuImage, exitB, kk;
         public static Texture2D enemyBullet, reflectedBullet, room;
         List<string> lines;
         string[,] tilesRead;
@@ -471,12 +471,27 @@ namespace MirrorKnight
                     for (int i = 0; i < entities.Count; i++)
                     {
                         entities[i].Update();
+
+
+                        //////////////////////////////World item pickup logic
+                        if (entities[i] is WorldItem)
+                        {
+                            if(p.Intersects(entities[i].GetRectangle()))
+                            {
+                                int id = ((WorldItem)entities[i]).getID();
+                                if (((WorldItem)entities[i]).IsPassive())
+                                {
+                                    p.i.Add(new PassiveItem(id));
+                                }
+                                else p.i.Add(new ActiveItem(id), p);
+                            }
+                        }
                     }
-                    for(int i = 0; i < enemies.Count; i++)
+                    for (int i = 0; i < enemies.Count; i++)
                     {
                         enemies[i].Update();
-                        
-                        if(enemies[i].IsAlive() == false)
+
+                        if (enemies[i].IsAlive() == false)
                         {
                             enemies[i].Kill();
                             enemies.Remove(enemies[i]);

@@ -50,9 +50,6 @@ namespace MirrorKnight
 
                         switch (args[0])
                         {
-                            case "hp":
-                                HP_MOD = Convert.ToInt32(args[1]);
-                                break;
 
                             case "spd":
                                 SPD_MOD = Convert.ToDouble(args[1]);

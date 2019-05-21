@@ -23,7 +23,7 @@ namespace MirrorKnight
 
         int invincibilityTimer = 0, invincibilityMax = 60, invisibleFrames = 5;
 
-        Inventory i;
+        public Inventory i;
 
         int trueMaxHP;
 
@@ -264,16 +264,5 @@ namespace MirrorKnight
         {
             return trueMaxHP;
         }
-
-        public void Pickup(PassiveItem i)
-        {
-
-        }
-
-        public void Pickup(ActiveItem i)
-        {
-
-        }
-
     }
 }
