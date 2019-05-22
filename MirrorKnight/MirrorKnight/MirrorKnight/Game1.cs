@@ -518,7 +518,7 @@ namespace MirrorKnight
                         projectiles[i].Update();
                     }
 
-                    for (int i = 0; i < projectiles.Count; i++)
+                    for (int i = projectiles.Count - 1; i >= 0; i--)
                     {
                         Vector2 pos = projectiles[i].body.getPos();
                         //Detects if projectile is going offscreen and if so, removes it
