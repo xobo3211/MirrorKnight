@@ -526,17 +526,12 @@ namespace MirrorKnight
                         {
                             projectiles[i].Remove();
                             projectiles.Remove(projectiles[i]);
-
-                            i--;
                         }
                         else if (isTileShootableThrough(projectiles[i].body.getOriginPos()) == false)
                         {
                             projectiles[i].Remove();
                             projectiles.Remove(projectiles[i]);
-
-                            i--;
                         }
-
                         else //Detects if projectile is currently hitting an enemy and if it is a reflected projectile.
                         {
                             for (int a = enemies.Count - 1; a >= 0; a--)
