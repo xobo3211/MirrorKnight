@@ -25,9 +25,9 @@ namespace MirrorKnight
         Texture2D texture;
 
 
-        bool isActive = false;
+        bool isActive = false, isOnCooldown = false;
 
-        int maxDuration, currentDuration;
+        public int maxDuration, currentDuration, cooldown, cooldownDuration;
 
         public ActiveItem(int id, Texture2D t)
         {
@@ -46,6 +46,8 @@ namespace MirrorKnight
                     {
                         maxDuration = Convert.ToInt32(first);
                         currentDuration = maxDuration;
+
+                        cooldown = maxDuration * 5;
                     }
 
                     while (!reader.EndOfStream)
@@ -87,6 +89,17 @@ namespace MirrorKnight
                 {
                     isActive = false;
                     currentDuration = maxDuration;
+
+                    isOnCooldown = true;
+                }
+            }
+            else if(isOnCooldown)
+            {
+                cooldownDuration++;
+
+                if(cooldownDuration >= cooldown)
+                {
+                    isOnCooldown = false;
                 }
             }
         }
@@ -94,6 +107,11 @@ namespace MirrorKnight
         public bool IsActive()
         {
             return isActive;
+        }
+
+        public bool IsCoolingDown()
+        {
+            return isOnCooldown;
         }
 
         public int GetHPMod()

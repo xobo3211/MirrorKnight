@@ -25,6 +25,8 @@ namespace MirrorKnight.Game_Objects
 
         bool timerStarted = false;
 
+        private Bar activeBar, cooldownBar;
+
         public Inventory()
         {
             items = new List<PassiveItem>();
@@ -34,6 +36,8 @@ namespace MirrorKnight.Game_Objects
         {
             active.Update();
 
+
+            /////////////////////////////Item pickup timer, creates a delay  between pickups so as to not create an infinite loop when dropping an active
             if (timerStarted)
             {
                 timer++;
@@ -43,6 +47,9 @@ namespace MirrorKnight.Game_Objects
                     timerStarted = false;
                 }
             }
+
+            activeBar.setVal(active.currentDuration);
+            cooldownBar.setVal(active.cooldownDuration);
             
         }
 
@@ -99,6 +106,17 @@ namespace MirrorKnight.Game_Objects
             active = i;
 
             timerStarted = true;
+
+            if(activeBar != null)
+            {
+                activeBar.change(body => body.deleteThis());
+                cooldownBar.change(body => body.deleteThis());
+            }
+
+            activeBar = new Bar(Useful.getWWidth() - 80, 50, 50, 15, active.maxDuration);
+            cooldownBar = new Bar(Useful.getWWidth() - 80, 50, 50, 15, active.cooldown);
+
+            cooldownBar.change(body => body.setVisible(false));
         }
 
         public bool HasActive()
@@ -114,6 +132,17 @@ namespace MirrorKnight.Game_Objects
         public bool CanPickUp()
         {
             return !timerStarted;
+        }
+
+        public void Activate()
+        {
+            active.Activate();
+        }
+
+        public void FlipBars()
+        {
+            activeBar.change(body => body.setVisible(!body.isVisable()));
+            cooldownBar.change(body => body.setVisible(!body.isVisable()));
         }
     }
 }

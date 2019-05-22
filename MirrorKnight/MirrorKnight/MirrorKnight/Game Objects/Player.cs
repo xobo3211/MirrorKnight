@@ -58,6 +58,9 @@ namespace MirrorKnight
             KeyControl.addKeyPress(Keys.S, () => movement.Y = 1);
             KeyControl.addKeyPress(Keys.A, () => movement.X = -1);
             KeyControl.addKeyPress(Keys.D, () => movement.X = 1);
+
+            KeyControl.addKeyPress(Keys.Space, () => i.Activate());
+
             ControllerControl.add(gp =>
             {
                 if (gp.ThumbSticks.Left != Vector2.Zero)
@@ -65,9 +68,14 @@ namespace MirrorKnight
                     movement = gp.ThumbSticks.Left;
                     movement.Y *= -1;
                 }
-                if (gp.ThumbSticks.Right != Vector2.Zero)
+                if (gp.Buttons.RightShoulder == ButtonState.Pressed && gp.ThumbSticks.Right != Vector2.Zero)
                 {
-                    movement = gp.ThumbSticks.Right;
+                    Vector2 playerAimVec = gp.ThumbSticks.Right;
+                    Attack(playerAimVec);
+                }
+                if(gp.Buttons.A == ButtonState.Pressed)
+                {
+                    
                 }
             });
             MouseState oldM = Mouse.GetState();

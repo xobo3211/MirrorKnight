@@ -239,6 +239,8 @@ namespace MirrorKnight
             p.body.setTimeFrame(1 / 8f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
 
+            p.i.Add(new ActiveItem(1, placeHc), p);
+
             map = new Map(Map.Floor.GARDEN);
 
             x = map.GetDimensions().X / 2;
