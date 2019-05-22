@@ -562,14 +562,16 @@ namespace MirrorKnight
                         }
                         else //Detects if projectile is currently hitting an enemy and if it is a reflected projectile.
                         {
-                            for (int a = enemies.Count - 1; a >= 0; a--)
+                            for (int a = enemies.Count - 1; projectiles[i].CanHurtEnemies() && a >= 0; a--)
                             {
-                                if (projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
+                                if (enemies[a].body.intersects(projectiles[i].body))
                                 {
                                     projectiles[i].Remove();
                                     projectiles.Remove(projectiles[i]);
 
                                     enemies[a].Hurt((int)p.GetDamage());
+
+                                    break;
                                 }
                             }
                         }
