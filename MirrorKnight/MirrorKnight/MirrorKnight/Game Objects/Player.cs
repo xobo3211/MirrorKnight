@@ -27,6 +27,8 @@ namespace MirrorKnight
 
         int trueMaxHP;
 
+        int healthBarSizeConst = 22;
+
         double effectiveDamage, effectiveMovespeed;
 
         public Vector2 lastMove = Vector2.Zero;
@@ -47,7 +49,7 @@ namespace MirrorKnight
             trueMaxHP = Base_HP;
 
 
-            bar = new Bar(10, 10, 100, 30, HP, trueMaxHP);
+            bar = new Bar(10, 10, healthBarSizeConst * trueMaxHP, 30, HP, trueMaxHP);
 
 
             Vector2 movement = Vector2.Zero;
@@ -170,6 +172,7 @@ namespace MirrorKnight
                 trueMaxHP = i.getHPMod() + Base_HP;
 
                 bar.setMax(trueMaxHP);
+                bar.change(body => body.setSize(healthBarSizeConst * trueMaxHP, body.getHeight()));
             }
             else if(i.getHPMod() + Base_HP < trueMaxHP)
             {
@@ -177,6 +180,7 @@ namespace MirrorKnight
                 trueMaxHP = i.getHPMod() + Base_HP;
 
                 bar.setMax(trueMaxHP);
+                bar.change(body => body.setSize(healthBarSizeConst * trueMaxHP, body.getHeight()));
             }
 
             effectiveDamage = DMG * i.getDMGMod();
