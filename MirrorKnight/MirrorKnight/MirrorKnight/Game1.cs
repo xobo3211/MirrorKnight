@@ -81,7 +81,7 @@ namespace MirrorKnight
         Sprite menuBackground;
 
         Song background;
-
+        Song mainMenuTheme;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -229,6 +229,7 @@ namespace MirrorKnight
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
             Text.setDefaultFont("font");
+            mainMenuTheme = Content.Load<Song>("mainMenu");
 
             background = Content.Load<Song>("background");
             MediaPlayer.IsRepeating = true;
