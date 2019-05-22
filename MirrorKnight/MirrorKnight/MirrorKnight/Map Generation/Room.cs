@@ -45,6 +45,9 @@ namespace MirrorKnight
         String roomName;        //Contains file path for the room
 
         bool hasBeenEntered = false;
+        public bool treasureTaken = false;
+
+        int treasureID = 0;
 
         public Room(Type t)
         {
@@ -282,6 +285,11 @@ namespace MirrorKnight
             {
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
+            }
+
+            if(roomType == Type.TREASURE && treasureTaken == false)
+            {
+                Game1.entities.Add(new WorldItem(Useful.getWWidth() - 20, Useful.getWHeight() - 20, Game1.placeHc));
             }
 
             hasBeenEntered = true;
