@@ -21,6 +21,10 @@ namespace MirrorKnight.Game_Objects
 
         ActiveItem active;
 
+        int timer = 0, timerMax = 120;
+
+        bool timerStarted = false;
+
         public Inventory()
         {
             items = new List<PassiveItem>();
@@ -29,6 +33,17 @@ namespace MirrorKnight.Game_Objects
         public void Update()
         {
             active.Update();
+
+            if (timerStarted)
+            {
+                timer++;
+                if (timer >= timerMax)
+                {
+                    timer = 0;
+                    timerStarted = false;
+                }
+            }
+            
         }
 
         public int getHPMod()
@@ -72,6 +87,7 @@ namespace MirrorKnight.Game_Objects
         public void Add(PassiveItem i)
         {
             items.Add(i);
+            timerStarted = true;
         }
 
         public void Add(ActiveItem i, Player p)
@@ -81,6 +97,23 @@ namespace MirrorKnight.Game_Objects
                 Game1.entities.Add(new WorldItem((int)p.body.getX(), (int)p.body.getY(), Game1.placeHc));
             }
             active = i;
+
+            timerStarted = true;
+        }
+
+        public bool HasActive()
+        {
+            return active != null;
+        }
+
+        public Texture2D GetActiveImage()
+        {
+            return active.GetImage();
+        }
+
+        public bool CanPickUp()
+        {
+            return !timerStarted;
         }
     }
 }

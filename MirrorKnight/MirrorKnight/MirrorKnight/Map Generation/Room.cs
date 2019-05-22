@@ -289,7 +289,7 @@ namespace MirrorKnight
 
             if(roomType == Type.TREASURE && treasureTaken == false)
             {
-                Game1.entities.Add(new WorldItem(Useful.getWWidth() - 20, Useful.getWHeight() - 20, Game1.placeHc));
+                Game1.entities.Add(new WorldItem((Useful.getWWidth() / 2) - 20, (Useful.getWHeight() / 2) - 20, Game1.placeHc));
             }
 
             hasBeenEntered = true;

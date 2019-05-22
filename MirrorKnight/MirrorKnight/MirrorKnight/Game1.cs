@@ -28,6 +28,8 @@ namespace MirrorKnight
         string[,] tilesRead;
         public static SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
 
+        Rectangle activeSlot;
+
         int mMTimer; //main menu scrolling
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         Text text;
@@ -167,6 +169,8 @@ namespace MirrorKnight
             rightDoor = new Rectangle(Useful.getWWidth() - doorSize, Useful.getWHeight() / 2 - doorWidth / 2, doorSize, doorWidth);
 
             floorExit = new Rectangle(Useful.getWWidth() / 2 - exitWidth / 2, Useful.getWHeight() / 2 - exitWidth / 2, exitWidth, exitWidth);
+
+            activeSlot = new Rectangle(Useful.getWWidth() - 70, 10, 30, 30);
 
 
             base.Initialize(); 
@@ -471,7 +475,7 @@ namespace MirrorKnight
 
 
                         //////////////////////////////World item pickup logic
-                        if (entities[i] is WorldItem)
+                        if (p.i.CanPickUp() && entities[i] is WorldItem)
                         {
                             if(p.Intersects(entities[i].GetRectangle()))
                             {
@@ -480,7 +484,7 @@ namespace MirrorKnight
                                 {
                                     p.i.Add(new PassiveItem(id));
                                 }
-                                else p.i.Add(new ActiveItem(id), p);
+                                else p.i.Add(new ActiveItem(id, ((WorldItem)entities[i]).body.getTexture()), p);
 
                                 if(map.GetRoom(x, y).getRoomType() == Room.Type.TREASURE)
                                 {
@@ -533,7 +537,7 @@ namespace MirrorKnight
 
                         else //Detects if projectile is currently hitting an enemy and if it is a reflected projectile.
                         {
-                            for (int a = enemies.Count-1; a >= 0; a--)
+                            for (int a = enemies.Count - 1; a >= 0; a--)
                             {
                                 if (projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
                                 {
@@ -686,6 +690,12 @@ namespace MirrorKnight
                 spriteBatch.Draw(pSB, pauseSfxButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 //spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(exitB, pauseExitButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+
+
+                if(p.i.HasActive())
+                {
+                    spriteBatch.Draw(p.GetActiveImage(), activeSlot, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, UI_ELEMENT);
+                }
 
                 if(map.GetRoom(x, y).getRoomType() == Room.Type.BOSS && enemies.Count == 0)
                 {
