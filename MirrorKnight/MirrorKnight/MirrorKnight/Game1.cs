@@ -119,7 +119,7 @@ namespace MirrorKnight
         /// </summary>
         protected override void Initialize()
         {
-
+            SoundEffect.MasterVolume = .25f;
             menuBackground = new Sprite(0,0);
             // TODO: Add your initialization logic here
             //IsMouseVisible = true;
