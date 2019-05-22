@@ -57,10 +57,11 @@ namespace MirrorKnight
 
         private void Fire()
         {
+            Game1.bulletReg.Play(0.2f ,0 ,0);
             if(targetsEntity)
             {
                 fireTimer = 0;
-
+                
                 Vector2 aimVec = targetEntity.body.getPos() - body.getPos();
                 aimVec.Normalize();
                 aimVec *= bulletSpeed;

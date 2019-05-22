@@ -29,7 +29,7 @@ namespace MirrorKnight
         public static SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
 
         Rectangle activeSlot;
-
+        Texture2D orb;
         Boolean oldMusic;
 
         int mMTimer; //main menu scrolling
@@ -203,7 +203,7 @@ namespace MirrorKnight
             bulletShotgun = Content.Load<SoundEffect>("proShotgun"); //sfw for shotgun enemies
             bossDoorLock = Content.Load<SoundEffect>("jail_cell_door"); //sound played when boss door is opened, in addition to normal door sound
 
-
+            orb = Content.Load<Texture2D>("orb");
             placeHc = Content.Load<Texture2D>("pc");
             crosshair.addTexture("crosshair");
             crosshair.setSize(100, 100);
@@ -249,7 +249,7 @@ namespace MirrorKnight
             p.body.setTimeFrame(1 / 8f);
             p.body.setPos(new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
 
-            p.i.Add(new ActiveItem(1, placeHc), p);
+            p.i.Add(new ActiveItem(1, orb), p);
 
             map = new Map(Map.Floor.GARDEN);
 
@@ -531,7 +531,7 @@ namespace MirrorKnight
 
                             else enemies[i].Kill();
                             enemies.Remove(enemies[i]);
-                            monsterRoar.Play();
+                           
 
                             i--;
                         }

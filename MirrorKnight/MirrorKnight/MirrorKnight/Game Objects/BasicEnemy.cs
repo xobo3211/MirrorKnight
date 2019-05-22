@@ -123,7 +123,7 @@ namespace MirrorKnight
             {
                 case Basic:
 
-                    Game1.bulletShotgun.Play(0.2f, 0, 0);
+                    Game1.bulletReg.Play(0.2f, 0, 0);
 
                     Game1.projectiles.Add(proj);
                     break;

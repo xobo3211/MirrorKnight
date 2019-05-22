@@ -106,11 +106,12 @@ namespace MirrorKnight.Game_Objects
             switch (t)
             {
                 case Basic:
+                    Game1.bulletReg.Play(0.2f, 0, 0);
                     Game1.projectiles.Add(proj);
                     break;
 
                 case Shotgun:
-
+                    Game1.bulletShotgun.Play(0.2f, 0, 0);
                     double spread = Math.PI / 6;
                     int bulletsPerSide = bulletCount / 2;
                     double rotation, iteration;
