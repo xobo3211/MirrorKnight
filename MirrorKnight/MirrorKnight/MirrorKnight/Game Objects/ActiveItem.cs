@@ -22,14 +22,18 @@ namespace MirrorKnight
 
         List<int> uniqueEffectIDs;                  //Contains the effect ID of unique effects outside of stat boosts (ex: multi-shot, bouncing bullets, etc.)
 
+        Texture2D texture;
+
 
         bool isActive = false;
 
         int maxDuration, currentDuration;
 
-        public ActiveItem(int id)
+        public ActiveItem(int id, Texture2D t)
         {
-            string path = "../../../items/passive/" + id + ".txt";
+            string path = "../../../../MirrorKnightContent/items/passive/" + id + ".txt";
+
+            texture = t;
 
             try
             {
@@ -105,6 +109,11 @@ namespace MirrorKnight
         public double GetSPDMod()
         {
             return SPD_MOD;
+        }
+
+        public Texture2D GetImage()
+        {
+            return texture;
         }
     }
 }

@@ -275,5 +275,10 @@ namespace MirrorKnight
         {
             HP--;
         }
+
+        public Texture2D GetActiveImage()
+        {
+            return i.GetActiveImage();
+        }
     }
 }

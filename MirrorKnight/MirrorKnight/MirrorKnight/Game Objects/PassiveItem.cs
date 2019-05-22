@@ -25,7 +25,7 @@ namespace MirrorKnight
 
         public PassiveItem(int id)
         {
-            string path = "../../../items/passive/" + id + ".txt";
+            string path = "../../../../MirrorKnightContent/items/passive/" + id + ".txt";
 
             try
             {
