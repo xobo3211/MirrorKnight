@@ -155,10 +155,12 @@ namespace MirrorKnight.Game_Objects
             }
         }
 
-        public new void Remove()
+        public new void Kill()
         {
-            this.Remove();
+            body.deleteThis();
             healthBar.change(body => body.deleteThis());
+
+            Console.WriteLine("test");
         }
     }
 }
