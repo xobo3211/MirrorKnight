@@ -30,6 +30,8 @@ namespace MirrorKnight
 
         Rectangle activeSlot;
 
+        Boolean oldMusic;
+
         int mMTimer; //main menu scrolling
         Dictionary<String, Rectangle> tiles = new Dictionary<string, Rectangle>();
         Text text;
@@ -234,7 +236,7 @@ namespace MirrorKnight
             background = Content.Load<Song>("background");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = .25f;
-            
+            MediaPlayer.Play(mainMenuTheme);
 
             text.center();
 
@@ -318,14 +320,7 @@ namespace MirrorKnight
                         
                     }
                 }
-                if (musicTog == true)
-                {
-                    MediaPlayer.Play(mainMenuTheme);
-                }
-                if (musicTog == false)
-                {
-                    MediaPlayer.Stop();
-                }
+                
                 //pauseMusicButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2) - 150, 60, 60);
                 //pauseSfxButton = new Rectangle(Useful.getWWidth() / 2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
                 if (m.LeftButton == ButtonState.Pressed)
@@ -344,7 +339,8 @@ namespace MirrorKnight
                         {
                             mbeep.Play();
                         }
-
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(background);
                         //mainMenuTransition(gameTime);
                     }
                     if (crosshair.getRectangle().Intersects(pauseMusicButton))
@@ -457,11 +453,11 @@ namespace MirrorKnight
                 else if (pauseMenu == false)
                 {
                     ////////////////////////////////////////////////////////////////Begin normal game logic
-                    if (musicTog == true)
+                    if (musicTog == true && oldMusic != true)
                     {
                         MediaPlayer.Play(background);
                     }
-                    if (musicTog == false)
+                    if (musicTog == false && oldMusic != false)
                     {
                         MediaPlayer.Stop();
                     }
@@ -677,7 +673,7 @@ namespace MirrorKnight
             oldGP = gp;
             oldKB = kb;
             oldM = m;
-
+            oldMusic = musicTog;
             base.Update(gameTime);
         }
 
