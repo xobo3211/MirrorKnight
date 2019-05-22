@@ -574,7 +574,7 @@ namespace MirrorKnight
                             }
                         }
                     }
-
+                    
                     ////////////////////////////////////////////////////////Movement from room to room logic
 
                     //If player enters the hitbox for a door

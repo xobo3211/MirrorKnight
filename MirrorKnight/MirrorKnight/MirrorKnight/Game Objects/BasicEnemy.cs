@@ -123,14 +123,14 @@ namespace MirrorKnight
             {
                 case Basic:
 
-                    Game1.bulletShotgun.Play();
+                    Game1.bulletShotgun.Play(0.2f, 0, 0);
 
                     Game1.projectiles.Add(proj);
                     break;
 
                 case Shotgun:
 
-                    Game1.bulletShotgun.Play();
+                    Game1.bulletShotgun.Play(0.2f, 0, 0);
 
                     double spread = Math.PI / 6;
                     int bulletsPerSide = bulletCount / 2;
