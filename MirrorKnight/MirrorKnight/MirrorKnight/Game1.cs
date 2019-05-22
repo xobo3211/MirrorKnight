@@ -322,7 +322,10 @@ namespace MirrorKnight
                 {
                     MediaPlayer.Play(mainMenuTheme);
                 }
-                
+                if (musicTog == false)
+                {
+                    MediaPlayer.Stop();
+                }
                 //pauseMusicButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2) - 150, 60, 60);
                 //pauseSfxButton = new Rectangle(Useful.getWWidth() / 2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
                 if (m.LeftButton == ButtonState.Pressed)
@@ -458,7 +461,10 @@ namespace MirrorKnight
                     {
                         MediaPlayer.Play(background);
                     }
-
+                    if (musicTog == false)
+                    {
+                        MediaPlayer.Stop();
+                    }
                     ////////////////////////////////////////////////////////////////Player movement and aiming logic
 
 
