@@ -474,7 +474,7 @@ namespace MirrorKnight
 
                     p.i.Update();
 
-                    for (int i = 0; i < entities.Count; i++)
+                    for (int i = entities.Count - 1; i >= 0; i--)
                     {
                         entities[i].Update();
 
@@ -490,6 +490,9 @@ namespace MirrorKnight
                                     p.i.Add(new PassiveItem(id));
                                 }
                                 else p.i.Add(new ActiveItem(id, ((WorldItem)entities[i]).body.getTexture()), p);
+
+                                entities[i].Remove();
+                                entities.Remove(entities[i]);
 
                                 if(map.GetRoom(x, y).getRoomType() == Room.Type.TREASURE)
                                 {
