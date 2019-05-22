@@ -22,7 +22,7 @@ namespace MirrorKnight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        public static Texture2D placeHc, loading, pMB, pMBO, pMBF, pSB, pSO, pSF, mainScreen, menuImage, exitB, kk;
+        public static Texture2D placeHc, loading, pMB, pMBO, pMBF, pSB, pSO, pSF, mainScreen, menuImage, exitB, kk, startS;
         public static Texture2D enemyBullet, reflectedBullet, room;
         List<string> lines;
         string[,] tilesRead;
@@ -89,9 +89,6 @@ namespace MirrorKnight
             graphics.ApplyChanges();
             
         }
-
-
-
 
         /// <summary>
         /// Classifies it by the first underscore name, and then into a dictionary with all names.
@@ -215,7 +212,7 @@ namespace MirrorKnight
             mainScreen = Content.Load<Texture2D>("Mirror-Knight");
             menuImage = Content.Load<Texture2D>("menu");
             exitB = Content.Load<Texture2D>("exitButton");
-
+            startS = Useful.getTexture("start");
 
             //crossHair = Content.Load<Texture2D>("crosshair");
             enemyBullet = Content.Load<Texture2D>("enemyBullet");
@@ -536,14 +533,12 @@ namespace MirrorKnight
 
                         else //Detects if projectile is currently hitting an enemy and if it is a reflected projectile.
                         {
-                            for (int a = 0; a < enemies.Count; a++)
+                            for (int a = enemies.Count; a >= 0; a--)
                             {
                                 if (projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
                                 {
                                     projectiles[i].Remove();
                                     projectiles.Remove(projectiles[i]);
-
-                                    i--;
 
                                     enemies[a].Hurt((int)p.GetDamage());
                                 }
@@ -675,7 +670,7 @@ namespace MirrorKnight
                         spriteBatch.Draw(kk, mainMenuKnights[i, j], null, Color.White);//, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                     }
                 }
-                spriteBatch.Draw(placeHc, mainMenuStart, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
+                spriteBatch.Draw(startS, mainMenuStart, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(pMB, pauseMusicButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 spriteBatch.Draw(pSB, pauseSfxButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
                 //spriteBatch.Draw(placeHc, pauseOptionsButton, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, MENU_BUTTONS);
