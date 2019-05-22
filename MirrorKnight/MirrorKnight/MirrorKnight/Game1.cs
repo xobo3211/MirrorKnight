@@ -507,7 +507,10 @@ namespace MirrorKnight
 
                         if (enemies[i].IsAlive() == false)
                         {
-                            enemies[i].Kill();
+                            if (enemies[i] is BossEnemy)
+                                ((BossEnemy)enemies[i]).Kill();
+
+                            else enemies[i].Kill();
                             enemies.Remove(enemies[i]);
                             monsterRoar.Play();
 
