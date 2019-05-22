@@ -1868,10 +1868,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="kk.png">
+    <Compile Include="..\..\..\..\..\..\..\Desktop\kk.png">
       <Name>kk</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <Link>kk.png</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

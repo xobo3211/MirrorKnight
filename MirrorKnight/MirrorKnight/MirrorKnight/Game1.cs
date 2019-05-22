@@ -29,7 +29,7 @@ namespace MirrorKnight
         public static SoundEffect mbeep, monsterRoar, swordSwing, doorFX, bulletShotgun, bulletReg, bossDoorLock;
 
         Rectangle activeSlot;
-        Texture2D orb;
+        public static Texture2D orb;
         Boolean oldMusic;
 
         int mMTimer; //main menu scrolling
