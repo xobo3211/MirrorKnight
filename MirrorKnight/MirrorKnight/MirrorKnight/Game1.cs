@@ -80,6 +80,8 @@ namespace MirrorKnight
 
         Sprite menuBackground;
 
+        Song background;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -227,6 +229,11 @@ namespace MirrorKnight
             //pauseMenuRect.setSize(Useful.getWWidth() / 2, Useful.getWHeight() / 2);
             //pauseMenuRect.depth = 100;
             Text.setDefaultFont("font");
+
+            background = Content.Load<Song>("background");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = .25f;
+            MediaPlayer.Play(background);
 
             text.center();
 
@@ -507,7 +514,10 @@ namespace MirrorKnight
 
                         if (enemies[i].IsAlive() == false)
                         {
-                            enemies[i].Kill();
+                            if (enemies[i] is BossEnemy)
+                                ((BossEnemy)enemies[i]).Kill();
+
+                            else enemies[i].Kill();
                             enemies.Remove(enemies[i]);
                             monsterRoar.Play();
 

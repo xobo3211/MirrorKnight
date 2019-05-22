@@ -302,7 +302,7 @@ namespace MirrorKnight
 
         public void ClearRoom()
         {
-            for(int i = Game1.entities.Count - 1; i >= 0; i--)
+            for(int i = Game1.enemies.Count - 1; i >= 0; i--)
             {
                 Game1.enemies[i].Remove();
             }
