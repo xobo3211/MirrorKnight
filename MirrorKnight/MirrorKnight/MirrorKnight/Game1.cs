@@ -512,7 +512,7 @@ namespace MirrorKnight
                         projectiles[i].Update();
                     }
 
-                    for (int i = 0; i < projectiles.Count; i++)
+                    for (int i = projectiles.Count - 1; i >= 0; i--)
                     {
                         Vector2 pos = projectiles[i].body.getPos();
                         //Detects if projectile is going offscreen and if so, removes it
@@ -533,7 +533,7 @@ namespace MirrorKnight
 
                         else //Detects if projectile is currently hitting an enemy and if it is a reflected projectile.
                         {
-                            for (int a = enemies.Count -1; a >= 0; a--)
+                            for (int a = enemies.Count-1; a >= 0; a--)
                             {
                                 if (projectiles[i].CanHurtEnemies() && enemies[a].body.intersects(projectiles[i].body))
                                 {
