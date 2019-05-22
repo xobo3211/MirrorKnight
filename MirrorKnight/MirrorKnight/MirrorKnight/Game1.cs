@@ -230,7 +230,7 @@ namespace MirrorKnight
             //pauseMenuRect.depth = 100;
             Text.setDefaultFont("font");
             mainMenuTheme = Content.Load<Song>("mainMenu");
-
+            
             background = Content.Load<Song>("background");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = .25f;
