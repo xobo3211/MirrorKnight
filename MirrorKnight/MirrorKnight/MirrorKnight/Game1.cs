@@ -234,7 +234,7 @@ namespace MirrorKnight
             background = Content.Load<Song>("background");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = .25f;
-            MediaPlayer.Play(background);
+            
 
             text.center();
 
@@ -318,6 +318,11 @@ namespace MirrorKnight
                         
                     }
                 }
+                if (musicTog == true)
+                {
+                    MediaPlayer.Play(mainMenuTheme);
+                }
+                
                 //pauseMusicButton = new Rectangle(Useful.getWWidth() / 2 - 200, (Useful.getWHeight() / 2) - 150, 60, 60);
                 //pauseSfxButton = new Rectangle(Useful.getWWidth() / 2 + 140, (Useful.getWHeight() / 2) - 150, 60, 60);
                 if (m.LeftButton == ButtonState.Pressed)
@@ -448,11 +453,14 @@ namespace MirrorKnight
                 }
                 else if (pauseMenu == false)
                 {
-                ////////////////////////////////////////////////////////////////Begin normal game logic
-
+                    ////////////////////////////////////////////////////////////////Begin normal game logic
+                    if (musicTog == true)
+                    {
+                        MediaPlayer.Play(background);
+                    }
 
                     ////////////////////////////////////////////////////////////////Player movement and aiming logic
-                    
+
 
                     p.body.setVisible(true);
                     if (kb.IsKeyDown(Keys.Tab) && oldKB.IsKeyUp(Keys.Tab))
