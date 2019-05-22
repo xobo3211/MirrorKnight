@@ -35,9 +35,6 @@ namespace MirrorKnight
         public Player()
         {
 
-
-            bar = new Bar(10, 10, 100, 30, 100, 100);
-
             i = new Inventory();
 
             body = new Sprite(10, 10);
@@ -48,6 +45,10 @@ namespace MirrorKnight
             HP = Base_HP;
 
             trueMaxHP = Base_HP;
+
+
+            bar = new Bar(10, 10, 100, 30, HP, trueMaxHP);
+
 
             Vector2 movement = Vector2.Zero;
 
@@ -167,11 +168,15 @@ namespace MirrorKnight
             {
                 HP += i.getHPMod() + Base_HP - trueMaxHP;
                 trueMaxHP = i.getHPMod() + Base_HP;
+
+                bar.setMax(trueMaxHP);
             }
             else if(i.getHPMod() + Base_HP < trueMaxHP)
             {
                 HP += i.getHPMod() + Base_HP - trueMaxHP;
                 trueMaxHP = i.getHPMod() + Base_HP;
+
+                bar.setMax(trueMaxHP);
             }
 
             effectiveDamage = DMG * i.getDMGMod();
@@ -214,7 +219,6 @@ namespace MirrorKnight
                     }
                 }
             }
-
             
             /////////////////Hazard collision logic
 
@@ -261,6 +265,11 @@ namespace MirrorKnight
         public override int GetMaxHP()
         {
             return trueMaxHP;
+        }
+
+        public void Hurt()
+        {
+            HP--;
         }
     }
 }

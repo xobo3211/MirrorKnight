@@ -481,6 +481,11 @@ namespace MirrorKnight
                                     p.i.Add(new PassiveItem(id));
                                 }
                                 else p.i.Add(new ActiveItem(id), p);
+
+                                if(map.GetRoom(x, y).getRoomType() == Room.Type.TREASURE)
+                                {
+                                    map.GetRoom(x, y).treasureTaken = true;
+                                }
                             }
                         }
                     }

@@ -36,7 +36,7 @@ namespace MirrorKnight.Game_Objects
             {
                 Random rn = new Random();
 
-                Thread.Sleep(rn.Next(3));
+                Thread.Sleep(rn.Next(1, 6));
 
                 double chance = rn.NextDouble();
 

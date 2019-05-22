@@ -1508,6 +1508,13 @@ namespace SureDroid
             }
         }
 
+        public void setMax(int num)
+        {
+            max = num;
+            //setVal(currentVal + num);
+            updateBar();
+        }
+
         public void increment(int num)
         {
             setVal(currentVal + num);
@@ -1520,7 +1527,7 @@ namespace SureDroid
 
         private void updateBar()
         {
-            cover.setSize((currentVal / max) * fill.getWidth(), fill.getHeight());
+            cover.setSize(((float)currentVal / max) * fill.getWidth(), fill.getHeight());
         }
 
         public void change(Action<Sprite> action)
