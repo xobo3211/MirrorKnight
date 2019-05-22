@@ -19,7 +19,7 @@ namespace MirrorKnight
     {
         float RANGE = 70f;
 
-        bool invincible = false;
+        public static bool invincible = false;
 
         int invincibilityTimer = 0, invincibilityMax = 60, invisibleFrames = 5;
 

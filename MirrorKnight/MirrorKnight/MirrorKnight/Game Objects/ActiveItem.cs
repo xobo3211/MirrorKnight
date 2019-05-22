@@ -31,7 +31,7 @@ namespace MirrorKnight
 
         public ActiveItem(int id, Texture2D t)
         {
-            string path = "../../../../MirrorKnightContent/items/passive/" + id + ".txt";
+            string path = "../../../../MirrorKnightContent/items/active/" + id + ".txt";
 
             texture = t;
 
@@ -47,7 +47,9 @@ namespace MirrorKnight
                         maxDuration = Convert.ToInt32(first);
                         currentDuration = maxDuration;
 
-                        cooldown = maxDuration * 5;
+                        Console.WriteLine(currentDuration);
+
+                        cooldown = maxDuration * 2;
                     }
 
                     while (!reader.EndOfStream)
@@ -70,7 +72,7 @@ namespace MirrorKnight
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e);
             }
         }
 
@@ -81,16 +83,23 @@ namespace MirrorKnight
 
         public void Update()
         {
+
             if (isActive)
             {
                 currentDuration--;
 
+                Player.invincible = true;
+
                 if (currentDuration <= 0)
                 {
+                    Player.invincible = false;
+
                     isActive = false;
                     currentDuration = maxDuration;
 
                     isOnCooldown = true;
+
+                    MirrorKnight.Game_Objects.Inventory.FlipBars();
                 }
             }
             else if(isOnCooldown)
@@ -100,6 +109,9 @@ namespace MirrorKnight
                 if(cooldownDuration >= cooldown)
                 {
                     isOnCooldown = false;
+                    cooldownDuration = 0;
+
+                    MirrorKnight.Game_Objects.Inventory.FlipBars();
                 }
             }
         }

@@ -471,6 +471,9 @@ namespace MirrorKnight
 
                     ///////////////////////////////////////////////////////////////////////////////Game Object update logic
 
+
+                    p.i.Update();
+
                     for (int i = 0; i < entities.Count; i++)
                     {
                         entities[i].Update();

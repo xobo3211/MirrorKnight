@@ -19,13 +19,13 @@ namespace MirrorKnight.Game_Objects
     {
         List<PassiveItem> items;
 
-        ActiveItem active;
+        public ActiveItem active;
 
         int timer = 0, timerMax = 120;
 
         bool timerStarted = false;
 
-        private Bar activeBar, cooldownBar;
+        static Bar activeBar, cooldownBar;
 
         public Inventory()
         {
@@ -139,7 +139,7 @@ namespace MirrorKnight.Game_Objects
             active.Activate();
         }
 
-        public void FlipBars()
+        public static void FlipBars()
         {
             activeBar.change(body => body.setVisible(!body.isVisable()));
             cooldownBar.change(body => body.setVisible(!body.isVisable()));
