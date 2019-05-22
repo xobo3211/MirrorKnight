@@ -59,6 +59,10 @@ namespace MirrorKnight
             KeyControl.addKeyPress(Keys.A, () => movement.X = -1);
             KeyControl.addKeyPress(Keys.D, () => movement.X = 1);
 
+            KeyControl.addKeyHold(Keys.OemOpenBrackets, () => DebugMode());
+            KeyControl.addKeyPress(Keys.OemCloseBrackets, () => ClearRoom());
+
+
             KeyControl.addKeyPress(Keys.Space, () => i.Activate());
 
             ControllerControl.add(gp =>
@@ -287,6 +291,22 @@ namespace MirrorKnight
         public Texture2D GetActiveImage()
         {
             return i.GetActiveImage();
+        }
+
+        public void DebugMode()
+        {
+            hasFlight = true;
+            invincible = true;
+            SPEED = 4;
+        }
+
+        public void ClearRoom()
+        {
+            for(int i = Game1.entities.Count - 1; i >= 0; i--)
+            {
+                Game1.entities[i].Remove();
+            }
+            Game1.entities.Clear();
         }
     }
 }

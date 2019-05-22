@@ -644,8 +644,6 @@ namespace MirrorKnight
                         }
                     }
 
-                    
-
                 }
                 ///////////////////////////////////////////End normal game logic
 
