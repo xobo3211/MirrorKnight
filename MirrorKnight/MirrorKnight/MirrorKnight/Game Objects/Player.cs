@@ -59,7 +59,7 @@ namespace MirrorKnight
             KeyControl.addKeyPress(Keys.A, () => movement.X = -1);
             KeyControl.addKeyPress(Keys.D, () => movement.X = 1);
 
-            KeyControl.addKeyHold(Keys.O, () => DebugMode());
+            KeyControl.addKeyPress(Keys.O, () => DebugMode());
             KeyControl.addKeyPress(Keys.P, () => ClearRoom());
 
 
@@ -304,9 +304,9 @@ namespace MirrorKnight
         {
             for(int i = Game1.entities.Count - 1; i >= 0; i--)
             {
-                Game1.entities[i].Remove();
+                Game1.enemies[i].Remove();
             }
-            Game1.entities.Clear();
+            Game1.enemies.Clear();
         }
     }
 }
