@@ -23,15 +23,22 @@ namespace MirrorKnight.Game_Objects
         protected new int[] firingTime = new int[] { 60, 90, 120 };                   //Delay after firing before next action taken by the enemy
         protected new double[] probability = new double[] { 1, 0.3, 0.2 };
 
+        private Bar healthBar;
+
 
         public BossEnemy(int x, int y, Texture2D texture, Player p) : base(x, y, texture, p)
         {
             Base_HP = 120;
             HP = Base_HP;
+
+            healthBar = new Bar(40, Useful.getWHeight() - 30, Useful.getWWidth() - 80, 30, Base_HP);
         }
 
         public override void Update()
         {
+
+            healthBar.setVal(HP);
+
             while (actionList.Count < bufferSize)
             {
                 Random rn = new Random();
@@ -146,6 +153,12 @@ namespace MirrorKnight.Game_Objects
                     
                     break;
             }
+        }
+
+        public new void Remove()
+        {
+            this.Remove();
+            healthBar.change(body => body.deleteThis());
         }
     }
 }
