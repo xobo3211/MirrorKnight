@@ -1470,13 +1470,7 @@ namespace SureDroid
         public void setReference(Wrapper<int> val)
         {
             reference = val;
-            fill.setUpdate(() =>
-            {
-                if (reference.Value != currentVal)
-                {
-                    setVal(reference.Value);
-                }
-            });
+            reference.setEvent(newVal => setVal(newVal));
         }
 
         public void setBaseColor(Color color)
@@ -1540,6 +1534,8 @@ namespace SureDroid
 
     public class Wrapper<T> where T : struct
     {
+        private Action<T> callback;
+
         public static implicit operator T(Wrapper<T> w)
         {
             return w.Value;
@@ -1554,11 +1550,13 @@ namespace SureDroid
         {
             get
             {
+
                 return _t;
             }
 
             set
             {
+                callback?.Invoke(value);
                 _t = value;
             }
         }
@@ -1569,5 +1567,11 @@ namespace SureDroid
         }
 
         private T _t;
+
+
+        internal void setEvent(Action<T> action)
+        {
+            callback = action;
+        }
     }
 }
