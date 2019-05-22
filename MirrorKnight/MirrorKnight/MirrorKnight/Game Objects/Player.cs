@@ -59,8 +59,8 @@ namespace MirrorKnight
             KeyControl.addKeyPress(Keys.A, () => movement.X = -1);
             KeyControl.addKeyPress(Keys.D, () => movement.X = 1);
 
-            KeyControl.addKeyHold(Keys.OemOpenBrackets, () => DebugMode());
-            KeyControl.addKeyPress(Keys.OemCloseBrackets, () => ClearRoom());
+            KeyControl.addKeyHold(Keys.O, () => DebugMode());
+            KeyControl.addKeyPress(Keys.P, () => ClearRoom());
 
 
             KeyControl.addKeyPress(Keys.Space, () => i.Activate());
