@@ -28,7 +28,6 @@ namespace MirrorKnight
         int trueMaxHP;
 
         double effectiveDamage, effectiveMovespeed;
-        
 
         public Vector2 lastMove = Vector2.Zero;
         private Bar bar;
@@ -162,10 +161,8 @@ namespace MirrorKnight
             hitbox.Y = (int)body.getOriginPos().Y - 20;
 
 
-            bar.setVal(HP);
-
-
             //////////////////////Player stat logic
+            bar.setVal(HP);
 
             if(i.getHPMod() + Base_HP > trueMaxHP)
             {
