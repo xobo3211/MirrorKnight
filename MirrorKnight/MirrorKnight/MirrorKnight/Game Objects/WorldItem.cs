@@ -27,7 +27,7 @@ namespace MirrorKnight.Game_Objects
         {
             Random rn = new Random();
 
-            double chance = rn.NextDouble();
+            double chance = 0;//rn.NextDouble();
 
             if (chance <= 0.5)
             {
