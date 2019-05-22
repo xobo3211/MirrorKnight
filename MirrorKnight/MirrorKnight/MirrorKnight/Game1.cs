@@ -418,6 +418,14 @@ namespace MirrorKnight
                                 pSB = pSO;
                                 soundFxTog = true;
                             }
+                            if (musicTog == true && oldMusic != true)
+                            {
+                                MediaPlayer.Play(background);
+                            }
+                            if (musicTog == false && oldMusic != false)
+                            {
+                                MediaPlayer.Stop();
+                            }
                         }
                         if (crosshair.getRectangle().Intersects(pauseOptionsButton))
                         {
@@ -453,14 +461,7 @@ namespace MirrorKnight
                 else if (pauseMenu == false)
                 {
                     ////////////////////////////////////////////////////////////////Begin normal game logic
-                    if (musicTog == true && oldMusic != true)
-                    {
-                        MediaPlayer.Play(background);
-                    }
-                    if (musicTog == false && oldMusic != false)
-                    {
-                        MediaPlayer.Stop();
-                    }
+                    
                     ////////////////////////////////////////////////////////////////Player movement and aiming logic
 
 

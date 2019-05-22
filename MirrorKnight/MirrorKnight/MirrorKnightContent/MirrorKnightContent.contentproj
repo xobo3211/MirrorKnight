@@ -1932,6 +1932,48 @@
       <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="roomEntities\normal\4.txt">
+      <Name>4</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="roomEntities\normal\7.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>7</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="roomEntities\normal\5.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>5</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="roomEntities\normal\10.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>10</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="roomEntities\normal\9.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>9</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="roomEntities\normal\8.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>8</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="roomEntities\normal\6.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>6</Name>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
